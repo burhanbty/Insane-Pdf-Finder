@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaynak Bul — Kitap, Makale ve Slayt Arama</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="ust">
+  <div class="marka">
+    <span class="logo">⌕</span>
+    <div>
+      <h1>Kaynak Bul</h1>
+      <p>Başlık, yazar ve yıl yazın; açık erişimli kaynaklarda nerede olduğunu bulun</p>
+    </div>
+  </div>
+  <button id="kaynaklarBtn" class="mini">Kaynaklar</button>
+</header>
+
+<main>
+  <form id="aramaForm" class="form">
+    <div class="satir">
+      <label class="genis">
+        <span>Başlık</span>
+        <input id="baslik" name="baslik" type="text" required autocomplete="off"
+               placeholder="ör. Sapiens: A Brief History of Humankind">
+      </label>
+      <label>
+        <span>Yazar <em>(isteğe bağlı)</em></span>
+        <input id="yazar" name="yazar" type="text" autocomplete="off" placeholder="ör. Yuval Noah Harari">
+      </label>
+      <label class="dar">
+        <span>Yıl</span>
+        <input id="yil" name="yil" type="number" min="1000" max="2100" placeholder="2011">
+      </label>
+    </div>
+
+    <div class="satir ikinci">
+      <div class="turler" role="radiogroup" aria-label="İçerik türü">
+        <label><input type="radio" name="tur" value="kitap" checked><span>Kitap</span></label>
+        <label><input type="radio" name="tur" value="makale"><span>Makale</span></label>
+        <label><input type="radio" name="tur" value="slayt"><span>Slayt / Sunum</span></label>
+      </div>
+      <label class="dar">
+        <span>Sonuç sayısı</span>
+        <input id="limit" name="limit" type="number" min="1" max="50" value="20">
+      </label>
+      <div class="eylemler">
+        <label class="onay">
+          <input type="checkbox" id="webDahil" checked>
+          <span>Genel web araması <em>(filetype:pdf)</em></span>
+        </label>
+        <button type="submit" class="birincil" id="araBtn">Ara</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="ozetPanel" class="panel gizli"></div>
+
+  <section id="sonucBolum" class="gizli">
+    <div class="sonuc-ust">
+      <h2 id="sonucBaslik"></h2>
+      <div class="sekiller" role="tablist">
+        <button class="sekme etkin" data-suzgec="hepsi">Hepsi</button>
+        <button class="sekme" data-suzgec="acik">İndirilebilir</button>
+        <button class="sekme" data-suzgec="ozet">Özet olanlar</button>
+        <button class="sekme" data-suzgec="uyum">Tam eşleşme</button>
+      </div>
+    </div>
+
+    <div class="kaynak-arac">
+      <label class="kaynak-secim">
+        <span>Kaynak</span>
+        <select id="kaynakSecim">
+          <option value="">Tüm kaynaklar</option>
+        </select>
+      </label>
+      <label class="onay">
+        <input type="checkbox" id="grupla">
+        <span>Sonuçları kaynağa göre grupla</span>
+      </label>
+      <label class="onay">
+        <input type="checkbox" id="sadeceTekKaynak">
+        <span>Yalnızca tek kaynakta bulunanlar</span>
+      </label>
+      <span id="kaynakSayaci" class="kaynak-sayac"></span>
+    </div>
+
+    <div id="kartlar" class="kartlar"></div>
+    <div id="bos" class="bos gizli"></div>
+  </section>
+
+  <section id="indirilenBolum" class="panel">
+    <div class="panel-ust">
+      <h2>İndirilenler <span id="indirmeSayisi" class="rozet">0</span></h2>
+      <span class="klasor" id="indirmeKlasor"></span>
+    </div>
+    <div id="indirmeListesi" class="dosya-listesi"></div>
+  </section>
+</main>
+
+<dialog id="kaynakDialog">
+  <div class="dialog-ust">
+    <h2>Kaynaklar</h2>
+    <button class="mini" id="kaynakKapat">Kapat</button>
+  </div>
+  <p class="ipucu">
+    Programın taradığı kaynaklar. <strong>Google Books</strong> ve <strong>Unpaywall</strong>
+    için <code>.env</code> dosyasına anahtar eklemen gerekiyor.
+  </p>
+  <div id="kaynakListesi"></div>
+  <div class="dialog-alt">
+    <h3>Kendi kaynağını ekle</h3>
+    <p class="ipucu">
+      <code>src/sources/</code> klasörüne varsayılan export'u şu biçimde olan bir dosya koy — kayıt defteri onu otomatik bulur:
+    </p>
+    <pre><code>export default {
+  id: "benim-sitem",
+  ad: "Benim Sitem",
+  tur: ["kitap", "makale"],
+  aciklama: "Ne yaptığını yaz",
+  ara: async (sorgu) =&gt; [
+    { kaynak: "benim-sitem", kaynakAd: "Benim Sitem", tur: sorgu.tur,
+      baslik: "...", yazarlar: [], link: "https://...", pdf: "https://..." }
+  ]
+}</code></pre>
+  </div>
+</dialog>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

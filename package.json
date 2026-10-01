@@ -1,0 +1,34 @@
+{
+  "name": "kaynak-bul",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Baslik/yazar/yil bilgisiyle kitap, makale ve slayt arayip bulunan icerikleri toplayan arac",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "pdfjs-dist": "^6.3.289"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^26.6.3",
+    "jsdom": "^30.1.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}
