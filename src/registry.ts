@@ -30,7 +30,7 @@ export async function kaynaklariYukle(): Promise<SourceModule[]> {
   if (kayitli) return kayitli;
 
   const dizin = ayar.sourcesDir;
-  let dosyalar: string[] = [];
+  let dosyalar: string[];
 
   try {
     dosyalar = (await fs.readdir(dizin))

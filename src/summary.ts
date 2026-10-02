@@ -99,9 +99,36 @@ async function metinGetir(
 /* ------------------------------------------------------------------ */
 
 const DURAKLAR = new Set([
-  "ve", "ile", "için", "bu", "da", "de", "bir", "olarak", "daha", "çok",
-  "the", "of", "and", "to", "in", "is", "are", "for", "that", "with",
-  "this", "was", "were", "has", "have", "its", "as", "on", "by", "from",
+  "ve",
+  "ile",
+  "için",
+  "bu",
+  "da",
+  "de",
+  "bir",
+  "olarak",
+  "daha",
+  "çok",
+  "the",
+  "of",
+  "and",
+  "to",
+  "in",
+  "is",
+  "are",
+  "for",
+  "that",
+  "with",
+  "this",
+  "was",
+  "were",
+  "has",
+  "have",
+  "its",
+  "as",
+  "on",
+  "by",
+  "from",
 ]);
 
 function cumleleriAyir(metin: string): string[] {
@@ -219,10 +246,7 @@ export async function ozetUret(girdi: OzetGirdi): Promise<OzetSonucu> {
 
   if (girdi.oncedenIndir) {
     try {
-      const sonuc = await indir(
-        { url: girdi.url, varsayilanAd: girdi.baslik },
-        girdi.tur,
-      );
+      const sonuc = await indir({ url: girdi.url, varsayilanAd: girdi.baslik }, girdi.tur);
       kaynak = sonuc.yol;
       // Yerel dosyayi fetch ile okuyamayiz; fs uzerinden tekrar isleyecegiz.
       return yerelDosyadanOzet(sonuc.yol, girdi.baslik);
@@ -247,7 +271,10 @@ export async function ozetUret(girdi: OzetGirdi): Promise<OzetSonucu> {
   }
 
   const kesik = metin.length > METIN_LIMIT ? metin.slice(0, METIN_LIMIT) : metin;
-  const ilkParagraf = kesik.split(/\n{2,}/).find((p) => p.trim().length > 60)?.trim();
+  const ilkParagraf = kesik
+    .split(/\n{2,}/)
+    .find((p) => p.trim().length > 60)
+    ?.trim();
 
   const llm = await llmOzet(kesik, girdi.baslik).catch(() => undefined);
   const ozet = llm ?? extractiveOzet(kesik);
@@ -294,7 +321,10 @@ async function yerelDosyadanOzet(dosyaYolu: string, baslik: string): Promise<Oze
   }
 
   const kesik = metin.slice(0, METIN_LIMIT);
-  const ilkParagraf = kesik.split(/\n{2,}/).find((p) => p.trim().length > 60)?.trim();
+  const ilkParagraf = kesik
+    .split(/\n{2,}/)
+    .find((p) => p.trim().length > 60)
+    ?.trim();
   const llm = await llmOzet(kesik, baslik).catch(() => undefined);
 
   return {

@@ -49,13 +49,15 @@ function deger(alan?: OAAlan | OAAlan[]): string | undefined {
 
 function degerler(alan?: OAAlan | OAAlan[]): string[] {
   if (!alan) return [];
-  return (Array.isArray(alan) ? alan : [alan])
-    .map((a) => a.$ ?? "")
-    .filter(Boolean);
+  return (Array.isArray(alan) ? alan : [alan]).map((a) => a.$ ?? "").filter(Boolean);
 }
 
 function erisimTuru(kayit: OAKayit, instance?: OAInstance): Work["erisim"] {
-  const sinif = (instance?.accessright?.["@classid"] ?? kayit.bestaccessright?.["@classid"] ?? "").toUpperCase();
+  const sinif = (
+    instance?.accessright?.["@classid"] ??
+    kayit.bestaccessright?.["@classid"] ??
+    ""
+  ).toUpperCase();
   if (sinif.includes("OPEN")) return "acik";
   if (sinif.includes("EMBARGO") || sinif.includes("RESTRICTED")) return "sinirli";
   if (sinif.includes("CLOSED")) return "yonlendir";
@@ -96,9 +98,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     const erisim = erisimTuru(kayit, acikOrnek);
 
     const webUrl =
-      acikOrnek?.webresource?.url?.$ ??
-      acikOrnek?.url?.$ ??
-      deger(kayit.pid)?.startsWith("http")
+      (acikOrnek?.webresource?.url?.$ ?? acikOrnek?.url?.$ ?? deger(kayit.pid)?.startsWith("http"))
         ? deger(kayit.pid)
         : undefined;
 

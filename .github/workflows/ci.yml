@@ -1,0 +1,74 @@
+name: CI
+
+# Ne zaman calisir:
+#   - main/master ve gelistirme dallarina push
+#   - her PR
+#   - elle tetikleme
+on:
+  push:
+    branches: [main, master, gelistirme]
+  pull_request:
+  workflow_dispatch:
+
+# Ayni PR'da tekrar calistirmaya gerek yok
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  kontrol:
+    name: Kontrol (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # Proje Node 20+ istiyor. 20, 22 ve 24 farkli yollardan geliyor.
+        node: [20, 22, 24]
+
+    steps:
+      - name: Kodu al
+        uses: actions/checkout@v4
+
+      - name: Node kur (${{ matrix.node }})
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Bagimliliklari kur
+        run: npm ci
+
+      - name: Bicim denetimi
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Tip kontrolu
+        run: npm run typecheck
+
+      # Tum testler cevrimdisidir: URL'ler sahte, fetch'ler stub'lu.
+      # Gercek kaynaklara istek atan smoke testleri ayri adimda, opsiyonel.
+      - name: Birim testleri
+        run: npm test
+
+  klonlama:
+    name: Temiz kurulum (klon -> calisiyor mu)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Bagimliliklari kur
+        run: npm ci
+
+      # "npm install && npm start" yolunun gercekten calistigini dogrular.
+      # Arayuz dosyalarini ve kaynak klasorunu kopyalayip baslatyoruz.
+      - name: Baslat betigini dogrula
+        run: node scripts/dogrula-kurulum.mjs

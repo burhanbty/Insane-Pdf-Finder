@@ -99,7 +99,11 @@ export async function get(url: string, secenek: GetOptions = {}): Promise<Respon
           // 429 genelde kotadir. Uzun bekleyip tekrar denemek cogu zaman
           // ise yaramaz ve butun aramayi yavaslatir; hatayi bildirip cik.
           if (cevap.status === 429 && deneme >= tekrarKotasiz) {
-            throw new KaynakHatasi("http", `${host} 429 — kota dolu, biraz sonra tekrar deneyin`, 429);
+            throw new KaynakHatasi(
+              "http",
+              `${host} 429 — kota dolu, biraz sonra tekrar deneyin`,
+              429,
+            );
           }
           sonHata = new KaynakHatasi("http", `${host} ${cevap.status}`, cevap.status);
           const bekle = Number(cevap.headers.get("retry-after") ?? 0) * 1000;

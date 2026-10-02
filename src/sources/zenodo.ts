@@ -48,10 +48,12 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     const md = k.metadata;
     if (!md?.title || !k.id) continue;
 
-    const pdf = k.files?.find((f) => /\.pdf$/i.test(f.key ?? ""))?.links?.self
-      ?? k.files?.[0]?.links?.self;
+    const pdf =
+      k.files?.find((f) => /\.pdf$/i.test(f.key ?? ""))?.links?.self ?? k.files?.[0]?.links?.self;
 
-    const tur = /presentation|slide|poster/i.test(md.resource_type?.title ?? "") ? "slayt" : "makale";
+    const tur = /presentation|slide|poster/i.test(md.resource_type?.title ?? "")
+      ? "slayt"
+      : "makale";
 
     sonuc.push({
       kaynak: "zenodo",

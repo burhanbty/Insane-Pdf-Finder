@@ -1,0 +1,13 @@
+dist/
+node_modules/
+downloads/*
+.cache/
+.env
+*.log
+
+# Bu dosyalara dokunmuyoruz; prettier da biçimlendirmesin.
+# tsconfig.json içindeki exclude ile aynı gerekçe:
+# match()/matchAll() indekslerinin "string | undefined" dönmesi
+# ele alınmamış. Düzeltildiklerinde HER İKİ listeden de silinmeli.
+src/sources/libgen.ts
+src/sources/annas-archive.ts

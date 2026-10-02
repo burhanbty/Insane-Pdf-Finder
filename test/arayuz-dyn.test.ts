@@ -33,7 +33,11 @@ let fetchCevabi: (yol: string, govde: unknown) => unknown;
 async function arayuzuYukle(): Promise<void> {
   const html = await fs.readFile(path.join(process.cwd(), "public/index.html"), "utf8");
 
-  dom = new JSDOM(html, { url: "http://127.0.0.1:3000/", pretendToBeVisual: true, runScripts: "outside-only" });
+  dom = new JSDOM(html, {
+    url: "http://127.0.0.1:3000/",
+    pretendToBeVisual: true,
+    runScripts: "outside-only",
+  });
   const { window } = dom;
 
   cagrilanlar = [];
@@ -63,7 +67,7 @@ async function arayuzuYukle(): Promise<void> {
     dom.window.eval(`globalThis.__calisma = (async () => {\n${js}\n})();`);
     await (dom.window as unknown as { __calisma: Promise<void> }).__calisma;
   } catch (hata) {
-    throw new Error(`app.js yüklenemedi: ${(hata as Error).message}`);
+    throw new Error(`app.js yüklenemedi: ${(hata as Error).message}`, { cause: hata });
   }
 
   // Modul, globalThis.fetch uzerinden istek atiyor; jsdom'da fetch
@@ -132,7 +136,14 @@ describe("arama gonderimi", () => {
               },
             ],
             kaynakDurumlari: [
-              { id: "ia", ad: "Internet Archive", tur: ["kitap"], sonucSayisi: 1, sureMs: 500, hazir: true },
+              {
+                id: "ia",
+                ad: "Internet Archive",
+                tur: ["kitap"],
+                sonucSayisi: 1,
+                sureMs: 500,
+                hazir: true,
+              },
             ],
             toplamSonuc: 1,
             gruplamaNotu: "not",

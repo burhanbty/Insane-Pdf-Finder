@@ -7,28 +7,118 @@
 
 /** Turkce ve Latin-1 karakterleri ASCII karsiliklarina indirger. */
 const HARF_MAP: Record<string, string> = {
-  ç: "c", Ç: "c", ğ: "g", Ğ: "g", ı: "i", İ: "i", I: "i",
-  ö: "o", Ö: "o", ş: "s", Ş: "s", ü: "u", Ü: "u",
-  â: "a", Â: "a", î: "i", Î: "i", û: "u", Û: "u",
-  é: "e", É: "e", è: "e", È: "e", á: "a", Á: "a",
-  í: "i", Í: "i", ó: "o", Ó: "o", ú: "u", Ú: "u", ñ: "n", Ñ: "n",
+  ç: "c",
+  Ç: "c",
+  ğ: "g",
+  Ğ: "g",
+  ı: "i",
+  İ: "i",
+  I: "i",
+  ö: "o",
+  Ö: "o",
+  ş: "s",
+  Ş: "s",
+  ü: "u",
+  Ü: "u",
+  â: "a",
+  Â: "a",
+  î: "i",
+  Î: "i",
+  û: "u",
+  Û: "u",
+  é: "e",
+  É: "e",
+  è: "e",
+  È: "e",
+  á: "a",
+  Á: "a",
+  í: "i",
+  Í: "i",
+  ó: "o",
+  Ó: "o",
+  ú: "u",
+  Ú: "u",
+  ñ: "n",
+  Ñ: "n",
 };
 
 /** Basliklarda atilan ama anlam tasiyan kelimeler. */
 const EDATLAR = new Set([
-  "the", "a", "an", "of", "and", "or", "in", "on", "to", "for", "with",
-  "is", "are", "was", "were", "be", "been", "it", "its", "this", "that",
-  "these", "those", "as", "by", "at", "from", "you", "your", "we", "our",
-  "not", "no", "do", "does", "did", "how", "what", "why", "when", "who",
-  "can", "will", "all", "any", "more", "most", "than", "then", "so",
-  "bir", "ve", "ile", "icin", "uzere", "da", "de", "dan", "den", "bu",
-  "ne", "nasil", "neden", "hangi", "her", "daha", "cok", "veya", "gibi",
+  "the",
+  "a",
+  "an",
+  "of",
+  "and",
+  "or",
+  "in",
+  "on",
+  "to",
+  "for",
+  "with",
+  "is",
+  "are",
+  "was",
+  "were",
+  "be",
+  "been",
+  "it",
+  "its",
+  "this",
+  "that",
+  "these",
+  "those",
+  "as",
+  "by",
+  "at",
+  "from",
+  "you",
+  "your",
+  "we",
+  "our",
+  "not",
+  "no",
+  "do",
+  "does",
+  "did",
+  "how",
+  "what",
+  "why",
+  "when",
+  "who",
+  "can",
+  "will",
+  "all",
+  "any",
+  "more",
+  "most",
+  "than",
+  "then",
+  "so",
+  "bir",
+  "ve",
+  "ile",
+  "icin",
+  "uzere",
+  "da",
+  "de",
+  "dan",
+  "den",
+  "bu",
+  "ne",
+  "nasil",
+  "neden",
+  "hangi",
+  "her",
+  "daha",
+  "cok",
+  "veya",
+  "gibi",
 ]);
 
 /** Surucu harflerini ve gereksiz noktalama isaretlerini atar. */
 export function normalizeMetin(girdi: string): string {
   if (!girdi) return "";
-  let s = girdi.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+  const s = girdi.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
 
   let cikis = "";
   for (const harf of s) {
@@ -57,8 +147,26 @@ export function eserAnahtari(baslik: string): string {
 
 /** Soyadin parcası sayılan edatlar ("de Cervantes Saavedra"). */
 const SOYAD_EDATLARI = new Set([
-  "de", "del", "della", "di", "da", "do", "dos", "das", "van", "von",
-  "der", "den", "ten", "ter", "la", "le", "el", "al", "ibn", "yildiz",
+  "de",
+  "del",
+  "della",
+  "di",
+  "da",
+  "do",
+  "dos",
+  "das",
+  "van",
+  "von",
+  "der",
+  "den",
+  "ten",
+  "ter",
+  "la",
+  "le",
+  "el",
+  "al",
+  "ibn",
+  "yildiz",
   "sark",
 ]);
 
@@ -80,7 +188,11 @@ export function yazarParcalari(yazar: string): { tam: string; soyad: string[]; a
     soyad.push(son);
     ad.push(...parca.slice(0, -1).filter((p) => !SOYAD_EDATLARI.has(p)));
   }
-  return { tam: normalizeMetin(isimler.join(" ")), soyad: [...new Set(soyad)], ad: [...new Set(ad)] };
+  return {
+    tam: normalizeMetin(isimler.join(" ")),
+    soyad: [...new Set(soyad)],
+    ad: [...new Set(ad)],
+  };
 }
 
 /** Jaccard benzerligi. */

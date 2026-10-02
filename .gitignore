@@ -1,7 +1,12 @@
 node_modules/
 dist/
 downloads/*
-!downloads/.gitkeep
-.env
+!.gitkeep
+!.gitkeep
 .cache/
+.env
 *.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

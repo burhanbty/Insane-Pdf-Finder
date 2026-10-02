@@ -42,10 +42,7 @@ describe("grupla", () => {
 
   it("farkli turleri birlestirmez", () => {
     const g = grupla(
-      [
-        w({ baslik: "Sapiens", tur: "kitap" }),
-        w({ baslik: "Sapiens", tur: "makale" }),
-      ],
+      [w({ baslik: "Sapiens", tur: "kitap" }), w({ baslik: "Sapiens", tur: "makale" })],
       sorgu,
     );
     expect(g).toHaveLength(2);
@@ -55,7 +52,13 @@ describe("grupla", () => {
     const g = grupla(
       [
         w({ baslik: "Sapiens", yazarlar: ["Harari"], yil: 2011 }),
-        w({ baslik: "Sapiens", yazarlar: ["Harari"], yil: 2011, ozet: "Ozet metni", kapak: "https://kapak.test/a.jpg" }),
+        w({
+          baslik: "Sapiens",
+          yazarlar: ["Harari"],
+          yil: 2011,
+          ozet: "Ozet metni",
+          kapak: "https://kapak.test/a.jpg",
+        }),
       ],
       sorgu,
     );

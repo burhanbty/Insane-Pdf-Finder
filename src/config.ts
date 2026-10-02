@@ -16,6 +16,8 @@ function yolla(k: string, varsayilan: string): string {
 const kodDizini = path.dirname(fileURLToPath(import.meta.url));
 const kok = path.resolve(kodDizini, "..");
 
+export const SURUM = "1.0.0";
+
 export const ayar = {
   port: Number(yolla("PORT", "3000")),
   host: yolla("HOST", "127.0.0.1"),
