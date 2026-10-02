@@ -1,0 +1,25 @@
+# Normalize satir sonlari (Windows CRLF -> LF)
+* text=auto eol=lf
+
+# Betikler
+*.ts   text
+*.js   text
+*.json text
+*.md   text
+*.css  text
+*.html text
+
+*.bat       text eol=crlf
+*.cmd       text eol=crlf
+
+# Ikili dosyalar
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+
+# Sifreler ve anahtarlar ASLA degistirilmemeli
+.env      text
+.env.*    text

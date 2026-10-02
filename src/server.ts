@@ -1,5 +1,6 @@
 import express, { type Request, type Response } from "express";
-import { ayar } from "./config.js";
+import { ayar, SURUM } from "./config.js";
+import { acilisRaporu, ilkCalistirmaHazirligi } from "./hazirlik.js";
 import { ara, grupla } from "./search.js";
 import { kaynakListesi, kaynaklariYukle, yuklenmeHataListesi } from "./registry.js";
 import { indir, indirilenleriListele } from "./download.js";
@@ -191,7 +192,12 @@ uygulama.post("/api/source/:id/run", async (req: Request, res: Response) => {
   const t0 = Date.now();
   try {
     const isler = await kaynak.ara(s);
-    res.json({ kaynak: kaynak.id, sureMs: Date.now() - t0, sonucSayisi: isler.length, sonuclar: isler });
+    res.json({
+      kaynak: kaynak.id,
+      sureMs: Date.now() - t0,
+      sonucSayisi: isler.length,
+      sonuclar: isler,
+    });
   } catch (hata) {
     res.status(502).json({
       hata: `${(hata as Error).message}`,
@@ -207,7 +213,8 @@ uygulama.post("/api/download", async (req: Request, res: Response) => {
   const url = guvenliUrl(g.url);
   if (!url) return hataCevap(res, 400, "Geçersiz indirme adresi");
 
-  const baslik = typeof g.baslik === "string" && g.baslik.trim() ? g.baslik.trim().slice(0, 150) : "icerik";
+  const baslik =
+    typeof g.baslik === "string" && g.baslik.trim() ? g.baslik.trim().slice(0, 150) : "icerik";
   const tur = g.tur === "metin" ? "metin" : "pdf";
 
   try {
@@ -224,7 +231,8 @@ uygulama.post("/api/summary", async (req: Request, res: Response) => {
   const url = guvenliUrl(g.url);
   if (!url) return hataCevap(res, 400, "Geçersiz içerik adresi");
 
-  const baslik = typeof g.baslik === "string" && g.baslik.trim() ? g.baslik.trim().slice(0, 150) : "İçerik";
+  const baslik =
+    typeof g.baslik === "string" && g.baslik.trim() ? g.baslik.trim().slice(0, 150) : "İçerik";
   const tur = g.tur === "metin" ? "metin" : "pdf";
 
   try {
@@ -254,6 +262,44 @@ uygulama.post("/api/sayfa-sayisi", async (req: Request, res: Response) => {
   } catch (hata) {
     hataCevap(res, 502, `Sayfa sayısı alınamadı: ${(hata as Error).message}`);
   }
+});
+
+/* ------------------------------- saglik ucu ------------------------------ */
+
+/**
+ * Saglik kontrolu. CI'da ve kullanici teshislerinde kullanilir:
+ * "program ayakta mi ve kaynaklar yuklendi mi?"
+ */
+uygulama.get("/api/saglik", (_req: Request, res: Response) => {
+  const kaynaklar = kaynakListesi();
+  const yuklene = kaynaklar.filter((k) => k.hazir);
+
+  const saglikli = yuklene.length > 0;
+
+  res.status(saglikli ? 200 : 503).json({
+    durum: saglikli ? "ok" : "kaynak yok",
+    surum: SURUM,
+    node: process.versions.node,
+    sure: Math.round(process.uptime()),
+    kaynak: {
+      toplam: kaynaklar.length,
+      hazir: yuklene.length,
+      kapali: kaynaklar.filter((k) => !k.hazir).map((k) => k.id),
+      yuklenmeHatalari: yuklenmeHataListesi(),
+    },
+    yapilandirma: {
+      // Anahtarlarin varligini yaziyoruz, degerlerini ASLA.
+      eposta: Boolean(ayar.contactEmail),
+      googleBooks: Boolean(ayar.googleBooksKey),
+      semanticScholar: Boolean(ayar.semanticScholarKey),
+      llm: Boolean(ayar.llm.apiKey),
+    },
+    dizin: {
+      kaynak: ayar.sourcesDir,
+      indirme: ayar.downloadsDir,
+      onbellek: ayar.cacheDir,
+    },
+  });
 });
 
 /** Indirilen dosyalar. */
@@ -291,33 +337,107 @@ uygulama.get(/^\/(?!api\/).*/, (_req: Request, res: Response) => {
 
 /* --------------------------------- calistir ------------------------------ */
 
+/*
+ * Acilis sirasi:
+ *   1) Node surumu uygun mu?
+ *   2) .env / dizinler hazir mi?
+ *   3) Kaynaklar yukleniyor
+ *   4) Sunucu dinlemeye basliyor (port hatasi insanlikca anlatiliyor)
+ *
+ * Bu siranin her adimi acikca yaziyoruz: kullanici "neden calismiyor"
+ * sorusunu terminal ciktisindan cevaplayabilmeli.
+ */
+
+const c = {
+  yesil: "\u001b[32m",
+  sari: "\u001b[33m",
+  kirmizi: "\u001b[31m",
+  soluk: "\u001b[90m",
+  kalin: "\u001b[1m",
+  sifir: "\u001b[0m",
+};
+
+/* --- 1) Node surumu ------------------------------------------------------ */
+
+const SURUM_DESTEK = 20;
+const nodeAna = Number(process.versions.node.split(".")[0] ?? 0);
+if (!Number.isFinite(nodeAna) || nodeAna < SURUM_DESTEK) {
+  console.error("");
+  console.error(`${c.kirmizi}${c.kalin}Node.js ${SURUM_DESTEK} veya üzeri gerekli.${c.sifir}`);
+  console.error(`${c.kirmizi}Şu an Node ${process.versions.node} çalışıyor.${c.sifir}`);
+  console.error(`${c.soluk}Kurulum: https://nodejs.org${c.sifir}`);
+  console.error("");
+  process.exit(1);
+}
+
+/* --- 2) Ilk calistirma hazirligi ------------------------------------------ */
+
+const hazirlik = ilkCalistirmaHazirligi();
+
+/* --- 3) Kaynaklar --------------------------------------------------------- */
+
 const yuklenen = await kaynaklariYukle();
+const yuklenmeHatalari = yuklenmeHataListesi();
 
-console.log(`[kaynak-bul] proje koku: ${ayar.projeKok}`);
-console.log(`[kaynak-bul] kaynak klasoru: ${ayar.sourcesDir}`);
+acilisRaporu(hazirlik, yuklenen.length, yuklenmeHatalari);
 
-for (const h of yuklenmeHataListesi()) {
-  console.warn(`[kaynak-bul] UYARI "${h.dosya}" yuklenemedi: ${h.hata}`);
-}
+/* --- 4) Sunucu ------------------------------------------------------------ */
 
-if (!yuklenen.length) {
-  // Sunucu ayaga kalkiyor ama arama yapamaz; bunu sessizce gecmek
-  // kullaniciyi "0 sonuc" ile bas basina birakirdi.
-  console.error("");
-  console.error("[kaynak-bul] HATA: hic kaynak yuklenemedi. Arama calismaz.");
-  console.error(`[kaynak-bul] Beklenen konum: ${ayar.sourcesDir}`);
-  console.error("[kaynak-bul] Dogrulamak icin: curl http://" + ayar.host + ":" + ayar.port + "/api/sources");
-  console.error("");
-} else {
-  console.log(`[kaynak-bul] ${yuklenen.length} kaynak yuklendi: ${yuklenen.map((k) => k.id).join(", ")}`);
-  const anahtarsiz = yuklenen.filter((k) => k.hazirMi && !k.hazirMi()).map((k) => k.id);
-  if (anahtarsiz.length) {
-    console.log(`[kaynak-bul] anahtar gerektiren kaynaklar (kapali): ${anahtarsiz.join(", ")}`);
+const dinleyici = uygulama.listen(ayar.port, ayar.host);
+
+dinleyici.on("error", (hata: NodeJS.ErrnoException) => {
+  if (hata.code === "EADDRINUSE") {
+    console.error(`${c.kirmizi}${c.kalin}Port ${ayar.port} zaten kullanımda.${c.sifir}`);
+    console.error("");
+    console.error("  Başka bir program o portu tutuyor. Üç seçeneğin var:");
+    console.error("");
+    console.error(`    1) Farklı port ile başlat:      PORT=3001 npm start`);
+    console.error(`       Windows'ta:  set PORT=3001 && npm start`);
+    console.error(`    2) Portu kullanan programı kapat`);
+    console.error(`    3) .env dosyasına PORT=3001 yaz`);
+    console.error("");
+    process.exit(1);
   }
+
+  if (hata.code === "EACCES") {
+    console.error(`${c.kirmizi}${c.kalin}Port ${ayar.port} için izin yok.${c.sifir}`);
+    console.error(
+      `${c.soluk}1024 altı portlar bazı sistemlerde rezervedir. Farklı port deneyin.${c.sifir}`,
+    );
+    process.exit(1);
+  }
+
+  if ((hata as NodeJS.ErrnoException).code === "EADDRNOTAVAIL") {
+    console.error(`${c.kirmizi}${c.kalin}Adres bulunamadı: ${ayar.host}${c.sifir}`);
+    console.error(`${c.soluk}HOST değerini kontrol edin (örn. HOST=127.0.0.1).${c.sifir}`);
+    process.exit(1);
+  }
+
+  console.error(`${c.kirmizi}${c.kalin}Sunucu başlatılamadı: ${hata.message}${c.sifir}`);
+  process.exit(1);
+});
+
+dinleyici.on("listening", () => {
+  const adres = `http://${ayar.host}:${ayar.port}`;
+  console.log(`  ${c.yesil}→${c.sifir} ${c.kalin}${adres}${c.sifir}`);
+  console.log("");
+  console.log(`${c.soluk}  Durdurmak için Ctrl+C${c.sifir}`);
+  console.log("");
+});
+
+/* --- Zarif kapanis ------------------------------------------------------- */
+
+let kapaniyor = false;
+function kapat(sinyal: string) {
+  if (kapaniyor) return;
+  kapaniyor = true;
+  console.log(`\n${c.soluk}${sinyal} alındı, kapatılıyor…${c.sifir}`);
+
+  dinleyici.close(() => process.exit(0));
+
+  // Açık istekler varsa 5 saniye bekleyip zorla çıkıyoruz.
+  setTimeout(() => process.exit(0), 5000).unref();
 }
 
-console.log(`[kaynak-bul] http://${ayar.host}:${ayar.port}`);
-
-uygulama.listen(ayar.port, ayar.host, () => {
-  console.log(`[kaynak-bul] sunucu hazir`);
-});
+process.on("SIGINT", () => kapat("SIGINT"));
+process.on("SIGTERM", () => kapat("SIGTERM"));

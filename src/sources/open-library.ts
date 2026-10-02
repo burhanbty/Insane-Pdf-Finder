@@ -37,11 +37,25 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
   u.searchParams.set("q", parcalar.join(" AND "));
 
   u.searchParams.set("limit", String(Math.min(50, sorgu.limit * 2)));
-  u.searchParams.set("fields", [
-    "key", "title", "subtitle", "author_name", "first_publish_year", "publish_year",
-    "publisher", "subject", "language", "isbn", "number_of_pages_median",
-    "cover_i", "edition_key", "ia",
-  ].join(","));
+  u.searchParams.set(
+    "fields",
+    [
+      "key",
+      "title",
+      "subtitle",
+      "author_name",
+      "first_publish_year",
+      "publish_year",
+      "publisher",
+      "subject",
+      "language",
+      "isbn",
+      "number_of_pages_median",
+      "cover_i",
+      "edition_key",
+      "ia",
+    ].join(","),
+  );
 
   const veri = await getJson<{ docs?: OLDoc[]; numFound?: number }>(u.toString(), {
     // Open Library kendi kuralina gore istekleri yavaslat.
@@ -53,13 +67,9 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
   for (const d of veri.docs ?? []) {
     if (!d.title) continue;
 
-    const kapak = d.cover_i
-      ? `https://covers.openlibrary.org/b/id/${d.cover_i}-L.jpg`
-      : undefined;
+    const kapak = d.cover_i ? `https://covers.openlibrary.org/b/id/${d.cover_i}-L.jpg` : undefined;
 
-    const olishler = (d.ia ?? []).map(
-      (id) => `https://archive.org/details/${id}`,
-    );
+    const olishler = (d.ia ?? []).map((id) => `https://archive.org/details/${id}`);
 
     sonuc.push({
       kaynak: "open-library",

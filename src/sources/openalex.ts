@@ -86,11 +86,23 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
   u.searchParams.set("search", sorgu.baslik);
   u.searchParams.set("per-page", String(Math.min(50, sorgu.limit * 2)));
   if (ayar.unpaywallEmail) u.searchParams.set("mailto", ayar.unpaywallEmail);
-  u.searchParams.set("select", [
-    "id", "doi", "display_name", "publication_year", "authorships",
-    "abstract_inverted_index", "primary_location", "best_oa_location",
-    "open_access", "topics", "cited_by_count", "type",
-  ].join(","));
+  u.searchParams.set(
+    "select",
+    [
+      "id",
+      "doi",
+      "display_name",
+      "publication_year",
+      "authorships",
+      "abstract_inverted_index",
+      "primary_location",
+      "best_oa_location",
+      "open_access",
+      "topics",
+      "cited_by_count",
+      "type",
+    ].join(","),
+  );
 
   // Not: OpenAlex `filter` parametresini 400 ile reddediyor; yazar ve yil
   // filtresi sonuc listesinde uygulanir (asagida).
@@ -105,16 +117,13 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     if (!w.display_name) continue;
 
     // Yazar filtresi: sorguda yazar varsa eslesmeyen sonuclari ele.
-    const yazarlar = (w.authorships ?? [])
-      .map((a) => a.author?.display_name ?? "")
-      .filter(Boolean);
+    const yazarlar = (w.authorships ?? []).map((a) => a.author?.display_name ?? "").filter(Boolean);
     if (sorgu.yazar && !yazarUstundenGecer(yazarlar, sorgu.yazar)) continue;
     if (sorgu.yil && w.publication_year && Math.abs(sorgu.yil - w.publication_year) > 1) continue;
 
     const doi = w.doi?.replace(/^https?:\/\/doi\.org\//, "");
     let pdf = w.best_oa_location?.pdf_url ?? w.primary_location?.pdf_url ?? undefined;
     let erisim: Work["erisim"] = pdf ? "acik" : w.open_access?.is_oa ? "sinirli" : "yonlendir";
-    let tamMetin: string | undefined;
 
     // DOI varsa yasal OA kopyasini arayin.
     if (!pdf && doi) {
@@ -138,13 +147,19 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       yazarlar: (w.authorships ?? []).map((a) => a.author?.display_name ?? "").filter(Boolean),
       yil: w.publication_year,
       ozet,
-      konular: (w.topics ?? []).map((t) => t.display_name ?? "").filter(Boolean).slice(0, 10),
+      konular: (w.topics ?? [])
+        .map((t) => t.display_name ?? "")
+        .filter(Boolean)
+        .slice(0, 10),
       yayinci: w.primary_location?.source?.display_name ?? undefined,
       doi,
       atif: w.cited_by_count,
-      link: w.best_oa_location?.landing_page_url ?? w.primary_location?.landing_page_url ?? w.id ?? "https://openalex.org",
+      link:
+        w.best_oa_location?.landing_page_url ??
+        w.primary_location?.landing_page_url ??
+        w.id ??
+        "https://openalex.org",
       pdf,
-      tamMetin,
       erisim,
       ham: w,
     });

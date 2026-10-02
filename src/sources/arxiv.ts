@@ -4,7 +4,11 @@ import type { SourceModule, Sorgu, Work } from "../types.js";
 /* arXiv Atom API: onceden yazilmis bilimsel makaleler, hepsi acik PDF. */
 
 function xmlKacis(c: string): string {
-  return c.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  return c
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 // arXiv Atom (XML) donduruyor; JSON desteklemiyor. Minimal bir ayristirma
@@ -29,7 +33,9 @@ function tumEtiketler(blok: string, etiket: string): string[] {
   const re = new RegExp(`<${etiket}(?:\\s[^>]*)?>([\\s\\S]*?)</${etiket}>`, "g");
   let m: RegExpExecArray | null;
   while ((m = re.exec(blok)) !== null) {
-    const d = kacisCoz(m[1] ?? "").replace(/\s+/g, " ").trim();
+    const d = kacisCoz(m[1] ?? "")
+      .replace(/\s+/g, " ")
+      .trim();
     if (d) cikti.push(d);
   }
   return cikti;

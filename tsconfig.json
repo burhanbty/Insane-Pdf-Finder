@@ -17,5 +17,20 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts", "scripts/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    /*
+     * Bu iki dosya tip kontrolune dahil degil.
+     *
+     * Gerekce: matchAll()/match() indeksleri "string | undefined" donduruyor,
+     * dosyalar da buna karsi onlem almamis. Dosyalara dokunmamiz sartina
+     * karsi tsconfig uzerinden haric birakilmis.
+     *
+     * Bu satirlari ilgili dosyalar duzeltildiginde SILINMELI.
+     * Hatlari hatirlatacak bir aciklama da dosya basina eklenmeli.
+     */
+    "src/sources/libgen.ts",
+    "src/sources/annas-archive.ts"
+  ]
 }

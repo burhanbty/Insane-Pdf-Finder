@@ -25,7 +25,7 @@ interface GBDoc {
   };
 }
 
-function yilCikart( tarih?: string): number | undefined {
+function yilCikart(tarih?: string): number | undefined {
   if (!tarih) return undefined;
   const m = tarih.match(/(\d{4})/);
   return m ? Number(m[1]) : undefined;

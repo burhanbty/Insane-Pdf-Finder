@@ -1,20 +1,19 @@
 @echo off
+REM ===================================================================
+REM  Kaynak Bul - Onbellek temizleme
+REM  Indirilen dosyalara dokunmaz; yalnizca .cache silinir.
+REM ===================================================================
 setlocal
 cd /d "%~dp0"
 
-where node >nul 2>nul
-if errorlevel 1 (
+if exist ".cache\" (
+  rmdir /s /q ".cache"
   echo.
-  echo   Node.js bulunamadi. Lutfen https://nodejs.org adresinden kurun.
-  pause
-  exit /b 1
+  echo   Onbellek temizlendi.
+) else (
+  echo.
+  echo   Onbellek yok, temizlenecek bir sey yok.
 )
 
-if exist ".cache\" rmdir /s /q ".cache"
-if exist "downloads\" (
-  echo   Not: Indirilen dosyalar downloads klasorunde saklanir ve silinmez.
-)
-
-echo.
-echo   Onbellek temizlendi.
+echo   Not: Indirilen dosyalar downloads\ klasorunde duruyor ve silinmedi.
 pause

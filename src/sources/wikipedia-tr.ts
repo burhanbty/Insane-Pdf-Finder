@@ -36,7 +36,7 @@ interface SayfaDetay {
 
 function kacisCoz(s: string): string {
   return s
-    .replace(/<[^>]+>/g, "")          // arama sonucundaki <span> etiketleri
+    .replace(/<[^>]+>/g, "") // arama sonucundaki <span> etiketleri
     .replace(/&quot;/g, '"')
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
@@ -69,8 +69,8 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
   detayU.searchParams.set("action", "query");
   detayU.searchParams.set("pageids", sayfalar.map((s) => s.pageid).join("|"));
   detayU.searchParams.set("prop", "extracts|pageimages");
-  detayU.searchParams.set("exintro", "1");        // sadece giriş bölümü
-  detayU.searchParams.set("explaintext", "1");   // HTML değil, düz metin
+  detayU.searchParams.set("exintro", "1"); // sadece giriş bölümü
+  detayU.searchParams.set("explaintext", "1"); // HTML değil, düz metin
   detayU.searchParams.set("piprop", "thumbnail");
   detayU.searchParams.set("pithumbsize", "300");
   detayU.searchParams.set("format", "json");

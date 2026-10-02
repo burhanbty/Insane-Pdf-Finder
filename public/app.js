@@ -55,8 +55,9 @@ const ERISIM_ETIKET = {
 };
 
 function kacis(s) {
-  return String(s ?? "").replace(/[&<>"']/g, (c) =>
-    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+  return String(s ?? "").replace(
+    /[&<>"']/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
   );
 }
 
@@ -75,13 +76,11 @@ function baytBicim(b) {
   const birim = ["B", "KB", "MB", "GB"];
   let i = 0;
   let n = b;
-  while (n >= 1024 && i < birim.length - 1) { n /= 1024; i++; }
+  while (n >= 1024 && i < birim.length - 1) {
+    n /= 1024;
+    i++;
+  }
   return `${n.toFixed(i === 0 ? 0 : 1)} ${birim[i]}`;
-}
-
-function metinKisitla(metin, sinir) {
-  if (!metin) return null;
-  return metin.length > sinir ? `${metin.slice(0, sinir).trimEnd()}…` : metin;
 }
 
 async function istek(yol, govde) {
@@ -112,7 +111,7 @@ el.form.addEventListener("submit", async (olay) => {
     baslik,
     yazar: el.yazar.value.trim(),
     yil: el.yil.value ? Number(el.yil.value) : undefined,
-    tur: el.form.querySelector('input[name=tur]:checked')?.value ?? "kitap",
+    tur: el.form.querySelector("input[name=tur]:checked")?.value ?? "kitap",
     limit: Number(el.limit.value) || 20,
   };
 
@@ -121,7 +120,8 @@ el.form.addEventListener("submit", async (olay) => {
   el.kartlar.innerHTML = "";
   el.sonucBolum.classList.add("gizli");
   el.ozetPanel.classList.remove("gizli");
-  el.ozetPanel.innerHTML = '<div class="durum-satir"><span class="nokta uyari"></span><span class="bilgi">Kaynaklar sorgulanıyor, bu birkaç saniye sürebilir…</span></div>';
+  el.ozetPanel.innerHTML =
+    '<div class="durum-satir"><span class="nokta uyari"></span><span class="bilgi">Kaynaklar sorgulanıyor, bu birkaç saniye sürebilir…</span></div>';
 
   try {
     const anahtar = JSON.stringify(govde);
@@ -131,7 +131,7 @@ el.form.addEventListener("submit", async (olay) => {
     // Web aramasini beklemeden ana sonuclari goster.
     const [ana, web] = await Promise.allSettled(istekler);
 
-const gruplar = [];
+    const gruplar = [];
     const durumlar = [];
     const hatalar = [];
     let webNotu = null;
@@ -177,7 +177,9 @@ function cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi) {
   });
 
   for (const h of hatalar) {
-    satirlar.push(`<div class="durum-satir"><span class="nokta hata"></span><span class="bilgi">${kacis(h)}</span></div>`);
+    satirlar.push(
+      `<div class="durum-satir"><span class="nokta hata"></span><span class="bilgi">${kacis(h)}</span></div>`,
+    );
   }
 
   // Genel web aramasi sonuc vermediginde kullaniciya elle acabilecegi adresi ver.
@@ -209,7 +211,8 @@ function cizKartlar(gruplar) {
 
   if (!gruplar.length) {
     el.bos.classList.remove("gizli");
-    el.bos.innerHTML = "<p>Sonuç bulunamadı.</p><p>Başlığı kısaltmayı veya yazarı kaldırmayı deneyin.</p>";
+    el.bos.innerHTML =
+      "<p>Sonuç bulunamadı.</p><p>Başlığı kısaltmayı veya yazarı kaldırmayı deneyin.</p>";
     return;
   }
   el.bos.classList.add("gizli");
@@ -309,7 +312,8 @@ function filtreUygula() {
   if (!gorunur.length) {
     el.sonucBaslik.textContent = "0 sonuç";
     el.bos.classList.remove("gizli");
-    el.bos.innerHTML = "<p>Bu filtreye uyan sonuç yok.</p><p>Farklı bir kaynak seçmeyi deneyin.</p>";
+    el.bos.innerHTML =
+      "<p>Bu filtreye uyan sonuç yok.</p><p>Farklı bir kaynak seçmeyi deneyin.</p>";
   } else {
     el.sonucBaslik.textContent = `${gorunur.length} sonuç`;
     el.bos.classList.add("gizli");
@@ -465,9 +469,7 @@ function kartYap(g) {
   // yapan kaynak (ilk siralama zaten puana gore).
   kart.dataset.anaKaynak = kaynakIdleri[0] ?? "";
 
-  const kapakUrl = g.kapak
-    ? `/api/kapak?url=${encodeURIComponent(g.kapak)}`
-    : null;
+  const kapakUrl = g.kapak ? `/api/kapak?url=${encodeURIComponent(g.kapak)}` : null;
 
   const etiketler = [];
   if (g.puan >= 0.85) etiketler.push(`<span class="etiket uyum">Tam eşleşme</span>`);
@@ -486,16 +488,19 @@ function kartYap(g) {
       ? `<div class="kaynak-notu">Bu eser ${kaynakIdleri.length} kaynakta bulundu — eşleştirildi</div>`
       : "";
 
-  const kaynakRozetleri = g.kaynaklar.map((k) => {
-    const [sinif, etiket] = ERISIM_ETIKET[k.erisim ?? "yonlendir"];
-    return `<span class="kaynak-rozet" data-kaynak="${kacis(k.kaynak)}">
+  const kaynakRozetleri = g.kaynaklar
+    .map((k) => {
+      const [sinif, etiket] = ERISIM_ETIKET[k.erisim ?? "yonlendir"];
+      return `<span class="kaynak-rozet" data-kaynak="${kacis(k.kaynak)}">
       <span class="badge ${sinif}">${etiket}</span>
       <a href="${kacis(k.link)}" target="_blank" rel="noopener noreferrer">${kacis(k.kaynakAd)}</a>
     </span>`;
-  }).join("");
+    })
+    .join("");
 
   const indirilebilir = g.kaynaklar.find((k) => k.pdf);
-  const ozetlenebilir = g.kaynaklar.find((k) => k.pdf || k.tamMetin) ?? g.kaynaklar.find((k) => k.ozet);
+  const ozetlenebilir =
+    g.kaynaklar.find((k) => k.pdf || k.tamMetin) ?? g.kaynaklar.find((k) => k.ozet);
 
   /*
    * Sayfa sayisi. Oncelikle kaynaktan gelen bilgi kullanilir; yoksa
@@ -506,21 +511,29 @@ function kartYap(g) {
 
   const eylemler = [];
   if (indirilebilir) {
-    eylemler.push(`<button class="birincil" data-eylem="indir" data-url="${kacis(indirilebilir.pdf)}" data-tur="pdf" data-baslik="${kacis(g.baslik)}">PDF indir</button>`);
+    eylemler.push(
+      `<button class="birincil" data-eylem="indir" data-url="${kacis(indirilebilir.pdf)}" data-tur="pdf" data-baslik="${kacis(g.baslik)}">PDF indir</button>`,
+    );
   } else {
-    eylemler.push(`<button class="bos-durum" disabled title="Bu kayıt için doğrudan PDF bağlantısı yok">PDF indir</button>`);
+    eylemler.push(
+      `<button class="bos-durum" disabled title="Bu kayıt için doğrudan PDF bağlantısı yok">PDF indir</button>`,
+    );
   }
 
   if (ozetlenebilir) {
     const tur = ozetlenebilir.pdf ? "pdf" : "metin";
     const url = ozetlenebilir.pdf ?? ozetlenebilir.tamMetin;
-    eylemler.push(`<button data-eylem="ozet" data-url="${kacis(url)}" data-tur="${tur}" data-baslik="${kacis(g.baslik)}">Özet çıkar</button>`);
+    eylemler.push(
+      `<button data-eylem="ozet" data-url="${kacis(url)}" data-tur="${tur}" data-baslik="${kacis(g.baslik)}">Özet çıkar</button>`,
+    );
   }
 
   kart.innerHTML = `
-    ${kapakUrl
-      ? `<img class="kapak" src="${kacis(kapakUrl)}" alt="" loading="lazy">`
-      : `<div class="kapak yok">📄</div>`}
+    ${
+      kapakUrl
+        ? `<img class="kapak" src="${kacis(kapakUrl)}" alt="" loading="lazy">`
+        : `<div class="kapak yok">📄</div>`
+    }
     <div class="kart-govde">
       <h3>${kacis(g.baslik)}</h3>
       ${g.altBaslik ? `<div class="alt">${kacis(g.altBaslik)}</div>` : ""}
@@ -542,7 +555,9 @@ function kartYap(g) {
 }
 
 function kacisId(s) {
-  return btoa(unescape(encodeURIComponent(s))).replace(/[^a-zA-Z0-9]/g, "").slice(0, 12);
+  return btoa(unescape(encodeURIComponent(s)))
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .slice(0, 12);
 }
 
 /* ----------------------------- sayfa sayisi ------------------------------ */
@@ -642,12 +657,18 @@ el.kartlar.addEventListener("click", async (olay) => {
     try {
       const sonuc = await istek("/api/download", { url, tur, baslik });
       buton.textContent = `Kaydedildi: ${sonuc.dosya}`;
-      setTimeout(() => { buton.textContent = eski; buton.disabled = false; }, 3500);
+      setTimeout(() => {
+        buton.textContent = eski;
+        buton.disabled = false;
+      }, 3500);
       await indirmeleriYenile();
     } catch (hata) {
       buton.textContent = "İndirilemedi";
       buton.title = hata.message;
-      setTimeout(() => { buton.textContent = eski; buton.disabled = false; }, 4000);
+      setTimeout(() => {
+        buton.textContent = eski;
+        buton.disabled = false;
+      }, 4000);
     }
     return;
   }
@@ -656,7 +677,8 @@ el.kartlar.addEventListener("click", async (olay) => {
     const anahtar = `${baslik}|${url}`;
     buton.disabled = true;
     buton.textContent = "Özetleniyor…";
-    hedefKutu.innerHTML = '<div class="ozet-metin">İçerik alınıyor ve özetleniyor… (büyük dosyalarda biraz sürebilir)</div>';
+    hedefKutu.innerHTML =
+      '<div class="ozet-metin">İçerik alınıyor ve özetleniyor… (büyük dosyalarda biraz sürebilir)</div>';
 
     try {
       if (!ozetYuklenen.has(anahtar)) {
@@ -715,12 +737,14 @@ async function indirmeleriYenile() {
     }
 
     el.dosyaListesi.innerHTML = dosyalar
-      .map((d) => `<div class="dosya">
+      .map(
+        (d) => `<div class="dosya">
         <span>${d.tur === "pdf" ? "📕" : "📄"}</span>
         <span class="ad">${kacis(d.dosya)}</span>
         <span class="boyut">${baytBicim(d.boyut)}</span>
         <span class="boyut">${new Date(d.tarih).toLocaleString("tr-TR")}</span>
-      </div>`)
+      </div>`,
+      )
       .join("");
   } catch {
     el.dosyaListesi.innerHTML = '<div class="dosya-yok">Liste alınamadı.</div>';
@@ -749,9 +773,9 @@ $("#kaynaklarBtn").addEventListener("click", async () => {
       .join("");
 
     if (yuklenmeHatalari?.length) {
-      el.kaynakListesi.innerHTML += `<p class="ipucu" style="margin-top:14px">Yüklenemeyen dosyalar: ${
-        yuklenmeHatalari.map((h) => kacis(h.dosya)).join(", ")
-      }</p>`;
+      el.kaynakListesi.innerHTML += `<p class="ipucu" style="margin-top:14px">Yüklenemeyen dosyalar: ${yuklenmeHatalari
+        .map((h) => kacis(h.dosya))
+        .join(", ")}</p>`;
     }
   } catch (hata) {
     el.kaynakListesi.innerHTML = `<p class="ipucu">${kacis(hata.message)}</p>`;

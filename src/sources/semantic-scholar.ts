@@ -30,10 +30,22 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
   const u = new URL("https://api.semanticscholar.org/graph/v1/paper/search");
   u.searchParams.set("query", parcalar.join(" "));
   u.searchParams.set("limit", String(Math.min(50, sorgu.limit * 2)));
-  u.searchParams.set("fields", [
-    "title", "abstract", "year", "authors", "externalIds",
-    "openAccessPdf", "fieldsOfStudy", "venue", "url", "citationCount", "isOpenAccess",
-  ].join(","));
+  u.searchParams.set(
+    "fields",
+    [
+      "title",
+      "abstract",
+      "year",
+      "authors",
+      "externalIds",
+      "openAccessPdf",
+      "fieldsOfStudy",
+      "venue",
+      "url",
+      "citationCount",
+      "isOpenAccess",
+    ].join(","),
+  );
   if (ayar.semanticScholarKey) u.searchParams.set("x-api-key", ayar.semanticScholarKey);
 
   const veri = await getJson<{ data?: SS[]; total?: number }>(u.toString(), {
@@ -58,7 +70,11 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       yayinci: p.venue ?? undefined,
       doi: p.externalIds?.DOI,
       atif: p.citationCount,
-      link: p.url ?? (p.paperId ? `https://www.semanticscholar.org/paper/${p.paperId}` : "https://www.semanticscholar.org"),
+      link:
+        p.url ??
+        (p.paperId
+          ? `https://www.semanticscholar.org/paper/${p.paperId}`
+          : "https://www.semanticscholar.org"),
       pdf: oaPdf ?? undefined,
       erisim: oaPdf ? "acik" : p.isOpenAccess ? "sinirli" : "yonlendir",
       ham: p,

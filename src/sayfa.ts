@@ -64,8 +64,7 @@ export async function sayfaSayisiOgren(
       }
 
       // PDF degilse (html hata sayfasi, metin) sayfa sayisi yoktur.
-      const pdfMi =
-        bayt[0] === 0x25 && bayt[1] === 0x50 && bayt[2] === 0x44 && bayt[3] === 0x46;
+      const pdfMi = bayt[0] === 0x25 && bayt[1] === 0x50 && bayt[2] === 0x44 && bayt[3] === 0x46;
       if (!pdfMi) {
         if (tur.includes("text/plain") || url.endsWith(".txt")) {
           // Duz metinde "sayfa" kavrami yok; karakter/kelime bilgisi verelim.
@@ -106,9 +105,7 @@ const ESZAMANLI = 3;
  * uc PDF'den biri 60 saniye surerse ucu de bekliyordu. Burada en fazla
  * ESZAMANLI adres ayni anda islenir; biri beklerken digerleri ilerler.
  */
-export async function topluSayfaSayisi(
-  adresler: string[],
-): Promise<Record<string, SayfaSonucu>> {
+export async function topluSayfaSayisi(adresler: string[]): Promise<Record<string, SayfaSonucu>> {
   const sonuc: Record<string, SayfaSonucu> = {};
   const benzersiz = [...new Set(adresler)].slice(0, 30);
   if (!benzersiz.length) return sonuc;
@@ -125,9 +122,7 @@ export async function topluSayfaSayisi(
     }
   }
 
-  await Promise.all(
-    Array.from({ length: Math.min(ESZAMANLI, benzersiz.length) }, isleyici),
-  );
+  await Promise.all(Array.from({ length: Math.min(ESZAMANLI, benzersiz.length) }, isleyici));
 
   return sonuc;
 }

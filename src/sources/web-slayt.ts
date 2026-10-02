@@ -42,7 +42,9 @@ function kacisCoz(s: string): string {
 }
 
 function metinTemizle(html: string): string {
-  return kacisCoz(html.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+  return kacisCoz(html.replace(/<[^>]+>/g, " "))
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 /**
@@ -101,7 +103,7 @@ async function bingAra(terimler: string[], adet = 20): Promise<BingSonuc[]> {
     const url = yonlendirmeyiCoz(kacisCoz(hamHref));
     if (!url.startsWith("http")) continue;
 
-    let alan = "";
+    let alan: string;
     try {
       alan = new URL(url).hostname.replace(/^www\./, "");
     } catch {
@@ -139,7 +141,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
   const terimler = [`"${sorgu.baslik}"`];
   if (sorgu.yazar) terimler.push(`"${sorgu.yazar}"`);
 
-  let hepsi: BingSonuc[] = [];
+  const hepsi: BingSonuc[] = [];
   const hatalar: string[] = [];
 
   for (const h of HEDEFLER) {

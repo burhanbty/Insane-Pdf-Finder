@@ -71,7 +71,11 @@ describe("yazarParcalari", () => {
 });
 
 describe("eslestir", () => {
-  const sorgu = { baslik: "Sapiens: A Brief History of Humankind", yazarlar: ["Yuval Noah Harari"], yil: 2011 };
+  const sorgu = {
+    baslik: "Sapiens: A Brief History of Humankind",
+    yazarlar: ["Yuval Noah Harari"],
+    yil: 2011,
+  };
 
   it("birebir ayni eseri yuksek puanlar", () => {
     const e = eslestir(sorgu, {
@@ -95,28 +99,46 @@ describe("eslestir", () => {
   it("kisa baslik sorgusu uzun baslikla eslesir", () => {
     const e = eslestir(
       { baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"], yil: 2011 },
-      { baslik: "Sapiens: A Brief History of Humankind", yazarlar: ["Yuval Noah Harari"], yil: 2011 },
+      {
+        baslik: "Sapiens: A Brief History of Humankind",
+        yazarlar: ["Yuval Noah Harari"],
+        yil: 2011,
+      },
     );
     expect(e.baslik).toBeGreaterThan(0.35);
     expect(e.puan).toBeGreaterThan(0.6);
   });
 
   it("dogru baslik yanlis yazarla orta puan verir", () => {
-    const e = eslestir({ baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"], yil: 2011 }, { baslik: "Sapiens", yazarlar: ["George Orwell"], yil: 2011 });
+    const e = eslestir(
+      { baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"], yil: 2011 },
+      { baslik: "Sapiens", yazarlar: ["George Orwell"], yil: 2011 },
+    );
     expect(e.puan).toBeGreaterThan(0.3);
     expect(e.puan).toBeLessThan(0.7);
     expect(e.yazar).toBe(0);
   });
 
   it("yil yoksa puanlamaya katilmaz", () => {
-    const e = eslestir({ baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"] }, { baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"] });
+    const e = eslestir(
+      { baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"] },
+      { baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"] },
+    );
     expect(e.yil).toBeNull();
     expect(e.puan).toBeGreaterThan(0.9);
   });
 
   it("yil saptasi puani dusurur", () => {
-    const dogru = eslestir(sorgu, { baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"], yil: 2011 });
-    const yanlis = eslestir(sorgu, { baslik: "Sapiens", yazarlar: ["Yuval Noah Harari"], yil: 1987 });
+    const dogru = eslestir(sorgu, {
+      baslik: "Sapiens",
+      yazarlar: ["Yuval Noah Harari"],
+      yil: 2011,
+    });
+    const yanlis = eslestir(sorgu, {
+      baslik: "Sapiens",
+      yazarlar: ["Yuval Noah Harari"],
+      yil: 1987,
+    });
     expect(dogru.puan).toBeGreaterThan(yanlis.puan);
   });
 

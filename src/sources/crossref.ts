@@ -49,10 +49,17 @@ function araliktanToplam(page?: string): number | undefined {
 async function ara(sorgu: Sorgu): Promise<Work[]> {
   const u = new URL("https://api.crossref.org/works");
   u.searchParams.set("query.bibliographic", sorgu.baslik + (sorgu.yazar ? ` ${sorgu.yazar}` : ""));
-  if (sorgu.yil) u.searchParams.set("filter", `from-pub-date:${sorgu.yil - 1}-01-01,until-pub-date:${sorgu.yil + 1}-12-31`);
+  if (sorgu.yil)
+    u.searchParams.set(
+      "filter",
+      `from-pub-date:${sorgu.yil - 1}-01-01,until-pub-date:${sorgu.yil + 1}-12-31`,
+    );
   u.searchParams.set("rows", String(Math.min(50, sorgu.limit * 2)));
   // Not: `language` Crossref select listesinde gecerli bir alan degil, 400 donuyor.
-  u.searchParams.set("select", "DOI,title,subtitle,author,issued,container-title,publisher,abstract,subject,page,volume,issue,type,URL");
+  u.searchParams.set(
+    "select",
+    "DOI,title,subtitle,author,issued,container-title,publisher,abstract,subject,page,volume,issue,type,URL",
+  );
   u.searchParams.set("mailto", "ornek@example.org");
 
   const veri = await getJson<{ message?: { items?: CR[] } }>(u.toString(), {
@@ -73,13 +80,20 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       tur: "makale",
       baslik,
       altBaslik: it.subtitle?.[0],
-      yazarlar: (it.author ?? []).map((a) => adDiz(a.given, a.family, a.name)).filter((x): x is string => Boolean(x)),
+      yazarlar: (it.author ?? [])
+        .map((a) => adDiz(a.given, a.family, a.name))
+        .filter((x): x is string => Boolean(x)),
       yil: yil ?? undefined,
-      ozet: it.abstract?.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(),
+      ozet: it.abstract
+        ?.replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim(),
       konular: it.subject,
       yayinci: it.containerTitle?.[0] ?? it.publisher,
       doi: it.DOI,
-      sayfa: it.page ? `${it.volume ?? ""}${it.issue ? `(${it.issue})` : ""}: ${it.page}`.replace(/^: /, "") : undefined,
+      sayfa: it.page
+        ? `${it.volume ?? ""}${it.issue ? `(${it.issue})` : ""}: ${it.page}`.replace(/^: /, "")
+        : undefined,
       // Crossref "page" alani sayfa araligi verir ("411-423"), toplam
       // sayfa sayisi degildir. Araligi hesaplayip sayi olarak saklariz.
       sayfaSayisi: araliktanToplam(it.page),

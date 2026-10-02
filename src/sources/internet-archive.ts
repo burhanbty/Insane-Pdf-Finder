@@ -19,7 +19,9 @@ function ilkDeger(v: string | string[] | undefined): string | undefined {
 }
 
 /** Bir IA kaydinin indirilebilir PDF/metin dosyalarini bulur. */
-export async function iaDosyalari(kimlik: string): Promise<{ pdf?: string; metin?: string; erisim: Work["erisim"] }> {
+export async function iaDosyalari(
+  kimlik: string,
+): Promise<{ pdf?: string; metin?: string; erisim: Work["erisim"] }> {
   try {
     const veri = await getJson<IAMeta>(
       `https://archive.org/metadata/${encodeURIComponent(kimlik)}`,
@@ -80,7 +82,12 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
 
   const u = new URL("https://archive.org/advancedsearch.php");
   u.searchParams.set("q", terimler.join(" AND "));
-  u.searchParams.set("fl[]", ["identifier", "title", "creator", "year", "date", "description", "subject", "language"].join(","));
+  u.searchParams.set(
+    "fl[]",
+    ["identifier", "title", "creator", "year", "date", "description", "subject", "language"].join(
+      ",",
+    ),
+  );
   u.searchParams.set("rows", String(Math.min(50, sorgu.limit * 2)));
   u.searchParams.set("sort", "downloads desc");
   u.searchParams.set("output", "json");

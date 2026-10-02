@@ -28,7 +28,13 @@ const CEVAP = {
       puan: 0.93,
       sayfaSayisi: 15,
       kaynaklar: [
-        { kaynak: "arxiv", kaynakAd: "arXiv", link: "https://arxiv.org/x", erisim: "acik", pdf: "https://arxiv.org/x.pdf" },
+        {
+          kaynak: "arxiv",
+          kaynakAd: "arXiv",
+          link: "https://arxiv.org/x",
+          erisim: "acik",
+          pdf: "https://arxiv.org/x.pdf",
+        },
         { kaynak: "crossref", kaynakAd: "Crossref", link: "https://cr.org/x", erisim: "yonlendir" },
       ],
     },
@@ -90,7 +96,7 @@ async function arayuzuYukle(): Promise<void> {
     window.eval(`globalThis.__calisma = (async () => {\n${js}\n})();`);
     await (window as unknown as { __calisma: Promise<void> }).__calisma;
   } catch (hata) {
-    throw new Error(`app.js yüklenemedi: ${(hata as Error).message}`);
+    throw new Error(`app.js yüklenemedi: ${(hata as Error).message}`, { cause: hata });
   }
 }
 
@@ -213,9 +219,7 @@ describe("kart üzerindeki kaynak bilgisi", () => {
 
   it("çok kaynakta bulunan eserde uyarı notu görünür", async () => {
     const d = await araVeBekle();
-    const not = d
-      .querySelector('[data-anahtar="coklu"]')!
-      .querySelector(".kaynak-notu");
+    const not = d.querySelector('[data-anahtar="coklu"]')!.querySelector(".kaynak-notu");
 
     expect(not?.textContent).toContain("2 kaynakta");
   });
@@ -281,10 +285,7 @@ describe("gruplama", () => {
 
     // İlk başlıktan sonraki ikinci başlığa kadar tüm kartlar arXiv olmalı.
     for (let i = ilkBaslik + 1; i < digerBaslik; i++) {
-      expect(
-        cocuklar[i]!.getAttribute("data-ana-kaynak"),
-        "gruplama sırası bozuk",
-      ).toBe("arxiv");
+      expect(cocuklar[i]!.getAttribute("data-ana-kaynak"), "gruplama sırası bozuk").toBe("arxiv");
     }
   });
 
