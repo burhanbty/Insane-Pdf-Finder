@@ -29,7 +29,7 @@ interface SayfaDetay {
   query?: {
     pages?: Record<
       string,
-      { title?: string; extract?: string; thumbnail?: string; pageid?: number }
+      { title?: string; extract?: string; thumbnail?: { source?: string }; pageid?: number }
     >;
   };
 }
@@ -80,7 +80,10 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     timeoutMs: 15_000,
   });
 
-  const detaylar = new Map<number, { extract?: string; thumbnail?: string; title?: string }>();
+  const detaylar = new Map<
+    number,
+    { extract?: string; thumbnail?: { source?: string }; title?: string }
+  >();
   for (const p of Object.values(detay.query?.pages ?? {})) {
     if (p.pageid) detaylar.set(p.pageid, p);
   }
@@ -101,7 +104,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       yazarlar: sorgu.yazar ? [sorgu.yazar] : [],
       yil: sorgu.yil,
       ozet: d?.extract ?? (s.snippet ? kacisCoz(s.snippet) : undefined),
-      kapak: d?.thumbnail,
+      kapak: d?.thumbnail?.source,
       link: `https://tr.wikipedia.org/wiki/${encodeURIComponent(baslik.replace(/ /g, "_"))}`,
       erisim: "acik",
     });

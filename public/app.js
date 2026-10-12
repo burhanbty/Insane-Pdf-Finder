@@ -44,6 +44,7 @@ const el = {
 let sonCevap = null;
 let suzgec = "hepsi";
 const ozetYuklenen = new Map();
+let kaynakAdlari = new Map();
 
 /* ------------------------------- yardimcilar ----------------------------- */
 
@@ -376,8 +377,6 @@ function grupBasliklariniCiz(gorunurKartlar, aktif) {
 
   el.kartlar.appendChild(parca);
 }
-
-let kaynakAdlari = new Map();
 
 function kovAd(id) {
   return kaynakAdlari.get(id) ?? id;

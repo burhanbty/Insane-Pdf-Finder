@@ -155,6 +155,8 @@ const IZINLI_KAPAK_ALANLARI = [
   "books.googleusercontent.com",
   "m.media-amazon.com",
   "images-na.ssl-images-amazon.com",
+  "upload.wikimedia.org",
+  "gutenberg.org",
 ];
 
 uygulama.get("/api/kapak", async (req: Request, res: Response) => {

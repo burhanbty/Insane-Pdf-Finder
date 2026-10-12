@@ -32,7 +32,8 @@ const ADS_MD5_RE = /ads\.php\?md5=([a-f0-9]{32})/i;
 const FILE_ID_RE = /file\.php\?id=(\d+)/i;
 const EDITION_LINK_RE = /href=["'][^"']*edition\.php\?id=\d+[^"']*["'][^>]*>([\s\S]*?)<\/a>/i;
 
-function htmlCoz(metin: string): string {
+function htmlCoz(metin?: string): string {
+  if (!metin) return "";
   return metin
     .replace(/&#x([0-9a-f]+);/gi, (_, h: string) =>
       String.fromCodePoint(Number.parseInt(h, 16)),
@@ -48,7 +49,8 @@ function htmlCoz(metin: string): string {
     .replace(/&gt;/gi, ">");
 }
 
-function htmlMetin(html: string): string {
+function htmlMetin(html?: string): string {
+  if (!html) return "";
   return htmlCoz(
     html
       .replace(/<br\s*\/?>/gi, "\n")
@@ -59,25 +61,27 @@ function htmlMetin(html: string): string {
   );
 }
 
-function tekSatirMetin(html: string): string {
+function tekSatirMetin(html?: string): string {
+  if (!html) return "";
   return htmlMetin(html).replace(/\s+/g, " ").trim();
 }
 
 function yilCoz(metin?: string): number | undefined {
   const eslesme = metin?.match(/\b(1[5-9]\d{2}|20\d{2}|2100)\b/);
-  if (!eslesme) return undefined;
+  if (!eslesme?.[1]) return undefined;
   const yil = Number(eslesme[1]);
   return Number.isFinite(yil) ? yil : undefined;
 }
 
 function sayfaCoz(metin?: string): number | undefined {
   const eslesme = metin?.match(/\d+/);
-  if (!eslesme) return undefined;
+  if (!eslesme?.[0]) return undefined;
   const sayi = Number(eslesme[0]);
   return Number.isFinite(sayi) && sayi > 0 ? sayi : undefined;
 }
 
-function yazarlariAyir(hucreHtml: string): string[] {
+function yazarlariAyir(hucreHtml?: string): string[] {
+  if (!hucreHtml) return [];
   // Yazar hücresindeki ayrı bağlantıları tercih et.
   const linkler = [...hucreHtml.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)]
     .map((m) => tekSatirMetin(m[1]))
@@ -94,17 +98,18 @@ function yazarlariAyir(hucreHtml: string): string[] {
     .filter(Boolean);
 }
 
-function baslikCoz(hucreHtml: string): string {
+function baslikCoz(hucreHtml?: string): string {
+  if (!hucreHtml) return "";
   // Güncel frontend başlığı edition.php?id=... bağlantısında taşıyor.
   const edition = hucreHtml.match(EDITION_LINK_RE);
-  if (edition) {
+  if (edition && edition[1]) {
     const baslik = tekSatirMetin(edition[1]);
     if (baslik) return baslik;
   }
 
   // Bazı kayıtlar seri adını <b> içinde gösterebiliyor.
   const seri = hucreHtml.match(/<b\b[^>]*>([\s\S]*?)<\/b>/i);
-  if (seri) {
+  if (seri && seri[1]) {
     const baslik = tekSatirMetin(seri[1]);
     if (baslik) return baslik;
   }
@@ -118,8 +123,10 @@ function tabloyuCoz(html: string, ayna: string): LibgenKayit[] {
 
   for (const satir of satirlar) {
     const satirHtml = satir[1];
+    if (!satirHtml) continue;
+
     const hucreler = [...satirHtml.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map(
-      (m) => m[1],
+      (m) => m[1] ?? "",
     );
 
     // Güncel libgen.li ailesi:
@@ -225,9 +232,11 @@ async function libgenAra(terimler: string, limit: number): Promise<LibgenKayit[]
     }
   }
 
-  // Kaynak geçici olarak erişilemiyorsa diğer kaynakların aramasını bozma.
+  if (sonHata instanceof Error) {
+    throw new Error(`Library Genesis aynaları başarısız: ${sonHata.message}`);
+  }
   if (sonHata) {
-    console.warn("[libgen] tüm aynalar başarısız veya parse edilemedi", sonHata);
+    throw new Error("Library Genesis aynaları başarısız");
   }
 
   return [];

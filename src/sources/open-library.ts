@@ -87,9 +87,6 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       sayfaSayisi: d.number_of_pages_median || undefined,
       kapak,
       link: `https://openlibrary.org${d.key ?? ""}`,
-      // Open Library odunc metni uzerinden erisim saglar; tam metin
-      // oradan okunabilir, biz de ozet icin oradan aliyoruz.
-      pdf: olishler[0],
       erisim: olishler.length ? "odunc" : "yonlendir",
       ham: { ia: d.ia, edition_key: d.edition_key },
     });

@@ -46,11 +46,12 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       "isOpenAccess",
     ].join(","),
   );
-  if (ayar.semanticScholarKey) u.searchParams.set("x-api-key", ayar.semanticScholarKey);
+  const header = ayar.semanticScholarKey ? { "x-api-key": ayar.semanticScholarKey } : undefined;
 
   const veri = await getJson<{ data?: SS[]; total?: number }>(u.toString(), {
     boslukMs: ayar.semanticScholarKey ? 300 : 1500,
     timeoutMs: 20_000,
+    header,
   });
 
   const sonuc: Work[] = [];

@@ -47,6 +47,12 @@ arayüzde o kaynağın durumu ayrı satırda görünür.
 | Crossref             | makale, kitap | Kesin künye (DOI, sayfa, cilt)                                        |
 | CORE                 | makale        | Açık erişim makale indeksi, çoğunda tam metin PDF                     |
 | Zenodo               | makale, slayt | Veri setleri, çalışma kâğıtları, sunum dosyaları                      |
+| Sci-Hub              | makale, kitap | 88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi   |
+| Europe PMC           | makale        | 44+ milyon biyomedikal/fen makalesi ve PubMed Central açık PDF'leri   |
+| Project Gutenberg    | kitap         | 70.000+ klasik ve kamu malı kitap (EPUB, TXT, HTML)                   |
+| HAL Science          | makale, kitap | 4+ milyon açık erişimli araştırma yayını, tez ve kitap (tam PDF)      |
+| Library Genesis      | kitap, makale | Ayna siteler üzerinden kitap ve makale künyesi / detay yönlendirmesi  |
+| Anna's Archive       | kitap, makale | Geniş gölge kütüphane meta-indeksi / detay yönlendirmesi              |
 | Türkçe Wikipedia     | hepsi         | Anahtarsız açık API; **senin eklediğin kaynak için örnek**            |
 | Web araması          | slayt         | SlideShare, Speaker Deck, Google Slides vb. — yalnızca bağlantı       |
 
@@ -222,29 +228,21 @@ Sonuçların hangi kaynaktan geldiğini incelemek için:
 npm run check          # lint + tip kontrolü + testler (hepsi)
 npm run lint           # eslint
 npm run typecheck      # tsc --noEmit
-npm test               # 80 birim testi (çevrimdışı, ~3 sn)
+npm test               # 97 birim testi (çevrimdışı, ~3 sn)
 npm run format         # prettier ile biçimlendir
 npm run format:check   # biçimi doğrula (CI'da çalışır)
 ```
 
-GitHub Actions şu kontroleri her push'ta ve her PR'da çalıştırır:
+GitHub Actions şu kontrolleri her push'ta ve her PR'da çalıştırır:
 Node 20/22/24 üzerinde kurulum, biçim denetimi, lint, tip kontrolü, birim
 testleri ve **temiz klonlama testi** (`scripts/dogrula-kurulum.mjs` — 31
 kontrol: dosyalar mevcut mu, sunucu ayakta mı, rotalar yanıt veriyor mu,
 arayüz sunuluyor mu, zarif kapanış çalışıyor mu).
 
-### Bilinen tip kontrolü istisnası
-
-`libgen.ts` ve `annas-archive.ts` şu anda `tsconfig.json` içindeki `exclude`
-listesinde. Gerekçesi: bu dosyalarda `match()`/`matchAll()` indekslerinin
-`string | undefined` dönmesi ele alınmamış. Lint ve testler bu dosyaları yine
-de kontrol ediyor. Düzeltildiklerinde `tsconfig.json` içindeki `exclude`
-bloğu **silinmelidir**.
-
 ## Testler
 
 ```bash
-npm test          # 80 birim testi (normalizasyon, puanlama, gruplama, arayüz)
+npm test          # 97 birim testi (normalizasyon, puanlama, gruplama, kaynaklar, arayüz)
 npm run typecheck # TypeScript hataları
 
 # gerçek kaynaklara istek atan duman testleri
@@ -276,8 +274,9 @@ doğru çizildiğini denetler.
 
 ## Kapsam
 
-Program telif hakkıyla korunan içeriklerin korsan kopyalarını barındıran
-siteleri (LibGen, Z-Library, Anna's Archive vb.) kaynak olarak kullanmaz.
-Yalnızca açık erişimli ve kamuya ait katalog verileriyle çalışır; genel web
-araması da yalnızca arama motoruna sorgu gönderip bulunan bağlantıları
-gösterir, içerik çekmez.
+Program telif hakkıyla korunan içerikleri doğrudan barındırmaz veya indirmez.
+LibGen ve Anna's Archive gibi harici indekslerden yalnızca bibliyografik kayıt
+ve künye bilgisi sorgulanır; bu kaynaklar için doğrudan indirme bağlantısı
+verilmeksizin yalnızca ilgili detay sayfasına yönlendirme (`erisim: "yonlendir"`)
+sağlanır. Genel web araması da yalnızca arama motoruna sorgu gönderip bulunan
+bağlantıları gösterir, içerik çekmez.

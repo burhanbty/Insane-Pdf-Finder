@@ -35,7 +35,8 @@ const TARAYICI_UA =
 
 const MD5_LINK_RE = /\/md5\/([a-f0-9]{32})/gi;
 
-function htmlCoz(metin: string): string {
+function htmlCoz(metin?: string): string {
+  if (!metin) return "";
   return metin
     .replace(/&#x([0-9a-f]+);/gi, (_, h: string) =>
       String.fromCodePoint(Number.parseInt(h, 16)),
@@ -51,7 +52,8 @@ function htmlCoz(metin: string): string {
     .replace(/&gt;/gi, ">");
 }
 
-function htmlMetin(html: string): string {
+function htmlMetin(html?: string): string {
+  if (!html) return "";
   return htmlCoz(
     html
       .replace(/<br\s*\/?>/gi, "\n")
@@ -62,7 +64,8 @@ function htmlMetin(html: string): string {
   );
 }
 
-function tekSatirMetin(html: string): string {
+function tekSatirMetin(html?: string): string {
+  if (!html) return "";
   return htmlMetin(html).replace(/\s+/g, " ").trim();
 }
 
@@ -77,7 +80,10 @@ function yilCoz(metin?: string): number | undefined {
 
   // Metadata satırında bazen birden fazla tarih oluyor; en sondaki genelde
   // baskı/kayıt yılına en yakın bilgi.
-  const yil = Number(yillar[yillar.length - 1][1]);
+  const sonuncu = yillar[yillar.length - 1];
+  const yilMetni = sonuncu?.[1];
+  if (!yilMetni) return undefined;
+  const yil = Number(yilMetni);
   return Number.isFinite(yil) ? yil : undefined;
 }
 
@@ -156,8 +162,9 @@ function metaBilgisiCoz(kart: string): {
 
   for (const parca of parcalar) {
     const dilEslesme = parca.match(/\[([a-z]{2,3})\]/i);
-    if (!dil && dilEslesme) {
-      dil = dilEslesme[1].toLowerCase();
+    const bulunanDil = dilEslesme?.[1];
+    if (!dil && bulunanDil) {
+      dil = bulunanDil.toLowerCase();
       continue;
     }
 
@@ -248,7 +255,9 @@ function sonuclariCoz(html: string, ayna: string, limit: number): AnnaKayit[] {
   const gorulen = new Set<string>();
 
   for (const eslesme of html.matchAll(MD5_LINK_RE)) {
-    const md5 = eslesme[1].toLowerCase();
+    const rawMd5 = eslesme[1];
+    if (!rawMd5) continue;
+    const md5 = rawMd5.toLowerCase();
     if (gorulen.has(md5)) continue;
     gorulen.add(md5);
 

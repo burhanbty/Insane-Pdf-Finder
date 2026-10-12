@@ -1,3 +1,4 @@
+import { ayar } from "../config.js";
 import { getJson } from "../http.js";
 import type { SourceModule, Sorgu, Work } from "../types.js";
 
@@ -31,16 +32,18 @@ function adDiz(g?: string, f?: string, n?: string): string | undefined {
 }
 
 /**
- * Crossref "page" alani makalenin o kismini verir ("411-423"), toplam
- * sayfa sayisi degildir. Tek sayfa ya da aralik varsa buradan cikaririz;
- * sonuc genel bir makale icin (orn. bir bolum) yaniltici olabilecegi icin
- * yalnizca sayi olarak saklanir.
+ * Crossref "page" alani makalenin o kismini verir ("411-423").
+ * Sayfa araligi varsa toplam sayfa sayisini (son - ilk + 1) olarak hesaplariz.
  */
 function araliktanToplam(page?: string): number | undefined {
   if (!page) return undefined;
   const sayilar = [...page.matchAll(/\d+/g)].map((m) => Number(m[0]));
   if (!sayilar.length) return undefined;
   if (sayilar.length === 1) return sayilar[0];
+  if (sayilar.length === 2 && sayilar[0] !== undefined && sayilar[1] !== undefined) {
+    const fark = Math.abs(sayilar[1] - sayilar[0]) + 1;
+    if (fark > 0 && fark < 5000) return fark;
+  }
   const enBuyuk = Math.max(...sayilar);
   // "e1000234" gibi artefaktlari ele.
   return enBuyuk < 100000 ? enBuyuk : undefined;
@@ -60,7 +63,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     "select",
     "DOI,title,subtitle,author,issued,container-title,publisher,abstract,subject,page,volume,issue,type,URL",
   );
-  u.searchParams.set("mailto", "ornek@example.org");
+  u.searchParams.set("mailto", ayar.contactEmail || "ornek@example.org");
 
   const veri = await getJson<{ message?: { items?: CR[] } }>(u.toString(), {
     boslukMs: 400,
