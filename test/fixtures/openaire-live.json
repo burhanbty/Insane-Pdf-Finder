@@ -1,0 +1,548 @@
+{
+  "response": {
+    "results": {
+      "result": [
+        {
+          "metadata": {
+            "oaf:entity": {
+              "oaf:result": {
+                "title": [
+                  {
+                    "@classid": "main title",
+                    "@classname": "main title",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@schemename": "dnet:dataCite_title",
+                    "$": "Attention Is All You Need"
+                  },
+                  {
+                    "@classid": "main title",
+                    "@classname": "main title",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@schemename": "dnet:dataCite_title",
+                    "$": "Ordalien im spätantiken und frühmittelalterlichen Westen: Deutungen und Praktiken zwischen Recht, Ritual und Gesellschaft"
+                  },
+                  {
+                    "@classid": "TranslatedTitle",
+                    "@classname": "TranslatedTitle",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@schemename": "dnet:dataCite_title",
+                    "$": "Ordeal in Late Antiquity and the Early Middle Ages in the West: Interpretations and Practices between Law, Ritual and Society"
+                  },
+                  {
+                    "@classid": "main title",
+                    "@classname": "main title",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@schemename": "dnet:dataCite_title",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:crosswalk:repository",
+                    "@trust": "0.9",
+                    "$": "Attention Is All You Need."
+                  },
+                  {
+                    "@classid": "main title",
+                    "@classname": "main title",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@schemename": "dnet:dataCite_title",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:crosswalk:repository",
+                    "@trust": "0.9",
+                    "$": "Attention is All you Need."
+                  }
+                ],
+                "creator": [
+                  {
+                    "@rank": "1",
+                    "$": "Ashish Vaswani"
+                  },
+                  {
+                    "@rank": "2",
+                    "$": "Noam Shazeer"
+                  },
+                  {
+                    "@rank": "3",
+                    "$": "Niki Parmar"
+                  },
+                  {
+                    "@rank": "4",
+                    "$": "Jakob Uszkoreit"
+                  },
+                  {
+                    "@rank": "5",
+                    "$": "Llion Jones"
+                  },
+                  {
+                    "@rank": "6",
+                    "@name": "Aidan N.",
+                    "@surname": "Gomez",
+                    "$": "Aidan N. Gomez"
+                  },
+                  {
+                    "@rank": "7",
+                    "@orcid_pending": "0000-0003-1092-6010",
+                    "$": "Lukasz Kaiser"
+                  },
+                  {
+                    "@rank": "8",
+                    "$": "Illia Polosukhin"
+                  }
+                ],
+                "pid": [
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.65215/r5bs2d54"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.65215/mdcm8z23"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.65215/2q58a426"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.65215/ysbyhc05"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.65215/ctdc8e75"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.65215/nxvz2v36"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "$": "10.65215/pc26a033"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:actionset",
+                    "@trust": "0.9",
+                    "$": "10.48550/arxiv.1706.03762"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:actionset",
+                    "@trust": "0.9",
+                    "$": "10.5283/epub.78347"
+                  },
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:actionset",
+                    "@trust": "0.9",
+                    "$": "10.5283/epub.78343"
+                  },
+                  {
+                    "@classid": "arXiv",
+                    "@classname": "arXiv",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:crosswalk:repository",
+                    "@trust": "0.9",
+                    "$": 1706.03762
+                  }
+                ],
+                "dateofacceptance": {
+                  "$": "2025-08-23"
+                },
+                "bestaccessright": {
+                  "@classid": "OPEN",
+                  "@classname": "Open Access",
+                  "@schemeid": "dnet:access_modes",
+                  "@schemename": "dnet:access_modes"
+                },
+                "children": {
+                  "instance": [
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.48550/arxiv.1706.03762"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://dblp.org/rec/journals/corr/VaswaniSPUJGKP17.html"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "DBLP",
+                        "@id": "openaire____::d8b68cc0a53121f6f896883a7d60c1db"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.65215/pc26a033"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.65215/ctdc8e75"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "DBLP",
+                        "@id": "openaire____::d8b68cc0a53121f6f896883a7d60c1db"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.5283/epub.78347"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.65215/2q58a426"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.65215/nxvz2v36"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.65215/r5bs2d54"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.5283/epub.78343"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "OPEN",
+                        "@classname": "Open Access",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "http://arxiv.org/abs/1706.03762"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "arXiv.org e-Print Archive",
+                        "@id": "opendoar____::6f4922f45568161a8cdf4ad2299f6d23"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.65215/ysbyhc05"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.65215/mdcm8z23"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "metadata": {
+            "oaf:entity": {
+              "oaf:result": {
+                "title": [
+                  {
+                    "@classid": "main title",
+                    "@classname": "main title",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@schemename": "dnet:dataCite_title",
+                    "$": "Not All Attention Is All You Need"
+                  },
+                  {
+                    "@classid": "main title",
+                    "@classname": "main title",
+                    "@schemeid": "dnet:dataCite_title",
+                    "@schemename": "dnet:dataCite_title",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:crosswalk:repository",
+                    "@trust": "0.9",
+                    "$": "Not All Attention Is All You Need."
+                  }
+                ],
+                "creator": [
+                  {
+                    "@rank": "1",
+                    "$": "Hongqiu Wu"
+                  },
+                  {
+                    "@rank": "2",
+                    "$": "Hai Zhao 0001"
+                  },
+                  {
+                    "@rank": "3",
+                    "$": "Min Zhang 0005"
+                  }
+                ],
+                "pid": [
+                  {
+                    "@classid": "doi",
+                    "@classname": "Digital Object Identifier",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:actionset",
+                    "@trust": "0.9",
+                    "$": "10.48550/arxiv.2104.04692"
+                  },
+                  {
+                    "@classid": "arXiv",
+                    "@classname": "arXiv",
+                    "@schemeid": "dnet:pid_types",
+                    "@schemename": "dnet:pid_types",
+                    "@inferred": false,
+                    "@provenanceaction": "sysimport:crosswalk:repository",
+                    "@trust": "0.9",
+                    "$": 2104.04692
+                  }
+                ],
+                "dateofacceptance": {
+                  "$": "2021-01-01"
+                },
+                "bestaccessright": {
+                  "@classid": "OPEN",
+                  "@classname": "Open Access",
+                  "@schemeid": "dnet:access_modes",
+                  "@schemename": "dnet:access_modes"
+                },
+                "children": {
+                  "instance": [
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://arxiv.org/abs/2104.04692"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "DBLP",
+                        "@id": "openaire____::d8b68cc0a53121f6f896883a7d60c1db"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "UNKNOWN",
+                        "@classname": "unspecified",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "https://doi.org/10.48550/arxiv.2104.04692"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "Unknown Repository",
+                        "@id": "openaire____::55045bd2a65019fd8e6741a755395c8c"
+                      }
+                    },
+                    {
+                      "accessright": {
+                        "@classid": "OPEN",
+                        "@classname": "Open Access",
+                        "@schemeid": "dnet:access_modes",
+                        "@schemename": "dnet:access_modes"
+                      },
+                      "webresource": {
+                        "url": {
+                          "$": "http://arxiv.org/abs/2104.04692"
+                        }
+                      },
+                      "hostedby": {
+                        "@name": "arXiv.org e-Print Archive",
+                        "@id": "opendoar____::6f4922f45568161a8cdf4ad2299f6d23"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

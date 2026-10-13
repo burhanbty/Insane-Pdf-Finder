@@ -79,11 +79,13 @@ export async function get(url: string, secenek: GetOptions = {}): Promise<Respon
     let sonHata: unknown;
 
     for (let deneme = 0; deneme <= sonDeneme; deneme++) {
-      const kontrolcu = new AbortController();
-      const zamanlayici = setTimeout(() => kontrolcu.abort(), timeoutMs);
+      // Native fetch bu sinyali yanit govdesi tuketilirken de izler.
+      // Basliklar geldikten sonra zamanlayiciyi temizlemek, yavas/sonsuz
+      // text(), arrayBuffer() ve indirme akislarini sinirsiz birakiyordu.
+      const sinyal = AbortSignal.timeout(timeoutMs);
       try {
         const cevap = await fetch(url, {
-          signal: kontrolcu.signal,
+          signal: sinyal,
           redirect: secenek.yonlendir ? "follow" : "follow",
           headers: {
             "user-agent": ayar.userAgent(),
@@ -116,13 +118,10 @@ export async function get(url: string, secenek: GetOptions = {}): Promise<Respon
         return cevap;
       } catch (h) {
         if (h instanceof KaynakHatasi && h.sinif === "http") throw h;
-        sonHata =
-          h instanceof Error && h.name === "AbortError"
-            ? new KaynakHatasi("zaman-asimi", `${host} zaman aşımı (${timeoutMs}ms)`)
-            : new KaynakHatasi("ag", `${host} ${(h as Error)?.message ?? h}`);
+        sonHata = sinyal.aborted
+          ? new KaynakHatasi("zaman-asimi", `${host} zaman aşımı (${timeoutMs}ms)`)
+          : new KaynakHatasi("ag", `${host} ${(h as Error)?.message ?? h}`);
         await new Promise((r) => setTimeout(r, 500 * (deneme + 1)));
-      } finally {
-        clearTimeout(zamanlayici);
       }
     }
 

@@ -19,11 +19,19 @@ interface OAAlan {
 
 interface OAInstance {
   accessright?: OAAlan;
-  webresource?: { url?: OAAlan } & OAAlan;
-  url?: OAAlan;
+  webresource?: { url?: OAAlan | OAAlan[] } | { url?: OAAlan | OAAlan[] }[];
+  url?: OAAlan | OAAlan[];
   hostedby?: { "@name"?: string };
   instancetype?: { "@classname"?: string };
   pid?: OAAlan;
+}
+
+interface OAZarf {
+  metadata?: { "oaf:entity"?: { "oaf:result"?: OAKayit } };
+}
+
+function dizi<T>(alan?: T | T[]): T[] {
+  return alan == null ? [] : Array.isArray(alan) ? alan : [alan];
 }
 
 interface OAKayit {
@@ -44,12 +52,23 @@ interface OAKayit {
 function deger(alan?: OAAlan | OAAlan[]): string | undefined {
   if (!alan) return undefined;
   if (Array.isArray(alan)) return deger(alan[0]);
-  return alan.$ ?? undefined;
+  return typeof alan.$ === "string" ? alan.$.trim() || undefined : undefined;
 }
 
 function degerler(alan?: OAAlan | OAAlan[]): string[] {
   if (!alan) return [];
-  return (Array.isArray(alan) ? alan : [alan]).map((a) => a.$ ?? "").filter(Boolean);
+  return dizi(alan)
+    .map((a) => deger(a) ?? "")
+    .filter(Boolean);
+}
+
+function httpUrl(aday: string): string | undefined {
+  try {
+    const u = new URL(aday);
+    return u.protocol === "http:" || u.protocol === "https:" ? u.toString() : undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 function erisimTuru(kayit: OAKayit, instance?: OAInstance): Work["erisim"] {
@@ -79,11 +98,16 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     ham: true,
   });
   const veri = JSON.parse(await cevap.text()) as {
-    response?: { results?: { result?: OAKayit[] } };
+    response?: { results?: { result?: OAZarf | OAZarf[] } };
   };
+  if (!veri?.response) throw new Error("OpenAIRE yanıt biçimi tanınmadı");
 
   const sonuc: Work[] = [];
-  for (const kayit of veri.response?.results?.result ?? []) {
+  for (const zarf of dizi(veri.response.results?.result)) {
+    const kayit = zarf?.metadata?.["oaf:entity"]?.["oaf:result"];
+    if (!kayit || typeof kayit !== "object") {
+      throw new Error("OpenAIRE kayıt metaverisi bulunamadı");
+    }
     const baslik = deger(kayit.title);
     if (!baslik) continue;
 
@@ -97,10 +121,17 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     const acikOrnek = ornekler.find((o) => erisimTuru(kayit, o) === "acik") ?? ornekler[0];
     const erisim = erisimTuru(kayit, acikOrnek);
 
-    const webUrl =
-      (acikOrnek?.webresource?.url?.$ ?? acikOrnek?.url?.$ ?? deger(kayit.pid)?.startsWith("http"))
-        ? deger(kayit.pid)
-        : undefined;
+    const adresler = [
+      ...dizi(acikOrnek?.webresource).flatMap((r) => degerler(r.url)),
+      ...degerler(acikOrnek?.url),
+      ...degerler(kayit.pid),
+    ]
+      .map(httpUrl)
+      .filter((u): u is string => Boolean(u));
+    const webUrl = adresler[0];
+    // Acik erisimli kayit sayfasi tek basina dogrudan PDF demek degildir.
+    const pdf =
+      erisim === "acik" ? adresler.find((u) => /\.pdf$/i.test(new URL(u).pathname)) : undefined;
 
     const doi = (Array.isArray(kayit.pid) ? kayit.pid : kayit.pid ? [kayit.pid] : [])
       .filter((p): p is OAAlan => p?.["@classid"] === "doi")
@@ -128,7 +159,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       dil: kayit.language?.["@classid"],
       doi,
       link: webUrl ?? (doi ? `https://doi.org/${doi}` : "https://explore.openaire.eu"),
-      pdf: erisim === "acik" && webUrl ? webUrl : undefined,
+      pdf,
       erisim,
       ham: kayit,
     });

@@ -1,0 +1,174 @@
+{
+  "node": "v24.18.1",
+  "fixed": ["F01", "F03", "F04", "F07", "F17"],
+  "probes": [
+    {
+      "id": "F01",
+      "detail": {
+        "groups": 1,
+        "retainedSources": ["a", "b"],
+        "pdfPreserved": true,
+        "status": "fixed"
+      }
+    },
+    {
+      "id": "F02",
+      "detail": {
+        "distinctAuthorsMerged": ["Alice Smith", "Bob Jones"],
+        "retainedSources": 2
+      }
+    },
+    {
+      "id": "F03",
+      "detail": {
+        "timeoutMs": 50,
+        "actualMs": 68,
+        "bodyAborted": true,
+        "status": "fixed"
+      }
+    },
+    {
+      "id": "F04",
+      "detail": [
+        {
+          "status": "fulfilled",
+          "file": "collision.txt",
+          "bytes": 8,
+          "contentVerified": true
+        },
+        {
+          "status": "fulfilled",
+          "file": "collision_2.txt",
+          "bytes": 8,
+          "contentVerified": true
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "detail": {
+        "forcedRefreshFetchCount": 1,
+        "expected": 2
+      }
+    },
+    {
+      "id": "F06",
+      "detail": {
+        "epubExposedAsPdf": "https://example.test/book.epub",
+        "inventedYear": 2099
+      }
+    },
+    {
+      "id": "F07",
+      "detail": {
+        "expectedUrl": "https://repository.test/paper.pdf",
+        "actualPdf": "https://repository.test/paper.pdf",
+        "actualType": "kitap",
+        "status": "fixed"
+      }
+    },
+    {
+      "id": "F08",
+      "detail": {
+        "articleIdExposedAsPageCount": 1000234,
+        "bookExposedAs": "makale"
+      }
+    },
+    {
+      "id": "F09",
+      "detail": {
+        "sourceMetadataContainsNoAuthorOrYear": true,
+        "actualAuthors": ["Invented Author"],
+        "actualYear": 2099
+      }
+    },
+    {
+      "id": "F16",
+      "detail": {
+        "declaredMinimum": "20",
+        "dependencyRequirements": [
+          {
+            "name": "pdfjs-dist",
+            "version": "6.3.289",
+            "node": ">=22.13.0 || >=24"
+          },
+          {
+            "name": "vitest",
+            "version": "5.0.3",
+            "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
+          },
+          {
+            "name": "jsdom",
+            "version": "30.1.1",
+            "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+          }
+        ],
+        "evidenceType": "package manifests; Node 20 was not executed"
+      }
+    },
+    {
+      "id": "F17",
+      "detail": {
+        "actualApiRecords": 2,
+        "adapterRecords": 2,
+        "metadataPath": "metadata[\"oaf:entity\"][\"oaf:result\"]",
+        "status": "fixed"
+      }
+    },
+    {
+      "id": "F18",
+      "detail": {
+        "actualRecordUri": "https://hal.science/hal-04749086v1",
+        "fabricatedPdf": "https://hal.science/hal-4749086/document",
+        "filesMissing": true
+      }
+    },
+    {
+      "id": "F10",
+      "detail": {
+        "summaryButtonUrl": "",
+        "requestBody": {
+          "url": "",
+          "tur": "metin",
+          "baslik": "abstract"
+        }
+      }
+    },
+    {
+      "id": "F11",
+      "detail": {
+        "expectedGroups": 2,
+        "actualGroups": ["A2 sonuç", "B1 sonuç", "A2 sonuç"]
+      }
+    },
+    {
+      "id": "F12",
+      "detail": {
+        "cardsBeforeWebCompletes": 0,
+        "cardsAfterWebCompletes": 1
+      }
+    },
+    {
+      "id": "F13",
+      "detail": {
+        "unsafeSchemePresentInRenderedLink": true,
+        "scriptWasNotExecuted": true
+      }
+    },
+    {
+      "id": "F14",
+      "detail": {
+        "loopbackDownloadStatus": 200,
+        "ownTestServerOnly": true
+      }
+    },
+    {
+      "id": "F15",
+      "detail": {
+        "foreignOriginAccepted": true,
+        "status": 200,
+        "isolatedCacheRemoved": true
+      }
+    }
+  ]
+}

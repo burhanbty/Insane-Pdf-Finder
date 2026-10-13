@@ -1,0 +1,247 @@
+{
+  "node": "v24.18.1",
+  "requestCount": 33,
+  "deadlineMs": 25000,
+  "requestTimeoutMs": 8000,
+  "results": [
+    {
+      "id": "annas-archive",
+      "status": "error",
+      "ms": 14159,
+      "error": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+    },
+    {
+      "id": "arxiv",
+      "status": "response",
+      "ms": 1174,
+      "count": 2,
+      "sample": [
+        {
+          "baslik": "Attention Is All You Need",
+          "tur": "makale",
+          "link": "https://arxiv.org/abs/1706.03762v7",
+          "pdf": "https://arxiv.org/pdf/1706.03762v7"
+        },
+        {
+          "baslik": "Not All Attention Is All You Need",
+          "tur": "makale",
+          "link": "https://arxiv.org/abs/2104.04692v3",
+          "pdf": "https://arxiv.org/pdf/2104.04692v3"
+        }
+      ]
+    },
+    {
+      "id": "core",
+      "status": "response",
+      "ms": 2970,
+      "count": 1,
+      "sample": [
+        {
+          "baslik": "All You Need is a Telephone and an Open Mind",
+          "tur": "makale",
+          "link": "https://core.ac.uk/outputs/171060341"
+        }
+      ]
+    },
+    {
+      "id": "crossref",
+      "status": "response",
+      "ms": 842,
+      "count": 2,
+      "sample": [
+        {
+          "baslik": "Is Attention All You Need?",
+          "tur": "makale",
+          "link": "https://doi.org/10.1007/978-3-031-84300-6_13"
+        },
+        {
+          "baslik": "Attention Is All You Need: An Analysis Of The Valuation Of Artificial Intelligence Tokens",
+          "tur": "makale",
+          "link": "https://doi.org/10.2139/ssrn.4993784"
+        }
+      ]
+    },
+    {
+      "id": "europe-pmc",
+      "status": "response",
+      "ms": 2430,
+      "count": 2,
+      "sample": [
+        {
+          "baslik": "Attention Is All You Need: A Universal Augmented Reality Surgical Navigation Framework",
+          "tur": "makale",
+          "link": "https://europepmc.org/articles/PPR1328024"
+        },
+        {
+          "baslik": "Correction to: Attention is all you need: utilizing attention in AI-enabled drug discovery.",
+          "tur": "makale",
+          "link": "https://europepmc.org/articles/42059664",
+          "pdf": "https://europepmc.org/articles/PMC13130204?pdf=render"
+        }
+      ]
+    },
+    {
+      "id": "gutenberg",
+      "status": "response",
+      "ms": 526,
+      "count": 1,
+      "sample": [
+        {
+          "baslik": "Pride and Prejudice",
+          "tur": "kitap",
+          "link": "https://www.gutenberg.org/ebooks/1342",
+          "pdf": "https://www.gutenberg.org/ebooks/1342.epub3.images"
+        }
+      ]
+    },
+    {
+      "id": "hal",
+      "status": "response",
+      "ms": 4261,
+      "count": 1,
+      "sample": [
+        {
+          "baslik": "Using LLMs techniques for Time Series Prediction",
+          "tur": "makale",
+          "link": "https://hal.science/hal-04749086v1",
+          "pdf": "https://hal.science/hal-4749086/document"
+        }
+      ]
+    },
+    {
+      "id": "internet-archive",
+      "status": "response",
+      "ms": 3037,
+      "count": 2,
+      "sample": [
+        {
+          "baslik": "Pride and prejudice",
+          "tur": "kitap",
+          "link": "https://archive.org/details/prideprejudice00aust"
+        },
+        {
+          "baslik": "Pride and prejudice",
+          "tur": "kitap",
+          "link": "https://archive.org/details/prideprejudice00austuoft"
+        }
+      ]
+    },
+    {
+      "id": "libgen",
+      "status": "response",
+      "ms": 808,
+      "count": 1,
+      "sample": [
+        {
+          "baslik": "2020-apr 03 vol. 34 iss. 07",
+          "tur": "makale",
+          "link": "https://libgen.li/ads.php?md5=8c27b63b5477f380b8ef621460a32eb2"
+        }
+      ]
+    },
+    {
+      "id": "open-library",
+      "status": "response",
+      "ms": 4263,
+      "count": 2,
+      "sample": [
+        {
+          "baslik": "Pride and Prejudice",
+          "tur": "kitap",
+          "link": "https://openlibrary.org/works/OL66554W"
+        },
+        {
+          "baslik": "Pride and Prejudice",
+          "tur": "kitap",
+          "link": "https://openlibrary.org/works/OL15165350W"
+        }
+      ]
+    },
+    {
+      "id": "openaire",
+      "status": "response",
+      "ms": 3671,
+      "count": 0,
+      "sample": []
+    },
+    {
+      "id": "openalex",
+      "status": "response",
+      "ms": 1942,
+      "count": 2,
+      "sample": [
+        {
+          "baslik": "Attention Is All You Need",
+          "tur": "makale",
+          "link": "https://doi.org/10.65215/r5bs2d54",
+          "pdf": "https://langtaosha.org.cn/index.php/lts/preprint/download/10/108"
+        },
+        {
+          "baslik": "Attention Is All You Need In Speech Separation",
+          "tur": "makale",
+          "link": "https://doi.org/10.1109/icassp39728.2021.9413901"
+        }
+      ]
+    },
+    {
+      "id": "sci-hub",
+      "status": "response",
+      "ms": 2635,
+      "count": 1,
+      "sample": [
+        {
+          "baslik": "Is Attention All You Need?",
+          "tur": "makale",
+          "link": "https://sci-hub.se/10.1007%2F978-3-031-84300-6_13",
+          "pdf": "https://sci-hub.se/10.1007%2F978-3-031-84300-6_13"
+        }
+      ]
+    },
+    {
+      "id": "semantic-scholar",
+      "status": "error",
+      "ms": 3280,
+      "error": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+    },
+    {
+      "id": "web-slayt",
+      "status": "response",
+      "ms": 6498,
+      "count": 0,
+      "sample": []
+    },
+    {
+      "id": "wikipedia-tr",
+      "status": "response",
+      "ms": 1693,
+      "count": 1,
+      "sample": [
+        {
+          "baslik": "Attention Is All You Need",
+          "tur": "makale",
+          "link": "https://tr.wikipedia.org/wiki/Attention_Is_All_You_Need"
+        }
+      ]
+    },
+    {
+      "id": "zenodo",
+      "status": "response",
+      "ms": 2202,
+      "count": 2,
+      "sample": [
+        {
+          "baslik": "Attention is all you need",
+          "tur": "makale",
+          "link": "https://zenodo.org/records/18289747",
+          "pdf": "https://zenodo.org/api/records/18289747/files/2026-doebeli-honegger-attention-is-all-you-need.pdf/content"
+        },
+        {
+          "baslik": "Constant Attention is all you need.",
+          "tur": "makale",
+          "link": "https://zenodo.org/records/17677147",
+          "pdf": "https://zenodo.org/api/records/17677147/files/ConstantAttentionIsAllYouNeed.pdf/content"
+        }
+      ]
+    }
+  ]
+}

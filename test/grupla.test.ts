@@ -17,6 +17,24 @@ function w(kismi: Partial<Work>): Work {
 const sorgu: Sorgu = { baslik: "Sapiens", yazar: "Harari", yil: 2011, tur: "kitap", limit: 20 };
 
 describe("grupla", () => {
+  it("benzerlik ile birlesen kayitlarin kaynak ve PDF baglantilarini bir kez korur", () => {
+    const kayitlar = [
+      w({ kaynak: "a", baslik: "Sapiens", yazarlar: ["Harari"], yil: 2011 }),
+      w({
+        kaynak: "b",
+        baslik: "Sapiens: History",
+        yazarlar: ["Harari"],
+        yil: 2011,
+        pdf: "https://ornek.test/b.pdf",
+      }),
+      w({ kaynak: "c", baslik: "Sapiens: History", yazarlar: ["Harari"], yil: 2011 }),
+    ];
+    const g = grupla(kayitlar, sorgu);
+    expect(g).toHaveLength(1);
+    expect(g[0]!.kaynaklar).toEqual(kayitlar);
+    expect(g[0]!.kaynaklar.find((k) => k.kaynak === "b")?.pdf).toBe("https://ornek.test/b.pdf");
+  });
+
   it("ayni normalize baslikta tek grup eder", () => {
     const g = grupla(
       [

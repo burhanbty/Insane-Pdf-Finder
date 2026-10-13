@@ -40,16 +40,39 @@ export function dosyaAdiTemizle(ad: string, uzanti: ".pdf" | ".txt"): string {
 
 /** Ayni isimde dosya varsa sonuna sayi ekler. */
 export function benzersizYol(klasor: string, ad: string): string {
+  const musait = (yol: string) => !fs.existsSync(yol) && !fs.existsSync(`${yol}.part`);
   let yol = path.join(klasor, ad);
-  if (!fs.existsSync(yol)) return yol;
+  if (musait(yol)) return yol;
 
   const temel = ad.replace(/\.(pdf|txt)$/, "");
   const uzanti = ad.endsWith(".pdf") ? ".pdf" : ".txt";
   for (let i = 2; i < 500; i++) {
     yol = path.join(klasor, `${temel}_${i}${uzanti}`);
-    if (!fs.existsSync(yol)) return yol;
+    if (musait(yol)) return yol;
   }
   return path.join(klasor, `${temel}_${Date.now()}${uzanti}`);
+}
+
+/** Dosya adini diskte atomik olarak ayirir; baska indirme ayni adi alamaz. */
+async function indirmeYoluAyir(klasor: string, ad: string): Promise<string> {
+  for (;;) {
+    const yol = benzersizYol(klasor, ad);
+    const gecici = `${yol}.part`;
+    let dosya: fs.promises.FileHandle;
+    try {
+      dosya = await fs.promises.open(gecici, "wx");
+    } catch (hata) {
+      if ((hata as NodeJS.ErrnoException).code === "EEXIST") continue;
+      throw hata;
+    }
+    await dosya.close();
+    // Aday secilirken diger indirme bitip .part -> asil ad yapmis olabilir.
+    if (fs.existsSync(yol)) {
+      await fs.promises.rm(gecici, { force: true });
+      continue;
+    }
+    return yol;
+  }
 }
 
 /** Guvenli mi: yalnizca http(s). */
@@ -92,10 +115,16 @@ export async function indir(
         : "bilinmiyor");
 
   const uzanti: ".pdf" | ".txt" = tur === "pdf" ? ".pdf" : ".txt";
-  const yol = benzersizYol(ayar.downloadsDir, dosyaAdiTemizle(hedef.varsayilanAd, uzanti));
+  let yol: string;
+  try {
+    yol = await indirmeYoluAyir(ayar.downloadsDir, dosyaAdiTemizle(hedef.varsayilanAd, uzanti));
+  } catch (hata) {
+    await cevap.body?.cancel().catch(() => undefined);
+    throw hata;
+  }
 
   const gecici = `${yol}.part`;
-  const cikis = fs.createWriteStream(gecici);
+  const cikis = fs.createWriteStream(gecici, { flags: "r+" });
   let yazilan = 0;
 
   try {
@@ -116,13 +145,12 @@ export async function indir(
       },
       cikis,
     );
+    await fs.promises.rename(gecici, yol);
   } catch (hata) {
     cikis.destroy();
     await fs.promises.rm(gecici, { force: true });
     throw hata;
   }
-
-  await fs.promises.rename(gecici, yol);
 
   return {
     dosya: path.basename(yol),

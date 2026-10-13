@@ -181,8 +181,10 @@ export function grupla(works: Work[], sorgu: Sorgu): Gruplanmis[] {
         });
       });
 
-      if (hedef >= 0) anahtarIndeksi.set(kesin, hedef);
-      else {
+      if (hedef >= 0) {
+        anahtarIndeksi.set(kesin, hedef);
+        gruplar[hedef]!.kaynaklar.push(w);
+      } else {
         gruplar.push({
           anahtar: kesin,
           tur: w.tur,
