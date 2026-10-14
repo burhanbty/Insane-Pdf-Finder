@@ -21,6 +21,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import os from "node:os";
+import { nodeDestekleniyor, NODE_GEREKSINIMI } from "./runtime.mjs";
 
 const kodDizini = path.dirname(fileURLToPath(import.meta.url));
 const kok = path.resolve(kodDizini, "..");
@@ -39,11 +40,9 @@ const tarayiciAc = process.env.OPEN_BROWSER !== "0";
 
 /* --- Node surumu --------------------------------------------------------- */
 
-const SURUM_DESTEK = 20;
-const nodeAna = Number(process.versions.node.split(".")[0] ?? 0);
-if (!Number.isFinite(nodeAna) || nodeAna < SURUM_DESTEK) {
+if (!nodeDestekleniyor(process.versions.node)) {
   console.error(
-    `${c.kirmizi}${c.kalin}Node.js ${SURUM_DESTEK}+ gerekli. Şu an: ${process.versions.node}${c.sifir}`,
+    `${c.kirmizi}${c.kalin}${NODE_GEREKSINIMI} gerekli. Şu an: ${process.versions.node}${c.sifir}`,
   );
   console.error(`${c.soluk}  Kurulum: https://nodejs.org${c.sifir}`);
   process.exit(1);

@@ -143,7 +143,9 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     sonuc.push({
       kaynak: "openaire",
       kaynakAd: `OpenAIRE${acikOrnek?.hostedby?.["@name"] ? ` (${acikOrnek.hostedby["@name"]})` : ""}`,
-      tur: "kitap",
+      tur: /book|monograph|chapter/i.test(acikOrnek?.instancetype?.["@classname"] ?? "")
+        ? "kitap"
+        : "makale",
       baslik,
       yazarlar: (Array.isArray(kayit.creator) ? kayit.creator : [kayit.creator])
         .filter((c): c is OAAlan => Boolean(c?.$))

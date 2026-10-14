@@ -15,7 +15,7 @@ cd "$(dirname "$0")"
 if ! command -v node >/dev/null 2>&1; then
   echo
   echo "  Node.js bulunamadı."
-  echo "  Lütfen Node.js 20 veya üzeri sürümü kurun: https://nodejs.org"
+  echo "  Lütfen Node.js 24.15 veya üzeri desteklenen sürümü kurun: https://nodejs.org"
   echo
   exit 1
 fi

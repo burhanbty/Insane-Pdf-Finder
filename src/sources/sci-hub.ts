@@ -13,6 +13,7 @@ import type { SourceModule, Sorgu, Work } from "../types.js";
 const AYNALAR = ["https://sci-hub.se", "https://sci-hub.st", "https://sci-hub.ru"] as const;
 
 interface CrossrefItem {
+  type?: string;
   DOI?: string;
   title?: string[];
   author?: { given?: string; family?: string; name?: string }[];
@@ -36,11 +37,9 @@ async function doiVeKunyeGetir(sorgu: Sorgu): Promise<Work[]> {
         kaynakAd: "Sci-Hub",
         tur: sorgu.tur,
         baslik: sorgu.baslik,
-        yazarlar: sorgu.yazar ? [sorgu.yazar] : [],
-        yil: sorgu.yil,
+        yazarlar: [],
         doi: baslikDoi,
         link: `${ayna}/${encodeURIComponent(baslikDoi)}`,
-        pdf: `${ayna}/${encodeURIComponent(baslikDoi)}`,
         ozet: "Sci-Hub üzerinden doğrudan erişilebilen tam metin akademik yayın.",
         erisim: "yonlendir",
       },
@@ -51,7 +50,7 @@ async function doiVeKunyeGetir(sorgu: Sorgu): Promise<Work[]> {
   const u = new URL("https://api.crossref.org/works");
   u.searchParams.set("query.bibliographic", sorgu.baslik + (sorgu.yazar ? ` ${sorgu.yazar}` : ""));
   u.searchParams.set("rows", String(Math.min(5, sorgu.limit)));
-  u.searchParams.set("select", "DOI,title,author,issued,publisher,container-title");
+  u.searchParams.set("select", "DOI,title,author,issued,publisher,container-title,type");
 
   const veri = await getJson<{ message?: { items?: CrossrefItem[] } }>(u.toString(), {
     boslukMs: 350,
@@ -75,14 +74,13 @@ async function doiVeKunyeGetir(sorgu: Sorgu): Promise<Work[]> {
     sonuclar.push({
       kaynak: "sci-hub",
       kaynakAd: "Sci-Hub",
-      tur: sorgu.tur,
+      tur: item.type?.startsWith("book") || item.type === "monograph" ? "kitap" : "makale",
       baslik,
       yazarlar,
       yil: Number.isFinite(yil) ? yil : undefined,
       yayinci: item["container-title"]?.[0] ?? item.publisher,
       doi,
       link: `${ayna}/${encodeURIComponent(doi)}`,
-      pdf: `${ayna}/${encodeURIComponent(doi)}`,
       ozet: `Sci-Hub açık arşivi üzerinden tam metin (DOI: ${doi}).`,
       erisim: "yonlendir",
     });

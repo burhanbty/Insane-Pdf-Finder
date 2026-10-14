@@ -8,6 +8,8 @@ Arayüz tarayıcıda açılıyor, Türkçe. Node.js + TypeScript, build adımı 
 
 ## Çalıştırma
 
+Node.js **22.22.2+ (22.x), 24.15.0+ (24.x) veya 26+** gerekir.
+
 ```bash
 npm install
 npm start
@@ -16,6 +18,34 @@ npm start
 Sonra tarayıcıda `http://127.0.0.1:3000`.
 
 Geliştirirken izleme modu: `npm run dev`.
+
+Sonuçlar eşleşme puanı, yayın yılı veya başlığa göre sıralanabilir. Filtrede görünen
+kayıtlar **Kaynakçayı indir (.ris)** düğmesiyle Zotero ve benzeri kaynakça araçlarına
+aktarılır. Kartlardaki **Künyeyi kopyala** düğmesi yazar, yıl, başlık ve bağlantıyı
+kopyalar; panoya erişilemiyorsa seçilebilir metin gösterir. Eksik bilgiler tahmin edilmez.
+
+PDF, EPUB ve düz metin ayrı indirme biçimleridir. Kaydedilen dosyaları **İndirilenler**
+listesinden açabilirsiniz. Dosya biçimi başlangıç imzasıyla denetlenir; HTML hata
+sayfaları PDF olarak kaydedilmez. İndirmeler 300 MB, özetleme 40 MB, sayfa sayımı
+120 MB ve kapaklar 5 MB ile sınırlıdır; sınırlar akış okunurken uygulanır.
+
+Her kaynak için 20 saniye süre sınırı uygulanır; yanıt vermeyen kaynağın hatası
+gösterilir, diğer sonuçlar korunur. Ortak HTTP istemcisi ve ayna kaynakları iptal
+sinyalini izler. Kendi kaynak modülleriniz de sinyali izlemelidir; süre sınırı
+üçüncü taraf kodun çalışmasını zorla durduramaz. Geçici kaynak hataları içeren
+eksik yanıtlar arama önbelleğine alınmaz.
+Başarılı kaynak yanıtları ayrı önbelleğe alınır; aynı arama tekrarlandığında
+yalnızca hata veren kaynaklar yeniden denenir.
+
+Yerel API yabancı Origin/Host başlıklarını reddeder ve POST isteklerinde JSON
+gerektirir. İndirme, özet, sayfa sayımı ve kapak istekleri özel/ayrılmış IP'leri ve
+standart dışı portları reddeder; yönlendirmeler yeniden denetlenir, DNS cevabı
+bağlantıya sabitlenir. Bu sınırlar kullanıcı tarafından verilen içerik adresleri
+içindir; kendi eklediğiniz kaynak modülleri yerel makinede çalıştırılan kod olarak güvenilir olmalıdır.
+
+`npm run check` lint, tip kontrolü ve çevrimdışı testleri çalıştırır. `npm run smoke`
+sunucuyu gerçek HTTP istekleriyle, geçici indirme/önbellek klasörlerinde doğrular.
+Canlı arama denemesi için `npm run smoke -- --live` kullanılabilir.
 
 ## API anahtarları (isteğe bağlı)
 
@@ -234,7 +264,7 @@ npm run format:check   # biçimi doğrula (CI'da çalışır)
 ```
 
 GitHub Actions şu kontrolleri her push'ta ve her PR'da çalıştırır:
-Node 20/22/24 üzerinde kurulum, biçim denetimi, lint, tip kontrolü, birim
+Node 22.22.2 / 24.15.0 / 26 üzerinde kurulum, biçim denetimi, lint, tip kontrolü, birim
 testleri ve **temiz klonlama testi** (`scripts/dogrula-kurulum.mjs` — 31
 kontrol: dosyalar mevcut mu, sunucu ayakta mı, rotalar yanıt veriyor mu,
 arayüz sunuluyor mu, zarif kapanış çalışıyor mu).

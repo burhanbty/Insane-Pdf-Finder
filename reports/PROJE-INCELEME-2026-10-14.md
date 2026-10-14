@@ -1,5 +1,9 @@
 # Kaynak Bul — inceleme ve test raporu
 
+> Güncel geliştirme turu: kalan sekiz bulgu da düzeltildi; ilk incelemenin 18/18 regresyon kontrolü geçti. Kaynakça araçları, dosya biçimleri, kaynak süre sınırları ve güvenlik geliştirmeleri [güncel raporda](./GELISTIRMELER-2026-10-14.md) anlatılır. Doğrulama betiği artık `audit-after-improvements.json` üretir. Aşağıdaki önceki tur notları tarihsel kayıttır.
+
+> İkinci düzeltme turu: F02, F05, F10, F11 ve F12'nin arayüzde web bekleme davranışı da giderildi. Toplam 10 bulgu düzeltildi; güncel test sonucu 136/136. Ayrıntılar: [ikinci beş düzeltme](./DUZELTMELER-IKINCI-TUR-2026-10-14.md). İlk inceleme ve ilk tur kanıtları tarihsel olarak korunur; doğrulama betiği artık `audit-after-second-fixes.json` üretir.
+
 > Güncelleme: Bu belge ilk incelemenin tarihsel sonuçlarını korur. Sonraki düzeltme çalışmasında F01, F03, F04, F07 ve F17 giderildi. Güncel doğrulama: [beş düzeltme raporu](./DUZELTMELER-2026-10-14.md). Aşağıdaki eski kanıtlar düzeltme öncesine aittir; `audit-reproduce.mjs` artık beş düzeltmeyi ve kalan 13 bulguyu denetler, çıktısını `audit-after-fixes.json` dosyasına yazar.
 
 Tarih: 14 Ekim 2026 (Europe/Istanbul). Ortam: Windows, Node v24.18.1, npm 11.16.0.

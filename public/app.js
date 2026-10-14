@@ -38,6 +38,7 @@ const el = {
   grupla: $("#grupla"),
   sadeceTekKaynak: $("#sadeceTekKaynak"),
   kaynakSayaci: $("#kaynakSayaci"),
+  siralama: $("#siralama"),
 };
 
 /** Son aramanın ham sonucu, filtrelemede kullanılır. */
@@ -45,6 +46,8 @@ let sonCevap = null;
 let suzgec = "hepsi";
 const ozetYuklenen = new Map();
 let kaynakAdlari = new Map();
+let aramaSurumu = 0;
+const kartDugumleri = new WeakMap();
 
 /* ------------------------------- yardimcilar ----------------------------- */
 
@@ -107,6 +110,8 @@ el.form.addEventListener("submit", async (olay) => {
 
   const baslik = el.baslik.value.trim();
   if (!baslik) return;
+  const aramaId = ++aramaSurumu;
+  const webDahil = el.webDahil.checked;
 
   const govde = {
     baslik,
@@ -126,39 +131,69 @@ el.form.addEventListener("submit", async (olay) => {
 
   try {
     const anahtar = JSON.stringify(govde);
-    const istekler = [istek("/api/search", govde)];
-    if (el.webDahil.checked) istekler.push(istek("/api/web-search", govde));
+    const cevaplar = [null, null];
 
-    // Web aramasini beklemeden ana sonuclari goster.
-    const [ana, web] = await Promise.allSettled(istekler);
+    function guncelle() {
+      if (aramaId !== aramaSurumu) return;
+      const [ana, web] = cevaplar;
+      const gruplar = [];
+      const durumlar = [];
+      const hatalar = [];
+      let webNotu = null;
+      let elleAramaAdresi = null;
 
-    const gruplar = [];
-    const durumlar = [];
-    const hatalar = [];
-    let webNotu = null;
-    let elleAramaAdresi = null;
+      if (ana?.status === "fulfilled") {
+        gruplar.push(...ana.value.gruplar);
+        durumlar.push(...ana.value.kaynakDurumlari);
+      } else if (ana) hatalar.push(`Kitap/makale araması: ${ana.reason.message}`);
 
-    if (ana.status === "fulfilled") {
-      gruplar.push(...ana.value.gruplar);
-      durumlar.push(...ana.value.kaynakDurumlari);
-    } else hatalar.push(`Kitap/makale araması: ${ana.reason.message}`);
+      if (web?.status === "fulfilled") {
+        gruplar.push(...web.value.gruplar);
+        durumlar.push(...web.value.kaynakDurumlari);
+        webNotu = web.value.gruplamaNotu ?? null;
+        elleAramaAdresi = web.value.elleAramaAdresi ?? null;
+      } else if (web) hatalar.push(`Web araması: ${web.reason.message}`);
 
-    if (web?.status === "fulfilled") {
-      gruplar.push(...web.value.gruplar);
-      durumlar.push(...web.value.kaynakDurumlari);
-      if (web.value.elleAramaAdresi) elleAramaAdresi = web.value.elleAramaAdresi;
-      if (web.value.gruplamaNotu) webNotu = web.value.gruplamaNotu;
-    } else if (el.webDahil.checked) hatalar.push(`Web araması: ${web.reason.message}`);
+      sonCevap = { gruplar, kaynakDurumlari: durumlar, hatalar, anahtar };
+      cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi);
+      cizKartlar(gruplar);
+      el.sonucBolum.classList.remove("gizli");
+      const bekleyen = !ana
+        ? "Ana kaynak araması sürüyor…"
+        : webDahil && !web
+          ? "Web araması sürüyor…"
+          : null;
+      if (bekleyen) {
+        el.ozetPanel.insertAdjacentHTML(
+          "beforeend",
+          `<div class="durum-satir"><span class="nokta uyari"></span><span class="bilgi">${kacis(bekleyen)}</span></div>`,
+        );
+        if (!gruplar.length) el.bos.innerHTML = `<p>${kacis(bekleyen)}</p>`;
+      }
+      // Ana arama bittiginde yeni sorguya izin ver; web arka planda surer.
+      el.araBtn.disabled = !ana;
+      el.araBtn.textContent = ana ? "Ara" : "Aranıyor…";
+    }
 
-    sonCevap = { gruplar, kaynakDurumlari: durumlar, hatalar, anahtar };
-    cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi);
-    cizKartlar(gruplar);
-    el.sonucBolum.classList.remove("gizli");
+    async function sorgula(yol, indeks) {
+      try {
+        cevaplar[indeks] = { status: "fulfilled", value: await istek(yol, govde) };
+      } catch (hata) {
+        cevaplar[indeks] = { status: "rejected", reason: hata };
+      }
+      guncelle();
+    }
+
+    const istekler = [sorgula("/api/search", 0)];
+    if (webDahil) istekler.push(sorgula("/api/web-search", 1));
+    await Promise.all(istekler);
   } catch (hata) {
-    mesajGoster(`Arama başarısız: ${hata.message}`);
+    if (aramaId === aramaSurumu) mesajGoster(`Arama başarısız: ${hata.message}`);
   } finally {
-    el.araBtn.disabled = false;
-    el.araBtn.textContent = "Ara";
+    if (aramaId === aramaSurumu) {
+      el.araBtn.disabled = false;
+      el.araBtn.textContent = "Ara";
+    }
   }
 });
 
@@ -211,6 +246,9 @@ function cizKartlar(gruplar) {
   el.kartlar.innerHTML = "";
 
   if (!gruplar.length) {
+    el.sonucBaslik.textContent = "0 sonuç";
+    kaynakSecimiDoldur([]);
+    el.kaynakSayaci.textContent = "";
     el.bos.classList.remove("gizli");
     el.bos.innerHTML =
       "<p>Sonuç bulunamadı.</p><p>Başlığı kısaltmayı veya yazarı kaldırmayı deneyin.</p>";
@@ -219,7 +257,15 @@ function cizKartlar(gruplar) {
   el.bos.classList.add("gizli");
 
   el.sonucBaslik.textContent = `${sonCevap.gruplar.length} sonuç`;
-  for (const g of gruplar) el.kartlar.appendChild(kartYap(g));
+  gruplar.forEach((g, i) => {
+    let kart = kartDugumleri.get(g);
+    if (!kart) {
+      kart = kartYap(g);
+      kartDugumleri.set(g, kart);
+    }
+    kart.dataset.sira = String(i);
+    el.kartlar.appendChild(kart);
+  });
 
   kaynakSecimiDoldur(gruplar);
   filtreUygula();
@@ -339,13 +385,28 @@ function grupBasliklariniCiz(gorunurKartlar, aktif) {
   // Önceki başlıkları temizle.
   for (const b of $$(".grup-basligi")) b.remove();
 
-  if (!aktif || !gorunurKartlar.length) return;
+  const sirali = [...el.kartlar.querySelectorAll(".kart")].sort((a, b) => {
+    const secim = el.siralama.value;
+    if (secim === "baslik") return a.dataset.baslik.localeCompare(b.dataset.baslik, "tr");
+    if (secim === "yeni" || secim === "eski") {
+      if (!a.dataset.yil) return b.dataset.yil ? 1 : 0;
+      if (!b.dataset.yil) return -1;
+      const fark = Number(a.dataset.yil) - Number(b.dataset.yil);
+      if (fark) return secim === "yeni" ? -fark : fark;
+    }
+    return Number(a.dataset.sira) - Number(b.dataset.sira);
+  });
+  if (!aktif || !gorunurKartlar.length) {
+    el.kartlar.append(...sirali);
+    return;
+  }
 
-  // Ana kaynak → o kaynaktan gelen kart sayısı
-  const adetler = new Map();
-  for (const kart of gorunurKartlar) {
+  const gruplar = new Map();
+  for (const kart of sirali) {
+    if (kart.classList.contains("gizli")) continue;
     const ana = kart.dataset.anaKaynak || "diger";
-    adetler.set(ana, (adetler.get(ana) ?? 0) + 1);
+    if (!gruplar.has(ana)) gruplar.set(ana, []);
+    gruplar.get(ana).push(kart);
   }
 
   /*
@@ -353,22 +414,12 @@ function grupBasliklariniCiz(gorunurKartlar, aktif) {
    * Gizli kartlari en sona tasiyoruz ki siralamayi bozmasinlar.
    */
   const parca = document.createDocumentFragment();
-  let oncekiAna = null;
-
-  for (const kart of el.kartlar.querySelectorAll(".kart")) {
-    if (kart.classList.contains("gizli")) continue;
-
-    const ana = kart.dataset.anaKaynak || "diger";
-    if (ana !== oncekiAna) {
-      parca.appendChild(baslikOlustur(kovAd(ana), adetler.get(ana) ?? 0, ana));
-      oncekiAna = ana;
-    }
-
-    kart.remove();
-    parca.appendChild(kart);
+  for (const [ana, kartlar] of gruplar) {
+    parca.appendChild(baslikOlustur(kovAd(ana), kartlar.length, ana));
+    parca.append(...kartlar);
   }
 
-  for (const kart of el.kartlar.querySelectorAll(".kart")) {
+  for (const kart of sirali) {
     if (kart.classList.contains("gizli")) {
       kart.remove();
       parca.appendChild(kart);
@@ -450,9 +501,23 @@ function kartYap(g) {
   const kart = document.createElement("article");
   kart.className = "kart";
   kart.dataset.anahtar = g.anahtar;
+  kart.dataset.baslik = g.baslik;
+  kart.dataset.yil = g.yil ?? "";
+  kart.dataset.kunye = [
+    g.yazarlar.join(", "),
+    g.yil ? `(${g.yil})` : "",
+    g.baslik,
+    g.kaynaklar.map((k) => guvenliAdres(k.link)).find(Boolean),
+  ]
+    .filter(Boolean)
+    .join(". ");
 
   // Filtre bayraklari
-  kart.dataset.indirilebilir = g.kaynaklar.some((k) => k.pdf) ? "1" : "0";
+  kart.dataset.indirilebilir = g.kaynaklar.some((k) =>
+    [k.pdf, k.epub, k.tamMetin].some(guvenliAdres),
+  )
+    ? "1"
+    : "0";
   kart.dataset.ozetli = g.kaynaklar.some((k) => k.ozet || k.tamMetin) ? "1" : "0";
   kart.dataset.uyum = g.puan >= 0.6 ? "1" : "0";
 
@@ -490,16 +555,24 @@ function kartYap(g) {
   const kaynakRozetleri = g.kaynaklar
     .map((k) => {
       const [sinif, etiket] = ERISIM_ETIKET[k.erisim ?? "yonlendir"];
+      const url = guvenliAdres(k.link);
+      const ad = url
+        ? `<a href="${kacis(url)}" target="_blank" rel="noopener noreferrer">${kacis(k.kaynakAd)}</a>`
+        : `<span>${kacis(k.kaynakAd)}</span>`;
       return `<span class="kaynak-rozet" data-kaynak="${kacis(k.kaynak)}">
       <span class="badge ${sinif}">${etiket}</span>
-      <a href="${kacis(k.link)}" target="_blank" rel="noopener noreferrer">${kacis(k.kaynakAd)}</a>
+      ${ad}
     </span>`;
     })
     .join("");
 
-  const indirilebilir = g.kaynaklar.find((k) => k.pdf);
-  const ozetlenebilir =
-    g.kaynaklar.find((k) => k.pdf || k.tamMetin) ?? g.kaynaklar.find((k) => k.ozet);
+  const indirilebilir = g.kaynaklar.find((k) => guvenliAdres(k.pdf));
+  const ozetlenebilir = g.kaynaklar
+    .flatMap((k) => [
+      { url: guvenliAdres(k.pdf), tur: "pdf" },
+      { url: guvenliAdres(k.tamMetin), tur: "metin" },
+    ])
+    .find((k) => k.url);
 
   /*
    * Sayfa sayisi. Oncelikle kaynaktan gelen bilgi kullanilir; yoksa
@@ -520,12 +593,25 @@ function kartYap(g) {
   }
 
   if (ozetlenebilir) {
-    const tur = ozetlenebilir.pdf ? "pdf" : "metin";
-    const url = ozetlenebilir.pdf ?? ozetlenebilir.tamMetin;
+    const { tur, url } = ozetlenebilir;
     eylemler.push(
       `<button data-eylem="ozet" data-url="${kacis(url)}" data-tur="${tur}" data-baslik="${kacis(g.baslik)}">Özet çıkar</button>`,
     );
   }
+
+  for (const [alan, tur, ad] of [
+    ["epub", "epub", "EPUB indir"],
+    ["tamMetin", "metin", "Metin indir"],
+  ]) {
+    const url = g.kaynaklar.map((k) => guvenliAdres(k[alan])).find(Boolean);
+    if (url)
+      eylemler.push(
+        `<button data-eylem="indir" data-url="${kacis(url)}" data-tur="${tur}" data-baslik="${kacis(g.baslik)}">${ad}</button>`,
+      );
+  }
+  eylemler.push(
+    `<button data-eylem="kunye" title="Kaynakça için yazar, yıl, başlık ve bağlantıyı kopyala">Künyeyi kopyala</button>`,
+  );
 
   kart.innerHTML = `
     ${
@@ -634,6 +720,18 @@ el.kartlar.addEventListener("click", async (olay) => {
   const baslik = buton.dataset.baslik;
   const hedefKutu = buton.closest(".kart").querySelector(".ozet-icerik");
 
+  if (eylem === "kunye") {
+    const kunye = buton.closest(".kart").dataset.kunye;
+    try {
+      await navigator.clipboard.writeText(kunye);
+      buton.textContent = "Kopyalandı";
+    } catch {
+      hedefKutu.textContent = kunye;
+      buton.textContent = "Künye aşağıda — seçip kopyalayın";
+    }
+    return;
+  }
+
   if (eylem === "sayfa") {
     buton.disabled = true;
     buton.textContent = "Sayılıyor…";
@@ -722,6 +820,47 @@ $$(".sekme").forEach((sekme) => {
 el.kaynakSecim.addEventListener("change", () => filtreUygula());
 el.grupla.addEventListener("change", () => filtreUygula());
 el.sadeceTekKaynak.addEventListener("change", () => filtreUygula());
+el.siralama.addEventListener("change", () => filtreUygula());
+
+$("#risAktar").addEventListener("click", () => {
+  const gosterilen = new Set($$(".kart:not(.gizli)").map((k) => k.dataset.anahtar));
+  const gruplar = (sonCevap?.gruplar ?? []).filter((g) => gosterilen.has(g.anahtar));
+  if (!gruplar.length) {
+    mesajGoster("Aktarılacak görünür sonuç yok.", "uyari");
+    return;
+  }
+  const tekSatir = (v) => String(v ?? "").replace(/[\r\n]+/g, " ");
+  const icerik = gruplar
+    .map((g) => {
+      const k = g.kaynaklar.find((k) => k.doi) ?? g.kaynaklar[0];
+      const alanlar = [
+        ["TY", g.tur === "kitap" ? "BOOK" : g.tur === "makale" ? "JOUR" : "GEN"],
+        ["TI", g.baslik],
+        ...g.yazarlar.map((a) => ["AU", a]),
+        ["PY", g.yil],
+        ["DO", k?.doi],
+        ["UR", guvenliAdres(k?.link)],
+        ["AB", g.ozet],
+      ];
+      return (
+        alanlar
+          .filter(([, v]) => v)
+          .map(([ad, v]) => `${ad}  - ${tekSatir(v)}`)
+          .join("\r\n") + "\r\nER  -\r\n"
+      );
+    })
+    .join("\r\n");
+  const url = URL.createObjectURL(
+    new Blob([icerik], { type: "application/x-research-info-systems;charset=utf-8" }),
+  );
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "kaynaklar.ris";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 
 /* ---------------------------- indirilenler ------------------------------ */
 
@@ -739,7 +878,7 @@ async function indirmeleriYenile() {
       .map(
         (d) => `<div class="dosya">
         <span>${d.tur === "pdf" ? "📕" : "📄"}</span>
-        <span class="ad">${kacis(d.dosya)}</span>
+        <a class="ad" href="/api/downloads/${encodeURIComponent(d.dosya)}" download>${kacis(d.dosya)}</a>
         <span class="boyut">${baytBicim(d.boyut)}</span>
         <span class="boyut">${new Date(d.tarih).toLocaleString("tr-TR")}</span>
       </div>`,
@@ -761,7 +900,7 @@ $("#kaynaklarBtn").addEventListener("click", async () => {
     el.kaynakListesi.innerHTML = kaynaklar
       .map((k) => {
         const nokta = k.hazir ? "iyi" : "uyari";
-        const durum = k.hazir ? "hazır" : "anahtar gerekli";
+        const durum = k.hazir ? "hazır" : (k.hata ?? "anahtar gerekli");
         return `<div class="durum-satir">
           <span class="nokta ${nokta}"></span>
           <span class="ad">${kacis(k.ad)} <span class="etiket">${kacis(k.tur.join(", "))}</span></span>

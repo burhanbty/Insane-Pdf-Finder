@@ -3,6 +3,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { ayar } from "./config.js";
 import type { KaynakInfo, SourceModule } from "./types.js";
+import { kaynakHazirligi } from "./source-state.js";
 
 /*
  * Kaynak kayit sistemi.
@@ -24,11 +25,15 @@ import type { KaynakInfo, SourceModule } from "./types.js";
  */
 
 let kayitli: SourceModule[] | null = null;
+let yukleme: Promise<SourceModule[]> | null = null;
 const yuklenmeHatalari: { dosya: string; hata: string }[] = [];
 
 export async function kaynaklariYukle(): Promise<SourceModule[]> {
   if (kayitli) return kayitli;
+  return (yukleme ??= kaynaklariOku());
+}
 
+async function kaynaklariOku(): Promise<SourceModule[]> {
   const dizin = ayar.sourcesDir;
   let dosyalar: string[];
 
@@ -60,9 +65,24 @@ export async function kaynaklariYukle(): Promise<SourceModule[]> {
       if (!k || typeof k.ara !== "function") {
         throw new Error("varsayılan export SourceModule değil");
       }
-      if (!k.id || !k.ad || !Array.isArray(k.tur)) {
+      if (
+        typeof k.id !== "string" ||
+        !k.id ||
+        typeof k.ad !== "string" ||
+        !k.ad ||
+        !Array.isArray(k.tur)
+      ) {
         throw new Error("id, ad veya tur eksik");
       }
+      if (
+        !/^[a-z0-9][a-z0-9-]*$/i.test(k.id) ||
+        !k.tur.length ||
+        k.tur.some((tur) => !["kitap", "makale", "slayt"].includes(tur))
+      ) {
+        throw new Error("Kaynak kimliği veya türleri geçersiz");
+      }
+      if (yuklenen.some((onceki) => onceki.id === k.id))
+        throw new Error(`Kaynak kimliği tekrar ediyor: ${k.id}`);
       yuklenen.push(k);
     } catch (hata) {
       yuklenmeHatalari.push({ dosya, hata: (hata as Error).message });
@@ -79,7 +99,7 @@ export function kaynakListesi(): KaynakInfo[] {
     ad: k.ad,
     tur: k.tur,
     aciklama: k.aciklama ?? "",
-    hazir: k.hazirMi ? Boolean(k.hazirMi()) : true,
+    ...kaynakHazirligi(k),
   }));
 }
 
@@ -90,6 +110,7 @@ export function yuklenmeHataListesi() {
 /** Testler ve yeniden yukleme icin. */
 export function kayitTemizle() {
   kayitli = null;
+  yukleme = null;
   yuklenmeHatalari.length = 0;
 }
 

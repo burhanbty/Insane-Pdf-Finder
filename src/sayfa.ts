@@ -1,5 +1,6 @@
 import { onbellekli } from "./cache.js";
 import { get } from "./http.js";
+import { sinirliGovde, pdfImzasi } from "./body.js";
 
 /*
  * Bir PDF'in kac sayfa oldugunu ogrenmek.
@@ -45,6 +46,8 @@ export async function sayfaSayisiOgren(
     anahtar(url),
     async (): Promise<SayfaSonucu> => {
       const cevap = await get(url, {
+        disAg: true,
+        tekrar: 0,
         yonlendir: true,
         timeoutMs: 45_000,
         boslukMs: 250,
@@ -55,16 +58,17 @@ export async function sayfaSayisiOgren(
       const beyanEdilen = Number(cevap.headers.get("content-length") ?? 0);
 
       if (beyanEdilen > EN_FAZLA_BAYT) {
+        await cevap.body?.cancel();
         return { not: "Dosya çok büyük, sayfa sayısı okunmadı" };
       }
 
-      const bayt = new Uint8Array(await cevap.arrayBuffer());
+      const bayt = await sinirliGovde(cevap, EN_FAZLA_BAYT);
       if (bayt.length > EN_FAZLA_BAYT) {
         return { not: "Dosya çok büyük, sayfa sayısı okunmadı" };
       }
 
       // PDF degilse (html hata sayfasi, metin) sayfa sayisi yoktur.
-      const pdfMi = bayt[0] === 0x25 && bayt[1] === 0x50 && bayt[2] === 0x44 && bayt[3] === 0x46;
+      const pdfMi = pdfImzasi(bayt);
       if (!pdfMi) {
         if (tur.includes("text/plain") || url.endsWith(".txt")) {
           // Duz metinde "sayfa" kavrami yok; karakter/kelime bilgisi verelim.
@@ -76,22 +80,23 @@ export async function sayfaSayisiOgren(
 
       try {
         const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
-        const belge = await pdfjs.getDocument({
+        const yukleme = pdfjs.getDocument({
           data: bayt,
           useSystemFonts: false,
           disableFontFace: true,
           verbosity: 0,
-        }).promise;
+        });
+        const belge = await yukleme.promise;
 
         const adet = belge.numPages;
-        await belge.cleanup();
+        await yukleme.destroy();
         return adet > 0 ? { sayfaSayisi: adet } : { not: "Sayfa sayısı okunamadı" };
       } catch (hata) {
         return { not: `PDF açılamadı: ${(hata as Error).message}` };
       }
     },
-    // Yenileme istendiyse disk onbellegini atlayip yeniden dener.
-    secenek.zorlaGuncelle ? { disk: false } : {},
+    // Yenileme iki onbellek katmanini atlar, yeni sonucu ikisine de yazar.
+    secenek,
   );
 }
 

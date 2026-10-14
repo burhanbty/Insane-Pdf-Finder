@@ -1,3 +1,4 @@
+import { istekSinyali } from "../deadline.js";
 import type { SourceModule, Sorgu, Work } from "../types.js";
 
 type AnnaKayit = {
@@ -306,6 +307,7 @@ function gercekBosSonucMu(html: string): boolean {
 }
 
 async function htmlGetir(url: string): Promise<string> {
+  istekSinyali.getStore()?.throwIfAborted();
   const controller = new AbortController();
   const zamanAsimi = setTimeout(() => controller.abort(), 20_000);
 
@@ -313,7 +315,7 @@ async function htmlGetir(url: string): Promise<string> {
     const cevap = await fetch(url, {
       method: "GET",
       redirect: "follow",
-      signal: controller.signal,
+      signal: istekSinyali.getStore() ? AbortSignal.any([controller.signal, istekSinyali.getStore()!]) : controller.signal,
       headers: {
         "User-Agent": TARAYICI_UA,
         Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",

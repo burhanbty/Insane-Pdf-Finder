@@ -1,4 +1,7 @@
 import { onbellekli } from "./cache.js";
+import { ayar } from "./config.js";
+import { sureSinirli } from "./deadline.js";
+import { kaynakHazirligi } from "./source-state.js";
 import { eserAnahtari, eslestir, yazarParcalari, yilUyumlu } from "./normalize.js";
 import { kaynaklariYukle, yuklenmeHataListesi } from "./registry.js";
 import type { Gruplanmis, KaynakInfo, Sorgu, Work } from "./types.js";
@@ -27,8 +30,11 @@ export interface AramaCevabi {
 export async function ara(sorgu: Sorgu): Promise<AramaCevabi> {
   // Ayni sorgu tekrar ederse diskteki onbellegi doneruz. arXiv ve Semantic
   // Scholar gibi anahtarsiz API'ler kotali; tekrar eden aramalar onlari yiyor.
-  const anahtar = `arama:${sorgu.tur}:${sorgu.baslik.toLowerCase().trim()}:${(sorgu.yazar ?? "").toLowerCase().trim()}:${sorgu.yil ?? ""}:${sorgu.limit}`;
-  return onbellekli(anahtar, () => araCanlı(sorgu));
+  // Eski gruplama kuraliyla birlestirilmis disk kayitlarini yeniden kullanma.
+  const anahtar = `arama:v3:${sorgu.tur}:${sorgu.baslik.toLowerCase().trim()}:${(sorgu.yazar ?? "").toLowerCase().trim()}:${sorgu.yil ?? ""}:${sorgu.limit}`;
+  return onbellekli(anahtar, () => araCanlı(sorgu), {
+    sakla: (cevap) => !cevap.kaynakDurumlari.some((k) => k.hazir && k.hataMesaji),
+  });
 }
 
 async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
@@ -47,7 +53,7 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
 
   const uygun = kaynaklar.filter((k) => {
     if (!k.tur.includes(sorgu.tur)) return false;
-    return k.hazirMi ? Boolean(k.hazirMi()) : true;
+    return kaynakHazirligi(k).hazir;
   });
 
   // Bu tur icin uygun kaynak yoksa da sessizce bos donme.
@@ -65,7 +71,24 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
     uygun.map(async (k) => {
       const t0 = Date.now();
       try {
-        const isler = await k.ara(sorgu);
+        const isler = await onbellekli(`kaynak:v1:${k.id}:${JSON.stringify(sorgu)}`, async () => {
+          const sonuc = await sureSinirli(() => k.ara(sorgu), ayar.kaynakTimeoutMs);
+          if (
+            !Array.isArray(sonuc) ||
+            sonuc.some(
+              (w) =>
+                !w ||
+                typeof w.baslik !== "string" ||
+                !Array.isArray(w.yazarlar) ||
+                w.yazarlar.some((a) => typeof a !== "string") ||
+                typeof w.link !== "string" ||
+                !["kitap", "makale", "slayt"].includes(w.tur),
+            )
+          ) {
+            throw new Error("Kaynak geçerli eser listesi döndürmedi");
+          }
+          return sonuc;
+        });
         return { k, isler, sure: Date.now() - t0, hata: undefined as string | undefined };
       } catch (hata) {
         return { k, isler: [] as Work[], sure: Date.now() - t0, hata: (hata as Error).message };
@@ -90,7 +113,7 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
   // Kullanilamayan kaynaklari da durum listesinde goster.
   for (const k of kaynaklar) {
     if (!k.tur.includes(sorgu.tur)) continue;
-    const hazir = k.hazirMi ? Boolean(k.hazirMi()) : true;
+    const { hazir, hata } = kaynakHazirligi(k);
     if (hazir) continue;
     durumlar.push({
       id: k.id,
@@ -100,7 +123,7 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
       hazir: false,
       sonucSayisi: 0,
       sureMs: 0,
-      hataMesaji: "API anahtarı yok (.env dosyasına ekleyin)",
+      hataMesaji: hata,
     });
   }
 
@@ -125,6 +148,19 @@ function ortakSoyadVar(a: string[], b: string[]): boolean {
   return a.some((x) => yazarParcalari(x).soyad.some((s) => bSoyad.has(s)));
 }
 
+/** Baslik ayni olsa da bilinen yazar/DOI celiskileri farkli eserlerdir. */
+function grupUyumlu(g: Gruplanmis, w: Work): boolean {
+  const doiAnahtari = (doi: string) =>
+    doi
+      .trim()
+      .toLowerCase()
+      .replace(/^(https?:\/\/(dx\.)?doi\.org\/|doi:\s*)/, "");
+  return g.kaynaklar.every((k) => {
+    if (k.doi && w.doi) return doiAnahtari(k.doi) === doiAnahtari(w.doi);
+    return !k.yazarlar.length || !w.yazarlar.length || ortakSoyadVar(k.yazarlar, w.yazarlar);
+  });
+}
+
 /**
  * Ayni eserin farkli kaynaklardaki kopyalarini birlestirir.
  * Gruplama anahtari once normalize baslik + yil, sonra eslesme puani.
@@ -144,7 +180,12 @@ export function grupla(works: Work[], sorgu: Sorgu): Gruplanmis[] {
   });
 
   const gruplar: Gruplanmis[] = [];
-  const anahtarIndeksi = new Map<string, number>();
+  const anahtarIndeksi = new Map<string, number[]>();
+  function anahtarKaydet(anahtar: string, indeks: number) {
+    const indeksler = anahtarIndeksi.get(anahtar) ?? [];
+    if (!indeksler.includes(indeks)) indeksler.push(indeks);
+    anahtarIndeksi.set(anahtar, indeksler);
+  }
 
   for (const w of sirali) {
     const es = eslestir(
@@ -157,36 +198,41 @@ export function grupla(works: Work[], sorgu: Sorgu): Gruplanmis[] {
     // makale tek grupta birlesebilir.
     const kesin = `${w.tur}::${eserAnahtari(w.baslik)}::${w.yil ?? "?"}`;
 
-    let hedef = anahtarIndeksi.get(kesin);
+    const adaylar = (anahtarIndeksi.get(kesin) ?? []).filter((i) => grupUyumlu(gruplar[i]!, w));
+    // Yazari/kimligi eksik kayit birden fazla esere uyuyorsa tahmin etme.
+    let hedef = adaylar.length === 1 ? adaylar[0] : undefined;
 
     // Anahtar tutmadiysa benzer eser gruplarini birlestir.
     if (hedef === undefined) {
-      hedef = gruplar.findIndex((g) => {
-        if (g.tur !== w.tur) return false;
+      hedef =
+        adaylar.length > 1
+          ? -1
+          : gruplar.findIndex((g) => {
+              if (g.tur !== w.tur || !grupUyumlu(g, w)) return false;
 
-        return g.kaynaklar.some((k) => {
-          if (!k.baslik) return false;
-          const p = eslestir(
-            { baslik: g.baslik, yazarlar: g.yazarlar, yil: g.yil },
-            { baslik: w.baslik, yazarlar: w.yazarlar, yil: w.yil },
-          ).puan;
-          if (p > 0.72) return true;
+              return g.kaynaklar.some((k) => {
+                if (!k.baslik) return false;
+                const p = eslestir(
+                  { baslik: g.baslik, yazarlar: g.yazarlar, yil: g.yil },
+                  { baslik: w.baslik, yazarlar: w.yazarlar, yil: w.yil },
+                ).puan;
+                if (p > 0.72) return true;
 
-          // Ayni yil + ayni yazar soyadi: kaynaklar farkli baski adi kullansa
-          // bile ayni eserdir ("Sapiens" ile "Sapiens: A Brief History...").
-          if (g.yil !== undefined && w.yil !== undefined && g.yil === w.yil && p > 0.5) {
-            if (ortakSoyadVar(g.yazarlar, w.yazarlar)) return true;
-          }
-          return false;
-        });
-      });
+                // Ayni yil + ayni yazar soyadi: kaynaklar farkli baski adi kullansa
+                // bile ayni eserdir ("Sapiens" ile "Sapiens: A Brief History...").
+                if (g.yil !== undefined && w.yil !== undefined && g.yil === w.yil && p > 0.5) {
+                  if (ortakSoyadVar(g.yazarlar, w.yazarlar)) return true;
+                }
+                return false;
+              });
+            });
 
       if (hedef >= 0) {
-        anahtarIndeksi.set(kesin, hedef);
+        anahtarKaydet(kesin, hedef);
         gruplar[hedef]!.kaynaklar.push(w);
       } else {
         gruplar.push({
-          anahtar: kesin,
+          anahtar: anahtarIndeksi.has(kesin) ? `${kesin}::${gruplar.length}` : kesin,
           tur: w.tur,
           baslik: w.baslik,
           altBaslik: w.altBaslik,
@@ -201,7 +247,7 @@ export function grupla(works: Work[], sorgu: Sorgu): Gruplanmis[] {
         // findIndex -1 dondugu icin yeni grubun indeksini burada ata,
         // yoksa asagida gruplar[-1] undefined olur.
         hedef = gruplar.length - 1;
-        anahtarIndeksi.set(kesin, hedef);
+        anahtarKaydet(kesin, hedef);
       }
     } else {
       gruplar[hedef]!.kaynaklar.push(w);

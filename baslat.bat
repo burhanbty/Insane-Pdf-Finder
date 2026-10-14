@@ -15,7 +15,7 @@ where node >nul 2>nul
 if errorlevel 1 (
   echo.
   echo   Node.js bulunamadi.
-  echo   Lutfen Node.js 20 veya uzeri surumu kurun: https://nodejs.org
+  echo   Lutfen Node.js 24.15 veya uzeri desteklenen surumu kurun: https://nodejs.org
   echo.
   pause
   exit /b 1

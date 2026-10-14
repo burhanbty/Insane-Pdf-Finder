@@ -44,10 +44,6 @@ function pdfUrlBul(hit: EPMCHit): string | undefined {
   const epmc = urls.find((u) => u.site === "Europe_PMC" && u.url?.includes("pdf"));
   if (epmc?.url) return epmc.url;
 
-  // PubMed Central açık erişim linki
-  const pmc = urls.find((u) => u.site === "PubMedCentral" && u.availability === "Free");
-  if (pmc?.url) return pmc.url;
-
   return undefined;
 }
 
@@ -111,7 +107,9 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       doi: hit.doi,
       ozet: htmlTemizle(hit.abstractText),
       sayfa: hit.pageInfo,
-      link: hit.id ? `https://europepmc.org/articles/${hit.id}` : `https://europepmc.org`,
+      link: hit.id
+        ? `https://europepmc.org/article/${encodeURIComponent(hit.source ?? "MED")}/${encodeURIComponent(hit.id)}`
+        : "https://europepmc.org",
       pdf,
       erisim: acikErisim ? "acik" : "sinirli",
     });

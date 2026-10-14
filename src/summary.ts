@@ -1,6 +1,7 @@
 import { ayar } from "./config.js";
 import { get } from "./http.js";
 import { indir } from "./download.js";
+import { sinirliGovde, pdfImzasi } from "./body.js";
 
 /*
  * Ozet iki katmali:
@@ -12,6 +13,7 @@ import { indir } from "./download.js";
  */
 
 const METIN_LIMIT = 60_000;
+const BOYUT_LIMIT = 40 * 1024 * 1024;
 
 export type OzetYontemi = "llm" | "extractive";
 
@@ -53,14 +55,17 @@ async function pdfMetni(veri: Uint8Array): Promise<{ metin: string; sayfa: numbe
   const sayfaSayisi = belge.numPages;
   const alinacak = Math.min(sayfaSayisi, 60);
 
-  for (let s = 1; s <= alinacak; s++) {
-    const sayfa = await belge.getPage(s);
-    const icerik = await sayfa.getTextContent();
-    parcalar.push(icerik.items.map((i) => ("str" in i ? i.str : "")).join(" "));
-  }
+  try {
+    for (let s = 1; s <= alinacak; s++) {
+      const sayfa = await belge.getPage(s);
+      const icerik = await sayfa.getTextContent();
+      parcalar.push(icerik.items.map((i) => ("str" in i ? i.str : "")).join(" "));
+    }
 
-  await belge.cleanup();
-  return { metin: duzMetniTemizle(parcalar.join("\n\n")), sayfa: sayfaSayisi };
+    return { metin: duzMetniTemizle(parcalar.join("\n\n")), sayfa: sayfaSayisi };
+  } finally {
+    await yuklenecek.destroy();
+  }
 }
 
 /** PDF veya metin adresinden icerik alir. */
@@ -69,6 +74,8 @@ async function metinGetir(
   tur: "pdf" | "metin",
 ): Promise<{ metin: string; sayfa?: number; uyari?: string }> {
   const cevap = await get(url, {
+    disAg: true,
+    tekrar: 0,
     yonlendir: true,
     timeoutMs: 30_000,
     boslukMs: 300,
@@ -76,9 +83,9 @@ async function metinGetir(
   });
 
   const icerikTipi = String(cevap.headers.get("content-type") ?? "").toLowerCase();
-  const bayt = new Uint8Array(await cevap.arrayBuffer());
+  const bayt = await sinirliGovde(cevap, BOYUT_LIMIT);
 
-  if (icerikTipi.includes("pdf") || bayt[0] === 0x25) {
+  if (pdfImzasi(bayt)) {
     // %PDF imzasi
     try {
       const { metin, sayfa } = await pdfMetni(bayt);
@@ -89,6 +96,10 @@ async function metinGetir(
         uyari: `PDF metin çıkarılamadı (muhtemelen taranmış görsel): ${(hata as Error).message}`,
       };
     }
+  }
+
+  if (tur === "pdf" || !icerikTipi.includes("text/plain") || bayt.includes(0)) {
+    throw new Error("Kaynak PDF veya düz metin içeriği döndürmedi");
   }
 
   return { metin: duzMetniTemizle(new TextDecoder("utf-8", { fatal: false }).decode(bayt)) };
@@ -291,6 +302,8 @@ export async function ozetUret(girdi: OzetGirdi): Promise<OzetSonucu> {
 
 async function yerelDosyadanOzet(dosyaYolu: string, baslik: string): Promise<OzetSonucu> {
   const fs = await import("node:fs/promises");
+  if ((await fs.stat(dosyaYolu)).size > BOYUT_LIMIT)
+    throw new Error("Dosya özetleme boyut sınırını aşıyor");
   const veri = await fs.readFile(dosyaYolu);
   const bayt = new Uint8Array(veri);
 

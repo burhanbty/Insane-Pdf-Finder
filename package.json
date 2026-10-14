@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Baslik/yazar/yil bilgisiyle kitap, makale ve slayt arayip bulunan icerikleri toplayan arac",
   "engines": {
-    "node": ">=20"
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -25,7 +25,9 @@
   "dependencies": {
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
-    "pdfjs-dist": "^6.3.289"
+    "ipaddr.js": "^2.5.0",
+    "pdfjs-dist": "^6.3.289",
+    "undici": "^7.30.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

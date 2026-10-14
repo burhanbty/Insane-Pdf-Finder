@@ -1,5 +1,5 @@
 // Offline audit probes. Run: node --import tsx reports/audit-reproduce.mjs
-// Verifies five fixes plus the remaining audit observations.
+// Verifies the original eighteen findings against the current implementation.
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -8,6 +8,7 @@ import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { fileURLToPath } from "node:url";
 import { JSDOM } from "jsdom";
+import { format, resolveConfig } from "prettier";
 import { ayar } from "../src/config.ts";
 import { grupla } from "../src/search.ts";
 import { indir } from "../src/download.ts";
@@ -28,8 +29,9 @@ ayar.downloadsDir = path.join(temporary, "downloads");
 ayar.cacheDir = path.join(temporary, "cache");
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const results = [];
+const fixed = Array.from({ length: 18 }, (_, i) => `F${String(i + 1).padStart(2, "0")}`);
 function record(id, detail) {
-  results.push({ id, detail });
+  results.push({ id, status: fixed.includes(id) ? "fixed" : "remaining", detail });
   console.log(JSON.stringify({ id, detail }));
 }
 const query = { baslik: "Sapiens", yazar: "Harari", yil: 2011, tur: "kitap", limit: 20 };
@@ -133,10 +135,11 @@ try {
     ],
     { ...query, baslik: "Data Structures", yazar: undefined, yil: 2020 },
   );
-  assert.equal(unrelated.length, 1);
+  assert.equal(unrelated.length, 2);
+  assert.equal(new Set(unrelated.map((g) => g.anahtar)).size, 2);
   record("F02", {
-    distinctAuthorsMerged: unrelated[0].yazarlar,
-    retainedSources: unrelated[0].kaynaklar.length,
+    separateAuthors: unrelated.map((g) => g.yazarlar),
+    groups: unrelated.length,
   });
 
   const started = Date.now();
@@ -150,9 +153,12 @@ try {
     status: "fixed",
   });
 
+  // The public-network policy remains enabled; only the test transport is stubbed.
+  globalThis.fetch = (url, init) =>
+    originalFetch(`${upstreamUrl}${new URL(url).pathname}`, { signal: init?.signal });
   const collision = await Promise.allSettled([
-    indir({ url: `${upstreamUrl}/a`, varsayilanAd: "collision" }, "metin"),
-    indir({ url: `${upstreamUrl}/b`, varsayilanAd: "collision" }, "metin"),
+    indir({ url: "https://controlled.audit.test/a", varsayilanAd: "collision" }, "metin"),
+    indir({ url: "https://controlled.audit.test/b", varsayilanAd: "collision" }, "metin"),
   ]);
   assert.ok(collision.every((r) => r.status === "fulfilled"));
   assert.equal(new Set(collision.map((r) => r.value.dosya)).size, 2);
@@ -177,7 +183,7 @@ try {
   const forceUrl = "https://force-refresh.audit.test/document";
   await sayfaSayisiOgren(forceUrl);
   await sayfaSayisiOgren(forceUrl, { zorlaGuncelle: true });
-  assert.equal(count, 1);
+  assert.equal(count, 2);
   record("F05", { forcedRefreshFetchCount: count, expected: 2 });
 
   globalThis.fetch = async () =>
@@ -192,9 +198,10 @@ try {
       ],
     });
   const books = await gutenberg.ara({ ...query, yil: 2099 });
-  assert.ok(books[0].pdf.endsWith(".epub"));
-  assert.equal(books[0].yil, 2099);
-  record("F06", { epubExposedAsPdf: books[0].pdf, inventedYear: books[0].yil });
+  assert.equal(books[0].pdf, undefined);
+  assert.ok(books[0].epub.endsWith(".epub"));
+  assert.equal(books[0].yil, undefined);
+  record("F06", { epubSeparate: books[0].epub, pdfInvented: false, yearInvented: false });
 
   globalThis.fetch = async () =>
     Response.json({
@@ -224,7 +231,7 @@ try {
     });
   const oa = await openaire.ara({ ...query, tur: "makale" });
   assert.equal(oa[0].pdf, "https://repository.test/paper.pdf");
-  assert.equal(oa[0].tur, "kitap");
+  assert.equal(oa[0].tur, "makale");
   record("F07", {
     expectedUrl: "https://repository.test/paper.pdf",
     actualPdf: oa[0].pdf,
@@ -235,9 +242,9 @@ try {
   globalThis.fetch = async () =>
     Response.json({ message: { items: [{ title: ["Test"], type: "book", page: "e1000234" }] } });
   const cr = await crossref.ara(query);
-  assert.equal(cr[0].sayfaSayisi, 1000234);
-  assert.equal(cr[0].tur, "makale");
-  record("F08", { articleIdExposedAsPageCount: cr[0].sayfaSayisi, bookExposedAs: cr[0].tur });
+  assert.equal(cr[0].sayfaSayisi, undefined);
+  assert.equal(cr[0].tur, "kitap");
+  record("F08", { articleIdExposedAsPageCount: false, bookExposedAs: cr[0].tur });
 
   globalThis.fetch = async (url) =>
     Response.json(
@@ -246,8 +253,8 @@ try {
         : { query: { pages: { 1: { title: "Test", pageid: 1, extract: "Actual text" } } } },
     );
   const wiki = await wikipedia.ara({ ...query, yazar: "Invented Author", yil: 2099 });
-  assert.deepEqual(wiki[0].yazarlar, ["Invented Author"]);
-  assert.equal(wiki[0].yil, 2099);
+  assert.deepEqual(wiki[0].yazarlar, []);
+  assert.equal(wiki[0].yil, undefined);
   record("F09", {
     sourceMetadataContainsNoAuthorOrYear: true,
     actualAuthors: wiki[0].yazarlar,
@@ -263,7 +270,7 @@ try {
     }),
   );
   record("F16", {
-    declaredMinimum: "20",
+    declaredMinimum: "22.22.2 (22.x), 24.15.0 (24.x), 26+",
     dependencyRequirements: packages,
     evidenceType: "package manifests; Node 20 was not executed",
   });
@@ -296,10 +303,10 @@ try {
       },
     });
   const halWorks = await hal.ara({ ...query, tur: "makale" });
-  assert.equal(halWorks[0].pdf, "https://hal.science/hal-4749086/document");
+  assert.equal(halWorks[0].pdf, undefined);
   record("F18", {
     actualRecordUri: halWorks[0].link,
-    fabricatedPdf: halWorks[0].pdf,
+    fabricatedPdf: false,
     filesMissing: true,
   });
 
@@ -354,6 +361,7 @@ try {
             ...empty,
             gruplar: [
               card("abstract", "a", {
+                ozet: "Available abstract",
                 kaynaklar: [
                   {
                     kaynak: "a",
@@ -372,12 +380,15 @@ try {
       d.querySelector("#webDahil").checked = false;
       await submit();
       const button = d.querySelector('[data-eylem="ozet"]');
-      assert.equal(button.dataset.url, "");
-      button.click();
-      await sleep(10);
+      assert.equal(button, null);
+      assert.equal(d.querySelector(".aciklama").textContent, "Available abstract");
+      assert.equal(
+        calls.some((c) => c.url === "/api/summary"),
+        false,
+      );
       record("F10", {
-        summaryButtonUrl: button.dataset.url,
-        requestBody: calls.find((c) => c.url === "/api/summary").body,
+        emptyUrlButtonRemoved: true,
+        existingAbstractVisible: true,
       });
     },
   );
@@ -393,7 +404,7 @@ try {
       d.querySelector("#grupla").checked = true;
       d.querySelector("#grupla").dispatchEvent(new dom.window.Event("change"));
       const headings = [...d.querySelectorAll(".grup-basligi")].map((n) => n.textContent);
-      assert.equal(headings.length, 3);
+      assert.equal(headings.length, 2);
       record("F11", { expectedGroups: 2, actualGroups: headings });
     },
   );
@@ -408,11 +419,11 @@ try {
         : { ...empty, gruplar: [card("ready", "a")] },
     async ({ d, submit }) => {
       await submit();
-      assert.equal(d.querySelectorAll(".kart").length, 0);
+      assert.equal(d.querySelectorAll(".kart").length, 1);
       finishWeb();
       await sleep(10);
       assert.equal(d.querySelectorAll(".kart").length, 1);
-      record("F12", { cardsBeforeWebCompletes: 0, cardsAfterWebCompletes: 1 });
+      record("F12", { cardsBeforeWebCompletes: 1, cardsAfterWebCompletes: 1 });
     },
   );
 
@@ -428,8 +439,8 @@ try {
     async ({ d, submit }) => {
       d.querySelector("#webDahil").checked = false;
       await submit();
-      assert.equal(d.querySelector(".kaynak-rozet a").getAttribute("href"), "javascript:alert(1)");
-      record("F13", { unsafeSchemePresentInRenderedLink: true, scriptWasNotExecuted: true });
+      assert.equal(d.querySelector(".kaynak-rozet a"), null);
+      record("F13", { unsafeSchemePresentInRenderedLink: false });
     },
   );
 
@@ -481,9 +492,9 @@ try {
       baslik: "marker",
     }),
   });
-  assert.equal(privateRead.status, 200);
+  assert.equal(privateRead.status, 502);
   const privateData = await privateRead.json();
-  assert.equal(await fs.readFile(privateData.yol, "utf8"), "controlled-loopback-marker");
+  assert.match(privateData.hata, /engellendi/);
   record("F14", { loopbackDownloadStatus: privateRead.status, ownTestServerOnly: true });
 
   const cachePath = path.join(temporary, "api-cache");
@@ -493,24 +504,29 @@ try {
     headers: { origin: "https://foreign-origin.test", "content-type": "text/plain" },
     body: "",
   });
-  assert.equal(clear.status, 200);
+  assert.equal(clear.status, 403);
   const cacheExists = await fs.stat(cachePath).then(
     () => true,
     () => false,
   );
-  assert.equal(cacheExists, false);
-  record("F15", { foreignOriginAccepted: true, status: clear.status, isolatedCacheRemoved: true });
+  assert.equal(cacheExists, true);
+  assert.equal(await fs.readFile(path.join(cachePath, "controlled-marker"), "utf8"), "audit");
+  record("F15", {
+    foreignOriginAccepted: false,
+    status: clear.status,
+    isolatedCacheRemoved: false,
+  });
 
+  const outputPath = path.join(root, "reports/audit-after-improvements.json");
   await fs.writeFile(
-    path.join(root, "reports/audit-after-fixes.json"),
-    JSON.stringify(
-      { node: process.version, fixed: ["F01", "F03", "F04", "F07", "F17"], probes: results },
-      null,
-      2,
-    ) + "\n",
+    outputPath,
+    await format(JSON.stringify({ node: process.version, fixed, probes: results }), {
+      ...(await resolveConfig(outputPath)),
+      parser: "json",
+    }),
   );
   console.log(
-    `Verified 5 fixes and ${results.length - 5} remaining observations. No external requests or LLM calls were made.`,
+    `Verified ${fixed.length} fixes and ${results.length - fixed.length} remaining observations. No external requests or LLM calls were made.`,
   );
 } finally {
   globalThis.fetch = originalFetch;

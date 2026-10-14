@@ -23,8 +23,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Proje Node 20+ istiyor. 20, 22 ve 24 farkli yollardan geliyor.
-        node: [20, 22, 24]
+        # Bağımlılıkların ortak desteklediği Node sürümleri.
+        node: ["22.22.2", "24.15.0", "26"]
 
     steps:
       - name: Kodu al

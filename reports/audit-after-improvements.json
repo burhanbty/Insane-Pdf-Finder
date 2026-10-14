@@ -1,0 +1,141 @@
+{
+  "node": "v24.18.1",
+  "fixed": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F12",
+    "F13",
+    "F14",
+    "F15",
+    "F16",
+    "F17",
+    "F18"
+  ],
+  "probes": [
+    {
+      "id": "F01",
+      "status": "fixed",
+      "detail": {
+        "groups": 1,
+        "retainedSources": ["a", "b"],
+        "pdfPreserved": true,
+        "status": "fixed"
+      }
+    },
+    {
+      "id": "F02",
+      "status": "fixed",
+      "detail": { "separateAuthors": [["Alice Smith"], ["Bob Jones"]], "groups": 2 }
+    },
+    {
+      "id": "F03",
+      "status": "fixed",
+      "detail": { "timeoutMs": 50, "actualMs": 53, "bodyAborted": true, "status": "fixed" }
+    },
+    {
+      "id": "F04",
+      "status": "fixed",
+      "detail": [
+        { "status": "fulfilled", "file": "collision.txt", "bytes": 8, "contentVerified": true },
+        { "status": "fulfilled", "file": "collision_2.txt", "bytes": 8, "contentVerified": true }
+      ]
+    },
+    { "id": "F05", "status": "fixed", "detail": { "forcedRefreshFetchCount": 2, "expected": 2 } },
+    {
+      "id": "F06",
+      "status": "fixed",
+      "detail": {
+        "epubSeparate": "https://example.test/book.epub",
+        "pdfInvented": false,
+        "yearInvented": false
+      }
+    },
+    {
+      "id": "F07",
+      "status": "fixed",
+      "detail": {
+        "expectedUrl": "https://repository.test/paper.pdf",
+        "actualPdf": "https://repository.test/paper.pdf",
+        "actualType": "makale",
+        "status": "fixed"
+      }
+    },
+    {
+      "id": "F08",
+      "status": "fixed",
+      "detail": { "articleIdExposedAsPageCount": false, "bookExposedAs": "kitap" }
+    },
+    {
+      "id": "F09",
+      "status": "fixed",
+      "detail": { "sourceMetadataContainsNoAuthorOrYear": true, "actualAuthors": [] }
+    },
+    {
+      "id": "F16",
+      "status": "fixed",
+      "detail": {
+        "declaredMinimum": "22.22.2 (22.x), 24.15.0 (24.x), 26+",
+        "dependencyRequirements": [
+          { "name": "pdfjs-dist", "version": "6.3.289", "node": ">=22.13.0 || >=24" },
+          { "name": "vitest", "version": "5.0.3", "node": "^22.12.0 || ^24.0.0 || >=26.0.0" },
+          { "name": "jsdom", "version": "30.1.1", "node": "^22.22.2 || ^24.15.0 || >=26.0.0" }
+        ],
+        "evidenceType": "package manifests; Node 20 was not executed"
+      }
+    },
+    {
+      "id": "F17",
+      "status": "fixed",
+      "detail": {
+        "actualApiRecords": 2,
+        "adapterRecords": 2,
+        "metadataPath": "metadata[\"oaf:entity\"][\"oaf:result\"]",
+        "status": "fixed"
+      }
+    },
+    {
+      "id": "F18",
+      "status": "fixed",
+      "detail": {
+        "actualRecordUri": "https://hal.science/hal-04749086v1",
+        "fabricatedPdf": false,
+        "filesMissing": true
+      }
+    },
+    {
+      "id": "F10",
+      "status": "fixed",
+      "detail": { "emptyUrlButtonRemoved": true, "existingAbstractVisible": true }
+    },
+    {
+      "id": "F11",
+      "status": "fixed",
+      "detail": { "expectedGroups": 2, "actualGroups": ["A2 sonuç", "B1 sonuç"] }
+    },
+    {
+      "id": "F12",
+      "status": "fixed",
+      "detail": { "cardsBeforeWebCompletes": 1, "cardsAfterWebCompletes": 1 }
+    },
+    { "id": "F13", "status": "fixed", "detail": { "unsafeSchemePresentInRenderedLink": false } },
+    {
+      "id": "F14",
+      "status": "fixed",
+      "detail": { "loopbackDownloadStatus": 502, "ownTestServerOnly": true }
+    },
+    {
+      "id": "F15",
+      "status": "fixed",
+      "detail": { "foreignOriginAccepted": false, "status": 403, "isolatedCacheRemoved": false }
+    }
+  ]
+}

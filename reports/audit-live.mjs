@@ -60,7 +60,12 @@ const results = await Promise.all(
 );
 globalThis.fetch = originalFetch;
 await fs.writeFile(
-  new URL("./audit-live-evidence.json", import.meta.url),
+  new URL(
+    process.argv.includes("--after-improvements")
+      ? "./audit-live-after-improvements.json"
+      : "./audit-live-evidence.json",
+    import.meta.url,
+  ),
   JSON.stringify(
     {
       node: process.version,

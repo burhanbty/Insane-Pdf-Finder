@@ -40,14 +40,14 @@ function diskYol(anahtar: string): string {
 export async function onbellekli<T>(
   anahtar: string,
   uretici: () => Promise<T>,
-  secenek: { disk?: boolean } = {},
+  secenek: { disk?: boolean; zorlaGuncelle?: boolean; sakla?: (deger: T) => boolean } = {},
 ): Promise<T> {
-  const { disk = true } = secenek;
+  const { disk = true, zorlaGuncelle = false } = secenek;
 
   const bel = bellek.get(anahtar) as Kayit<T> | undefined;
-  if (bel && Date.now() - bel.zaman < BELLEK_TTL_MS) return bel.deger;
+  if (!zorlaGuncelle && bel && Date.now() - bel.zaman < BELLEK_TTL_MS) return bel.deger;
 
-  if (disk) {
+  if (disk && !zorlaGuncelle) {
     const p = diskYol(anahtar);
     try {
       const ham = await fs.readFile(p, "utf8");
@@ -62,6 +62,7 @@ export async function onbellekli<T>(
   }
 
   const deger = await uretici();
+  if (secenek.sakla && !secenek.sakla(deger)) return deger;
   bellekEkle(anahtar, deger);
 
   if (disk) {

@@ -1,4 +1,7 @@
 import { ayar } from "./config.js";
+import { AdresHatasi, disFetch } from "./network.js";
+import { istekSinyali } from "./deadline.js";
+import { setTimeout as bekle } from "node:timers/promises";
 
 type HataSinifi = "zaman-asimi" | "http" | "ag" | "parse";
 
@@ -42,6 +45,8 @@ function sirayaAl<T>(host: string, boslukMs: number, is: () => Promise<T>): Prom
 }
 
 export interface GetOptions {
+  disAg?: boolean;
+  izinliHost?: (host: string) => boolean;
   /** Header ekle. */
   header?: Record<string, string>;
   timeoutMs?: number;
@@ -74,17 +79,21 @@ export async function get(url: string, secenek: GetOptions = {}): Promise<Respon
   const u = new URL(url);
   const host = u.host;
   const sonDeneme = tekrar;
+  const ustSinyal = istekSinyali.getStore();
 
   return sirayaAl(host, boslukMs, async () => {
     let sonHata: unknown;
 
     for (let deneme = 0; deneme <= sonDeneme; deneme++) {
+      ustSinyal?.throwIfAborted();
       // Native fetch bu sinyali yanit govdesi tuketilirken de izler.
       // Basliklar geldikten sonra zamanlayiciyi temizlemek, yavas/sonsuz
       // text(), arrayBuffer() ve indirme akislarini sinirsiz birakiyordu.
-      const sinyal = AbortSignal.timeout(timeoutMs);
+      const sinyal = ustSinyal
+        ? AbortSignal.any([ustSinyal, AbortSignal.timeout(timeoutMs)])
+        : AbortSignal.timeout(timeoutMs);
       try {
-        const cevap = await fetch(url, {
+        const init: RequestInit = {
           signal: sinyal,
           redirect: secenek.yonlendir ? "follow" : "follow",
           headers: {
@@ -95,9 +104,13 @@ export async function get(url: string, secenek: GetOptions = {}): Promise<Respon
             "accept-language": "tr,en;q=0.8",
             ...header,
           },
-        });
+        };
+        const cevap = secenek.disAg
+          ? await disFetch(url, init, secenek.izinliHost)
+          : await fetch(url, init);
 
         if (cevap.status === 429 || cevap.status >= 500) {
+          await cevap.body?.cancel().catch(() => undefined);
           // 429 genelde kotadir. Uzun bekleyip tekrar denemek cogu zaman
           // ise yaramaz ve butun aramayi yavaslatir; hatayi bildirip cik.
           if (cevap.status === 429 && deneme >= tekrarKotasiz) {
@@ -109,24 +122,32 @@ export async function get(url: string, secenek: GetOptions = {}): Promise<Respon
           }
           sonHata = new KaynakHatasi("http", `${host} ${cevap.status}`, cevap.status);
           const bekle = Number(cevap.headers.get("retry-after") ?? 0) * 1000;
-          await new Promise((r) => setTimeout(r, bekle || 800 * (deneme + 1)));
+          if (deneme < sonDeneme)
+            await bekleme(Math.min(bekle || 800 * (deneme + 1), 5000), ustSinyal);
           continue;
         }
         if (!cevap.ok) {
+          await cevap.body?.cancel().catch(() => undefined);
           throw new KaynakHatasi("http", `${host} ${cevap.status}`, cevap.status);
         }
         return cevap;
       } catch (h) {
+        if (h instanceof AdresHatasi) throw h;
+        ustSinyal?.throwIfAborted();
         if (h instanceof KaynakHatasi && h.sinif === "http") throw h;
         sonHata = sinyal.aborted
           ? new KaynakHatasi("zaman-asimi", `${host} zaman aşımı (${timeoutMs}ms)`)
           : new KaynakHatasi("ag", `${host} ${(h as Error)?.message ?? h}`);
-        await new Promise((r) => setTimeout(r, 500 * (deneme + 1)));
+        if (deneme < sonDeneme) await bekleme(500 * (deneme + 1), ustSinyal);
       }
     }
 
     throw sonHata instanceof Error ? sonHata : new KaynakHatasi("ag", `${host} bilinmeyen hata`);
   });
+}
+
+async function bekleme(ms: number, signal?: AbortSignal) {
+  await bekle(ms, undefined, { signal });
 }
 
 /** JSON GET. Hatali JSON gelirse KaynakHatasi firlatir. */

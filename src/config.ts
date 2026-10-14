@@ -21,6 +21,7 @@ export const SURUM = "1.0.0";
 export const ayar = {
   port: Number(yolla("PORT", "3000")),
   host: yolla("HOST", "127.0.0.1"),
+  kaynakTimeoutMs: 20_000,
 
   contactEmail: yolla("CONTACT_EMAIL", ""),
   googleBooksKey: yolla("GOOGLE_BOOKS_API_KEY", ""),
@@ -35,7 +36,7 @@ export const ayar = {
 
   /** SOURCES_DIR mutlak yol olarak verilirse onu, degilse varsayilani kullan. */
   sourcesDir: process.env.SOURCES_DIR?.trim()
-    ? path.resolve(process.env.SOURCES_DIR.trim())
+    ? path.resolve(kok, process.env.SOURCES_DIR.trim())
     : path.join(kok, "src", "sources"),
 
   publicDir: path.join(kok, "public"),

@@ -83,6 +83,15 @@
 
         <div class="kaynak-arac">
           <label class="kaynak-secim">
+            <span>Sıralama</span>
+            <select id="siralama">
+              <option value="uyum">Eşleşme puanı</option>
+              <option value="yeni">En yeni</option>
+              <option value="eski">En eski</option>
+              <option value="baslik">Başlık A–Z</option>
+            </select>
+          </label>
+          <label class="kaynak-secim">
             <span>Kaynak</span>
             <select id="kaynakSecim">
               <option value="">Tüm kaynaklar</option>
@@ -97,6 +106,7 @@
             <span>Yalnızca tek kaynakta bulunanlar</span>
           </label>
           <span id="kaynakSayaci" class="kaynak-sayac"></span>
+          <button type="button" class="mini" id="risAktar">Kaynakçayı indir (.ris)</button>
         </div>
 
         <div id="kartlar" class="kartlar"></div>
@@ -118,8 +128,8 @@
         <button class="mini" id="kaynakKapat">Kapat</button>
       </div>
       <p class="ipucu">
-        Programın taradığı kaynaklar. <strong>Google Books</strong> ve
-        <strong>Unpaywall</strong> için <code>.env</code> dosyasına anahtar eklemen gerekiyor.
+        Programın taradığı kaynaklar. Bazı kaynaklar için <code>.env</code> dosyasına API anahtarı
+        veya iletişim e-postası ekleyebilirsiniz. Hazır kaynaklar anahtarsız da çalışır.
       </p>
       <div id="kaynakListesi"></div>
       <div class="dialog-alt">

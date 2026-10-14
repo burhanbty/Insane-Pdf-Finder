@@ -26,6 +26,64 @@ afterEach(async () => {
 });
 
 describe("indirme dosyalarının izolasyonu", () => {
+  it("HTML hata sayfasını PDF adıyla kaydetmez", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        async () =>
+          new Response("<html>Login required</html>", {
+            headers: { "content-type": "application/pdf" },
+          }),
+      ),
+    );
+    await expect(
+      indir({ url: "https://file.test/paper.pdf", varsayilanAd: "paper" }, "pdf"),
+    ).rejects.toThrow("PDF yerine");
+    expect(await fs.readdir(dizin)).toEqual([]);
+  });
+  it("imzası birden fazla parçaya bölünen PDF'i korur", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        async () =>
+          new Response(
+            new ReadableStream({
+              start(c) {
+                c.enqueue(new TextEncoder().encode("%P"));
+                c.enqueue(new TextEncoder().encode("DF-1.4\nrest"));
+                c.close();
+              },
+            }),
+          ),
+      ),
+    );
+    const s = await indir({ url: "https://file.test/doc", varsayilanAd: "paper" }, "pdf");
+    expect(s.dosya).toBe("paper.pdf");
+    expect(await fs.readFile(s.yol, "utf8")).toBe("%PDF-1.4\nrest");
+  });
+  it("ZIP arşivini EPUB gibi sunmaz ve kısa gövdede temiz hata verir", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response("PK")),
+    );
+    await expect(
+      indir({ url: "https://file.test/book", varsayilanAd: "book" }, "epub"),
+    ).rejects.toThrow("EPUB");
+    expect(await fs.readdir(dizin)).toEqual([]);
+  });
+  it("EPUB mimetype imzasını doğrular ve doğru uzantıyla kaydeder", async () => {
+    const header = Buffer.alloc(30);
+    header.writeUInt32LE(0x04034b50);
+    header.writeUInt16LE(8, 26);
+    const b = Buffer.concat([header, Buffer.from("mimetypeapplication/epub+zip")]);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response(b)),
+    );
+    const s = await indir({ url: "https://file.test/book", varsayilanAd: "book" }, "epub");
+    expect(s.dosya).toBe("book.epub");
+    expect(s.tur).toBe("epub");
+  });
   it("aynı adlı üç eşzamanlı indirmeyi ayrı dosyalara, tam içerikle yazar", async () => {
     vi.stubGlobal(
       "fetch",

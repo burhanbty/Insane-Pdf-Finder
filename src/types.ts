@@ -38,6 +38,8 @@ export interface Work {
   link: string;
   /** Dogrudan indirilebilir yasal PDF/metin. */
   pdf?: string;
+  /** EPUB, PDF'ten ayrı bir indirme biçimidir. */
+  epub?: string;
   /** Dogrudan okunabilir tam metin. */
   tamMetin?: string;
   /** Tarayici uzerinde acilacak erisim turu. */

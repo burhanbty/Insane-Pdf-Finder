@@ -31,15 +31,6 @@ interface GutendexResponse {
   results?: GutenbergBook[];
 }
 
-function pdfVeyaEpubBul(formats: Record<string, string> = {}): string | undefined {
-  return (
-    formats["application/pdf"] ??
-    formats["application/epub+zip"] ??
-    formats["application/x-mobipocket-ebook"] ??
-    formats["text/html"]
-  );
-}
-
 function tamMetinBul(formats: Record<string, string> = {}): string | undefined {
   return (
     formats["text/plain; charset=utf-8"] ??
@@ -80,7 +71,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       .filter(Boolean);
 
     const formatlar = book.formats ?? {};
-    const pdf = pdfVeyaEpubBul(formatlar);
+    const pdf = formatlar["application/pdf"];
     const tamMetin = tamMetinBul(formatlar);
     const kapak = kapakBul(formatlar);
     const dil = book.languages?.[0];
@@ -91,12 +82,12 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       tur: "kitap",
       baslik: book.title,
       yazarlar,
-      yil: sorgu.yil,
       dil,
       konular: (book.subjects ?? []).slice(0, 8),
       kapak,
       link: `https://www.gutenberg.org/ebooks/${book.id}`,
       pdf,
+      epub: formatlar["application/epub+zip"],
       tamMetin,
       erisim: "acik",
     });

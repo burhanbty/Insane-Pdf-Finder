@@ -5,6 +5,7 @@ import fs from "node:fs";
 import { ayar } from "./config.js";
 import { get } from "./http.js";
 import { normalizeMetin } from "./normalize.js";
+import { pdfImzasi } from "./body.js";
 
 /*
  * Indirme: uzak PDF/tam metni downloads/ klasorune akis halinde yazar.
@@ -14,11 +15,23 @@ import { normalizeMetin } from "./normalize.js";
 
 const EN_FAZLA_BAYT = 300 * 1024 * 1024;
 
+function epubImzasi(b: Buffer): boolean {
+  return (
+    b.length >= 58 &&
+    b.readUInt32LE(0) === 0x04034b50 &&
+    b.readUInt16LE(8) === 0 &&
+    b.readUInt16LE(26) === 8 &&
+    b.readUInt16LE(28) === 0 &&
+    b.subarray(30, 38).toString() === "mimetype" &&
+    b.subarray(38, 58).toString() === "application/epub+zip"
+  );
+}
+
 export interface IndirmeSonucu {
   dosya: string;
   yol: string;
   boyut: number;
-  tur: "pdf" | "metin" | "bilinmiyor";
+  tur: "pdf" | "epub" | "metin" | "bilinmiyor";
 }
 
 export interface Indirilebilir {
@@ -27,7 +40,7 @@ export interface Indirilebilir {
 }
 
 /** Dosya adini guvenli hale getirir: yol gezintisi ve kural disi karakter yok. */
-export function dosyaAdiTemizle(ad: string, uzanti: ".pdf" | ".txt"): string {
+export function dosyaAdiTemizle(ad: string, uzanti: ".pdf" | ".epub" | ".txt"): string {
   const temiz = normalizeMetin(ad)
     .replace(/\s+/g, "_")
     .replace(/[^a-z0-9_]+/g, "")
@@ -44,8 +57,8 @@ export function benzersizYol(klasor: string, ad: string): string {
   let yol = path.join(klasor, ad);
   if (musait(yol)) return yol;
 
-  const temel = ad.replace(/\.(pdf|txt)$/, "");
-  const uzanti = ad.endsWith(".pdf") ? ".pdf" : ".txt";
+  const uzanti = path.extname(ad);
+  const temel = path.basename(ad, uzanti);
   for (let i = 2; i < 500; i++) {
     yol = path.join(klasor, `${temel}_${i}${uzanti}`);
     if (musait(yol)) return yol;
@@ -91,7 +104,7 @@ function guvenliUrl(aday: string): URL | null {
  */
 export async function indir(
   hedef: Indirilebilir,
-  ipucuTur?: "pdf" | "metin",
+  ipucuTur?: "pdf" | "epub" | "metin",
 ): Promise<IndirmeSonucu> {
   const u = guvenliUrl(hedef.url);
   if (!u) throw new Error("Geçersiz indirme adresi");
@@ -100,12 +113,18 @@ export async function indir(
 
   // Once HEAD/GET ile gercek dosya tipini ve boyutu ogren.
   const cevap = await get(u.toString(), {
+    disAg: true,
+    tekrar: 0,
     yonlendir: true,
     timeoutMs: 20_000,
     boslukMs: 400,
   });
 
   const icerikTipi = String(cevap.headers.get("content-type") ?? "").toLowerCase();
+  if (Number(cevap.headers.get("content-length")) > EN_FAZLA_BAYT) {
+    await cevap.body?.cancel();
+    throw new Error("Dosya 300 MB sınırını aşıyor");
+  }
   const tur: IndirmeSonucu["tur"] =
     ipucuTur ??
     (icerikTipi.includes("pdf")
@@ -114,7 +133,7 @@ export async function indir(
         ? "metin"
         : "bilinmiyor");
 
-  const uzanti: ".pdf" | ".txt" = tur === "pdf" ? ".pdf" : ".txt";
+  const uzanti = tur === "epub" ? ".epub" : tur === "pdf" ? ".pdf" : ".txt";
   let yol: string;
   try {
     yol = await indirmeYoluAyir(ayar.downloadsDir, dosyaAdiTemizle(hedef.varsayilanAd, uzanti));
@@ -126,6 +145,7 @@ export async function indir(
   const gecici = `${yol}.part`;
   const cikis = fs.createWriteStream(gecici, { flags: "r+" });
   let yazilan = 0;
+  let ilk = Buffer.alloc(0);
 
   try {
     const govde = cevap.body;
@@ -140,11 +160,30 @@ export async function indir(
           if (yazilan > EN_FAZLA_BAYT) {
             throw new Error(`Dosya ${EN_FAZLA_BAYT / 1024 / 1024} MB sınırını aşıyor`);
           }
+          if (ilk.length < 512) ilk = Buffer.concat([ilk, b.subarray(0, 512 - ilk.length)]);
+          if (tur === "pdf" && ilk.length >= 5 && !pdfImzasi(ilk))
+            throw new Error("Kaynak PDF yerine farklı içerik döndürdü");
+          if (tur === "epub" && ilk.length >= 58 && !epubImzasi(ilk))
+            throw new Error("Kaynak geçerli EPUB içeriği döndürmedi");
           yield b;
         }
       },
       cikis,
     );
+    if (!yazilan) throw new Error("Boş dosya indirilemez");
+    if (tur === "pdf" && !pdfImzasi(ilk))
+      throw new Error("Kaynak PDF yerine farklı içerik döndürdü");
+    if (tur === "epub" && !epubImzasi(ilk)) {
+      throw new Error("Kaynak geçerli EPUB içeriği döndürmedi");
+    }
+    if (
+      tur === "metin" &&
+      (/html/i.test(icerikTipi) ||
+        /<!doctype\s+html|<html[\s>]/i.test(ilk.toString()) ||
+        ilk.includes(0))
+    ) {
+      throw new Error("Kaynak düz metin yerine farklı içerik döndürdü");
+    }
     await fs.promises.rename(gecici, yol);
   } catch (hata) {
     cikis.destroy();
@@ -179,7 +218,13 @@ export async function indirilenleriListele(): Promise<KayitliDosya[]> {
         dosya: d.name,
         boyut: st.size,
         tarih: st.mtime.toISOString(),
-        tur: d.name.endsWith(".pdf") ? "pdf" : d.name.endsWith(".txt") ? "metin" : "bilinmiyor",
+        tur: d.name.endsWith(".pdf")
+          ? "pdf"
+          : d.name.endsWith(".epub")
+            ? "epub"
+            : d.name.endsWith(".txt")
+              ? "metin"
+              : "bilinmiyor",
       });
     }
     return cikti.sort((a, b) => b.tarih.localeCompare(a.tarih));

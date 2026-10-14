@@ -5,12 +5,19 @@
 
 import { spawn } from "node:child_process";
 import { once } from "node:events";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 
 const PORT = 3311;
+const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "kaynak-bul-smoke-"));
+let basarisiz = 0;
+const boot = `const {ayar}=await import('./src/config.ts'); ayar.downloadsDir=${JSON.stringify(path.join(temporary, "downloads"))}; ayar.cacheDir=${JSON.stringify(path.join(temporary, "cache"))}; await import('./src/server.ts');`;
 
 console.log("Sunucu baslatiliyor...");
-const cocuk = spawn(process.execPath, ["node_modules/tsx/dist/cli.mjs", "src/server.ts"], {
-  env: { ...process.env, PORT: String(PORT) },
+const cocuk = spawn(process.execPath, ["--import", "tsx", "--input-type=module", "-e", boot], {
+  env: { ...process.env, PORT: String(PORT), HOST: "127.0.0.1", LLM_API_KEY: "", LLM_BASE_URL: "" },
+  windowsHide: true,
   stdio: ["ignore", "pipe", "pipe"],
 });
 
@@ -48,6 +55,7 @@ async function test(ad: string, yol: string, govde?: unknown, beklenen: number[]
     const ms = Date.now() - t0;
 
     if (!beklenen.includes(cevap.status)) {
+      basarisiz++;
       console.log(
         `FAIL ${ad.padEnd(30)} ${cevap.status} beklenen ${beklenen.join("/")}  ${String(veri.hata ?? "")}`,
       );
@@ -58,6 +66,7 @@ async function test(ad: string, yol: string, govde?: unknown, beklenen: number[]
     );
     return veri;
   } catch (hata) {
+    basarisiz++;
     console.log(`FAIL ${ad.padEnd(30)} ${(hata as Error).message}`);
     return null;
   }
@@ -74,25 +83,30 @@ try {
   try {
     const s = await fetch(`http://127.0.0.1:${PORT}/`);
     const html = await s.text();
+    if (!s.ok) basarisiz++;
     console.log(
       `${s.ok ? "OK  " : "FAIL"} ${"GET / (statik)".padEnd(30)} ${s.status}  ${html.length} bayt HTML`,
     );
     const c = await fetch(`http://127.0.0.1:${PORT}/app.js`);
     const js = await c.text();
+    if (!c.ok) basarisiz++;
     console.log(
       `${c.ok ? "OK  " : "FAIL"} ${"GET /app.js".padEnd(30)} ${c.status}  ${js.length} bayt JS`,
     );
   } catch (hata) {
+    basarisiz++;
     console.log(`FAIL statik dosyalar — ${(hata as Error).message}`);
   }
 
-  const arama = await test("POST /api/search (makale)", "/api/search", {
-    baslik: "Attention Is All You Need",
-    yazar: "Vaswani",
-    yil: 2017,
-    tur: "makale",
-    limit: 5,
-  });
+  const arama = process.argv.includes("--live")
+    ? await test("POST /api/search (makale)", "/api/search", {
+        baslik: "Attention Is All You Need",
+        yazar: "Vaswani",
+        yil: 2017,
+        tur: "makale",
+        limit: 5,
+      })
+    : null;
 
   if (arama) {
     const gruplar = arama.gruplar as { baslik: string; puan: number; kaynaklar: unknown[] }[];
@@ -106,6 +120,7 @@ try {
   // Girdi dogrulama: bu rotalar 4xx donmeli, sunucu cokmemeli.
   await test("search (baslik yok)", "/api/search", { yazar: "x" }, [400]);
   await test("search (bozuk yil)", "/api/search", { baslik: "x", yil: 9999 }, [400]);
+  await test("search (kesirli limit)", "/api/search", { baslik: "x", limit: 1.5 }, [400]);
   await test("download (javascript:)", "/api/download", { url: "javascript:alert(1)" }, [400]);
   await test(
     "download (olmayan host)",
@@ -121,11 +136,25 @@ try {
   );
   await test("GET /api/custom-sources", "/api/custom-sources");
   await test("POST /api/cache/clear", "/api/cache/clear", {});
+  process.exitCode = basarisiz ? 1 : 0;
 
   console.log("\n--- sunucu cikisi ---");
   console.log(sunucuCikti.trim().split("\n").slice(0, 5).join("\n"));
 } finally {
-  cocuk.kill();
-  await once(cocuk, "exit").catch(() => {});
+  if (cocuk.exitCode === null) {
+    cocuk.kill();
+    await once(cocuk, "exit").catch(() => {});
+  }
+  await geciciyiTemizle();
   console.log("\nSunucu kapatildi.");
+}
+async function geciciyiTemizle() {
+  const relative = path.relative(os.tmpdir(), temporary);
+  if (
+    !relative.startsWith("kaynak-bul-smoke-") ||
+    relative.includes("..") ||
+    path.isAbsolute(relative)
+  )
+    throw Error("Geçici dizin sınır dışında");
+  await fs.rm(temporary, { recursive: true, force: true });
 }

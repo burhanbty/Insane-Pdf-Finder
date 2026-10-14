@@ -58,12 +58,12 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     const uri = doc.uri_s ?? `https://hal.science/hal-${doc.docid}`;
     // HAL açık PDF indirme adresi
     const dosyaPdf = doc.files_s?.find((f) => f.toLowerCase().endsWith(".pdf"));
-    const pdf = dosyaPdf ?? `https://hal.science/hal-${doc.docid}/document`;
+    const pdf = dosyaPdf;
 
     const tur: Work["tur"] =
       doc.docType_s?.toUpperCase() === "OUV" || doc.docType_s?.toUpperCase() === "COUV"
         ? "kitap"
-        : sorgu.tur;
+        : "makale";
 
     sonuclar.push({
       kaynak: "hal",
@@ -76,7 +76,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       doi: doc.doiId_s,
       link: uri,
       pdf,
-      erisim: "acik",
+      erisim: pdf ? "acik" : "yonlendir",
     });
   }
 

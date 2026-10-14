@@ -12,7 +12,7 @@ interface CR {
   author?: { given?: string; family?: string; name?: string; ORCID?: string }[];
   published?: { "date-parts"?: number[][] };
   issued?: { "date-parts"?: number[][] };
-  containerTitle?: string[];
+  "container-title"?: string[];
   publisher?: string;
   abstract?: string;
   subject?: string[];
@@ -37,16 +37,11 @@ function adDiz(g?: string, f?: string, n?: string): string | undefined {
  */
 function araliktanToplam(page?: string): number | undefined {
   if (!page) return undefined;
-  const sayilar = [...page.matchAll(/\d+/g)].map((m) => Number(m[0]));
-  if (!sayilar.length) return undefined;
-  if (sayilar.length === 1) return sayilar[0];
-  if (sayilar.length === 2 && sayilar[0] !== undefined && sayilar[1] !== undefined) {
-    const fark = Math.abs(sayilar[1] - sayilar[0]) + 1;
-    if (fark > 0 && fark < 5000) return fark;
-  }
-  const enBuyuk = Math.max(...sayilar);
-  // "e1000234" gibi artefaktlari ele.
-  return enBuyuk < 100000 ? enBuyuk : undefined;
+  const aralik = page.trim().match(/^(\d+)\s*[-–—]\s*(\d+)$/);
+  if (!aralik) return undefined;
+  const ilk = Number(aralik[1]);
+  const son = Number(aralik[2]);
+  return ilk > 0 && son >= ilk && son - ilk < 5000 ? son - ilk + 1 : undefined;
 }
 
 async function ara(sorgu: Sorgu): Promise<Work[]> {
@@ -80,7 +75,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     sonuc.push({
       kaynak: "crossref",
       kaynakAd: "Crossref",
-      tur: "makale",
+      tur: it.type?.startsWith("book") || it.type === "monograph" ? "kitap" : "makale",
       baslik,
       altBaslik: it.subtitle?.[0],
       yazarlar: (it.author ?? [])
@@ -92,7 +87,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
         .replace(/\s+/g, " ")
         .trim(),
       konular: it.subject,
-      yayinci: it.containerTitle?.[0] ?? it.publisher,
+      yayinci: it["container-title"]?.[0] ?? it.publisher,
       doi: it.DOI,
       sayfa: it.page
         ? `${it.volume ?? ""}${it.issue ? `(${it.issue})` : ""}: ${it.page}`.replace(/^: /, "")

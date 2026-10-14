@@ -22,7 +22,7 @@ describe("sci-hub kaynak modülü", () => {
     expect(sonuclar).toHaveLength(1);
     expect(sonuclar[0]!.doi).toBe("10.1038/nature12373");
     expect(sonuclar[0]!.link).toContain("sci-hub.se/10.1038%2Fnature12373");
-    expect(sonuclar[0]!.pdf).toContain("sci-hub.se/10.1038%2Fnature12373");
+    expect(sonuclar[0]!.pdf).toBeUndefined();
     expect(sonuclar[0]!.erisim).toBe("yonlendir");
   });
 
@@ -180,7 +180,8 @@ describe("gutenberg kaynak modülü", () => {
       expect(k.kaynak).toBe("gutenberg");
       expect(k.baslik).toBe("Frankenstein; or, the modern prometheus");
       expect(k.yazarlar).toEqual(["Mary Wollstonecraft Shelley"]);
-      expect(k.pdf).toBe("https://www.gutenberg.org/ebooks/84.epub3.images");
+      expect(k.pdf).toBeUndefined();
+      expect(k.epub).toBe("https://www.gutenberg.org/ebooks/84.epub3.images");
       expect(k.tamMetin).toBe("https://www.gutenberg.org/ebooks/84.txt.utf-8");
       expect(k.kapak).toContain("pg84.cover.medium.jpg");
       expect(k.erisim).toBe("acik");
