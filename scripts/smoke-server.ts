@@ -12,7 +12,7 @@ import path from "node:path";
 const PORT = 3311;
 const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "kaynak-bul-smoke-"));
 let basarisiz = 0;
-const boot = `const {ayar}=await import('./src/config.ts'); ayar.downloadsDir=${JSON.stringify(path.join(temporary, "downloads"))}; ayar.cacheDir=${JSON.stringify(path.join(temporary, "cache"))}; await import('./src/server.ts');`;
+const boot = `const {ayar}=await import('./src/config.ts'); ayar.downloadsDir=${JSON.stringify(path.join(temporary, "downloads"))}; ayar.cacheDir=${JSON.stringify(path.join(temporary, "cache"))}; ayar.dataDir=${JSON.stringify(path.join(temporary, "data"))}; await import('./src/server.ts');`;
 
 console.log("Sunucu baslatiliyor...");
 const cocuk = spawn(process.execPath, ["--import", "tsx", "--input-type=module", "-e", boot], {
@@ -78,6 +78,8 @@ try {
 
   await test("GET /api/sources", "/api/sources");
   await test("GET /api/downloads", "/api/downloads");
+  await test("GET /api/workspace", "/api/workspace");
+  await test("ISBN (kontrol basamağı yanlış)", "/api/isbn", { isbn: "9780131103628" }, [400]);
 
   // Statik dosyalar JSON donmez; ayri dogruluyoruz.
   try {

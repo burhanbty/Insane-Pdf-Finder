@@ -48,6 +48,7 @@ const ozetYuklenen = new Map();
 let kaynakAdlari = new Map();
 let aramaSurumu = 0;
 const kartDugumleri = new WeakMap();
+const kartVerileri = new WeakMap();
 
 /* ------------------------------- yardimcilar ----------------------------- */
 
@@ -539,6 +540,11 @@ function kartYap(g) {
   if (g.puan >= 0.85) etiketler.push(`<span class="etiket uyum">Tam eşleşme</span>`);
   else if (g.puan >= 0.6) etiketler.push(`<span class="etiket uyum">Büyük olasılık</span>`);
   if (g.yil) etiketler.push(`<span class="etiket">${g.yil}</span>`);
+  const katalogIsbn = g.kaynaklar.find((k) => k.isbn)?.isbn;
+  if (katalogIsbn)
+    etiketler.push(
+      `<span class="etiket" title="Kaynak kaydındaki ISBN; hocanızın istediği baskıyla karşılaştırın">ISBN ${kacis(katalogIsbn)}</span>`,
+    );
   etiketler.push(`<span class="etiket tur">${g.tur}</span>`);
   for (const k of g.konular.slice(0, 4)) etiketler.push(`<span class="etiket">${kacis(k)}</span>`);
 
@@ -582,6 +588,7 @@ function kartYap(g) {
   const sayfaParcasi = sayfaEtiketi(g, indirilebilir);
 
   const eylemler = [];
+  eylemler.push('<button data-eylem="kitaplik" class="kitaplik-kaydet">Kitaplığa kaydet</button>');
   if (indirilebilir) {
     eylemler.push(
       `<button class="birincil" data-eylem="indir" data-url="${kacis(indirilebilir.pdf)}" data-tur="pdf" data-baslik="${kacis(g.baslik)}">PDF indir</button>`,
@@ -636,6 +643,7 @@ function kartYap(g) {
       <div class="ozet-icerik"></div>
     </div>`;
 
+  kartVerileri.set(kart, g);
   return kart;
 }
 
@@ -719,6 +727,22 @@ el.kartlar.addEventListener("click", async (olay) => {
   const tur = buton.dataset.tur;
   const baslik = buton.dataset.baslik;
   const hedefKutu = buton.closest(".kart").querySelector(".ozet-icerik");
+
+  if (eylem === "kitaplik") {
+    buton.disabled = true;
+    try {
+      const sonuc = await istek("/api/workspace/items", {
+        eser: kartVerileri.get(buton.closest(".kart")),
+      });
+      buton.textContent = sonuc.eklendi ? "Kitaplığa kaydedildi" : "Kitaplığınızda mevcut";
+      document.dispatchEvent(new CustomEvent("kitaplik-degisti"));
+    } catch (hata) {
+      buton.disabled = false;
+      buton.textContent = "Tekrar kaydet";
+      hedefKutu.textContent = `Kitaplığa kaydedilemedi: ${hata.message}`;
+    }
+    return;
+  }
 
   if (eylem === "kunye") {
     const kunye = buton.closest(".kart").dataset.kunye;
@@ -923,6 +947,8 @@ $("#kaynaklarBtn").addEventListener("click", async () => {
 $("#kaynakKapat").addEventListener("click", () => el.dialog.close());
 
 /* ------------------------------ baslangic ------------------------------- */
+
+document.addEventListener("indirmeler-degisti", () => void indirmeleriYenile());
 
 await indirmeleriYenile();
 

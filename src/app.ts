@@ -10,6 +10,9 @@ import { get } from "./http.js";
 import { sinirliGovde } from "./body.js";
 import { kaynakHazirligi } from "./source-state.js";
 import { sureSinirli } from "./deadline.js";
+import { calismaRotalari } from "./workspace-api.js";
+import { isbnDogrula, isbnKitabi } from "./isbn.js";
+import { KaynakHatasi } from "./http.js";
 import type { Sorgu, Tur } from "./types.js";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -50,7 +53,9 @@ uygulama.use("/api", (req, res, next) => {
   res.setHeader("cache-control", "no-store");
   next();
 });
+uygulama.use("/api/workspace/import", express.json({ limit: "21mb" }));
 uygulama.use(express.json({ limit: "1mb" }));
+uygulama.use("/api/workspace", calismaRotalari);
 
 /* ------------------------------ ara yardimcilar --------------------------- */
 
@@ -100,6 +105,25 @@ function sorguAyikla(v: unknown): Sorgu | string {
 }
 
 /* ------------------------------- rotalar -------------------------------- */
+
+uygulama.post("/api/isbn", async (req, res) => {
+  const isbn = isbnDogrula(req.body?.isbn);
+  if (!isbn)
+    return hataCevap(
+      res,
+      400,
+      "Geçerli bir ISBN-10 veya ISBN-13 girin; kontrol basamağı uyuşmuyor",
+    );
+  try {
+    res.json(await isbnKitabi(isbn));
+  } catch (hata) {
+    hataCevap(
+      res,
+      hata instanceof KaynakHatasi && hata.durum === 404 ? 404 : 502,
+      (hata as Error).message,
+    );
+  }
+});
 
 /** Birincil arama: kayitli tum kaynaklar. */
 uygulama.post("/api/search", async (req: Request, res: Response) => {

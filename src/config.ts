@@ -42,6 +42,7 @@ export const ayar = {
   publicDir: path.join(kok, "public"),
   downloadsDir: path.join(kok, "downloads"),
   cacheDir: path.join(kok, ".cache"),
+  dataDir: path.join(kok, ".data"),
   projeKok: kok,
 
   /** Kullanici tanitici. Open Library kendini arayabilsin diye sart. */

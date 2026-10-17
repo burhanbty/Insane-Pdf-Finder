@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-16",
+  "node": "v24.18.1",
+  "isbn": "9780131103627",
+  "title": "The C Programming Language",
+  "authors": ["Brian W. Kernighan", "Dennis MacAlistair Ritchie"],
+  "year": 1988,
+  "source": "https://openlibrary.org/isbn/9780131103627",
+  "privateContentSent": false,
+  "keysUsed": false,
+  "contactEmailUsed": false,
+  "download": false
+}

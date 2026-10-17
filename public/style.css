@@ -1,4 +1,6 @@
 :root {
+  color-scheme: dark;
+  scroll-behavior: smooth;
   --zemin: #0e1116;
   --panel: #161b23;
   --panel2: #1d232d;
@@ -10,6 +12,171 @@
   --uyari: #e0a33e;
   --hata: #e05c5c;
   --yaricap: 10px;
+}
+
+.ust-eylemler,
+.kitaplik-arac,
+.kitaplik-eylemler,
+.kayitli-aramalar,
+.yedek-eylemler {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.ust-eylemler a {
+  text-decoration: none;
+  color: var(--metin);
+}
+.aramalar-panel {
+  margin-top: 18px;
+}
+.kayitli-aramalar {
+  margin-top: 12px;
+}
+.arama-kaydi {
+  display: flex;
+  gap: 4px;
+  border: 1px solid var(--kenar);
+  padding: 4px;
+  border-radius: 8px;
+}
+.kitaplik-arac {
+  align-items: end;
+  margin-bottom: 14px;
+}
+.kitaplik-arac label {
+  flex: 1 1 160px;
+}
+.kitaplik-listesi {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+.kitaplik-karti {
+  border: 1px solid var(--kenar);
+  border-radius: 9px;
+  padding: 16px;
+  overflow-wrap: anywhere;
+}
+.kitaplik-karti h3 {
+  font-size: 16px;
+}
+.kitaplik-notu {
+  white-space: pre-wrap;
+  margin: 12px 0;
+  max-height: 200px;
+  overflow: auto;
+}
+.kitaplik-etiketler {
+  margin: 8px 0;
+}
+.kitaplik-eylemler {
+  margin-top: 10px;
+}
+.kitaplik-eylemler a {
+  color: var(--vurgu);
+  text-decoration: none;
+}
+.yedek-panel {
+  margin-top: 24px;
+  border-top: 1px solid var(--kenar);
+  padding-top: 16px;
+}
+.yedek-panel summary {
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.yedek-eylemler {
+  margin-bottom: 14px;
+}
+.dosya-sec {
+  max-width: 300px;
+}
+#kayitForm {
+  display: grid;
+  gap: 14px;
+}
+#kayitForm textarea {
+  width: 100%;
+  resize: vertical;
+  background: var(--zemin);
+  color: var(--metin);
+  border: 1px solid var(--kenar);
+  border-radius: 8px;
+  padding: 12px;
+  font: inherit;
+}
+.islem-hata {
+  color: var(--hata);
+}
+.baslangic-rehberi {
+  margin-bottom: 18px;
+}
+.baslangic-rehberi summary,
+.ders-listesi summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.baslangic-rehberi ol {
+  padding: 14px 22px 0;
+}
+.isbn-panel {
+  margin-bottom: 18px;
+}
+.isbn-satir {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0;
+}
+.isbn-satir input {
+  flex: 1 1 180px;
+}
+.isbn-satir label {
+  flex: 0 0 auto;
+}
+.ders-listesi {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--kenar);
+}
+.ders-listesi label {
+  margin: 10px 0;
+}
+.ders-listesi textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  resize: vertical;
+  font: inherit;
+  color: var(--metin);
+  background: var(--zemin);
+  border: 1px solid var(--kenar);
+  border-radius: 8px;
+}
+#kitaplikBolum {
+  scroll-margin-top: 100px;
+}
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .ust-eylemler {
+    justify-content: end;
+  }
+  .kitaplik-arac label {
+    flex-basis: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
 }
 
 * {
@@ -126,7 +293,10 @@ label em {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="search"],
+input:not([type]),
+select {
   background: var(--zemin);
   border: 1px solid var(--kenar);
   color: var(--metin);
@@ -173,6 +343,10 @@ input::placeholder {
 .turler input:checked + span {
   background: var(--vurgu);
   color: #06101d;
+}
+.turler input:focus-visible + span {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 3px;
 }
 .turler span:hover {
   color: var(--metin);

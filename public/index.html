@@ -12,13 +12,45 @@
         <span class="logo">⌕</span>
         <div>
           <h1>Kaynak Bul</h1>
-          <p>Başlık, yazar ve yıl yazın; açık erişimli kaynaklarda nerede olduğunu bulun</p>
+          <p>Ders kitabını başlık, yazar veya ISBN ile bul; kitaplığını derslerine göre düzenle</p>
         </div>
       </div>
-      <button id="kaynaklarBtn" class="mini">Kaynaklar</button>
+      <nav class="ust-eylemler" aria-label="Ana gezinme">
+        <a class="mini" href="#kitaplikBolum">Kitaplığım <span id="kitaplikSayisi">0</span></a>
+        <button id="kaynaklarBtn" class="mini">Kaynaklar</button>
+      </nav>
     </header>
 
     <main>
+      <details class="panel baslangic-rehberi">
+        <summary>Hocanın verdiği kitabı nasıl bulursun?</summary>
+        <ol>
+          <li>Başlık ve yazarı gir. ISBN varsa önce aşağıdaki kutudan kitabın künyesini getir.</li>
+          <li>
+            Sonuçtaki yazar, yıl ve ISBN'yi ders listenle karşılaştır; farklı baskılar olabilir.
+          </li>
+          <li>
+            Kitabı kitaplığına kaydet, ders adını koleksiyon olarak ekle. PDF/EPUB bağlantısı varsa
+            indirebilirsin; diğer kayıtlarda kaynağı aç.
+          </li>
+        </ol>
+      </details>
+      <section class="panel isbn-panel" aria-labelledby="isbnBaslik">
+        <h2 id="isbnBaslik">ISBN ile doğru kitabı bul</h2>
+        <div class="isbn-satir">
+          <label for="isbnGirdi">ISBN-10 veya ISBN-13</label
+          ><input
+            id="isbnGirdi"
+            type="text"
+            maxlength="40"
+            placeholder="Ör. 9780131103627"
+          /><button type="button" id="isbnBul">Künyeyi getir</button>
+        </div>
+        <p id="isbnSonuc" class="ipucu" role="status" aria-live="polite"></p>
+        <button type="button" class="mini gizli" id="isbnKaydet">
+          Bu ISBN kaydını kitaplığa ekle
+        </button>
+      </section>
       <form id="aramaForm" class="form">
         <div class="satir">
           <label class="genis">
@@ -29,6 +61,7 @@
               type="text"
               required
               autocomplete="off"
+              maxlength="300"
               placeholder="ör. Sapiens: A Brief History of Humankind"
             />
           </label>
@@ -68,7 +101,36 @@
         </div>
       </form>
 
-      <div id="ozetPanel" class="panel gizli"></div>
+      <section class="panel aramalar-panel" aria-labelledby="aramalarBaslik">
+        <div class="panel-ust">
+          <h2 id="aramalarBaslik">Kayıtlı aramalar</h2>
+          <button type="button" class="mini" id="aramaKaydet">Bu aramayı kaydet</button>
+        </div>
+        <div id="kayitliAramalar" class="kayitli-aramalar">
+          <p class="ipucu">Aramalar yükleniyor…</p>
+        </div>
+        <details class="ders-listesi">
+          <summary>Ders kitapları listesini topluca ekle</summary>
+          <p class="ipucu">
+            Her satıra bir kitap yaz: Başlık | Yazar | Yıl. Yazar ve yıl isteğe bağlıdır.
+            Önizlemeden sonra arama listene kaydedilir; kitaplar kendiliğinden aranmaz.
+          </p>
+          <label>Ders adı<input id="dersAdi" maxlength="60" placeholder="Ör. CENG 201" /></label>
+          <label
+            >Kitap listesi<textarea
+              id="dersKitaplari"
+              rows="4"
+              maxlength="10000"
+              placeholder="The C Programming Language | Brian Kernighan | 1988&#10;Introduction to Algorithms | Thomas Cormen"
+            ></textarea>
+          </label>
+          <button type="button" id="dersOnizle">Listeyi önizle</button>
+          <p id="dersSonuc" class="ipucu" role="status"></p>
+          <button type="button" id="dersKaydet" disabled>Önizlenen listeyi kaydet</button>
+        </details>
+      </section>
+
+      <div id="ozetPanel" class="panel gizli" role="status" aria-live="polite"></div>
 
       <section id="sonucBolum" class="gizli">
         <div class="sonuc-ust">
@@ -113,6 +175,62 @@
         <div id="bos" class="bos gizli"></div>
       </section>
 
+      <section id="kitaplikBolum" class="panel" aria-labelledby="kitaplikBaslik">
+        <div class="panel-ust">
+          <div>
+            <h2 id="kitaplikBaslik">Kitaplığım</h2>
+            <p class="ipucu">
+              Kaynaklarınızı kaydedin, okuma durumunu izleyin ve not alın. Veriler bu bilgisayarda
+              saklanır.
+            </p>
+          </div>
+          <button type="button" class="mini" id="kitaplikYenile">Yenile</button>
+        </div>
+        <div class="kitaplik-arac">
+          <label
+            >Kitaplıkta ara<input
+              id="kitaplikAra"
+              type="search"
+              placeholder="Başlık, yazar veya not"
+          /></label>
+          <label
+            >Koleksiyon<select id="koleksiyonFiltre">
+              <option value="">Tüm koleksiyonlar</option>
+            </select></label
+          >
+          <label
+            >Okuma durumu<select id="okumaFiltre">
+              <option value="">Tümü</option>
+              <option value="okunacak">Okunacak</option>
+              <option value="okunuyor">Okunuyor</option>
+              <option value="okundu">Okundu</option>
+              <option value="arsiv">Arşivlenenler</option>
+            </select></label
+          >
+          <button type="button" class="mini" id="kitaplikRis">RIS indir</button>
+          <button type="button" class="mini" id="kitaplikBib">BibTeX indir</button>
+        </div>
+        <p id="calismaMesaj" class="ipucu" role="status" aria-live="polite"></p>
+        <div id="kitaplikListe" class="kitaplik-listesi">
+          <p class="ipucu">Kitaplık yükleniyor…</p>
+        </div>
+        <details class="yedek-panel">
+          <summary>Yedekleme ve geri yükleme</summary>
+          <p class="ipucu">
+            JSON yedeği kitaplığınızı, notlarınızı ve kayıtlı aramalarınızı içerir. Birleştirme
+            mevcut notların üzerine yazmaz.
+          </p>
+          <div class="yedek-eylemler">
+            <button type="button" id="yedekIndir">Yedek indir</button>
+            <label class="dosya-sec"
+              >Yedek seç<input id="yedekDosya" type="file" accept=".json,application/json"
+            /></label>
+          </div>
+          <p id="yedekOnizleme" class="ipucu" role="status"></p>
+          <button type="button" id="yedekBirlestir" disabled>Önizlenen yedeği birleştir</button>
+        </details>
+      </section>
+
       <section id="indirilenBolum" class="panel">
         <div class="panel-ust">
           <h2>İndirilenler <span id="indirmeSayisi" class="rozet">0</span></h2>
@@ -122,9 +240,9 @@
       </section>
     </main>
 
-    <dialog id="kaynakDialog">
+    <dialog id="kaynakDialog" aria-labelledby="kaynakDialogBaslik">
       <div class="dialog-ust">
-        <h2>Kaynaklar</h2>
+        <h2 id="kaynakDialogBaslik">Kaynaklar</h2>
         <button class="mini" id="kaynakKapat">Kapat</button>
       </div>
       <p class="ipucu">
@@ -151,6 +269,43 @@
       </div>
     </dialog>
 
+    <dialog id="kayitDialog" aria-labelledby="kayitDialogBaslik">
+      <form id="kayitForm">
+        <div class="dialog-ust">
+          <h2 id="kayitDialogBaslik">Kaydı düzenle</h2>
+          <button type="button" class="mini" id="kayitKapat">Kapat</button>
+        </div>
+        <p id="kayitEserBaslik" class="ipucu"></p>
+        <label
+          >Koleksiyon<input
+            id="kayitKoleksiyon"
+            autofocus
+            maxlength="80"
+            placeholder="Ör. CENG 201"
+            list="koleksiyonOnerileri"
+        /></label>
+        <datalist id="koleksiyonOnerileri"></datalist>
+        <label
+          >Okuma durumu<select id="kayitDurum">
+            <option value="okunacak">Okunacak</option>
+            <option value="okunuyor">Okunuyor</option>
+            <option value="okundu">Okundu</option>
+          </select></label
+        >
+        <label
+          >Notlar<textarea
+            id="kayitNotlar"
+            maxlength="5000"
+            rows="6"
+            placeholder="Kaynakla ilgili kendi notlarınız"
+          ></textarea>
+        </label>
+        <p id="kayitHata" class="ipucu" role="alert"></p>
+        <button type="submit" class="birincil" id="kayitKaydet">Değişiklikleri kaydet</button>
+      </form>
+    </dialog>
+
     <script type="module" src="/app.js"></script>
+    <script type="module" src="/workspace.js"></script>
   </body>
 </html>

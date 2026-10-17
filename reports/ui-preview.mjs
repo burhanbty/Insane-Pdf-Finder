@@ -8,12 +8,31 @@ import { kaynaklariYukle } from "../src/registry.ts";
 import { uygulama } from "../src/app.ts";
 
 const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "kaynak-bul-ui-preview-"));
+console.log(`Temporary UI fixture: ${temporary}`);
+const originalFetch = globalThis.fetch;
+globalThis.fetch = (url, init) => {
+  if (String(url).startsWith("https://openlibrary.org/api/books")) {
+    return Promise.resolve(
+      Response.json({
+        "ISBN:9780131103627": {
+          title: "The C Programming Language — arayüz örneği",
+          authors: [{ name: "Brian Kernighan" }],
+          publish_date: "1988",
+          edition_name: "Second edition (test fixture)",
+        },
+      }),
+    );
+  }
+  return originalFetch(url, init);
+};
 Object.assign(ayar, {
   sourcesDir: path.join(temporary, "sources"),
   cacheDir: path.join(temporary, "cache"),
   downloadsDir: path.join(temporary, "downloads"),
+  dataDir: path.join(temporary, "data"),
 });
-for (const dir of [ayar.sourcesDir, ayar.cacheDir, ayar.downloadsDir]) await fs.mkdir(dir);
+for (const dir of [ayar.sourcesDir, ayar.cacheDir, ayar.downloadsDir, ayar.dataDir])
+  await fs.mkdir(dir);
 await fs.writeFile(
   path.join(ayar.downloadsDir, "arayuz_ornegi.txt"),
   "Arayüz doğrulaması için örnek metin.",

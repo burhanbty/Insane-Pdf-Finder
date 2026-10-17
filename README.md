@@ -6,7 +6,37 @@ içeriklerinden özet çıkarıyor.
 
 Arayüz tarayıcıda açılıyor, Türkçe. Node.js + TypeScript, build adımı yok.
 
-## Çalıştırma
+## Öğrenci için kullanım
+
+Hocanızın verdiği kitapta **başlık, yazar ve baskı** bilgilerini karşılaştırın.
+ISBN varsa **ISBN ile doğru kitabı bul** alanından künyeyi getirin; ISBN-10/13
+kontrol basamağı denetlenir. Katalog bilgisi formu doldurur; geniş kaynak araması
+siz **Ara** düğmesine bastığınızda başlar. ISBN kaydı bir PDF bulunduğu anlamına gelmez.
+
+**Ders kitapları listesini topluca ekle** alanına ders adını ve her satıra
+`Başlık | Yazar | Yıl` biçiminde kitapları yapıştırın. Yazar/yıl isteğe bağlıdır.
+Önizlenen liste, onayınızla kayıtlı aramalara eklenir; dış kaynaklar otomatik taranmaz.
+Bir defada en fazla 20 satır, toplamda 50 kayıtlı arama desteklenir. Aynı sorgu tekrar eklenmez.
+
+Bulduğunuz kitabı **Kitaplığa kaydet** ile saklayın. **Not ve koleksiyon** üzerinden
+ders adını (ör. CENG 201), okuma durumunu ve kişisel notlarınızı düzenleyebilirsiniz.
+Kitaplıkta arama, koleksiyon/okuma durumu filtresi, arşivleme ve geri alma vardır.
+Kaydedilmiş PDF/EPUB/metin bağlantıları kitaplıktan da indirilebilir. Görünen kitaplar
+RIS veya BibTeX olarak dışa aktarılır; kişisel notlar kaynakçaya dahil edilmez.
+
+Veriler **`.data/workspace.json`** içinde, tek sunucu sürecinde sıralı ve atomik
+olarak saklanır. `.data/` Git dışında tutulur. Bu sürüm yerel ve tek kullanıcı içindir;
+aynı veri dosyasına birden fazla sunucu süreciyle eşzamanlı yazmayın.
+Kitaplık sınırı 1000 kayıt, not sınırı kayıt başına 5000 karakter, veri sınırı 20 MB'dir.
+
+**Yedekleme ve geri yükleme** bölümünden JSON yedeği indirin. Bu yedek kişisel
+notlarınızı ve kayıtlı aramalarınızı da içerir; PDF/EPUB dosyalarını içermez.
+İçe aktarım önce önizlenir, sonra ekleme yoluyla birleştirilir; mevcut kayıtların notları
+değiştirilmez. Bozuk yerel veri otomatik sıfırlanmaz; dosya korunup hata gösterilir.
+Bozuk bir dosyadan kurtarmada önce dosyayı ayrıca koruyup veri klasöründen taşıyın,
+ardından sağlam JSON yedeğini uygulamadan içe aktarın.
+
+## Kurulum
 
 Node.js **22.22.2+ (22.x), 24.15.0+ (24.x) veya 26+** gerekir.
 
