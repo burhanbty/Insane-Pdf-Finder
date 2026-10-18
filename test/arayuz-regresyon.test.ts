@@ -69,6 +69,17 @@ const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 afterEach(() => dom?.window.close());
 
 describe("arama araçları", () => {
+  it("kapalı arama seçeneklerindeki geçersiz alanı düzeltmek için görünür yapar", async () => {
+    await kur(() => BOS);
+    d.querySelector<HTMLInputElement>("#baslik")!.value = "Algorithms";
+    d.querySelector<HTMLInputElement>("#yil")!.value = "999";
+    const secenekler = d.querySelector<HTMLDetailsElement>(".arama-secenekleri")!;
+    expect(secenekler.open).toBe(false);
+    expect(d.querySelector<HTMLFormElement>("#aramaForm")!.reportValidity()).toBe(false);
+    expect(secenekler.open).toBe(true);
+    expect(cagrilar.some((c) => c.url === "/api/search")).toBe(false);
+  });
+
   it("bilinmeyen yılları sona alır ve başlığa göre sıralar", async () => {
     await kur(() =>
       cevap([kart("Z", "a", { yil: 2000 }), kart("B"), kart("A", "a", { yil: 2024 })]),

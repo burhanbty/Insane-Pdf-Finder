@@ -4,138 +4,214 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kaynak Bul — Kitap, Makale ve Slayt Arama</title>
+    <script src="/theme.js"></script>
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/theme.css" />
   </head>
   <body>
+    <a class="atla" href="#aramaForm">Aramaya geç</a>
     <header class="ust">
-      <div class="marka">
-        <span class="logo">⌕</span>
-        <div>
-          <h1>Kaynak Bul</h1>
-          <p>Ders kitabını başlık, yazar veya ISBN ile bul; kitaplığını derslerine göre düzenle</p>
+      <a class="marka" href="#kesfet" aria-label="Kaynak Bul ana sayfa">
+        <span class="logo" aria-hidden="true">k<span>.</span></span>
+        <span class="marka-yazi">kaynak bul<span>Öğrenmeye bir adım daha yakın.</span></span>
+      </a>
+      <nav class="ust-eylemler" aria-label="Ana gezinme">
+        <a href="#kesfet"><span aria-hidden="true">⌕</span> Kitap bul</a>
+        <a href="#kitaplikBolum"
+          ><span aria-hidden="true">▤</span> Kitaplığım
+          <span id="kitaplikSayisi" class="nav-sayi">0</span></a
+        >
+        <a href="#aramalarBolum"><span aria-hidden="true">☷</span> Ders listelerim</a>
+        <a href="#indirilenBolum"><span aria-hidden="true">↓</span> İndirilenler</a>
+      </nav>
+      <div class="yan-not">
+        <span class="yan-not-ikon" aria-hidden="true">✦</span
+        ><strong>Bir ders, bir kitapla başlar.</strong>
+        <p>Bulduklarını kaydet. Notlarını ve okuma ilerlemeni bir arada tut.</p>
+        <a href="#kitaplikBolum">Kitaplığına git →</a>
+      </div>
+      <div class="yan-alt">
+        <button id="kaynaklarBtn" class="mini">Arama kaynakları</button
+        ><span>Kitaplığın bu bilgisayarda saklanır.</span>
+      </div>
+    </header>
+    <main id="kesfet">
+      <div class="sayfa-ust">
+        <span>ÖĞRENCİNİN ÇALIŞMA ALANI</span>
+        <div class="sayfa-ust-arac">
+          <span class="yerel-bilgi"
+            ><i aria-hidden="true"></i> Kendi kitaplığın, kendi düzenin</span
+          >
+          <div class="tema-secici" role="group" aria-label="Görünüm">
+            <button
+              type="button"
+              data-tema-sec="acik"
+              aria-label="Açık tema"
+              aria-pressed="false"
+              title="Açık tema"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+                /></svg
+              ><span class="tema-ad">Açık</span>
+            </button>
+            <button
+              type="button"
+              data-tema-sec="koyu"
+              aria-label="Koyu tema"
+              aria-pressed="false"
+              title="Koyu tema"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z" /></svg
+              ><span class="tema-ad">Koyu</span>
+            </button>
+            <button
+              type="button"
+              data-tema-sec="sistem"
+              aria-label="Sistem temasını kullan"
+              aria-pressed="true"
+              title="Sistem temasını kullan"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="13" rx="2" />
+                <path d="M8 21h8m-4-4v4" /></svg
+              ><span class="tema-ad">Sistem</span>
+            </button>
+          </div>
         </div>
       </div>
-      <nav class="ust-eylemler" aria-label="Ana gezinme">
-        <a class="mini" href="#kitaplikBolum">Kitaplığım <span id="kitaplikSayisi">0</span></a>
-        <button id="kaynaklarBtn" class="mini">Kaynaklar</button>
-      </nav>
-    </header>
-
-    <main>
-      <details class="panel baslangic-rehberi">
-        <summary>Hocanın verdiği kitabı nasıl bulursun?</summary>
-        <ol>
-          <li>Başlık ve yazarı gir. ISBN varsa önce aşağıdaki kutudan kitabın künyesini getir.</li>
-          <li>
-            Sonuçtaki yazar, yıl ve ISBN'yi ders listenle karşılaştır; farklı baskılar olabilir.
-          </li>
-          <li>
-            Kitabı kitaplığına kaydet, ders adını koleksiyon olarak ekle. PDF/EPUB bağlantısı varsa
-            indirebilirsin; diğer kayıtlarda kaynağı aç.
-          </li>
-        </ol>
-      </details>
-      <section class="panel isbn-panel" aria-labelledby="isbnBaslik">
-        <h2 id="isbnBaslik">ISBN ile doğru kitabı bul</h2>
-        <div class="isbn-satir">
-          <label for="isbnGirdi">ISBN-10 veya ISBN-13</label
-          ><input
-            id="isbnGirdi"
-            type="text"
-            maxlength="40"
-            placeholder="Ör. 9780131103627"
-          /><button type="button" id="isbnBul">Künyeyi getir</button>
-        </div>
-        <p id="isbnSonuc" class="ipucu" role="status" aria-live="polite"></p>
-        <button type="button" class="mini gizli" id="isbnKaydet">
-          Bu ISBN kaydını kitaplığa ekle
-        </button>
-      </section>
-      <form id="aramaForm" class="form">
-        <div class="satir">
-          <label class="genis">
-            <span>Başlık</span>
-            <input
-              id="baslik"
-              name="baslik"
-              type="text"
-              required
-              autocomplete="off"
-              maxlength="300"
-              placeholder="ör. Sapiens: A Brief History of Humankind"
-            />
-          </label>
-          <label>
-            <span>Yazar <em>(isteğe bağlı)</em></span>
-            <input
-              id="yazar"
-              name="yazar"
-              type="text"
-              autocomplete="off"
-              placeholder="ör. Yuval Noah Harari"
-            />
-          </label>
-          <label class="dar">
-            <span>Yıl</span>
-            <input id="yil" name="yil" type="number" min="1000" max="2100" placeholder="2011" />
-          </label>
-        </div>
-
-        <div class="satir ikinci">
-          <div class="turler" role="radiogroup" aria-label="İçerik türü">
-            <label><input type="radio" name="tur" value="kitap" checked /><span>Kitap</span></label>
-            <label><input type="radio" name="tur" value="makale" /><span>Makale</span></label>
-            <label><input type="radio" name="tur" value="slayt" /><span>Slayt / Sunum</span></label>
-          </div>
-          <label class="dar">
-            <span>Sonuç sayısı</span>
-            <input id="limit" name="limit" type="number" min="1" max="50" value="20" />
-          </label>
-          <div class="eylemler">
-            <label class="onay">
-              <input type="checkbox" id="webDahil" checked />
-              <span>Genel web araması <em>(filetype:pdf)</em></span>
-            </label>
-            <button type="submit" class="birincil" id="araBtn">Ara</button>
-          </div>
-        </div>
-      </form>
-
-      <section class="panel aramalar-panel" aria-labelledby="aramalarBaslik">
-        <div class="panel-ust">
-          <h2 id="aramalarBaslik">Kayıtlı aramalar</h2>
-          <button type="button" class="mini" id="aramaKaydet">Bu aramayı kaydet</button>
-        </div>
-        <div id="kayitliAramalar" class="kayitli-aramalar">
-          <p class="ipucu">Aramalar yükleniyor…</p>
-        </div>
-        <details class="ders-listesi">
-          <summary>Ders kitapları listesini topluca ekle</summary>
-          <p class="ipucu">
-            Her satıra bir kitap yaz: Başlık | Yazar | Yıl. Yazar ve yıl isteğe bağlıdır.
-            Önizlemeden sonra arama listene kaydedilir; kitaplar kendiliğinden aranmaz.
+      <section class="karsilama" aria-labelledby="sayfaBaslik">
+        <div>
+          <p class="ust-etiket">MERAK ETTİĞİN YERDEN BAŞLA</p>
+          <h1 id="sayfaBaslik">Aradığın kitap.<br /><em>Bir sonraki adımın.</em></h1>
+          <p class="karsilama-aciklama">
+            Hocanın önerdiği kitabı bul, derslerine göre düzenle.<br />Aramaya daha az, öğrenmeye
+            daha çok zaman ayır.
           </p>
-          <label>Ders adı<input id="dersAdi" maxlength="60" placeholder="Ör. CENG 201" /></label>
-          <label
-            >Kitap listesi<textarea
-              id="dersKitaplari"
-              rows="4"
-              maxlength="10000"
-              placeholder="The C Programming Language | Brian Kernighan | 1988&#10;Introduction to Algorithms | Thomas Cormen"
-            ></textarea>
-          </label>
-          <button type="button" id="dersOnizle">Listeyi önizle</button>
-          <p id="dersSonuc" class="ipucu" role="status"></p>
-          <button type="button" id="dersKaydet" disabled>Önizlenen listeyi kaydet</button>
-        </details>
+        </div>
+        <div class="kitap-cizim" aria-hidden="true">
+          <span class="cizim-yildiz">✳</span>
+          <div class="cizim-halka"></div>
+          <div class="cizim-kitap kitap-bir">
+            <span>biraz<br />merak.</span><small>01 — KEŞFET</small>
+          </div>
+          <div class="cizim-kitap kitap-iki">
+            <span>yeni bir<br />sayfa.</span><small>02 — ÖĞREN</small>
+          </div>
+          <span class="cizim-not">Kendi yolunu, sayfa sayfa.</span>
+        </div>
       </section>
+      <div class="arama-alani">
+        <div class="bolum-baslik">
+          <div>
+            <span class="ust-etiket">01 / KEŞFET</span>
+            <h2>Hangi kitabı arıyorsun?</h2>
+          </div>
+          <span class="kucuk-not">Başlığı bilmen yeterli.</span>
+        </div>
+        <form id="aramaForm" class="form">
+          <div class="satir">
+            <label class="genis">
+              <span>Kitabın veya kaynağın adı</span>
+              <input
+                id="baslik"
+                name="baslik"
+                type="text"
+                required
+                autocomplete="off"
+                maxlength="300"
+                placeholder="Kitabın adı — ör. Introduction to Algorithms"
+              />
+            </label>
+            <label>
+              <span>Yazar <em>(isteğe bağlı)</em></span>
+              <input
+                id="yazar"
+                name="yazar"
+                type="text"
+                autocomplete="off"
+                placeholder="Ör. Thomas Cormen"
+              />
+            </label>
+          </div>
+
+          <div class="satir ikinci">
+            <div class="turler" role="radiogroup" aria-label="İçerik türü">
+              <label
+                ><input type="radio" name="tur" value="kitap" checked /><span>Kitap</span></label
+              >
+              <label><input type="radio" name="tur" value="makale" /><span>Makale</span></label>
+              <label
+                ><input type="radio" name="tur" value="slayt" /><span>Slayt / Sunum</span></label
+              >
+            </div>
+
+            <div class="eylemler">
+              <button type="submit" class="birincil" id="araBtn">Ara</button>
+            </div>
+          </div>
+          <details class="arama-secenekleri">
+            <summary>Arama seçenekleri</summary>
+            <div class="gelismis-satir">
+              <label class="dar">
+                <span>Yıl</span>
+                <input id="yil" name="yil" type="number" min="1000" max="2100" placeholder="2011" />
+              </label>
+              <label class="dar">
+                <span>Sonuç sayısı</span>
+                <input id="limit" name="limit" type="number" min="1" max="50" value="20" />
+              </label>
+              <label class="onay">
+                <input type="checkbox" id="webDahil" checked />
+                <span>Web üzerindeki PDF sonuçlarını da ara</span>
+              </label>
+            </div>
+          </details>
+        </form>
+        <details class="isbn-panel">
+          <summary>ISBN numaran mı var? <span>Numarayla kitabı bul →</span></summary>
+          <p class="ipucu">Kitabın arka kapağındaki 10 veya 13 haneli numarayı gir.</p>
+          <div class="isbn-satir">
+            <label for="isbnGirdi">ISBN-10 veya ISBN-13</label
+            ><input
+              id="isbnGirdi"
+              type="text"
+              maxlength="40"
+              placeholder="Ör. 9780131103627"
+            /><button type="button" id="isbnBul">Künyeyi getir</button>
+          </div>
+          <p id="isbnSonuc" class="ipucu" role="status" aria-live="polite"></p>
+          <button type="button" class="mini gizli" id="isbnKaydet">
+            Bu ISBN kaydını kitaplığa ekle
+          </button>
+        </details>
+        <details class="panel baslangic-rehberi">
+          <summary>Hocanın verdiği kitabı nasıl bulursun?</summary>
+          <ol>
+            <li>
+              Başlık ve yazarı gir. ISBN varsa “ISBN numaran mı var?” alanından kitabın bilgilerini
+              getir.
+            </li>
+            <li>
+              Sonuçtaki yazar, yıl ve ISBN'yi ders listenle karşılaştır; farklı baskılar olabilir.
+            </li>
+            <li>
+              Kitabı kitaplığına kaydet, ders adını koleksiyon olarak ekle. PDF/EPUB bağlantısı
+              varsa indirebilirsin; diğer kayıtlarda kaynağı aç.
+            </li>
+          </ol>
+        </details>
+      </div>
 
       <div id="ozetPanel" class="panel gizli" role="status" aria-live="polite"></div>
 
       <section id="sonucBolum" class="gizli">
         <div class="sonuc-ust">
           <h2 id="sonucBaslik"></h2>
-          <div class="sekiller" role="tablist">
+          <div class="sekiller" role="group" aria-label="Sonuçları filtrele">
             <button class="sekme etkin" data-suzgec="hepsi">Hepsi</button>
             <button class="sekme" data-suzgec="acik">İndirilebilir</button>
             <button class="sekme" data-suzgec="ozet">Özet olanlar</button>
@@ -175,14 +251,44 @@
         <div id="bos" class="bos gizli"></div>
       </section>
 
+      <section id="aramalarBolum" class="panel aramalar-panel" aria-labelledby="aramalarBaslik">
+        <div class="panel-ust">
+          <div>
+            <span class="ust-etiket">02 / PLANLA</span>
+            <h2 id="aramalarBaslik">Ders listelerin ve aramaların</h2>
+          </div>
+          <button type="button" class="mini" id="aramaKaydet">Bu aramayı kaydet</button>
+        </div>
+        <div id="kayitliAramalar" class="kayitli-aramalar">
+          <p class="ipucu">Aramalar yükleniyor…</p>
+        </div>
+        <details class="ders-listesi">
+          <summary>Ders kitapları listesini topluca ekle</summary>
+          <p class="ipucu">
+            Her satıra bir kitap yaz: Başlık | Yazar | Yıl. Yazar ve yıl isteğe bağlıdır.
+            Önizlemeden sonra arama listene kaydedilir; kitaplar kendiliğinden aranmaz.
+          </p>
+          <label>Ders adı<input id="dersAdi" maxlength="60" placeholder="Ör. CENG 201" /></label>
+          <label
+            >Kitap listesi<textarea
+              id="dersKitaplari"
+              rows="4"
+              maxlength="10000"
+              placeholder="The C Programming Language | Brian Kernighan | 1988&#10;Introduction to Algorithms | Thomas Cormen"
+            ></textarea>
+          </label>
+          <button type="button" id="dersOnizle">Listeyi önizle</button>
+          <p id="dersSonuc" class="ipucu" role="status"></p>
+          <button type="button" id="dersKaydet" disabled>Önizlenen listeyi kaydet</button>
+        </details>
+      </section>
+
       <section id="kitaplikBolum" class="panel" aria-labelledby="kitaplikBaslik">
         <div class="panel-ust">
           <div>
-            <h2 id="kitaplikBaslik">Kitaplığım</h2>
-            <p class="ipucu">
-              Kaynaklarınızı kaydedin, okuma durumunu izleyin ve not alın. Veriler bu bilgisayarda
-              saklanır.
-            </p>
+            <span class="ust-etiket">03 / BİRİKTİR</span>
+            <h2 id="kitaplikBaslik">Senin kitaplığın</h2>
+            <p class="ipucu">Kitapların, derslerin ve notların. Kaldığın yerden devam et.</p>
           </div>
           <button type="button" class="mini" id="kitaplikYenile">Yenile</button>
         </div>
@@ -194,7 +300,7 @@
               placeholder="Başlık, yazar veya not"
           /></label>
           <label
-            >Koleksiyon<select id="koleksiyonFiltre">
+            >Ders / koleksiyon<select id="koleksiyonFiltre">
               <option value="">Tüm koleksiyonlar</option>
             </select></label
           >
@@ -233,11 +339,16 @@
 
       <section id="indirilenBolum" class="panel">
         <div class="panel-ust">
-          <h2>İndirilenler <span id="indirmeSayisi" class="rozet">0</span></h2>
+          <h2>İndirdiğin dosyalar <span id="indirmeSayisi" class="rozet">0</span></h2>
           <span class="klasor" id="indirmeKlasor"></span>
         </div>
         <div id="indirmeListesi" class="dosya-listesi"></div>
       </section>
+      <footer class="sayfa-alt">
+        <span>kaynak bul<span class="vurgu-nokta">.</span></span>
+        <p>Her yeni sayfa, yeni bir başlangıç.</p>
+        <a href="#kesfet">Başa dön ↑</a>
+      </footer>
     </main>
 
     <dialog id="kaynakDialog" aria-labelledby="kaynakDialogBaslik">
@@ -246,11 +357,16 @@
         <button class="mini" id="kaynakKapat">Kapat</button>
       </div>
       <p class="ipucu">
-        Programın taradığı kaynaklar. Bazı kaynaklar için <code>.env</code> dosyasına API anahtarı
-        veya iletişim e-postası ekleyebilirsiniz. Hazır kaynaklar anahtarsız da çalışır.
+        Kitap, makale ve sunum ararken bu katalogları tararız. Her kaynağın sunduğu erişim
+        seçenekleri farklı olabilir.
       </p>
       <div id="kaynakListesi"></div>
-      <div class="dialog-alt">
+      <details class="dialog-alt">
+        <summary>Geliştirici ayarları</summary>
+        <p class="ipucu">
+          Bazı kaynakların ek seçenekleri için .env dosyasına API anahtarı veya iletişim e-postası
+          eklenebilir.
+        </p>
         <h3>Kendi kaynağını ekle</h3>
         <p class="ipucu">
           <code>src/sources/</code> klasörüne varsayılan export'u şu biçimde olan bir dosya koy —
@@ -266,7 +382,7 @@
       baslik: "...", yazarlar: [], link: "https://...", pdf: "https://..." }
   ]
 }</code></pre>
-      </div>
+      </details>
     </dialog>
 
     <dialog id="kayitDialog" aria-labelledby="kayitDialogBaslik">
@@ -277,7 +393,7 @@
         </div>
         <p id="kayitEserBaslik" class="ipucu"></p>
         <label
-          >Koleksiyon<input
+          >Ders / koleksiyon<input
             id="kayitKoleksiyon"
             autofocus
             maxlength="80"

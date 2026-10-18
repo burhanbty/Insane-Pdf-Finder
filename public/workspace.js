@@ -95,7 +95,9 @@ function ciz() {
     </article>`;
         })
         .join("")
-    : '<p class="ipucu kitaplik-bos">Bu görünümde kayıt yok. Arama kartındaki “Kitaplığa kaydet” düğmesini kullanabilirsiniz.</p>';
+    : alan.kitaplik.length
+      ? '<p class="ipucu kitaplik-bos">Bu filtrelere uyan kitap yok. Arama metnini veya filtrelerini değiştirebilirsin.</p>'
+      : '<p class="ipucu kitaplik-bos"><strong>Yeni bir sayfa açmaya hazır mısın?</strong>Bulduğun kitapları buraya kaydet; derslerini, notlarını ve okuma ilerlemeni bir arada tut.<br /><a href="#aramaForm">İlk kitabını bul →</a></p>';
   q("#kayitliAramalar").innerHTML = alan.aramalar.length
     ? alan.aramalar
         .map(

@@ -74,6 +74,15 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+it("filtreye uymayan kitaplar için ilk kullanım yerine filtreyi değiştirme önerisi verir", async () => {
+  await kur(() => state([kayit()]));
+  const input = d.querySelector<HTMLInputElement>("#kitaplikAra")!;
+  input.value = "eşleşmeyen kitap";
+  input.dispatchEvent(new dom.window.Event("input", { bubbles: true }));
+  expect(d.querySelector(".kitaplik-bos")?.textContent).toContain("filtrelerini değiştirebilirsin");
+  expect(d.querySelector(".kitaplik-bos a")).toBeNull();
+});
+
 it("ISBN kaydı formu doldurur ve otomatik arama başlatmadan kitaplığa kaydedilebilir", async () => {
   await kur((url) =>
     url === "/api/isbn"

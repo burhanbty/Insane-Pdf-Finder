@@ -1,0 +1,198 @@
+:root {
+  --buton-yazi: #ffffff;
+  --yuzey-nav: #edf1e8;
+  --yuzey-secili: #dae5d4;
+  --yuzey-hover: #e6ede4;
+  --yuzey-alan: #fbfcf9;
+  --yuzey-yumusak: #fafbf7;
+  --yuzey-ikincil: #f0f3eb;
+  --yuzey-not: #f7f8f1;
+  --yuzey-etiket: #f0f4ea;
+  --yesil-koyu: #315b46;
+  --yesil-hover: #1d4939;
+  --yazi-yesil: #4c6543;
+  --yazi-ikincil: #6e7d65;
+  --yazi-hafif: #7c8971;
+  --yazi-vurgu: #758763;
+  --kenar-yumusak: #e9ede4;
+  --kenar-hover: #a3b6a5;
+  --uyum-kenar: #2f5d43;
+  --bilgi-kenar: #bbd1d8;
+  --bilgi-yazi: #315f72;
+  --uyari-kenar: #e0cfaa;
+  --erisim-zemin: #e3f1e8;
+  --erisim-yazi: #286448;
+  --sinirli-zemin: #faf0d8;
+  --sinirli-yazi: #806019;
+  --odunc-zemin: #eee9f6;
+  --odunc-yazi: #70568c;
+  --yonlendir-zemin: #edf0f1;
+  --yonlendir-yazi: #5c6e79;
+  --ozet-zemin: #edf3e7;
+  --cizim-halka: #ececdb;
+  --cizim-not: #95967b;
+  --golge-panel: #243d2c04;
+  --golge-secim: #263d3512;
+  --golge-dialog: #213c3530;
+  --perde: #263d3566;
+  --odak-halesi: #275c4922;
+}
+
+:root[data-tema="koyu"] {
+  color-scheme: dark;
+  --zemin: #1c2521;
+  --panel: #28332c;
+  --panel2: #344137;
+  --kenar: #405044;
+  --metin: #e8eadf;
+  --soluk: #b4c0ad;
+  --vurgu: #b6cc98;
+  --basari: #b0d1aa;
+  --uyari: #e0bd86;
+  --hata: #f0aaa0;
+  --buton-yazi: #243222;
+  --yuzey-nav: #202b25;
+  --yuzey-secili: #3c4d3d;
+  --yuzey-hover: #354438;
+  --yuzey-alan: #222d27;
+  --yuzey-yumusak: #253129;
+  --yuzey-ikincil: #2b382e;
+  --yuzey-not: #303c2e;
+  --yuzey-etiket: #34432f;
+  --yesil-koyu: #b6cc98;
+  --yesil-hover: #c5d9aa;
+  --yazi-yesil: #c7d7b5;
+  --yazi-ikincil: #b6c1ac;
+  --yazi-hafif: #a9b69d;
+  --yazi-vurgu: #b7cd9e;
+  --kenar-yumusak: #37463b;
+  --kenar-hover: #70866a;
+  --uyum-kenar: #658157;
+  --bilgi-kenar: #51696a;
+  --bilgi-yazi: #b2ccd0;
+  --uyari-kenar: #80714e;
+  --erisim-zemin: #354c3c;
+  --erisim-yazi: #bfdcc3;
+  --sinirli-zemin: #49422d;
+  --sinirli-yazi: #e2c88d;
+  --odunc-zemin: #40394b;
+  --odunc-yazi: #d2bfdf;
+  --yonlendir-zemin: #354148;
+  --yonlendir-yazi: #c0cfd5;
+  --ozet-zemin: #303f2e;
+  --cizim-halka: #35402f;
+  --cizim-not: #bec1a1;
+  --golge-panel: #0d181815;
+  --golge-secim: #0d181830;
+  --golge-dialog: #0d181860;
+  --perde: #111a18aa;
+  --odak-halesi: #b6cc9830;
+}
+
+.sayfa-ust-arac {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.tema-secici {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--yuzey-ikincil);
+  border: 1px solid var(--kenar-yumusak);
+  border-radius: 10px;
+  letter-spacing: 0;
+}
+.tema-secici button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 8px;
+  min-height: 32px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--yazi-ikincil);
+  font-size: 10px;
+  font-weight: 500;
+}
+.tema-secici svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tema-secici button[aria-pressed="true"] {
+  background: var(--panel);
+  color: var(--yazi-yesil);
+  border-color: var(--kenar-yumusak);
+  box-shadow: 0 1px 4px var(--golge-secim);
+}
+.tema-secici button:hover {
+  background: var(--yuzey-hover);
+  color: var(--metin);
+}
+.tema-secici button:focus-visible {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 2px;
+}
+textarea::placeholder {
+  color: var(--yazi-hafif);
+  opacity: 1;
+}
+:root[data-tema="koyu"] .logo {
+  color: #f4eedc;
+  background: #425c40;
+}
+:root[data-tema="koyu"] .kitap-bir {
+  background: #d4a574;
+}
+:root[data-tema="koyu"] .kitap-iki {
+  background: #657c54;
+}
+:root[data-tema="koyu"] .turler input:checked + span:hover {
+  color: var(--metin);
+}
+:root[data-tema="koyu"] .atla {
+  color: var(--metin);
+}
+:root[data-tema="koyu"] .sayfa-alt .vurgu-nokta {
+  color: #d8b784;
+}
+:root[data-tema="koyu"] label em {
+  opacity: 1;
+}
+@media (max-width: 1200px) {
+  .tema-ad {
+    display: none;
+  }
+  .sayfa-ust-arac {
+    gap: 12px;
+  }
+}
+@media (max-width: 1000px) {
+  .sayfa-ust .yerel-bilgi {
+    display: none;
+  }
+}
+@media (max-width: 540px) {
+  .sayfa-ust {
+    gap: 8px;
+  }
+  .tema-secici button {
+    padding: 6px;
+    min-width: 30px;
+  }
+  .sayfa-ust-arac {
+    flex-shrink: 0;
+  }
+}
+@media (forced-colors: active) {
+  .tema-secici button[aria-pressed="true"] {
+    border-color: Highlight;
+  }
+}

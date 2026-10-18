@@ -106,6 +106,16 @@ function mesajGoster(metin, tur = "hata") {
 
 /* -------------------------------- arama --------------------------------- */
 
+// Kapalı seçeneklerdeki geçersiz alanı, tarayıcı odağı oraya taşımadan aç.
+el.form.addEventListener(
+  "invalid",
+  (olay) => {
+    const ayrinti = olay.target.closest("details");
+    if (ayrinti) ayrinti.open = true;
+  },
+  true,
+);
+
 el.form.addEventListener("submit", async (olay) => {
   olay.preventDefault();
 
@@ -234,11 +244,10 @@ function cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi) {
   }
 
   const toplam = durumlar.reduce((a, d) => a + d.sonucSayisi, 0);
-  el.ozetPanel.innerHTML =
-    `<div class="durum-satir" style="border:none">
-       <span class="ad">${toplam} ham kayıt, ${sonCevap.gruplar.length} birleşik sonuç</span>
-       <span class="bilgi">${durumlar.length} kaynak sorgulandı</span>
-     </div>` + satirlar.join("");
+  el.ozetPanel.innerHTML = `<div class="durum-satir" style="border:none">
+       <span class="ad">${sonCevap.gruplar.length} sonuç bulundu</span>
+       <span class="bilgi">${durumlar.length} katalog tarandı · ${toplam} kayıt incelendi</span>
+     </div><details class="kaynak-ayrinti"><summary>Arama ayrıntılarını göster${hatalar.length || durumlar.some((d) => d.hataMesaji) ? " · Bazı kaynaklara ulaşılamadı" : ""}</summary>${satirlar.join("")}</details>`;
 }
 
 /* -------------------------------- kartlar ------------------------------- */

@@ -9,7 +9,7 @@ Arayüz tarayıcıda açılıyor, Türkçe. Node.js + TypeScript, build adımı 
 ## Öğrenci için kullanım
 
 Hocanızın verdiği kitapta **başlık, yazar ve baskı** bilgilerini karşılaştırın.
-ISBN varsa **ISBN ile doğru kitabı bul** alanından künyeyi getirin; ISBN-10/13
+ISBN varsa **ISBN numaran mı var?** alanından künyeyi getirin; ISBN-10/13
 kontrol basamağı denetlenir. Katalog bilgisi formu doldurur; geniş kaynak araması
 siz **Ara** düğmesine bastığınızda başlar. ISBN kaydı bir PDF bulunduğu anlamına gelmez.
 
@@ -35,6 +35,11 @@ notlarınızı ve kayıtlı aramalarınızı da içerir; PDF/EPUB dosyalarını 
 değiştirilmez. Bozuk yerel veri otomatik sıfırlanmaz; dosya korunup hata gösterilir.
 Bozuk bir dosyadan kurtarmada önce dosyayı ayrıca koruyup veri klasöründen taşıyın,
 ardından sağlam JSON yedeğini uygulamadan içe aktarın.
+
+Sayfanın üstündeki **Açık / Koyu / Sistem** seçeneklerinden görünümü değiştirebilirsiniz.
+İlk açılışta cihazınızın tema tercihi izlenir. Seçiminiz bu tarayıcıda saklanır;
+**Sistem** seçeneği cihazın tema değişikliklerini otomatik takip eder. Tema seçimi
+kitaplığınızı veya notlarınızı değiştirmez.
 
 ## Kurulum
 
