@@ -582,6 +582,7 @@ function kartYap(g) {
     .join("");
 
   const indirilebilir = g.kaynaklar.find((k) => guvenliAdres(k.pdf));
+  const pdfSayfasi = g.kaynaklar.find((k) => k.erisim !== "odunc" && guvenliAdres(k.link));
   const ozetlenebilir = g.kaynaklar
     .flatMap((k) => [
       { url: guvenliAdres(k.pdf), tur: "pdf" },
@@ -602,9 +603,13 @@ function kartYap(g) {
     eylemler.push(
       `<button class="birincil" data-eylem="indir" data-url="${kacis(indirilebilir.pdf)}" data-tur="pdf" data-baslik="${kacis(g.baslik)}">PDF indir</button>`,
     );
+  } else if (pdfSayfasi) {
+    eylemler.push(
+      `<button data-eylem="indir" data-url="${kacis(pdfSayfasi.link)}" data-tur="pdf" data-baslik="${kacis(g.baslik)}" title="Kaynak sayfasının bildirdiği PDF bağlantısını kontrol eder">PDF bağlantısını bul</button><span class="pdf-bilgi">Doğrudan PDF bağlantısı henüz yok.</span>`,
+    );
   } else {
     eylemler.push(
-      `<button class="bos-durum" disabled title="Bu kayıt için doğrudan PDF bağlantısı yok">PDF indir</button>`,
+      '<span class="pdf-bilgi">Bu kayıt PDF indirme sunmuyor; erişim seçenekleri için kaynağı aç.</span>',
     );
   }
 
@@ -650,6 +655,7 @@ function kartYap(g) {
       ${kaynakSatiri}
       <div class="kaynaklar">${kaynakRozetleri}</div>
       <div class="ozet-icerik"></div>
+      <div class="indirme-icerik" role="status" aria-live="polite"></div>
     </div>`;
 
   kartVerileri.set(kart, g);
@@ -785,20 +791,43 @@ el.kartlar.addEventListener("click", async (olay) => {
     const eski = buton.textContent;
     buton.textContent = "İndiriliyor…";
     try {
-      const sonuc = await istek("/api/download", { url, tur, baslik });
-      buton.textContent = `Kaydedildi: ${sonuc.dosya}`;
-      setTimeout(() => {
-        buton.textContent = eski;
-        buton.disabled = false;
-      }, 3500);
+      const g = kartVerileri.get(buton.closest(".kart"));
+      const alternatifler =
+        tur === "pdf"
+          ? [
+              ...new Set(
+                [
+                  ...g.kaynaklar.map((k) => guvenliAdres(k.pdf)),
+                  ...g.kaynaklar
+                    .filter((k) => k.erisim !== "odunc")
+                    .map((k) => guvenliAdres(k.link)),
+                ].filter((u) => u && u !== url),
+              ),
+            ].slice(0, 5)
+          : [];
+      const sonuc = await istek("/api/download", {
+        url,
+        tur,
+        baslik,
+        ...(alternatifler.length ? { alternatifler } : {}),
+      });
+      const adres = `/api/downloads/${encodeURIComponent(sonuc.dosya)}`;
+      const a = document.createElement("a");
+      a.href = adres;
+      a.download = sonuc.dosya;
+      document.body.append(a);
+      a.click();
+      a.remove();
+      buton.closest(".kart").querySelector(".indirme-icerik").innerHTML =
+        `<p>Dosya hazır. Tarayıcı indirmesi başlatıldı. <a href="${kacis(adres)}" download="${kacis(sonuc.dosya)}">Başlamadıysa dosyayı indir</a></p>`;
       await indirmeleriYenile();
     } catch (hata) {
-      buton.textContent = "İndirilemedi";
       buton.title = hata.message;
-      setTimeout(() => {
-        buton.textContent = eski;
-        buton.disabled = false;
-      }, 4000);
+      buton.closest(".kart").querySelector(".indirme-icerik").innerHTML =
+        `<p class="islem-hata">${kacis(hata.message)}</p><p>Kaynak bağlantısını açarak önizleme, ödünç veya indirme seçeneklerini kontrol edebilirsin.</p>`;
+    } finally {
+      buton.textContent = eski;
+      buton.disabled = false;
     }
     return;
   }

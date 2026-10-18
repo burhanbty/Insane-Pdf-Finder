@@ -112,12 +112,22 @@ it("kaydedilmiş kitap doğrudan indirilebilir; kişisel notlar indirme isteğin
   await kur((yol) =>
     yol === "/api/download" ? { dosya: "book.pdf" } : state([kayit("one", { eser: g })]),
   );
+  const downloads: string[] = [];
+  dom.window.HTMLAnchorElement.prototype.click = function () {
+    downloads.push(this.getAttribute("href")!);
+  };
   click('[data-alan="indir"]');
   await vi.waitFor(() =>
     expect(d.querySelector("#calismaMesaj")?.textContent).toContain("book.pdf"),
   );
   const istek = calls.find((c) => c.url === "/api/download")?.body;
-  expect(istek).toEqual({ url: "https://example.com/book.pdf", tur: "pdf", baslik: g.baslik });
+  expect(istek).toEqual({
+    url: "https://example.com/book.pdf",
+    tur: "pdf",
+    baslik: g.baslik,
+    alternatifler: ["https://example.com/book"],
+  });
+  expect(downloads).toEqual(["/api/downloads/book.pdf"]);
 });
 it("ISBN alanı değişirse eski katalog yanıtı formun üzerine yazılmaz", async () => {
   let resolve!: (v: unknown) => void;

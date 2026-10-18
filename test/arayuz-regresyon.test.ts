@@ -69,6 +69,58 @@ const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 afterEach(() => dom?.window.close());
 
 describe("arama araçları", () => {
+  it("tek tıkla sunucu kaydını tarayıcı indirmesine aktarır ve ikinci PDF adayını gönderir", async () => {
+    const g = kart("Book", "a", {
+      kaynaklar: [
+        {
+          kaynak: "a",
+          kaynakAd: "A",
+          link: "https://a.test/record",
+          pdf: "https://a.test/broken.pdf",
+        },
+        {
+          kaynak: "b",
+          kaynakAd: "B",
+          link: "https://b.test/record",
+          pdf: "https://b.test/full.pdf",
+        },
+      ],
+    });
+    await kur((url) => (url === "/api/download" ? { dosya: "book.pdf" } : cevap([g])));
+    const downloads: string[] = [];
+    dom.window.HTMLAnchorElement.prototype.click = function () {
+      downloads.push(this.getAttribute("href")!);
+    };
+    degistir("#webDahil", false);
+    gonder();
+    await vi.waitFor(() => expect(ids()).toEqual(["Book"]));
+    (d.querySelector('[data-eylem="indir"]') as HTMLElement).click();
+    await vi.waitFor(() => expect(downloads).toContain("/api/downloads/book.pdf"));
+    expect(cagrilar.find((c) => c.url === "/api/download")?.body).toMatchObject({
+      alternatifler: expect.arrayContaining(["https://b.test/full.pdf"]),
+    });
+    expect(d.querySelector(".indirme-icerik a")?.getAttribute("download")).toBe("book.pdf");
+  });
+  it("katalog kaydında pasif PDF yerine bağlantı arama eylemi sunar; hatayı görünür tutar", async () => {
+    await kur((url) =>
+      url === "/api/download"
+        ? { hata: "Doğrudan PDF bağlantısı bulunamadı" }
+        : cevap([kart("Catalog")]),
+    );
+    degistir("#webDahil", false);
+    gonder();
+    await vi.waitFor(() => expect(ids()).toEqual(["Catalog"]));
+    const button = d.querySelector<HTMLButtonElement>('[data-eylem="indir"]')!;
+    expect(button.textContent).toBe("PDF bağlantısını bul");
+    expect(button.disabled).toBe(false);
+    button.click();
+    await vi.waitFor(() =>
+      expect(d.querySelector(".indirme-icerik")?.textContent).toContain(
+        "Doğrudan PDF bağlantısı bulunamadı",
+      ),
+    );
+    expect(button.disabled).toBe(false);
+  });
   it("kapalı arama seçeneklerindeki geçersiz alanı düzeltmek için görünür yapar", async () => {
     await kur(() => BOS);
     d.querySelector<HTMLInputElement>("#baslik")!.value = "Algorithms";

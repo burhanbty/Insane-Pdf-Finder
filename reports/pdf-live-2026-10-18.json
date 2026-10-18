@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-18",
+  "node": "v24.18.1",
+  "keysUsed": false,
+  "contactEmailUsed": false,
+  "downloads": [
+    {
+      "ad": "W3C doğrudan PDF",
+      "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      "ok": true,
+      "bytes": 13264,
+      "signature": "%PDF-",
+      "sha256": "3df79d34abbca99308e79cb94461c1893582604d68329a41fd4bec1885e6adb4",
+      "ms": 436
+    },
+    {
+      "ad": "arXiv doğrudan PDF",
+      "url": "https://arxiv.org/pdf/1706.03762",
+      "ok": true,
+      "bytes": 2215244,
+      "signature": "%PDF-",
+      "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697",
+      "ms": 739
+    },
+    {
+      "ad": "arXiv kayıt sayfasından PDF",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "ok": true,
+      "bytes": 2215244,
+      "signature": "%PDF-",
+      "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697",
+      "ms": 476
+    }
+  ],
+  "example": {
+    "sorgu": {
+      "baslik": "Deli Kadın Mektupları",
+      "tur": "kitap",
+      "limit": 5
+    },
+    "toplam": 5,
+    "eserler": [
+      {
+        "baslik": "Kitap Eleştirisi: Deli Kadın Hikayeleri'nde deliren kadınlar",
+        "yazarlar": ["GÜNEŞ Emine"],
+        "pdf": false,
+        "kaynaklar": [
+          {
+            "ad": "Crossref",
+            "link": "https://doi.org/10.1501/fe0001_0000000101"
+          },
+          {
+            "ad": "Sci-Hub",
+            "link": "https://sci-hub.se/10.1501%2Ffe0001_0000000101"
+          }
+        ]
+      },
+      {
+        "baslik": "Suriye ve Filistin Mektupları",
+        "yazarlar": ["Orhan ÇİÇEK"],
+        "pdf": false,
+        "kaynaklar": [
+          {
+            "ad": "Crossref",
+            "link": "https://doi.org/10.33692/avrasyad.628254"
+          }
+        ]
+      },
+      {
+        "baslik": "Deli Zamanlar",
+        "yazarlar": [],
+        "pdf": false,
+        "kaynaklar": [
+          {
+            "ad": "Türkçe Wikipedia",
+            "link": "https://tr.wikipedia.org/wiki/Deli_Zamanlar"
+          }
+        ]
+      },
+      {
+        "baslik": "Tragedyalarda Kentin  “Deli-Kadın” İmgesi: Politik Özne  Olarak “Kadın”",
+        "yazarlar": ["Çağla Özcan", "Bahadır Söylemez"],
+        "pdf": false,
+        "kaynaklar": [
+          {
+            "ad": "Crossref",
+            "link": "https://doi.org/10.26650/bs/aa23.2021.001-2.13"
+          },
+          {
+            "ad": "Sci-Hub",
+            "link": "https://sci-hub.se/10.26650%2Fbs%2Faa23.2021.001-2.13"
+          }
+        ]
+      },
+      {
+        "baslik": "Recaizade Mahmut Ekrem’in Kitaplaşmamış Mektupları",
+        "yazarlar": ["Necati TONGA"],
+        "pdf": false,
+        "kaynaklar": [
+          {
+            "ad": "Crossref",
+            "link": "https://doi.org/10.31465/eeder.1350113"
+          }
+        ]
+      }
+    ],
+    "kaynaklar": [
+      {
+        "id": "benim-sitem",
+        "hazir": false,
+        "sonucSayisi": 0,
+        "hata": "API anahtarı yok (.env dosyasına ekleyin)"
+      },
+      {
+        "id": "google-books",
+        "hazir": false,
+        "sonucSayisi": 0,
+        "hata": "API anahtarı yok (.env dosyasına ekleyin)"
+      },
+      {
+        "id": "hal",
+        "hazir": true,
+        "sonucSayisi": 0
+      },
+      {
+        "id": "openaire",
+        "hazir": true,
+        "sonucSayisi": 0
+      },
+      {
+        "id": "crossref",
+        "hazir": true,
+        "sonucSayisi": 10
+      },
+      {
+        "id": "open-library",
+        "hazir": true,
+        "sonucSayisi": 0
+      },
+      {
+        "id": "internet-archive",
+        "hazir": true,
+        "sonucSayisi": 0
+      },
+      {
+        "id": "wikipedia-tr",
+        "hazir": true,
+        "sonucSayisi": 5
+      },
+      {
+        "id": "sci-hub",
+        "hazir": true,
+        "sonucSayisi": 5
+      },
+      {
+        "id": "libgen",
+        "hazir": true,
+        "sonucSayisi": 0,
+        "hata": "Library Genesis aynaları başarısız: fetch failed"
+      },
+      {
+        "id": "annas-archive",
+        "hazir": true,
+        "sonucSayisi": 0,
+        "hata": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+      },
+      {
+        "id": "gutenberg",
+        "hazir": true,
+        "sonucSayisi": 0,
+        "hata": "Kaynak 20 saniyede yanıt vermedi"
+      }
+    ]
+  }
+}

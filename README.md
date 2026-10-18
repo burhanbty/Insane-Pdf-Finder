@@ -64,6 +64,17 @@ listesinden açabilirsiniz. Dosya biçimi başlangıç imzasıyla denetlenir; HT
 sayfaları PDF olarak kaydedilmez. İndirmeler 300 MB, özetleme 40 MB, sayfa sayımı
 120 MB ve kapaklar 5 MB ile sınırlıdır; sınırlar akış okunurken uygulanır.
 
+**PDF indir** dosyayı uygulamanın `downloads/` klasörüne kaydeder ve ardından tarayıcı
+indirmesini başlatır. Başlamazsa karttaki dosya bağlantısından tekrar alabilirsiniz.
+Doğrudan PDF bilgisi olmayan kayıtlarda **PDF bağlantısını bul**, sayfanın bildirdiği
+PDF adresini kontrol eder. İlk adres başarısızsa aynı karttaki diğer kaynaklar denenir.
+Katalog, önizleme ve ödünç kayıtları her zaman indirilebilir PDF içermez; bulunamadığında
+gerekçe kartta kalır. Dosya 90 saniyelik istek, toplam 120 saniyelik işlem sınırına tabidir.
+
+Gerçek uygulama `npm start` ile açılan **http://127.0.0.1:3000** adresidir.
+`reports/ui-preview.mjs` ile açılan **3319** portu, açıkça etiketlenmiş örnek verili
+tasarım önizlemesidir; gerçek kitap araması yapmaz.
+
 Her kaynak için 20 saniye süre sınırı uygulanır; yanıt vermeyen kaynağın hatası
 gösterilir, diğer sonuçlar korunur. Ortak HTTP istemcisi ve ayna kaynakları iptal
 sinyalini izler. Kendi kaynak modülleriniz de sinyali izlemelidir; süre sınırı

@@ -31,7 +31,7 @@ export async function ara(sorgu: Sorgu): Promise<AramaCevabi> {
   // Ayni sorgu tekrar ederse diskteki onbellegi doneruz. arXiv ve Semantic
   // Scholar gibi anahtarsiz API'ler kotali; tekrar eden aramalar onlari yiyor.
   // Eski gruplama kuraliyla birlestirilmis disk kayitlarini yeniden kullanma.
-  const anahtar = `arama:v3:${sorgu.tur}:${sorgu.baslik.toLowerCase().trim()}:${(sorgu.yazar ?? "").toLowerCase().trim()}:${sorgu.yil ?? ""}:${sorgu.limit}`;
+  const anahtar = `arama:v4:${sorgu.tur}:${sorgu.baslik.toLowerCase().trim()}:${(sorgu.yazar ?? "").toLowerCase().trim()}:${sorgu.yil ?? ""}:${sorgu.limit}`;
   return onbellekli(anahtar, () => araCanlı(sorgu), {
     sakla: (cevap) => !cevap.kaynakDurumlari.some((k) => k.hazir && k.hataMesaji),
   });
@@ -71,24 +71,28 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
     uygun.map(async (k) => {
       const t0 = Date.now();
       try {
-        const isler = await onbellekli(`kaynak:v1:${k.id}:${JSON.stringify(sorgu)}`, async () => {
-          const sonuc = await sureSinirli(() => k.ara(sorgu), ayar.kaynakTimeoutMs);
-          if (
-            !Array.isArray(sonuc) ||
-            sonuc.some(
-              (w) =>
-                !w ||
-                typeof w.baslik !== "string" ||
-                !Array.isArray(w.yazarlar) ||
-                w.yazarlar.some((a) => typeof a !== "string") ||
-                typeof w.link !== "string" ||
-                !["kitap", "makale", "slayt"].includes(w.tur),
-            )
-          ) {
-            throw new Error("Kaynak geçerli eser listesi döndürmedi");
-          }
-          return sonuc;
-        });
+        const kaynakSurumu = k.id === "internet-archive" ? "v2" : "v1";
+        const isler = await onbellekli(
+          `kaynak:${kaynakSurumu}:${k.id}:${JSON.stringify(sorgu)}`,
+          async () => {
+            const sonuc = await sureSinirli(() => k.ara(sorgu), ayar.kaynakTimeoutMs);
+            if (
+              !Array.isArray(sonuc) ||
+              sonuc.some(
+                (w) =>
+                  !w ||
+                  typeof w.baslik !== "string" ||
+                  !Array.isArray(w.yazarlar) ||
+                  w.yazarlar.some((a) => typeof a !== "string") ||
+                  typeof w.link !== "string" ||
+                  !["kitap", "makale", "slayt"].includes(w.tur),
+              )
+            ) {
+              throw new Error("Kaynak geçerli eser listesi döndürmedi");
+            }
+            return sonuc;
+          },
+        );
         return { k, isler, sure: Date.now() - t0, hata: undefined as string | undefined };
       } catch (hata) {
         return { k, isler: [] as Work[], sure: Date.now() - t0, hata: (hata as Error).message };

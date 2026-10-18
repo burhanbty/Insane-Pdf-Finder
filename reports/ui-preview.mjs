@@ -6,6 +6,7 @@ import os from "node:os";
 import { ayar } from "../src/config.ts";
 import { kaynaklariYukle } from "../src/registry.ts";
 import { uygulama } from "../src/app.ts";
+import express from "express";
 
 const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "kaynak-bul-ui-preview-"));
 console.log(`Temporary UI fixture: ${temporary}`);
@@ -82,7 +83,20 @@ for (const id of ["ornek-a", "ornek-b"]) {
   );
 }
 await kaynaklariYukle();
-const server = uygulama.listen(3319, "127.0.0.1", () =>
+const preview = express();
+preview.get("/", async (_req, res) => {
+  const html = await fs.readFile(path.join(ayar.publicDir, "index.html"), "utf8");
+  res
+    .type("html")
+    .send(
+      html.replace(
+        "<body>",
+        '<body><aside class="onizleme-uyari" role="note">Arayüz önizlemesi — örnek veriler gösteriliyor. Gerçek arama için <a href="http://127.0.0.1:3000">uygulamayı aç</a>.</aside>',
+      ),
+    );
+});
+preview.use(uygulama);
+const server = preview.listen(3319, "127.0.0.1", () =>
   console.log("UI fixture: http://127.0.0.1:3319"),
 );
 let stopping = false;

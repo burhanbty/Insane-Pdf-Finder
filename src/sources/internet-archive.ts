@@ -9,13 +9,20 @@ import type { SourceModule, Sorgu, Work } from "../types.js";
  */
 
 interface IAMeta {
-  metadata?: Record<string, string | string[]>;
-  files?: { name?: string; format?: string; size?: string; source?: string }[];
+  is_dark?: boolean;
+  metadata?: Record<string, string | string[] | boolean>;
+  files?: {
+    name?: string;
+    format?: string;
+    size?: string;
+    source?: string;
+    private?: string | boolean;
+  }[];
 }
 
-function ilkDeger(v: string | string[] | undefined): string | undefined {
+function ilkDeger(v: string | string[] | boolean | undefined): string | undefined {
   if (Array.isArray(v)) return v[0];
-  return v;
+  return v === undefined ? undefined : String(v);
 }
 
 /** Bir IA kaydinin indirilebilir PDF/metin dosyalarini bulur. */
@@ -30,7 +37,10 @@ export async function iaDosyalari(
 
     const md = veri.metadata ?? {};
     const erisimKisiti = ilkDeger(md.access_restricted_item);
-    const oduncMu = ilkDeger(md.collection)?.split("|").includes("printdisabled") ?? false;
+    const koleksiyonlar = Array.isArray(md.collection)
+      ? md.collection
+      : String(md.collection ?? "").split("|");
+    const oduncMu = koleksiyonlar.some((v) => ["printdisabled", "inlibrary"].includes(v));
 
     let pdf: string | undefined;
     let metin: string | undefined;
@@ -38,18 +48,24 @@ export async function iaDosyalari(
     for (const f of veri.files ?? []) {
       const ad = f.name ?? "";
       const format = (f.format ?? "").toLowerCase();
-      if (!pdf && format === "pdf" && ad.endsWith(".pdf") && !/bw\.pdf$/.test(ad)) {
+      if (f.private === true || f.private === "true") continue;
+      if (
+        !pdf &&
+        /^(?:text |image )?pdf$/.test(format) &&
+        /\.pdf$/i.test(ad) &&
+        !/bw\.pdf$/i.test(ad)
+      ) {
         pdf = `https://archive.org/download/${encodeURIComponent(kimlik)}/${encodeURIComponent(ad)}`;
       }
-      if (!metin && /\.(txt|txt\.pdf|epub)$/.test(ad) && format.includes("text")) {
+      if (!metin && /\.txt$/i.test(ad) && format.includes("text")) {
         metin = `https://archive.org/download/${encodeURIComponent(kimlik)}/${encodeURIComponent(ad)}`;
       }
     }
 
-    const sinirli = erisimKisiti === "true" || oduncMu;
+    const sinirli = veri.is_dark === true || erisimKisiti === "true" || oduncMu;
     return {
       pdf: sinirli ? undefined : pdf,
-      metin,
+      metin: sinirli ? undefined : metin,
       erisim: sinirli ? "odunc" : pdf || metin ? "acik" : "yonlendir",
     };
   } catch {

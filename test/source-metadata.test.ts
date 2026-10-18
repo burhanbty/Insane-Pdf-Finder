@@ -7,6 +7,7 @@ import gutenberg from "../src/sources/gutenberg.js";
 import wiki from "../src/sources/wikipedia-tr.js";
 import openaire from "../src/sources/openaire.js";
 import sciHub from "../src/sources/sci-hub.js";
+import { iaDosyalari } from "../src/sources/internet-archive.js";
 
 const s = { baslik: "Test", yazar: "Query Author", yil: 2099, tur: "kitap" as const, limit: 10 };
 const yanit = (data: unknown) =>
@@ -15,6 +16,39 @@ const yanit = (data: unknown) =>
     vi.fn(async () => Response.json(data)),
   );
 afterEach(() => vi.unstubAllGlobals());
+
+it.each(["Text PDF", "Image PDF", "PDF"])(
+  "Internet Archive %s dosyasını kaybetmez",
+  async (format) => {
+    yanit({ metadata: {}, files: [{ name: "Book scan.pdf", format }] });
+    expect(await iaDosyalari("public-book")).toMatchObject({
+      pdf: "https://archive.org/download/public-book/Book%20scan.pdf",
+      erisim: "acik",
+    });
+  },
+);
+it("Internet Archive özel dosyaları ve ödünç koleksiyonunun metnini indirme olarak sunmaz", async () => {
+  yanit({ metadata: {}, files: [{ name: "private.pdf", format: "Text PDF", private: true }] });
+  expect((await iaDosyalari("private")).pdf).toBeUndefined();
+  yanit({
+    metadata: { collection: ["books", "printdisabled"] },
+    files: [
+      { name: "book.pdf", format: "Text PDF" },
+      { name: "book.txt", format: "DjVuTXT" },
+    ],
+  });
+  expect(await iaDosyalari("borrow")).toMatchObject({
+    pdf: undefined,
+    metin: undefined,
+    erisim: "odunc",
+  });
+});
+it("Internet Archive bool erişim kısıtını ve kapalı kaydı korur", async () => {
+  for (const extra of [{ metadata: { access_restricted_item: true } }, { is_dark: true }]) {
+    yanit({ ...extra, files: [{ name: "book.pdf", format: "Text PDF" }] });
+    expect((await iaDosyalari("restricted")).pdf).toBeUndefined();
+  }
+});
 
 it("Sci-Hub Crossref kitap türünü makale sorgusuyla değiştirmez", async () => {
   yanit({ message: { items: [{ DOI: "10.1000/book", title: ["Test"], type: "book-chapter" }] } });

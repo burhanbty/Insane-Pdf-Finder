@@ -1927,3 +1927,39 @@ input::placeholder {
   flex: 0 1 auto;
   min-width: 0;
 }
+
+.pdf-bilgi {
+  font-size: 12px;
+  color: var(--soluk);
+}
+.indirme-icerik:not(:empty) {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid var(--kenar);
+  border-radius: 10px;
+  background: var(--yuzey-yumusak);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.indirme-icerik p + p {
+  margin-top: 7px;
+}
+.indirme-icerik a {
+  color: var(--vurgu);
+  font-weight: 600;
+}
+.onizleme-uyari {
+  padding: 12px 20px;
+  background: #f3deb5;
+  color: #483818;
+  font:
+    14px/1.5 system-ui,
+    sans-serif;
+  text-align: center;
+}
+
+.onizleme-uyari a {
+  color: #483818;
+  text-decoration: underline;
+  font-weight: 700;
+}

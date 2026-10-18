@@ -69,6 +69,16 @@ it("özel ağdan dosya indirmeyi engeller", async () => {
   expect((await r.json()).hata).toContain("engellendi");
   expect(await fs.readdir(ayar.downloadsDir)).toEqual(["book.txt"]);
 });
+it("indirme alternatiflerinin sayısını ve URL biçimini denetler", async () => {
+  for (const alternatifler of [
+    "bad",
+    ["javascript:alert(1)"],
+    Array(6).fill("https://example.com/file.pdf"),
+  ])
+    expect(
+      (await post("/api/download", { url: "https://example.com/file.pdf", alternatifler })).status,
+    ).toBe(400);
+});
 it.each([1.5, 0, 51, "Infinity"])("geçersiz limit %s aramayı başlatmaz", async (limit) => {
   expect((await post("/api/search", { baslik: "x", limit })).status).toBe(400);
 });

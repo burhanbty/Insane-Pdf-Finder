@@ -295,9 +295,17 @@ uygulama.post("/api/download", async (req: Request, res: Response) => {
   const baslik =
     typeof g.baslik === "string" && g.baslik.trim() ? g.baslik.trim().slice(0, 150) : "icerik";
   const tur = g.tur === "epub" ? "epub" : g.tur === "metin" ? "metin" : "pdf";
+  if (
+    g.alternatifler !== undefined &&
+    (!Array.isArray(g.alternatifler) ||
+      g.alternatifler.length > 5 ||
+      g.alternatifler.some((v) => !guvenliUrl(v)))
+  )
+    return hataCevap(res, 400, "En fazla 5 geçerli alternatif adres gönderilebilir");
+  const alternatifler = (g.alternatifler ?? []) as string[];
 
   try {
-    const sonuc = await indir({ url, varsayilanAd: baslik }, tur);
+    const sonuc = await indir({ url, varsayilanAd: baslik, alternatifler }, tur);
     res.json({ ...sonuc, tamAd: path.resolve(sonuc.yol) });
   } catch (hata) {
     hataCevap(res, 502, `İndirme başarısız: ${(hata as Error).message}`);

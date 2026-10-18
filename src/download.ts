@@ -6,6 +6,8 @@ import { ayar } from "./config.js";
 import { get } from "./http.js";
 import { normalizeMetin } from "./normalize.js";
 import { pdfImzasi } from "./body.js";
+import { pdfYanitiniBul } from "./pdf-resolver.js";
+import { sureSinirli } from "./deadline.js";
 
 /*
  * Indirme: uzak PDF/tam metni downloads/ klasorune akis halinde yazar.
@@ -37,6 +39,7 @@ export interface IndirmeSonucu {
 export interface Indirilebilir {
   url: string;
   varsayilanAd: string;
+  alternatifler?: string[];
 }
 
 /** Dosya adini guvenli hale getirir: yol gezintisi ve kural disi karakter yok. */
@@ -106,19 +109,29 @@ export async function indir(
   hedef: Indirilebilir,
   ipucuTur?: "pdf" | "epub" | "metin",
 ): Promise<IndirmeSonucu> {
+  return sureSinirli(() => indirDosya(hedef, ipucuTur), 120_000);
+}
+
+async function indirDosya(
+  hedef: Indirilebilir,
+  ipucuTur?: "pdf" | "epub" | "metin",
+): Promise<IndirmeSonucu> {
   const u = guvenliUrl(hedef.url);
   if (!u) throw new Error("Geçersiz indirme adresi");
 
   await fs.promises.mkdir(ayar.downloadsDir, { recursive: true });
 
   // Once HEAD/GET ile gercek dosya tipini ve boyutu ogren.
-  const cevap = await get(u.toString(), {
-    disAg: true,
-    tekrar: 0,
-    yonlendir: true,
-    timeoutMs: 20_000,
-    boslukMs: 400,
-  });
+  const cevap =
+    ipucuTur === "pdf"
+      ? await pdfYanitiniBul([u.toString(), ...(hedef.alternatifler ?? []).slice(0, 5)])
+      : await get(u.toString(), {
+          disAg: true,
+          tekrar: 0,
+          yonlendir: true,
+          timeoutMs: 90_000,
+          boslukMs: 400,
+        });
 
   const icerikTipi = String(cevap.headers.get("content-type") ?? "").toLowerCase();
   if (Number(cevap.headers.get("content-length")) > EN_FAZLA_BAYT) {

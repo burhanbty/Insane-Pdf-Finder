@@ -78,9 +78,17 @@ function ciz() {
             ["tamMetin", "Metin indir"],
           ]
             .map(([alan, ad]) => {
-              const adres = k.eser.kaynaklar.map((s) => url(s[alan])).find(Boolean);
+              const dogrudan = k.eser.kaynaklar.map((s) => url(s[alan])).find(Boolean);
+              const adres =
+                dogrudan ??
+                (alan === "pdf"
+                  ? k.eser.kaynaklar
+                      .filter((s) => s.erisim !== "odunc")
+                      .map((s) => url(s.link))
+                      .find(Boolean)
+                  : null);
               return adres
-                ? `<button type="button" data-alan="indir" data-url="${esc(adres)}" data-tur="${alan === "tamMetin" ? "metin" : alan}">${ad}</button>`
+                ? `<button type="button" data-alan="indir" data-url="${esc(adres)}" data-tur="${alan === "tamMetin" ? "metin" : alan}">${alan === "pdf" && !dogrudan ? "PDF bağlantısını bul" : ad}</button>`
                 : "";
             })
             .join("");
@@ -92,6 +100,7 @@ function ciz() {
       ${link ? `<a class="mini" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Kaynağı aç</a>` : ""}
       ${indirmeler}
       <button type="button" data-alan="arsiv">${k.arsiv ? "Arşivden geri al" : "Arşivle"}</button></div>
+      <div class="indirme-icerik" role="status" aria-live="polite"></div>
     </article>`;
         })
         .join("")
@@ -141,18 +150,44 @@ q("#kitaplikListe").addEventListener("click", async (e) => {
     const onceki = b.textContent;
     b.textContent = "İndiriliyor…";
     try {
+      const alternatifler =
+        b.dataset.tur === "pdf"
+          ? [
+              ...new Set(
+                [
+                  ...k.eser.kaynaklar.map((s) => url(s.pdf)),
+                  ...k.eser.kaynaklar.filter((s) => s.erisim !== "odunc").map((s) => url(s.link)),
+                ].filter((u) => u && u !== b.dataset.url),
+              ),
+            ].slice(0, 5)
+          : [];
       const r = await fetch("/api/download", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ url: b.dataset.url, tur: b.dataset.tur, baslik: k.eser.baslik }),
-        signal: AbortSignal.timeout(60_000),
+        body: JSON.stringify({
+          url: b.dataset.url,
+          tur: b.dataset.tur,
+          baslik: k.eser.baslik,
+          ...(alternatifler.length ? { alternatifler } : {}),
+        }),
+        signal: AbortSignal.timeout(125_000),
       });
       const sonuc = await r.json();
       if (!r.ok) throw new Error(sonuc.hata ?? "İndirme başarısız");
+      const adres = `/api/downloads/${encodeURIComponent(sonuc.dosya)}`;
+      const a = document.createElement("a");
+      a.href = adres;
+      a.download = sonuc.dosya;
+      document.body.append(a);
+      a.click();
+      a.remove();
+      b.closest(".kitaplik-karti").querySelector(".indirme-icerik").innerHTML =
+        `<p>Dosya hazır. <a href="${esc(adres)}" download="${esc(sonuc.dosya)}">Tarayıcı indirmesi başlamadıysa buradan indir</a></p>`;
       mesaj(`Kaydedildi: ${sonuc.dosya}`);
       document.dispatchEvent(new CustomEvent("indirmeler-degisti"));
     } catch (h) {
       mesaj(h.message, true);
+      b.closest(".kitaplik-karti").querySelector(".indirme-icerik").textContent = h.message;
     } finally {
       b.disabled = false;
       b.textContent = onceki;
