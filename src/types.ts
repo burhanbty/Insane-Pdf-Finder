@@ -8,6 +8,10 @@ export interface Sorgu {
   yil?: number;
   tur: Tur;
   limit: number;
+  isbn?: string;
+  baski?: string;
+  dil?: string;
+  yayinci?: string;
 }
 
 /** Tek bir kaynaktan gelen ham sonuc. */
@@ -26,7 +30,10 @@ export interface Work {
   yayinci?: string;
   dil?: string;
   isbn?: string;
+  baski?: string;
   doi?: string;
+  /** Eser üst kaydının yılı, belirli bir baskının yayın yılı değildir. */
+  kunyeTuru?: "eser" | "baski";
   /** Metin olarak sayfa bilgisi (örn. "412 sayfa", "12: 30-58"). */
   sayfa?: string;
   /** Sayfanin sayisi. Kaynaga gore ya da PDF icinden olculur. */
@@ -65,6 +72,21 @@ export interface Gruplanmis {
   /** Sayfa bilgisi metin olarak (ornegin kunye bilgisinden). */
   sayfa?: string;
   kaynaklar: Work[];
+  eslesme?: {
+    tur: "tam" | "yakin" | "ilgili";
+    aciklama: string;
+    oneri?: boolean;
+  };
+  karsilastirma?: {
+    kaynakLink: string;
+    kaynakAd: string;
+    alanlar: {
+      alan: string;
+      istenen: string;
+      bulunan: string;
+      durum: "uygun" | "farkli" | "bilinmiyor";
+    }[];
+  }[];
 }
 
 export interface KaynakInfo {

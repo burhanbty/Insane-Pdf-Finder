@@ -12,6 +12,7 @@ import { kaynakHazirligi } from "./source-state.js";
 import { sureSinirli } from "./deadline.js";
 import { calismaRotalari } from "./workspace-api.js";
 import { isbnDogrula, isbnKitabi } from "./isbn.js";
+import { indirmeRotalari } from "./download-jobs.js";
 import { KaynakHatasi } from "./http.js";
 import type { Sorgu, Tur } from "./types.js";
 import fs from "node:fs/promises";
@@ -56,6 +57,7 @@ uygulama.use("/api", (req, res, next) => {
 uygulama.use("/api/workspace/import", express.json({ limit: "21mb" }));
 uygulama.use(express.json({ limit: "1mb" }));
 uygulama.use("/api/workspace", calismaRotalari);
+uygulama.use("/api/download-jobs", indirmeRotalari());
 
 /* ------------------------------ ara yardimcilar --------------------------- */
 
@@ -95,12 +97,28 @@ function sorguAyikla(v: unknown): Sorgu | string {
   if (!Number.isInteger(limit) || limit < 1 || limit > 50)
     return "Sonuç sayısı 1-50 arası tam sayı olmalı";
 
+  const tercih: Pick<Sorgu, "isbn" | "baski" | "dil" | "yayinci"> = {};
+  if (g.isbn !== undefined && g.isbn !== "") {
+    const isbn = isbnDogrula(g.isbn);
+    if (!isbn) return "Geçerli bir ISBN-10 veya ISBN-13 girin";
+    tercih.isbn = isbn;
+  }
+  for (const alan of ["baski", "dil", "yayinci"] as const) {
+    if (g[alan] === undefined || g[alan] === "") continue;
+    if (typeof g[alan] !== "string" || (g[alan] as string).length > 200)
+      return "Baskı, dil ve yayınevi alanları en fazla 200 karakter olmalı";
+    tercih[alan] = (g[alan] as string).trim() || undefined;
+  }
+  if (tur !== "kitap" && Object.values(tercih).some(Boolean))
+    return "Baskı tercihleri yalnızca kitap araması için kullanılabilir";
+
   return {
     baslik,
     yazar: typeof g.yazar === "string" && g.yazar.trim() ? g.yazar.trim().slice(0, 200) : undefined,
     yil,
     tur,
     limit,
+    ...tercih,
   };
 }
 

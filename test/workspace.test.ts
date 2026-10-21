@@ -43,6 +43,37 @@ afterEach(async () => {
 });
 
 describe("kalıcı kitaplık", () => {
+  it("baskı bilgisi ve kayıtlı arama tercihleri yeniden okumada korunur", async () => {
+    const g = eser();
+    Object.assign(g.kaynaklar[0]!, {
+      baski: "Second edition",
+      dil: "eng",
+      isbn: "9780131103627",
+      yil: 1988,
+    });
+    await alan.ekle(g);
+    const a = arama();
+    Object.assign(a.sorgu, {
+      isbn: "0-13-110362-8",
+      baski: "2",
+      dil: "en",
+      yayinci: "Prentice Hall",
+    });
+    await alan.aramaKaydet(a);
+    const yeni = await new CalismaAlani(() => dosya).listele();
+    expect(yeni.kitaplik[0]?.eser.kaynaklar[0]).toMatchObject({
+      baski: "Second edition",
+      dil: "eng",
+      isbn: "9780131103627",
+      yil: 1988,
+    });
+    expect(yeni.aramalar[0]?.sorgu).toMatchObject({
+      isbn: "9780131103627",
+      baski: "2",
+      dil: "en",
+      yayinci: "Prentice Hall",
+    });
+  });
   it("ilk okumada boş alan döner; kendiliğinden dosya oluşturmaz", async () => {
     expect(await alan.listele()).toEqual({ surum: 1, kitaplik: [], aramalar: [] });
     expect(await fs.readdir(dizin)).toEqual([]);

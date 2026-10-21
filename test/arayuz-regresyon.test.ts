@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import fs from "node:fs/promises";
 import { JSDOM } from "jsdom";
+import { grupla } from "../src/search.js";
 
 const BOS = { gruplar: [], kaynakDurumlari: [], toplamSonuc: 0, gruplamaNotu: "" };
 const kart = (id: string, source = "a", extra: Record<string, unknown> = {}) => ({
@@ -39,15 +40,20 @@ async function kur(handler: (url: string, body: unknown) => unknown) {
     const body = options?.body ? JSON.parse(options.body) : undefined;
     cagrilar.push({ url, body });
     const data =
-      url === "/api/downloads"
-        ? { dosyalar: [] }
-        : url === "/api/sources"
-          ? { kaynaklar: [] }
-          : url === "/api/sayfa-sayisi"
-            ? { sonuclar: {} }
-            : ((await handler(url, body)) as Record<string, unknown>);
+      url === "/api/download-jobs" && !body
+        ? { isler: [] }
+        : url === "/api/downloads"
+          ? { dosyalar: [] }
+          : url === "/api/sources"
+            ? { kaynaklar: [] }
+            : url === "/api/sayfa-sayisi"
+              ? { sonuclar: {} }
+              : ((await handler(url, body)) as Record<string, unknown>);
     return { ok: !data.hata, json: async () => data };
   }) as unknown as typeof dom.window.fetch;
+  dom.window.eval(
+    await fs.readFile(new URL("../public/download-manager.js", import.meta.url), "utf8"),
+  );
   const js = await fs.readFile(new URL("../public/app.js", import.meta.url), "utf8");
   dom.window.eval(`globalThis.__regresyon = (async () => {\n${js}\n})();`);
   await (dom.window as unknown as { __regresyon: Promise<void> }).__regresyon;
@@ -69,6 +75,78 @@ const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 afterEach(() => dom?.window.close());
 
 describe("arama araçları", () => {
+  it("baskı tercihini gönderir, kıyaslamayı ve yazım önerisini güvenli biçimde gösterir", async () => {
+    const s = {
+      baslik: "Calcullus",
+      isbn: "9780131103627",
+      dil: "tr",
+      tur: "kitap" as const,
+      limit: 20,
+    };
+    const gruplar = grupla(
+      [
+        {
+          baslik: "Calculus",
+          tur: "kitap",
+          yazarlar: [],
+          kaynak: "catalog",
+          kaynakAd: "Catalog",
+          link: "https://example.com/book",
+          isbn: "9780306406157",
+          dil: "eng",
+        },
+      ],
+      s,
+    );
+    await kur(() => cevap(gruplar));
+    degistir("#webDahil", false);
+    degistir("#hedefIsbn", s.isbn);
+    degistir("#hedefDil", "tr");
+    gonder(s.baslik);
+    await vi.waitFor(() => expect(ids()).toHaveLength(1));
+    expect(cagrilar.find((c) => c.url === "/api/search")?.body).toMatchObject({
+      isbn: s.isbn,
+      dil: "tr",
+    });
+    expect(d.querySelector("#aramaOnerileri button")?.textContent).toBe("Calculus");
+    expect(d.querySelector(".baski-karsilastirma")?.textContent).toContain("9780306406157");
+    expect(d.querySelector(".kunye-farkli")?.textContent).toBe("Farklı");
+    expect(d.querySelector(".etiket.eslesme-tam")).toBeNull();
+    (d.querySelector("#aramaOnerileri button") as HTMLElement).click();
+    await vi.waitFor(() => expect(cagrilar.filter((c) => c.url === "/api/search")).toHaveLength(2));
+    expect(
+      (cagrilar.filter((c) => c.url === "/api/search")[1]!.body as { baslik: string }).baslik,
+    ).toBe("Calculus");
+  });
+  it("tam eşleşme filtresinde yüksek puanlı farklı baskıyı göstermez", async () => {
+    await kur(() =>
+      cevap([
+        kart("Exact", "a", { eslesme: { tur: "tam", aciklama: "Başlık eşleşiyor" } }),
+        kart("Other edition", "a", { puan: 1, eslesme: { tur: "yakin", aciklama: "Farklı ISBN" } }),
+      ]),
+    );
+    degistir("#webDahil", false);
+    gonder();
+    await vi.waitFor(() => expect(ids()).toHaveLength(2));
+    (d.querySelector('[data-suzgec="uyum"]') as HTMLElement).click();
+    expect(
+      [...d.querySelectorAll<HTMLElement>(".kart:not(.gizli)")].map((k) => k.dataset.anahtar),
+    ).toEqual(["Exact"]);
+  });
+  it("bütün kaynaklar başarısızsa kesin bir 'sonuç yok' mesajı vermez", async () => {
+    await kur(() => ({
+      ...BOS,
+      kaynakDurumlari: [
+        { id: "a", ad: "A", hazir: true, hataMesaji: "HTTP 429", sonucSayisi: 0, sureMs: 0 },
+      ],
+    }));
+    degistir("#webDahil", false);
+    gonder();
+    await vi.waitFor(() =>
+      expect(d.querySelector("#bos")?.textContent).toContain("kaynaklara ulaşılamadı"),
+    );
+    expect(d.querySelector("#bos")?.textContent).not.toContain("Sonuç bulunamadı");
+  });
   it("tek tıkla sunucu kaydını tarayıcı indirmesine aktarır ve ikinci PDF adayını gönderir", async () => {
     const g = kart("Book", "a", {
       kaynaklar: [
@@ -86,7 +164,11 @@ describe("arama araçları", () => {
         },
       ],
     });
-    await kur((url) => (url === "/api/download" ? { dosya: "book.pdf" } : cevap([g])));
+    await kur((url) =>
+      url === "/api/download-jobs"
+        ? { is: { id: "job", baslik: "Book", durum: "tamamlandi", dosya: "book.pdf", alinan: 42 } }
+        : cevap([g]),
+    );
     const downloads: string[] = [];
     dom.window.HTMLAnchorElement.prototype.click = function () {
       downloads.push(this.getAttribute("href")!);
@@ -96,14 +178,14 @@ describe("arama araçları", () => {
     await vi.waitFor(() => expect(ids()).toEqual(["Book"]));
     (d.querySelector('[data-eylem="indir"]') as HTMLElement).click();
     await vi.waitFor(() => expect(downloads).toContain("/api/downloads/book.pdf"));
-    expect(cagrilar.find((c) => c.url === "/api/download")?.body).toMatchObject({
+    expect(cagrilar.find((c) => c.url === "/api/download-jobs" && c.body)?.body).toMatchObject({
       alternatifler: expect.arrayContaining(["https://b.test/full.pdf"]),
     });
     expect(d.querySelector(".indirme-icerik a")?.getAttribute("download")).toBe("book.pdf");
   });
   it("katalog kaydında pasif PDF yerine bağlantı arama eylemi sunar; hatayı görünür tutar", async () => {
     await kur((url) =>
-      url === "/api/download"
+      url === "/api/download-jobs"
         ? { hata: "Doğrudan PDF bağlantısı bulunamadı" }
         : cevap([kart("Catalog")]),
     );
@@ -148,8 +230,8 @@ describe("arama araçları", () => {
   });
   it("EPUB ve metin gerçek biçimleriyle indirilir; güvenli olmayan link tıklanamaz", async () => {
     await kur((url) =>
-      url === "/api/download"
-        ? { dosya: "book.epub" }
+      url === "/api/download-jobs"
+        ? { is: { id: "job", baslik: "Book", durum: "tamamlandi", dosya: "book.epub", alinan: 42 } }
         : cevap([
             kart("Book", "a", {
               kaynaklar: [
@@ -172,7 +254,7 @@ describe("arama araçları", () => {
     expect(d.querySelector('[data-tur="metin"][data-eylem="indir"]')).not.toBeNull();
     (d.querySelector('[data-tur="epub"][data-eylem="indir"]') as HTMLElement).click();
     await vi.waitFor(() =>
-      expect(cagrilar.find((c) => c.url === "/api/download")?.body).toEqual({
+      expect(cagrilar.find((c) => c.url === "/api/download-jobs" && c.body)?.body).toEqual({
         url: "https://example.test/book.epub",
         tur: "epub",
         baslik: "Book",

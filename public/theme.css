@@ -196,3 +196,145 @@ textarea::placeholder {
     border-color: Highlight;
   }
 }
+
+/* Arama doğruluğu, baskı karşılaştırması ve indirme kuyruğu */
+.baski-tercihleri {
+  min-width: 0;
+  margin: 20px 0 0;
+  padding: 16px;
+  border: 1px solid var(--kenar);
+  border-radius: 10px;
+}
+.baski-tercihleri legend {
+  padding: 0 8px;
+  font-weight: 600;
+}
+.baski-tercihleri legend em {
+  font-size: 0.82rem;
+  color: var(--soluk);
+  font-weight: 400;
+}
+.baski-tercihleri .gelismis-satir {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.baski-tercihleri label {
+  min-width: 0;
+}
+.baski-tercihleri:disabled {
+  opacity: 0.55;
+}
+.arama-onerileri {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 16px 0;
+  padding: 16px;
+  background: var(--yuzey-not);
+  border-radius: 10px;
+}
+.eslesme-aciklama {
+  margin: 12px 0;
+  font-size: 0.82rem;
+  color: var(--soluk);
+  line-height: 1.6;
+}
+.etiket.eslesme-tam {
+  background: var(--erisim-zemin);
+  color: var(--erisim-yazi);
+}
+.etiket.eslesme-yakin {
+  background: var(--sinirli-zemin);
+  color: var(--sinirli-yazi);
+}
+.etiket.eslesme-ilgili {
+  background: var(--yonlendir-zemin);
+  color: var(--yonlendir-yazi);
+}
+.baski-karsilastirma {
+  border: 1px solid var(--kenar);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+}
+.baski-karsilastirma summary {
+  color: var(--vurgu);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+.baski-karsilastirma h4 {
+  font-size: 0.85rem;
+  margin: 16px 0 8px;
+}
+.tablo-kaydir {
+  overflow-x: auto;
+}
+.baski-karsilastirma table {
+  width: 100%;
+  min-width: 480px;
+  font-size: 0.78rem;
+  border-collapse: collapse;
+}
+.baski-karsilastirma th,
+.baski-karsilastirma td {
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--kenar);
+  padding: 9px 6px;
+  overflow-wrap: anywhere;
+  min-width: 65px;
+}
+.kunye-uygun {
+  color: var(--basari);
+}
+.kunye-farkli {
+  color: var(--uyari);
+  font-weight: 600;
+}
+.kunye-bilinmiyor {
+  color: var(--soluk);
+}
+.indirme-kuyruk-baslik {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--kenar);
+}
+.indirme-kuyrugu {
+  display: grid;
+  gap: 12px;
+}
+.indirme-isi {
+  padding: 16px;
+  border: 1px solid var(--kenar);
+  border-radius: 10px;
+  background: var(--yuzey-yumusak);
+  overflow-wrap: anywhere;
+}
+.indirme-isi h4 {
+  margin: 0 0 8px;
+}
+.indirme-isi p {
+  font-size: 0.85rem;
+  color: var(--soluk);
+  margin: 8px 0;
+}
+.indirme-isi progress {
+  width: 100%;
+  height: 10px;
+  accent-color: var(--vurgu);
+}
+.indirme-is-eylem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+.indirme-isi[data-durum="basarisiz"] {
+  border-color: var(--uyari-kenar);
+}
+@media (max-width: 560px) {
+  .baski-tercihleri .gelismis-satir {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

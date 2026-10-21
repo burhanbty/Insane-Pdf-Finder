@@ -51,9 +51,14 @@ async function kur(handler: (url: string, body?: Record<string, unknown>) => unk
   dom.window.fetch = (async (url: string, opts?: { body?: string }) => {
     const body = opts?.body ? JSON.parse(opts.body) : undefined;
     calls.push({ url, body });
-    const v = (await handler(url, body)) as Record<string, unknown>;
+    const v = (
+      url === "/api/download-jobs" && !body ? { isler: [] } : await handler(url, body)
+    ) as Record<string, unknown>;
     return { ok: !v.hata, json: async () => v };
   }) as typeof dom.window.fetch;
+  dom.window.eval(
+    await fs.readFile(new URL("../public/download-manager.js", import.meta.url), "utf8"),
+  );
   const js = await fs.readFile(new URL("../public/workspace.js", import.meta.url), "utf8");
   dom.window.eval(`globalThis.__workspace = (async () => {\n${js}\n})();`);
   await (dom.window as unknown as { __workspace: Promise<void> }).__workspace;
@@ -110,7 +115,9 @@ it("kaydedilmiş kitap doğrudan indirilebilir; kişisel notlar indirme isteğin
   const g = eser();
   Object.assign(g.kaynaklar[0]!, { pdf: "https://example.com/book.pdf" });
   await kur((yol) =>
-    yol === "/api/download" ? { dosya: "book.pdf" } : state([kayit("one", { eser: g })]),
+    yol === "/api/download-jobs"
+      ? { is: { id: "job", baslik: "Book", durum: "tamamlandi", dosya: "book.pdf", alinan: 42 } }
+      : state([kayit("one", { eser: g })]),
   );
   const downloads: string[] = [];
   dom.window.HTMLAnchorElement.prototype.click = function () {
@@ -118,9 +125,9 @@ it("kaydedilmiş kitap doğrudan indirilebilir; kişisel notlar indirme isteğin
   };
   click('[data-alan="indir"]');
   await vi.waitFor(() =>
-    expect(d.querySelector("#calismaMesaj")?.textContent).toContain("book.pdf"),
+    expect(d.querySelector(".indirme-icerik a")?.getAttribute("download")).toBe("book.pdf"),
   );
-  const istek = calls.find((c) => c.url === "/api/download")?.body;
+  const istek = calls.find((c) => c.url === "/api/download-jobs" && c.body)?.body;
   expect(istek).toEqual({
     url: "https://example.com/book.pdf",
     tur: "pdf",

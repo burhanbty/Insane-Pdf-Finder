@@ -75,8 +75,6 @@ const EDATLAR = new Set([
   "your",
   "we",
   "our",
-  "not",
-  "no",
   "do",
   "does",
   "did",
@@ -118,7 +116,11 @@ const EDATLAR = new Set([
 /** Surucu harflerini ve gereksiz noktalama isaretlerini atar. */
 export function normalizeMetin(girdi: string): string {
   if (!girdi) return "";
-  const s = girdi.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+  const s = girdi
+    .replace(/\+/g, " plus ")
+    .replace(/#/g, " sharp ")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "");
 
   let cikis = "";
   for (const harf of s) {
@@ -127,7 +129,7 @@ export function normalizeMetin(girdi: string): string {
 
   return cikis
     .replace(/[’'`´]/g, "")
-    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
     .replace(/\s+/g, " ")
     .trim()
     .toLowerCase();
@@ -136,7 +138,7 @@ export function normalizeMetin(girdi: string): string {
 /** Anlamli tokenlari sirayla, tekrarsiz dondurur. */
 export function tokenlar(metin: string): string[] {
   const ham = normalizeMetin(metin).split(" ").filter(Boolean);
-  const gecerli = ham.filter((t) => t.length > 1 && !EDATLAR.has(t));
+  const gecerli = ham.filter((t) => !EDATLAR.has(t));
   return [...new Set(gecerli.length ? gecerli : ham)];
 }
 
@@ -285,8 +287,12 @@ export function eslestir(sorgu: EslestirmeGirdi, eser: EslestirmeGirdi): Eslesti
   const yazar = yazarPuani(sorgu.yazarlar, eser.yazarlar);
   const yil = yilPuani(sorgu.yil, eser.yil);
 
-  const parcalar: number[] = [baslik, yazar];
-  const agirliklar: number[] = [0.6, 0.4];
+  const parcalar: number[] = [baslik];
+  const agirliklar: number[] = [0.6];
+  if (sorgu.yazarlar.length) {
+    parcalar.push(yazar);
+    agirliklar.push(0.4);
+  }
   if (yil !== null) {
     parcalar.push(yil);
     agirliklar.push(0.15);

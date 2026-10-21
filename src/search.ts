@@ -2,6 +2,7 @@ import { onbellekli } from "./cache.js";
 import { ayar } from "./config.js";
 import { sureSinirli } from "./deadline.js";
 import { kaynakHazirligi } from "./source-state.js";
+import { baskilarUyumlu, sonucuAcikla } from "./matching.js";
 import { eserAnahtari, eslestir, yazarParcalari, yilUyumlu } from "./normalize.js";
 import { kaynaklariYukle, yuklenmeHataListesi } from "./registry.js";
 import type { Gruplanmis, KaynakInfo, Sorgu, Work } from "./types.js";
@@ -31,7 +32,7 @@ export async function ara(sorgu: Sorgu): Promise<AramaCevabi> {
   // Ayni sorgu tekrar ederse diskteki onbellegi doneruz. arXiv ve Semantic
   // Scholar gibi anahtarsiz API'ler kotali; tekrar eden aramalar onlari yiyor.
   // Eski gruplama kuraliyla birlestirilmis disk kayitlarini yeniden kullanma.
-  const anahtar = `arama:v4:${sorgu.tur}:${sorgu.baslik.toLowerCase().trim()}:${(sorgu.yazar ?? "").toLowerCase().trim()}:${sorgu.yil ?? ""}:${sorgu.limit}`;
+  const anahtar = `arama:v6:${JSON.stringify(sorgu)}`;
   return onbellekli(anahtar, () => araCanlı(sorgu), {
     sakla: (cevap) => !cevap.kaynakDurumlari.some((k) => k.hazir && k.hataMesaji),
   });
@@ -71,7 +72,7 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
     uygun.map(async (k) => {
       const t0 = Date.now();
       try {
-        const kaynakSurumu = k.id === "internet-archive" ? "v2" : "v1";
+        const kaynakSurumu = ["internet-archive", "open-library"].includes(k.id) ? "v3" : "v1";
         const isler = await onbellekli(
           `kaynak:${kaynakSurumu}:${k.id}:${JSON.stringify(sorgu)}`,
           async () => {
@@ -141,15 +142,29 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
     kaynakDurumlari: durumlar.sort((a, b) => a.sureMs - b.sureMs),
     toplamSonuc: hepsi.length,
     gruplamaNotu:
-      "Aynı eserin farklı kaynaklardaki kayıtları, başlık + yazar + yıl karşılaştırılarak tek kartta birleştirildi.",
+      "Kayıtlar başlık, yazar ve bilinen baskı bilgilerine göre birleştirildi. Eksik künye bilgisi doğrulanmış eşleşme sayılmaz.",
   };
 }
 
 /** Iki yazar listesi en az bir soyadda kesisiyor mu. */
 function ortakSoyadVar(a: string[], b: string[]): boolean {
   if (!a.length || !b.length) return false;
-  const bSoyad = new Set(b.flatMap((x) => yazarParcalari(x).soyad));
-  return a.some((x) => yazarParcalari(x).soyad.some((s) => bSoyad.has(s)));
+  return a.some((x) =>
+    b.some((y) => {
+      const ax = yazarParcalari(x),
+        by = yazarParcalari(y);
+      if (!ax.soyad.some((s) => by.soyad.includes(s))) return false;
+      return (
+        !ax.ad.length ||
+        !by.ad.length ||
+        ax.ad.some((ad) =>
+          by.ad.some(
+            (bd) => ad === bd || ((ad.length === 1 || bd.length === 1) && ad[0] === bd[0]),
+          ),
+        )
+      );
+    }),
+  );
 }
 
 /** Baslik ayni olsa da bilinen yazar/DOI celiskileri farkli eserlerdir. */
@@ -161,6 +176,7 @@ function grupUyumlu(g: Gruplanmis, w: Work): boolean {
       .replace(/^(https?:\/\/(dx\.)?doi\.org\/|doi:\s*)/, "");
   return g.kaynaklar.every((k) => {
     if (k.doi && w.doi) return doiAnahtari(k.doi) === doiAnahtari(w.doi);
+    if (!baskilarUyumlu(k, w)) return false;
     return !k.yazarlar.length || !w.yazarlar.length || ortakSoyadVar(k.yazarlar, w.yazarlar);
   });
 }
@@ -208,13 +224,13 @@ export function grupla(works: Work[], sorgu: Sorgu): Gruplanmis[] {
 
     // Anahtar tutmadiysa benzer eser gruplarini birlestir.
     if (hedef === undefined) {
-      hedef =
+      const benzerler =
         adaylar.length > 1
-          ? -1
-          : gruplar.findIndex((g) => {
-              if (g.tur !== w.tur || !grupUyumlu(g, w)) return false;
+          ? []
+          : gruplar.flatMap((g, indeks) => {
+              if (g.tur !== w.tur || !grupUyumlu(g, w)) return [];
 
-              return g.kaynaklar.some((k) => {
+              const uygun = g.kaynaklar.some((k) => {
                 if (!k.baslik) return false;
                 const p = eslestir(
                   { baslik: g.baslik, yazarlar: g.yazarlar, yil: g.yil },
@@ -229,7 +245,9 @@ export function grupla(works: Work[], sorgu: Sorgu): Gruplanmis[] {
                 }
                 return false;
               });
+              return uygun ? [indeks] : [];
             });
+      hedef = benzerler.length === 1 ? benzerler[0]! : -1;
 
       if (hedef >= 0) {
         anahtarKaydet(kesin, hedef);
@@ -288,6 +306,7 @@ export function grupla(works: Work[], sorgu: Sorgu): Gruplanmis[] {
   // Yazar bos olan sonuclari (genel katalog kayitlari) one cikarma.
   for (const g of gruplar) {
     if (g.yazarlar.length === 0) g.puan *= 0.85;
+    sonucuAcikla(g, sorgu);
   }
 
   return gruplar;

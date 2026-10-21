@@ -1,6 +1,7 @@
 import { ayar } from "../config.js";
 import { getJson } from "../http.js";
 import type { SourceModule, Sorgu, Work } from "../types.js";
+import { isbnKitabi } from "../isbn.js";
 
 interface OLDoc {
   key?: string;
@@ -26,6 +27,7 @@ function solrKacis(s: string): string {
 }
 
 async function ara(sorgu: Sorgu): Promise<Work[]> {
+  if (sorgu.isbn) return (await isbnKitabi(sorgu.isbn)).eser.kaynaklar;
   const u = new URL("https://openlibrary.org/search.json");
 
   // Onemli: Open Library `title=` parametresi TAM baslik eslesmesi istiyor.
@@ -57,11 +59,31 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     ].join(","),
   );
 
-  const veri = await getJson<{ docs?: OLDoc[]; numFound?: number }>(u.toString(), {
+  let veri = await getJson<{ docs?: OLDoc[]; numFound?: number }>(u.toString(), {
     // Open Library kendi kuralina gore istekleri yavaslat.
     boslukMs: ayar.contactEmail ? 350 : 1100,
     timeoutMs: 20_000,
   });
+  // Boş kesin aramada tek, sınırlandırılmış yazım önerisi sorgusu. Ağ hatası boş sonuç sayılmaz.
+  const kelimeler = sorgu.baslik.match(/[\p{L}\p{N}]+/gu) ?? [];
+  if (
+    !veri.docs?.length &&
+    kelimeler.length &&
+    kelimeler.length <= 12 &&
+    kelimeler.some((k) => k.length >= 5)
+  ) {
+    const yakin = [
+      `title:(${kelimeler.map((k) => `${solrKacis(k)}${k.length >= 5 && !/^\d+$/.test(k) ? "~1" : ""}`).join(" AND ")})`,
+    ];
+    if (sorgu.yazar) yakin.push(`author:"${solrKacis(sorgu.yazar)}"`);
+    u.searchParams.set("q", yakin.join(" AND "));
+    u.searchParams.set("limit", "5");
+    veri = await getJson<{ docs?: OLDoc[] }>(u.toString(), {
+      boslukMs: ayar.contactEmail ? 350 : 1100,
+      timeoutMs: 8000,
+      tekrar: 0,
+    });
+  }
 
   const sonuc: Work[] = [];
   for (const d of veri.docs ?? []) {
@@ -76,13 +98,13 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       kaynakAd: "Open Library",
       tur: "kitap",
       baslik: d.title,
+      kunyeTuru: "eser",
       altBaslik: d.subtitle,
       yazarlar: d.author_name ?? [],
       yil: d.first_publish_year,
       konular: (d.subject ?? []).slice(0, 12),
-      yayinci: d.publisher?.[0],
-      dil: d.language?.[0],
-      isbn: d.isbn?.[0],
+      // Work araması farklı baskıların ISBN/dil/yayınevlerini bir arada döndürür.
+      // Dizilerin ilk elemanlarını aynı baskının künyesiymiş gibi kullanma.
       sayfa: d.number_of_pages_median ? `${d.number_of_pages_median} sayfa` : undefined,
       sayfaSayisi: d.number_of_pages_median || undefined,
       kapak,

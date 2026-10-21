@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-21",
+  "automated": {
+    "files": 28,
+    "tests": 338,
+    "passed": true,
+    "lint": true,
+    "typecheck": true,
+    "format": true,
+    "smoke": true
+  },
+  "controlledBrowser": {
+    "source": "isolated synthetic fixture on port 3320",
+    "states": [
+      {
+        "baslik": "Calculus 2",
+        "durum": "tamamlandi",
+        "boyut": 2097152
+      },
+      {
+        "baslik": "Calculus 2",
+        "durum": "tamamlandi",
+        "boyut": 2097152,
+        "mevcut": true
+      },
+      {
+        "baslik": "Calculus 3",
+        "durum": "basarisiz"
+      }
+    ],
+    "files": ["calculus_2.pdf"],
+    "partialFiles": [],
+    "mobile": {
+      "width": 390,
+      "pageOverflow": false,
+      "comparisonTableWidth": 480
+    }
+  },
+  "real": {
+    "isbn": "9780131103627",
+    "title": "The C Programming Language",
+    "publisher": "Prentice Hall",
+    "year": 1988,
+    "pdf": {
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "servedStatus": 200,
+      "bytes": 2215244,
+      "signature": "%PDF-1.5",
+      "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697",
+      "existingFileReused": true
+    },
+    "nativeDownload": "Synthetic browser download observed; real PDF browser download event timed out. Real HTTP attachment and content integrity verified."
+  }
+}

@@ -26,6 +26,7 @@ const CEVAP = {
       yil: 2017,
       konular: [],
       puan: 0.93,
+      eslesme: { tur: "tam" },
       sayfaSayisi: 15,
       kaynaklar: [
         {
@@ -46,6 +47,7 @@ const CEVAP = {
       yil: 2015,
       konular: [],
       puan: 0.8,
+      eslesme: { tur: "yakin" },
       kaynaklar: [
         { kaynak: "arxiv", kaynakAd: "arXiv", link: "https://arxiv.org/y", erisim: "acik" },
       ],

@@ -31,7 +31,7 @@ interface Kitap {
 export async function isbnKitabi(
   isbn: string,
 ): Promise<{ eser: Gruplanmis; isbn: string; baski?: string }> {
-  return onbellekli(`isbn:v1:${isbn}`, () =>
+  return onbellekli(`isbn:v2:${isbn}`, () =>
     sureSinirli(async () => {
       const u = new URL("https://openlibrary.org/api/books");
       u.searchParams.set("bibkeys", `ISBN:${isbn}`);
@@ -77,6 +77,8 @@ export async function isbnKitabi(
             yazarlar,
             yil,
             isbn,
+            kunyeTuru: "baski",
+            baski: typeof k.edition_name === "string" ? k.edition_name.slice(0, 100) : undefined,
             link,
             yayinci:
               typeof k.publishers?.[0]?.name === "string"

@@ -187,7 +187,7 @@ describe("grupla", () => {
     expect(g[0]!.baslik).toBe("Sapiens");
   });
 
-  it("yil uyumsuz ayni baslikli kayitlari birlestirir ama cezalandirir", () => {
+  it("farklı yıllardaki kitap baskılarını ayrı tutar", () => {
     const g = grupla(
       [
         w({ baslik: "Sapiens", yazarlar: ["Harari"], yil: 2011 }),
@@ -195,7 +195,7 @@ describe("grupla", () => {
       ],
       sorgu,
     );
-    // Ayni normalize baslik -> kesin anahtar ayni, tek grup olur.
-    expect(g).toHaveLength(1);
+    expect(g).toHaveLength(2);
+    expect(g.map((x) => x.yil).sort()).toEqual([1999, 2011]);
   });
 });

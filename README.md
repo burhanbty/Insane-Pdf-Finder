@@ -13,6 +13,20 @@ ISBN varsa **ISBN numaran mı var?** alanından künyeyi getirin; ISBN-10/13
 kontrol basamağı denetlenir. Katalog bilgisi formu doldurur; geniş kaynak araması
 siz **Ara** düğmesine bastığınızda başlar. ISBN kaydı bir PDF bulunduğu anlamına gelmez.
 
+Sonuçlar **Aramanla eşleşen / Yakın eşleşme / Diğer sonuç** olarak açıklanır.
+Tam eşleşme filtresi yalnızca başlık ve girilen tercihleri doğrulanan kayıtları gösterir;
+yazar ya da baskı eksiği doğrulanmış sayılmaz. Open Library kesin başlıkta sonuç bulamazsa
+tek bir yakın yazım sorgusu yapılır. **Bunu mu aradın?** yalnızca katalogda gerçekten
+dönen yakın başlıklardan öneri sunar; öneriye basmadan arama metni değiştirilmez.
+
+**Arama seçenekleri → Hocanın istediği baskı** alanına ISBN, baskı, dil ve yayınevi
+girebilirsiniz. Kitap kartındaki **Baskı ve dili karşılaştır** tablosu her kaynak için
+istenen ve bulunan bilgileri yan yana gösterir: **Uyuşuyor / Farklı / Doğrulanamadı**.
+Bilinen farklı ISBN, dil, baskı, yıl ve cilt numaraları aynı kitap kartında birleştirilmez.
+Open Library eser aramasının farklı baskılara ait toplu ISBN/dil listeleri bir baskıymış
+gibi sunulmaz; ISBN tercihinde doğrudan o ISBN'nin katalog kaydı sorgulanır.
+Bu, katalog karşılaştırmasıdır; PDF dosyasının içindeki baskıyı ayrıca kontrol edin.
+
 **Ders kitapları listesini topluca ekle** alanına ders adını ve her satıra
 `Başlık | Yazar | Yıl` biçiminde kitapları yapıştırın. Yazar/yıl isteğe bağlıdır.
 Önizlenen liste, onayınızla kayıtlı aramalara eklenir; dış kaynaklar otomatik taranmaz.
@@ -66,6 +80,14 @@ sayfaları PDF olarak kaydedilmez. İndirmeler 300 MB, özetleme 40 MB, sayfa sa
 
 **PDF indir** dosyayı uygulamanın `downloads/` klasörüne kaydeder ve ardından tarayıcı
 indirmesini başlatır. Başlamazsa karttaki dosya bağlantısından tekrar alabilirsiniz.
+Arama ve kitaplık indirmeleri ortak **İndirme kuyruğu** üzerinden çalışır: iki eşzamanlı
+iş, en fazla 20 bekleyen/çalışan iş, alınan baytlar ve kaynak bildirirse toplam boyut/yüzde.
+İptal, yarım dosyayı temizler; **Tekrar dene** dosyayı baştan indirir. Tamamlanan içerik
+SHA-256 ile mevcut dosyalarla karşılaştırılır; aynı içerik için ikinci sunucu dosyası
+oluşturulmaz. Aynı sayfada aynı dosyanın ikinci otomatik tarayıcı indirmesi de engellenir;
+manuel dosya bağlantısı her zaman kullanılabilir. Tarayıcının geçmişte indirdiği dosyaları
+web sayfası denetlemez. Kuyruk sunucu yeniden başlatılınca sıfırlanır, tamamlanan dosyalar
+korunur. Duraklatma ve kaldığı bayttan devam etme bu sürümde yoktur.
 Doğrudan PDF bilgisi olmayan kayıtlarda **PDF bağlantısını bul**, sayfanın bildirdiği
 PDF adresini kontrol eder. İlk adres başarısızsa aynı karttaki diğer kaynaklar denenir.
 Katalog, önizleme ve ödünç kayıtları her zaman indirilebilir PDF içermez; bulunamadığında
@@ -74,6 +96,9 @@ gerekçe kartta kalır. Dosya 90 saniyelik istek, toplam 120 saniyelik işlem s�
 Gerçek uygulama `npm start` ile açılan **http://127.0.0.1:3000** adresidir.
 `reports/ui-preview.mjs` ile açılan **3319** portu, açıkça etiketlenmiş örnek verili
 tasarım önizlemesidir; gerçek kitap araması yapmaz.
+`node --import tsx reports/features-preview.mjs` ise **3320** portunda dış ağa kapalı,
+geçici verili özellik testini açar; yazım önerisi, baskı farkları ve yavaş indirmeleri
+denemek içindir. Bu önizlemedeki PDF akışı gerçek bir kitap değildir.
 
 Her kaynak için 20 saniye süre sınırı uygulanır; yanıt vermeyen kaynağın hatası
 gösterilir, diğer sonuçlar korunur. Ortak HTTP istemcisi ve ayna kaynakları iptal

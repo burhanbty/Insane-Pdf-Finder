@@ -86,12 +86,15 @@ function eserOku(v: unknown): Gruplanmis {
       kaynak: metin(k.kaynak, 100, true),
       kaynakAd: metin(k.kaynakAd, 200, true),
       tur: tipi,
-      baslik,
-      yazarlar,
-      yil: yil(g.yil),
+      baslik: k.baslik === undefined ? baslik : metin(k.baslik, 1000, true),
+      yazarlar: k.yazarlar === undefined ? yazarlar : liste(k.yazarlar, 30, 300),
+      yil: yil(k.yil),
       link,
       doi: metin(k.doi, 300) || undefined,
       isbn: metin(k.isbn, 40) || undefined,
+      baski: metin(k.baski, 200) || undefined,
+      kunyeTuru: k.kunyeTuru === "eser" || k.kunyeTuru === "baski" ? k.kunyeTuru : undefined,
+      dil: metin(k.dil, 200) || undefined,
       yayinci: metin(k.yayinci, 500) || undefined,
       pdf: adres(k.pdf),
       epub: adres(k.epub),
@@ -152,6 +155,15 @@ function aramaOku(v: unknown): Omit<KayitliArama, "id"> {
       yil: yil(s.yil),
       tur: tur(s.tur),
       limit,
+      isbn: s.isbn
+        ? (isbnDogrula(s.isbn) ??
+          (() => {
+            throw new CalismaHatasi("Geçersiz ISBN");
+          })())
+        : undefined,
+      baski: metin(s.baski, 200) || undefined,
+      dil: metin(s.dil, 200) || undefined,
+      yayinci: metin(s.yayinci, 200) || undefined,
     },
   };
 }

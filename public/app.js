@@ -50,6 +50,13 @@ let aramaSurumu = 0;
 const kartDugumleri = new WeakMap();
 const kartVerileri = new WeakMap();
 
+function baskiAlanlariniGuncelle() {
+  $(".baski-tercihleri").disabled =
+    el.form.querySelector("input[name=tur]:checked")?.value !== "kitap";
+}
+el.form.addEventListener("change", baskiAlanlariniGuncelle);
+baskiAlanlariniGuncelle();
+
 /* ------------------------------- yardimcilar ----------------------------- */
 
 const ERISIM_ETIKET = {
@@ -131,6 +138,17 @@ el.form.addEventListener("submit", async (olay) => {
     tur: el.form.querySelector("input[name=tur]:checked")?.value ?? "kitap",
     limit: Number(el.limit.value) || 20,
   };
+  if (govde.tur === "kitap") {
+    for (const [alan, id] of [
+      ["isbn", "hedefIsbn"],
+      ["baski", "hedefBaski"],
+      ["dil", "hedefDil"],
+      ["yayinci", "hedefYayinci"],
+    ]) {
+      const deger = document.getElementById(id).value.trim();
+      if (deger) govde[alan] = deger;
+    }
+  }
 
   el.araBtn.disabled = true;
   el.araBtn.textContent = "Aranıyor…";
@@ -254,14 +272,42 @@ function cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi) {
 
 function cizKartlar(gruplar) {
   el.kartlar.innerHTML = "";
+  const oneriler = $("#aramaOnerileri");
+  oneriler.replaceChildren();
+  const tam = gruplar.filter((g) => g.eslesme?.tur === "tam").length;
+  const yakin = gruplar.filter((g) => g.eslesme?.tur === "yakin").length;
+  $("#eslesmeOzeti").textContent = gruplar.length
+    ? `${tam} aramanla eşleşen · ${yakin} yakın eşleşme · ${gruplar.length - tam - yakin} diğer sonuç. Başlık eşleşmesi, PDF içeriğinin veya baskının doğrulandığı anlamına gelmez.`
+    : "";
+  const basliklar = !tam
+    ? [...new Set(gruplar.filter((g) => g.eslesme?.oneri).map((g) => g.baslik))].slice(0, 3)
+    : [];
+  oneriler.classList.toggle("gizli", !basliklar.length);
+  if (basliklar.length) {
+    oneriler.append(document.createTextNode("Bunu mu aradın? "));
+    for (const baslik of basliklar) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = baslik;
+      b.addEventListener("click", () => {
+        el.baslik.value = baslik;
+        el.form.requestSubmit();
+      });
+      oneriler.append(b);
+    }
+  }
 
   if (!gruplar.length) {
     el.sonucBaslik.textContent = "0 sonuç";
     kaynakSecimiDoldur([]);
     el.kaynakSayaci.textContent = "";
     el.bos.classList.remove("gizli");
-    el.bos.innerHTML =
-      "<p>Sonuç bulunamadı.</p><p>Başlığı kısaltmayı veya yazarı kaldırmayı deneyin.</p>";
+    const hazir = sonCevap.kaynakDurumlari.filter((d) => d.hazir);
+    const ulasilamadi =
+      sonCevap.hatalar.length || (hazir.length && hazir.every((d) => d.hataMesaji));
+    el.bos.innerHTML = ulasilamadi
+      ? "<p>Arama tamamlanamadı veya bazı kaynaklara ulaşılamadı.</p><p>Arama ayrıntılarını kontrol edip tekrar deneyebilirsin.</p>"
+      : "<p>Sonuç bulunamadı.</p><p>Başlığı kısaltmayı veya yazarı kaldırmayı deneyin.</p>";
     return;
   }
   el.bos.classList.add("gizli");
@@ -397,6 +443,11 @@ function grupBasliklariniCiz(gorunurKartlar, aktif) {
 
   const sirali = [...el.kartlar.querySelectorAll(".kart")].sort((a, b) => {
     const secim = el.siralama.value;
+    if (secim === "uyum") {
+      const sira = { tam: 0, yakin: 1, ilgili: 2 };
+      const fark = (sira[a.dataset.eslesme] ?? 2) - (sira[b.dataset.eslesme] ?? 2);
+      if (fark) return fark;
+    }
     if (secim === "baslik") return a.dataset.baslik.localeCompare(b.dataset.baslik, "tr");
     if (secim === "yeni" || secim === "eski") {
       if (!a.dataset.yil) return b.dataset.yil ? 1 : 0;
@@ -529,7 +580,8 @@ function kartYap(g) {
     ? "1"
     : "0";
   kart.dataset.ozetli = g.kaynaklar.some((k) => k.ozet || k.tamMetin) ? "1" : "0";
-  kart.dataset.uyum = g.puan >= 0.6 ? "1" : "0";
+  kart.dataset.uyum = g.eslesme?.tur === "tam" ? "1" : "0";
+  kart.dataset.eslesme = g.eslesme?.tur ?? "ilgili";
 
   /*
    * Kaynak kimlikleri. Kaynak bazli suzgec ve gruplama bunlari kullanir.
@@ -546,8 +598,9 @@ function kartYap(g) {
   const kapakUrl = g.kapak ? `/api/kapak?url=${encodeURIComponent(g.kapak)}` : null;
 
   const etiketler = [];
-  if (g.puan >= 0.85) etiketler.push(`<span class="etiket uyum">Tam eşleşme</span>`);
-  else if (g.puan >= 0.6) etiketler.push(`<span class="etiket uyum">Büyük olasılık</span>`);
+  etiketler.push(
+    `<span class="etiket eslesme-${kacis(kart.dataset.eslesme)}">${{ tam: "Aramanla eşleşen", yakin: "Yakın eşleşme · kontrol et", ilgili: "Diğer sonuç" }[kart.dataset.eslesme]}</span>`,
+  );
   if (g.yil) etiketler.push(`<span class="etiket">${g.yil}</span>`);
   const katalogIsbn = g.kaynaklar.find((k) => k.isbn)?.isbn;
   if (katalogIsbn)
@@ -648,6 +701,8 @@ function kartYap(g) {
         ${etiketler.join("")}
       </div>
       ${aciklama}
+      ${g.eslesme ? `<p class="eslesme-aciklama">${kacis(g.eslesme.aciklama)}</p>` : ""}
+      ${g.karsilastirma?.length ? `<details class="baski-karsilastirma"><summary>Baskı ve dili karşılaştır</summary><p class="ipucu">Katalog bilgileri karşılaştırılır. Eksik alanlar doğrulanmış sayılmaz; indirilen dosyanın baskısını ayrıca kontrol et.</p>${g.karsilastirma.map((k) => `<h4>${guvenliAdres(k.kaynakLink) ? `<a href="${kacis(guvenliAdres(k.kaynakLink))}" target="_blank" rel="noopener noreferrer">${kacis(k.kaynakAd)} · Kaydı aç ↗</a>` : kacis(k.kaynakAd)}</h4><div class="tablo-kaydir"><table><caption class="atla">${kacis(k.kaynakAd)} künye karşılaştırması</caption><thead><tr><th scope="col">Bilgi</th><th scope="col">İstenen</th><th scope="col">Bu kayıt</th><th scope="col">Durum</th></tr></thead><tbody>${k.alanlar.map((a) => `<tr><th scope="row">${kacis(a.alan)}</th><td>${kacis(a.istenen)}</td><td>${kacis(a.bulunan)}</td><td class="kunye-${kacis(a.durum)}">${{ uygun: "Uyuşuyor", farkli: "Farklı", bilinmiyor: "Doğrulanamadı" }[a.durum]}</td></tr>`).join("")}</tbody></table></div>`).join("")}</details>` : ""}
       <div class="kart-eylem">
         ${sayfaParcasi}
         ${eylemler.join("")}
@@ -805,22 +860,15 @@ el.kartlar.addEventListener("click", async (olay) => {
               ),
             ].slice(0, 5)
           : [];
-      const sonuc = await istek("/api/download", {
-        url,
-        tur,
-        baslik,
-        ...(alternatifler.length ? { alternatifler } : {}),
-      });
-      const adres = `/api/downloads/${encodeURIComponent(sonuc.dosya)}`;
-      const a = document.createElement("a");
-      a.href = adres;
-      a.download = sonuc.dosya;
-      document.body.append(a);
-      a.click();
-      a.remove();
-      buton.closest(".kart").querySelector(".indirme-icerik").innerHTML =
-        `<p>Dosya hazır. Tarayıcı indirmesi başlatıldı. <a href="${kacis(adres)}" download="${kacis(sonuc.dosya)}">Başlamadıysa dosyayı indir</a></p>`;
-      await indirmeleriYenile();
+      await window.indirmeYoneticisi.ekle(
+        {
+          url,
+          tur,
+          baslik,
+          ...(alternatifler.length ? { alternatifler } : {}),
+        },
+        buton.closest(".kart").querySelector(".indirme-icerik"),
+      );
     } catch (hata) {
       buton.title = hata.message;
       buton.closest(".kart").querySelector(".indirme-icerik").innerHTML =

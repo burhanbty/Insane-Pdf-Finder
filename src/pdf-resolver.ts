@@ -1,6 +1,7 @@
 import { get, KaynakHatasi } from "./http.js";
 import { disAdres } from "./network.js";
 import { pdfImzasi, sinirliGovde } from "./body.js";
+import { istekSinyali } from "./deadline.js";
 
 const SAYFA_SINIRI = 2 * 1024 * 1024;
 
@@ -77,11 +78,18 @@ export function sayfadakiPdfler(html: string, sayfa: string): string[] {
 async function basiniOku(r: Response): Promise<{ ilk: Uint8Array; cevap: Response }> {
   if (!r.body) throw Error("Kaynak boş yanıt döndürdü");
   const reader = r.body.getReader();
+  const signal = istekSinyali.getStore();
+  const iptal = () => {
+    void reader.cancel(signal?.reason).catch(() => undefined);
+  };
+  signal?.throwIfAborted();
+  signal?.addEventListener("abort", iptal, { once: true });
   const parcalar: Uint8Array[] = [];
   let n = 0;
   try {
     while (n < 5) {
       const next = await reader.read();
+      signal?.throwIfAborted();
       if (next.done) break;
       parcalar.push(next.value);
       n += next.value.length;
@@ -89,6 +97,8 @@ async function basiniOku(r: Response): Promise<{ ilk: Uint8Array; cevap: Respons
   } catch (e) {
     await reader.cancel().catch(() => undefined);
     throw e;
+  } finally {
+    signal?.removeEventListener("abort", iptal);
   }
   const ilk = Buffer.concat(parcalar);
   const body = new ReadableStream<Uint8Array>({
@@ -117,6 +127,7 @@ export async function pdfYanitiniBul(adresler: string[]): Promise<Response> {
   let hata =
     "Kaynak PDF yerine bir sayfa döndürdü; doğrudan PDF bağlantısı bulunamadı. Kayıt yalnızca katalog, önizleme veya ödünç erişimi sunuyor olabilir.";
   for (let i = 0; kuyruk.length && i < 8; i++) {
+    istekSinyali.getStore()?.throwIfAborted();
     const adres = kuyruk.shift()!;
     if (gorulen.has(adres)) continue;
     gorulen.add(adres);
@@ -141,6 +152,7 @@ export async function pdfYanitiniBul(adresler: string[]): Promise<Response> {
         hata = "Kaynak PDF yerine farklı bir dosya döndürdü.";
       }
     } catch (e) {
+      istekSinyali.getStore()?.throwIfAborted();
       if (e instanceof KaynakHatasi && [401, 403, 429].includes(e.durum ?? 0))
         hata = `Kaynak otomatik indirmeye izin vermedi (HTTP ${e.durum}). Kaynak sayfasını açarak erişim seçeneklerini kontrol edebilirsiniz.`;
       else hata = (e as Error).message;

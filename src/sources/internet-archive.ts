@@ -1,5 +1,6 @@
 import { getJson } from "../http.js";
 import type { SourceModule, Sorgu, Work } from "../types.js";
+import { isbnDogrula } from "../isbn.js";
 
 /*
  * Internet Archive: iki islev.
@@ -26,9 +27,12 @@ function ilkDeger(v: string | string[] | boolean | undefined): string | undefine
 }
 
 /** Bir IA kaydinin indirilebilir PDF/metin dosyalarini bulur. */
-export async function iaDosyalari(
-  kimlik: string,
-): Promise<{ pdf?: string; metin?: string; erisim: Work["erisim"] }> {
+export async function iaDosyalari(kimlik: string): Promise<{
+  pdf?: string;
+  metin?: string;
+  erisim: Work["erisim"];
+  kunye?: Pick<Work, "isbn" | "baski" | "dil" | "yayinci">;
+}> {
   try {
     const veri = await getJson<IAMeta>(
       `https://archive.org/metadata/${encodeURIComponent(kimlik)}`,
@@ -64,6 +68,19 @@ export async function iaDosyalari(
 
     const sinirli = veri.is_dark === true || erisimKisiti === "true" || oduncMu;
     return {
+      kunye: {
+        isbn:
+          (Array.isArray(md.isbn) ? md.isbn : [md.isbn]).map(isbnDogrula).find((s) => s !== null) ??
+          undefined,
+        baski: typeof md.edition === "string" ? md.edition.slice(0, 200) : undefined,
+        yayinci: typeof md.publisher === "string" ? md.publisher.slice(0, 500) : undefined,
+        dil:
+          typeof md.language === "string"
+            ? md.language
+            : Array.isArray(md.language) && md.language.length === 1
+              ? md.language[0]
+              : undefined,
+      },
       pdf: sinirli ? undefined : pdf,
       metin: sinirli ? undefined : metin,
       erisim: sinirli ? "odunc" : pdf || metin ? "acik" : "yonlendir",
@@ -81,7 +98,7 @@ interface IADoc {
   date?: string;
   description?: string;
   subject?: string | string[];
-  language?: string;
+  language?: string | string[];
   mediatype?: string;
   publicdate?: string;
 }
@@ -129,7 +146,8 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       yil: Number.isFinite(yil) ? yil : undefined,
       ozet: dizi(d.description).join(" ").slice(0, 1200) || undefined,
       konular: dizi(d.subject).slice(0, 12),
-      dil: d.language,
+      ...dosyalar.kunye,
+      dil: dosyalar.kunye?.dil ?? (dizi(d.language).length === 1 ? dizi(d.language)[0] : undefined),
       link: `https://archive.org/details/${d.identifier}`,
       pdf: dosyalar.pdf,
       tamMetin: dosyalar.metin,

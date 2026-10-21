@@ -79,6 +79,49 @@ it("indirme alternatiflerinin sayısını ve URL biçimini denetler", async () =
       (await post("/api/download", { url: "https://example.com/file.pdf", alternatifler })).status,
     ).toBe(400);
 });
+it("kuyruk rotaları da yabancı Origin ve bozuk girdileri reddeder", async () => {
+  expect(
+    (
+      await post(
+        "/api/download-jobs",
+        { url: "https://example.com/a.pdf" },
+        { origin: "https://evil.example" },
+      )
+    ).status,
+  ).toBe(403);
+  for (const g of [
+    { url: "javascript:alert(1)" },
+    { url: "https://user:secret@example.com/a" },
+    { url: "https://example.com/a", tur: "zip" },
+    { url: "https://example.com/a", alternatifler: ["file:///private"] },
+  ]) {
+    expect((await post("/api/download-jobs", g)).status).toBe(400);
+  }
+  const r = await post("/api/download-jobs", { url: "http://127.0.0.1/internal", tur: "metin" });
+  expect(r.status).toBe(202);
+  const { is } = await r.json();
+  let sonuc;
+  for (let n = 0; n < 20; n++) {
+    const { isler } = await (await fetch(url + "/api/download-jobs")).json();
+    sonuc = isler.find((i: { id: string }) => i.id === is.id);
+    if (sonuc.durum === "basarisiz") break;
+    await new Promise((r) => setTimeout(r, 10));
+  }
+  expect(sonuc.durum).toBe("basarisiz");
+  expect(sonuc.hata).toContain("engellendi");
+  expect(await fs.readdir(ayar.downloadsDir)).toEqual(["book.txt"]);
+});
+it("baskı tercihlerini doğrulamadan kaynak sorgusu başlatmaz", async () => {
+  for (const alan of [
+    { isbn: "9780131103628" },
+    { baski: 2 },
+    { dil: ["en"] },
+    { yayinci: "x".repeat(201) },
+    { tur: "makale", isbn: "9780131103627" },
+  ]) {
+    expect((await post("/api/search", { baslik: "Calculus", ...alan })).status).toBe(400);
+  }
+});
 it.each([1.5, 0, 51, "Infinity"])("geçersiz limit %s aramayı başlatmaz", async (limit) => {
   expect((await post("/api/search", { baslik: "x", limit })).status).toBe(400);
 });

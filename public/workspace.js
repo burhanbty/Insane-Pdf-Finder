@@ -161,30 +161,16 @@ q("#kitaplikListe").addEventListener("click", async (e) => {
               ),
             ].slice(0, 5)
           : [];
-      const r = await fetch("/api/download", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
+      await window.indirmeYoneticisi.ekle(
+        {
           url: b.dataset.url,
           tur: b.dataset.tur,
           baslik: k.eser.baslik,
           ...(alternatifler.length ? { alternatifler } : {}),
-        }),
-        signal: AbortSignal.timeout(125_000),
-      });
-      const sonuc = await r.json();
-      if (!r.ok) throw new Error(sonuc.hata ?? "İndirme başarısız");
-      const adres = `/api/downloads/${encodeURIComponent(sonuc.dosya)}`;
-      const a = document.createElement("a");
-      a.href = adres;
-      a.download = sonuc.dosya;
-      document.body.append(a);
-      a.click();
-      a.remove();
-      b.closest(".kitaplik-karti").querySelector(".indirme-icerik").innerHTML =
-        `<p>Dosya hazır. <a href="${esc(adres)}" download="${esc(sonuc.dosya)}">Tarayıcı indirmesi başlamadıysa buradan indir</a></p>`;
-      mesaj(`Kaydedildi: ${sonuc.dosya}`);
-      document.dispatchEvent(new CustomEvent("indirmeler-degisti"));
+        },
+        b.closest(".kitaplik-karti").querySelector(".indirme-icerik"),
+      );
+      mesaj("İndirme kuyruğuna eklendi. İndirilenler bölümünden takip edebilirsin.");
     } catch (h) {
       mesaj(h.message, true);
       b.closest(".kitaplik-karti").querySelector(".indirme-icerik").textContent = h.message;
@@ -262,6 +248,18 @@ q("#aramaKaydet").addEventListener("click", async (e) => {
         yil: q("#yil").value ? Number(q("#yil").value) : undefined,
         tur: form.querySelector("input[name=tur]:checked").value,
         limit: Number(q("#limit").value),
+        ...(form.querySelector("input[name=tur]:checked").value === "kitap"
+          ? Object.fromEntries(
+              [
+                ["isbn", "hedefIsbn"],
+                ["baski", "hedefBaski"],
+                ["dil", "hedefDil"],
+                ["yayinci", "hedefYayinci"],
+              ]
+                .map(([k, id]) => [k, q(`#${id}`).value.trim()])
+                .filter(([, v]) => v),
+            )
+          : {}),
       },
     });
     await yenile();
@@ -285,6 +283,14 @@ q("#kayitliAramalar").addEventListener("click", async (e) => {
     q("#limit").value = s.limit;
     q("#webDahil").checked = a.webDahil;
     q(`#aramaForm input[value="${s.tur}"]`).checked = true;
+    for (const [k, id] of [
+      ["isbn", "hedefIsbn"],
+      ["baski", "hedefBaski"],
+      ["dil", "hedefDil"],
+      ["yayinci", "hedefYayinci"],
+    ])
+      q(`#${id}`).value = s[k] ?? "";
+    q("#aramaForm").dispatchEvent(new Event("change", { bubbles: true }));
     q("#baslik").focus();
     mesaj("Kayıtlı arama forma aktarıldı. Başlatmak için Ara düğmesine basın.");
     return;
@@ -434,7 +440,12 @@ q("#isbnBul").addEventListener("click", async (e) => {
     q("#baslik").value = g.baslik;
     q("#yazar").value = g.yazarlar[0] ?? "";
     q("#yil").value = g.yil ?? "";
+    q("#hedefIsbn").value = data.isbn;
+    q("#hedefBaski").value = data.baski ?? "";
+    q("#hedefDil").value = "";
+    q("#hedefYayinci").value = g.kaynaklar.find((k) => k.yayinci)?.yayinci?.slice(0, 200) ?? "";
     q('#aramaForm input[value="kitap"]').checked = true;
+    q("#aramaForm").dispatchEvent(new Event("change", { bubbles: true }));
     q("#isbnSonuc").textContent = [
       g.baslik,
       g.yazarlar.join(", "),

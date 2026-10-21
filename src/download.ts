@@ -2,12 +2,13 @@ import path from "node:path";
 import { pipeline } from "node:stream/promises";
 import { Readable } from "node:stream";
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import { ayar } from "./config.js";
 import { get } from "./http.js";
 import { normalizeMetin } from "./normalize.js";
 import { pdfImzasi } from "./body.js";
 import { pdfYanitiniBul } from "./pdf-resolver.js";
-import { sureSinirli } from "./deadline.js";
+import { istekSinyali, sureSinirli } from "./deadline.js";
 
 /*
  * Indirme: uzak PDF/tam metni downloads/ klasorune akis halinde yazar.
@@ -34,12 +35,57 @@ export interface IndirmeSonucu {
   yol: string;
   boyut: number;
   tur: "pdf" | "epub" | "metin" | "bilinmiyor";
+  mevcut?: boolean;
 }
 
 export interface Indirilebilir {
   url: string;
   varsayilanAd: string;
   alternatifler?: string[];
+}
+
+export interface IndirmeSecenekleri {
+  signal?: AbortSignal;
+  tekillestir?: boolean;
+  ilerleme?: (durum: {
+    alinan: number;
+    toplam?: number;
+    asama: "baglaniyor" | "indiriliyor" | "dogrulaniyor";
+  }) => void;
+}
+
+// Aynı anda biten iki indirme de aynı içerik için ikinci dosya oluşturmasın.
+let bitirmeSirasi: Promise<unknown> = Promise.resolve();
+async function ayniDosyayiBul(
+  yol: string,
+  boyut: number,
+  ozet: string,
+  signal: AbortSignal,
+): Promise<string | undefined> {
+  const kok = path.dirname(yol);
+  const dosyalar = await fs.promises.readdir(kok, { withFileTypes: true });
+  for (const d of dosyalar) {
+    signal.throwIfAborted();
+    if (!d.isFile() || path.extname(d.name) !== path.extname(yol)) continue;
+    const aday = path.join(kok, d.name);
+    try {
+      if ((await fs.promises.lstat(aday)).size !== boyut) continue;
+      // Sembolik bağlantılar ve kök dışına yönelen dosyalar kullanılmaz.
+      const st = await fs.promises.lstat(aday);
+      if (
+        !st.isFile() ||
+        path.dirname(await fs.promises.realpath(aday)) !== (await fs.promises.realpath(kok))
+      )
+        continue;
+      const hash = createHash("sha256");
+      for await (const b of fs.createReadStream(aday, { signal })) hash.update(b);
+      if (hash.digest("hex") === ozet) return aday;
+    } catch (hata) {
+      signal.throwIfAborted();
+      if ((hata as NodeJS.ErrnoException).code !== "ENOENT") throw hata;
+    }
+  }
+  return undefined;
 }
 
 /** Dosya adini guvenli hale getirir: yol gezintisi ve kural disi karakter yok. */
@@ -108,14 +154,25 @@ function guvenliUrl(aday: string): URL | null {
 export async function indir(
   hedef: Indirilebilir,
   ipucuTur?: "pdf" | "epub" | "metin",
+  secenek: IndirmeSecenekleri = {},
 ): Promise<IndirmeSonucu> {
-  return sureSinirli(() => indirDosya(hedef, ipucuTur), 120_000);
+  return sureSinirli(() => {
+    const signal = AbortSignal.any([
+      istekSinyali.getStore()!,
+      ...(secenek.signal ? [secenek.signal] : []),
+    ]);
+    return istekSinyali.run(signal, () => indirDosya(hedef, ipucuTur, { ...secenek, signal }));
+  }, 120_000);
 }
 
 async function indirDosya(
   hedef: Indirilebilir,
   ipucuTur?: "pdf" | "epub" | "metin",
+  secenek: IndirmeSecenekleri = {},
 ): Promise<IndirmeSonucu> {
+  const signal = secenek.signal!;
+  signal.throwIfAborted();
+  secenek.ilerleme?.({ alinan: 0, asama: "baglaniyor" });
   const u = guvenliUrl(hedef.url);
   if (!u) throw new Error("Geçersiz indirme adresi");
 
@@ -134,6 +191,11 @@ async function indirDosya(
         });
 
   const icerikTipi = String(cevap.headers.get("content-type") ?? "").toLowerCase();
+  const uzunluk = Number(cevap.headers.get("content-length"));
+  const toplam =
+    Number.isSafeInteger(uzunluk) && uzunluk > 0 && !cevap.headers.get("content-encoding")
+      ? uzunluk
+      : undefined;
   if (Number(cevap.headers.get("content-length")) > EN_FAZLA_BAYT) {
     await cevap.body?.cancel();
     throw new Error("Dosya 300 MB sınırını aşıyor");
@@ -159,6 +221,8 @@ async function indirDosya(
   const cikis = fs.createWriteStream(gecici, { flags: "r+" });
   let yazilan = 0;
   let ilk = Buffer.alloc(0);
+  const hash = createHash("sha256");
+  let mevcut = false;
 
   try {
     const govde = cevap.body;
@@ -170,6 +234,8 @@ async function indirDosya(
         for await (const parca of kaynak) {
           const b = parca as Buffer;
           yazilan += b.byteLength;
+          hash.update(b);
+          secenek.ilerleme?.({ alinan: yazilan, toplam, asama: "indiriliyor" });
           if (yazilan > EN_FAZLA_BAYT) {
             throw new Error(`Dosya ${EN_FAZLA_BAYT / 1024 / 1024} MB sınırını aşıyor`);
           }
@@ -182,6 +248,7 @@ async function indirDosya(
         }
       },
       cikis,
+      { signal },
     );
     if (!yazilan) throw new Error("Boş dosya indirilemez");
     if (tur === "pdf" && !pdfImzasi(ilk))
@@ -197,7 +264,24 @@ async function indirDosya(
     ) {
       throw new Error("Kaynak düz metin yerine farklı içerik döndürdü");
     }
-    await fs.promises.rename(gecici, yol);
+    secenek.ilerleme?.({ alinan: yazilan, toplam, asama: "dogrulaniyor" });
+    const bitir = async () => {
+      signal.throwIfAborted();
+      const bulunan = secenek.tekillestir
+        ? await ayniDosyayiBul(yol, yazilan, hash.digest("hex"), signal)
+        : undefined;
+      signal.throwIfAborted();
+      if (bulunan) {
+        await fs.promises.rm(gecici);
+        yol = bulunan;
+        mevcut = true;
+      } else await fs.promises.rename(gecici, yol);
+    };
+    if (secenek.tekillestir) {
+      const sira = bitirmeSirasi.catch(() => undefined).then(bitir);
+      bitirmeSirasi = sira;
+      await sira;
+    } else await bitir();
   } catch (hata) {
     cikis.destroy();
     await fs.promises.rm(gecici, { force: true });
@@ -209,6 +293,7 @@ async function indirDosya(
     yol,
     boyut: yazilan,
     tur,
+    ...(mevcut ? { mevcut } : {}),
   };
 }
 
