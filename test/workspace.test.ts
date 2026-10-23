@@ -43,6 +43,35 @@ afterEach(async () => {
 });
 
 describe("kalıcı kitaplık", () => {
+  it("alternatif PDF, lisans/sürüm ve ödünç erişim durumu yeniden okumada korunur", async () => {
+    const g = eser();
+    Object.assign(g.kaynaklar[0]!, {
+      erisim: "odunc",
+      belgeTuru: "kitap-bolumu",
+      pdfAdaylari: [
+        {
+          url: "https://repo.org/a.pdf",
+          kaynak: "unpaywall",
+          lisans: "cc-by",
+          surum: "acceptedVersion",
+          durum: "verified",
+          baglantiTuru: "pdf",
+        },
+        { url: "http://127.0.0.1/private.pdf", kaynak: "bad", durum: "aday" },
+      ],
+    });
+    await alan.ekle(g);
+    const kayit = (await new CalismaAlani(() => dosya).listele()).kitaplik[0]!.eser.kaynaklar[0]!;
+    expect(kayit).toMatchObject({ erisim: "odunc", belgeTuru: "kitap-bolumu" });
+    expect(kayit.pdfAdaylari).toEqual([
+      expect.objectContaining({
+        url: "https://repo.org/a.pdf",
+        lisans: "cc-by",
+        surum: "acceptedVersion",
+        durum: "aday",
+      }),
+    ]);
+  });
   it("baskı bilgisi ve kayıtlı arama tercihleri yeniden okumada korunur", async () => {
     const g = eser();
     Object.assign(g.kaynaklar[0]!, {

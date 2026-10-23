@@ -155,7 +155,10 @@ q("#kitaplikListe").addEventListener("click", async (e) => {
           ? [
               ...new Set(
                 [
-                  ...k.eser.kaynaklar.map((s) => url(s.pdf)),
+                  ...k.eser.kaynaklar.flatMap((s) => [
+                    url(s.pdf),
+                    ...(s.pdfAdaylari ?? []).map((a) => url(a.url)),
+                  ]),
                   ...k.eser.kaynaklar.filter((s) => s.erisim !== "odunc").map((s) => url(s.link)),
                 ].filter((u) => u && u !== b.dataset.url),
               ),

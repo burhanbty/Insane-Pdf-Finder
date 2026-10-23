@@ -74,6 +74,45 @@ const ids = () => [...d.querySelectorAll<HTMLElement>(".kart")].map((k) => k.dat
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 afterEach(() => dom?.window.close());
 
+it("tek kaynağın alternatif PDF'leri indirme kuyruğuna gider ve kitap bölümü etiketi görünür", async () => {
+  await kur((url) =>
+    url === "/api/download-jobs"
+      ? { is: { id: "alternatives", durum: "sirada", baslik: "Book", alinan: 0 } }
+      : cevap([
+          kart("Book", "doab", {
+            kaynaklar: [
+              {
+                kaynak: "doab",
+                kaynakAd: "DOAB",
+                link: "https://publisher.org/book",
+                pdf: "https://publisher.org/main.pdf",
+                belgeTuru: "kitap-bolumu",
+                pdfAdaylari: [
+                  { url: "https://publisher.org/main.pdf" },
+                  { url: "https://repo.org/alternative.pdf" },
+                  { url: "javascript:alert(1)" },
+                ],
+              },
+            ],
+          }),
+        ]),
+  );
+  degistir("#webDahil", false);
+  gonder();
+  await vi.waitFor(() => expect(ids()).toEqual(["Book"]));
+  expect(d.querySelector(".kaynak-rozet")?.textContent).toContain("Kitap bölümü");
+  (d.querySelector('[data-eylem="indir"]') as HTMLElement).click();
+  await vi.waitFor(() =>
+    expect(cagrilar.some((c) => c.url === "/api/download-jobs" && c.body)).toBe(true),
+  );
+  const body = cagrilar.find((c) => c.url === "/api/download-jobs" && c.body)?.body as {
+    alternatifler: string[];
+  };
+  expect(body.alternatifler).toContain("https://repo.org/alternative.pdf");
+  expect(body.alternatifler).not.toContain("https://publisher.org/main.pdf");
+  expect(body.alternatifler.some((s) => s.startsWith("javascript:"))).toBe(false);
+});
+
 describe("arama araçları", () => {
   it("baskı tercihini gönderir, kıyaslamayı ve yazım önerisini güvenli biçimde gösterir", async () => {
     const s = {

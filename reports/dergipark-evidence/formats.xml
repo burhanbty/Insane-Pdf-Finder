@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/zollu/bundles/ojsoai/oai2.xsl" ?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+         http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-10-22T22:50:42Z</responseDate>
+    <request verb="ListMetadataFormats">https://dergipark.org.tr/api/public/oai/?verb=ListMetadataFormats</request>
+    <ListMetadataFormats>
+        <metadataFormat>
+            <metadataPrefix>oai_dc</metadataPrefix>
+            <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
+            <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>oai_etdms</metadataPrefix>
+            <schema>http://www.ndltd.org/standards/metadata/etdms/1.0/etdms.xsd</schema>
+            <metadataNamespace>http://www.ndltd.org/standards/metadata/etdms/1.0/</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>oai_marc</metadataPrefix>
+            <schema>http://www.openarchives.org/OAI/1.1/oai_marc.xsd</schema>
+            <metadataNamespace>http://www.openarchives.org/OAI/1.1/oai_marc</metadataNamespace>
+        </metadataFormat>
+        <metadataFormat>
+            <metadataPrefix>oai_mods</metadataPrefix>
+            <schema>http://www.loc.gov/standards/mods/v3/mods-3-0.xsd</schema>
+            <metadataNamespace>http://www.loc.gov/mods/v3</metadataNamespace>
+        </metadataFormat>
+    </ListMetadataFormats>
+</OAI-PMH>

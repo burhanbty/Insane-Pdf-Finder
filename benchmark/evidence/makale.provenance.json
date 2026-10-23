@@ -1,0 +1,5 @@
+{
+  "url": "https://api.crossref.org/works?filter=type%3Ajournal-article&rows=30&select=DOI,title,author,published,URL",
+  "alindi": "2026-10-22T19:42:37.799Z",
+  "sha256": "34e38e9655d281cfac7885b782d3907f2dda540ae5c5f6dc31005a6ca7d2a16e"
+}

@@ -1,0 +1,159 @@
+{
+  "response":{
+    "numFound":5257,
+    "start":0,
+    "maxScore":3.1059394,
+    "numFoundExact":true,
+    "docs":[{
+      "title_s":["Introduction to symplectic mechanics"],
+      "authFullName_s":["Zaidni Azeddine"],
+      "uri_s":"https://hal.science/hal-03611773v1",
+      "producedDateY_i":2022
+    },{
+      "title_s":["An Introduction to Path Planning and Convex Optimization for Control"],
+      "authFullName_s":["Johann Laconte"],
+      "uri_s":"https://hal.inrae.fr/hal-04891897v1",
+      "producedDateY_i":2025
+    },{
+      "title_s":["Les femmes françaises des « années folles »"],
+      "authFullName_s":["Dominique Lejeune"],
+      "uri_s":"https://shs.hal.science/halshs-03133907v1",
+      "producedDateY_i":2021
+    },{
+      "title_s":["On selves and I’s – A lecture apropos of Douglas Hofstadter’s \"I am a strange loop"],
+      "authFullName_s":["Dimitris Ginosatis"],
+      "uri_s":"https://hal.science/cel-01247890v5",
+      "producedDateY_i":2015
+    },{
+      "title_s":["Principes et normes de radioprotection"],
+      "authFullName_s":["H. Metivier"],
+      "uri_s":"https://cel.hal.science/cel-00652666v1",
+      "producedDateY_i":1996
+    },{
+      "title_s":["Le développement durable de l’agriculture : notions générales, enjeux, stratégies d’actions publiques et décisions des acteurs"],
+      "authFullName_s":["Jean-Paul Dubeuf"],
+      "uri_s":"https://hal.inrae.fr/hal-02811475v1",
+      "producedDateY_i":2012
+    },{
+      "title_s":["The spectroscopy of fission fragments"],
+      "authFullName_s":["W.R. Philipps"],
+      "uri_s":"https://cel.hal.science/cel-00652729v1",
+      "producedDateY_i":1997
+    },{
+      "title_s":["Quarks et gluons à haute témpérature"],
+      "authFullName_s":["Jean-Yves Ollitrault"],
+      "uri_s":"https://cel.hal.science/cel-00653210v1",
+      "producedDateY_i":1998
+    },{
+      "title_s":["La structure électromagnétique du deuton"],
+      "authFullName_s":["S. Kox"],
+      "uri_s":"https://cel.hal.science/cel-00653212v1",
+      "producedDateY_i":1998
+    },{
+      "title_s":["La psychologie est un sport de combat","Psychology is a fighting sport"],
+      "authFullName_s":["Hervé Larroze-Marracq"],
+      "uri_s":"https://hal.science/hal-04092926v1",
+      "producedDateY_i":2009
+    },{
+      "title_s":["Méta-écosystèmes et Changements Globaux"],
+      "authFullName_s":["Isabelle Gounand"],
+      "uri_s":"https://hal.science/hal-04332380v1",
+      "producedDateY_i":2022
+    },{
+      "title_s":["Les limites de la rationalité en intelligence artificielle","The Limits of Rationality in Artificial Intelligence"],
+      "authFullName_s":["Charles Bodon"],
+      "uri_s":"https://hal.science/hal-04366272v3",
+      "producedDateY_i":2023
+    },{
+      "title_s":["Deviance of Poisson regression"],
+      "authFullName_s":["Enwu Liu"],
+      "uri_s":"https://hal.science/hal-02335439v1",
+      "producedDateY_i":2019
+    },{
+      "title_s":["Systèmes non-linéaire et chaos"],
+      "authFullName_s":["Paul Manneville"],
+      "uri_s":"https://cel.hal.science/cel-00092941v1",
+      "producedDateY_i":2006
+    },{
+      "title_s":["Simulation numérique en physique statistique"],
+      "authFullName_s":["Pascal Viot"],
+      "uri_s":"https://cel.hal.science/cel-00092945v1",
+      "producedDateY_i":2006
+    },{
+      "title_s":["Physique Statistique et Gaz Parfaits"],
+      "authFullName_s":["Patrice Bacher"],
+      "uri_s":"https://cel.hal.science/cel-00092973v1",
+      "producedDateY_i":2006
+    },{
+      "title_s":["Quantum cryptography"],
+      "authFullName_s":["Gilles Brassard"],
+      "uri_s":"https://cel.hal.science/cel-00092980v1",
+      "producedDateY_i":2006
+    },{
+      "title_s":["Quantum computation - alternative models and algorithms"],
+      "authFullName_s":["Dorit Aharonov"],
+      "uri_s":"https://cel.hal.science/cel-00092985v1",
+      "producedDateY_i":2006
+    },{
+      "title_s":["Geometrical foundations of tensor calculus and relativity"],
+      "authFullName_s":["Frédéric Schuller","Vincent Lorent"],
+      "uri_s":"https://cel.hal.science/cel-00093001v1",
+      "producedDateY_i":2006
+    },{
+      "title_s":["équation de Dirac"],
+      "authFullName_s":["Alain Comtet"],
+      "uri_s":"https://cel.hal.science/cel-00092970v1",
+      "producedDateY_i":2006
+    },{
+      "title_s":["Cointégration et Modèle à Correction d'Erreur : Pratiques sur Eviews","Cointegration and Error Correction Model : practices on Eviews"],
+      "authFullName_s":["Jonas Kibala Kuma"],
+      "uri_s":"https://hal.science/cel-01771038v1",
+      "producedDateY_i":2018
+    },{
+      "title_s":["Les grandes questions en physique des particules"],
+      "authFullName_s":["M. Davier"],
+      "uri_s":"https://in2p3.hal.science/in2p3-00008354v1",
+      "producedDateY_i":2000
+    },{
+      "title_s":["Workshop on Genomic Evaluation"],
+      "authFullName_s":["Marie Pégard"],
+      "uri_s":"https://hal.science/hal-04731328v1",
+      "producedDateY_i":2020
+    },{
+      "title_s":["La pensée de Georg Simmel : Individualismus der modernen Zeit"],
+      "authFullName_s":["Sonia Goldblum"],
+      "uri_s":"https://hal.science/hal-04251405v1",
+      "producedDateY_i":2018
+    },{
+      "title_s":["TP formation des images"],
+      "authFullName_s":["Brahim Lamine"],
+      "uri_s":"https://hal-sfo.ccsd.cnrs.fr/sfo-00652557v1",
+      "producedDateY_i":2009
+    },{
+      "title_s":["Découverte de airGRiwrm sur la Moyenne Vallée de l’Hérault"],
+      "authFullName_s":["David Dorchies"],
+      "uri_s":"https://hal.inrae.fr/hal-04812296v1",
+      "producedDateY_i":2024
+    },{
+      "title_s":["ANALYSE DE FOURIER ET DISTRIBUTIONS"],
+      "authFullName_s":["Joëlle Pichaud"],
+      "uri_s":"https://hal.science/hal-04972986v1",
+      "producedDateY_i":2003
+    },{
+      "title_s":["Les adjonctions: une approche algébrique"],
+      "authFullName_s":["Fernand Meyer"],
+      "uri_s":"https://minesparis-psl.hal.science/cel-01534184v1",
+      "producedDateY_i":2016
+    },{
+      "title_s":["Conception et conduite d’un projet de communication. 1: Définir les objectifs d’une campagne de communication"],
+      "authFullName_s":["Peter Stockinger"],
+      "uri_s":"https://inalco.hal.science/hal-02974423v1",
+      "producedDateY_i":2020
+    },{
+      "title_s":["Le rôle des nouvelles technologies dans la désynchronisation des apprentissages à l’école primaire"],
+      "authFullName_s":["Julien Dugas"],
+      "uri_s":"https://hal.science/hal-03059058v1",
+      "producedDateY_i":2018
+    }]
+  }
+}

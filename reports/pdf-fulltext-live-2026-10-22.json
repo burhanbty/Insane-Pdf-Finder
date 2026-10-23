@@ -1,0 +1,237 @@
+{
+  "tarih": "2026-10-22T20:11:53.400Z",
+  "yapilandirildi": true,
+  "adresRaporaYazilmadi": true,
+  "onbellek": "Doğrulama başında yeni ve yalıtılmış önbellek",
+  "sinir": "Canlı Crossref künyesi üzerinden Unpaywall adayları; bu rapor dosya indirme/kimlik doğrulaması değildir.",
+  "sonuclar": [
+    {
+      "doi": "10.1038/s41597-023-02208-w",
+      "durum": {
+        "hazir": true,
+        "planlanan": 1,
+        "tamamlanan": 1,
+        "eklenenAday": 4,
+        "sureMs": 629,
+        "hatalar": []
+      },
+      "eser": {
+        "kaynak": "crossref",
+        "kaynakAd": "Crossref",
+        "tur": "makale",
+        "baslik": "CORE: A Global Aggregation Service for Open Access Papers",
+        "yazarlar": [
+          "Petr Knoth",
+          "Drahomira Herrmannova",
+          "Matteo Cancellieri",
+          "Lucas Anastasiou",
+          "Nancy Pontika",
+          "Samuel Pearce",
+          "Bikash Gyawali",
+          "David Pride"
+        ],
+        "yil": 2023,
+        "doi": "10.1038/s41597-023-02208-w",
+        "link": "https://doi.org/10.1038/s41597-023-02208-w",
+        "pdfAdaylari": [
+          {
+            "url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://doi.org/10.1038/s41597-023-02208-w",
+            "doi": "10.1038/s41597-023-02208-w",
+            "lisans": "cc-by",
+            "surum": "publishedVersion",
+            "hostTuru": "publisher",
+            "baglantiTuru": "pdf",
+            "durum": "aday"
+          },
+          {
+            "url": "https://oro.open.ac.uk/89835/1/article.pdf",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://oro.open.ac.uk/view/person/pk3295.html%3E;",
+            "doi": "10.1038/s41597-023-02208-w",
+            "lisans": "other-oa",
+            "surum": "acceptedVersion",
+            "hostTuru": "repository",
+            "baglantiTuru": "pdf",
+            "durum": "aday"
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10247729/pdf/41597_2023_Article_2208.pdf",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/10247729",
+            "doi": "10.1038/s41597-023-02208-w",
+            "lisans": "cc-by",
+            "surum": "submittedVersion",
+            "hostTuru": "repository",
+            "baglantiTuru": "pdf",
+            "durum": "aday"
+          },
+          {
+            "url": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+            "doi": "10.1038/s41597-023-02208-w",
+            "lisans": "cc-by-sa",
+            "surum": "submittedVersion",
+            "hostTuru": "repository",
+            "baglantiTuru": "kayit",
+            "durum": "aday"
+          }
+        ],
+        "pdf": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+        "erisim": "acik"
+      }
+    },
+    {
+      "doi": "10.1371/journal.pone.0000308",
+      "durum": {
+        "hazir": true,
+        "planlanan": 1,
+        "tamamlanan": 1,
+        "eklenenAday": 4,
+        "sureMs": 165,
+        "hatalar": []
+      },
+      "eser": {
+        "kaynak": "crossref",
+        "kaynakAd": "Crossref",
+        "tur": "makale",
+        "baslik": "Sharing Detailed Research Data Is Associated with Increased Citation Rate",
+        "yazarlar": ["Heather A. Piwowar", "Roger S. Day", "Douglas B. Fridsma"],
+        "yil": 2007,
+        "doi": "10.1371/journal.pone.0000308",
+        "link": "https://doi.org/10.1371/journal.pone.0000308",
+        "pdfAdaylari": [
+          {
+            "url": "https://doi.org/10.1371/journal.pone.0000308",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://doi.org/10.1371/journal.pone.0000308",
+            "doi": "10.1371/journal.pone.0000308",
+            "lisans": "cc-by",
+            "surum": "publishedVersion",
+            "hostTuru": "publisher",
+            "baglantiTuru": "kayit",
+            "durum": "aday"
+          },
+          {
+            "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/1817752",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/1817752",
+            "doi": "10.1371/journal.pone.0000308",
+            "lisans": "cc-by",
+            "surum": "submittedVersion",
+            "hostTuru": "repository",
+            "baglantiTuru": "kayit",
+            "durum": "aday"
+          },
+          {
+            "url": "https://doaj.org/article/8fafaa9ad5ff4b3fa1525b29d957b01d",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://doaj.org/article/8fafaa9ad5ff4b3fa1525b29d957b01d",
+            "doi": "10.1371/journal.pone.0000308",
+            "lisans": "cc-by-sa",
+            "surum": "submittedVersion",
+            "hostTuru": "repository",
+            "baglantiTuru": "kayit",
+            "durum": "aday"
+          },
+          {
+            "url": "https://figshare.com/articles/dataset/Sharing_Detailed_Research_Data_Is_Associated_with_Increased_Citation_Rate/152356",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://figshare.com/articles/dataset/Sharing_Detailed_Research_Data_Is_Associated_with_Increased_Citation_Rate/152356",
+            "doi": "10.1371/journal.pone.0000308",
+            "lisans": "cc-by",
+            "surum": "submittedVersion",
+            "hostTuru": "repository",
+            "baglantiTuru": "kayit",
+            "durum": "aday"
+          }
+        ],
+        "erisim": "acik"
+      }
+    },
+    {
+      "doi": "10.1038/s41586-021-03819-2",
+      "durum": {
+        "hazir": true,
+        "planlanan": 1,
+        "tamamlanan": 1,
+        "eklenenAday": 2,
+        "sureMs": 179,
+        "hatalar": []
+      },
+      "eser": {
+        "kaynak": "crossref",
+        "kaynakAd": "Crossref",
+        "tur": "makale",
+        "baslik": "Highly accurate protein structure prediction with AlphaFold",
+        "yazarlar": [
+          "John Jumper",
+          "Richard Evans",
+          "Alexander Pritzel",
+          "Tim Green",
+          "Michael Figurnov",
+          "Olaf Ronneberger",
+          "Kathryn Tunyasuvunakool",
+          "Russ Bates",
+          "Augustin Žídek",
+          "Anna Potapenko",
+          "Alex Bridgland",
+          "Clemens Meyer",
+          "Simon A. A. Kohl",
+          "Andrew J. Ballard",
+          "Andrew Cowie",
+          "Bernardino Romera-Paredes",
+          "Stanislav Nikolov",
+          "Rishub Jain",
+          "Jonas Adler",
+          "Trevor Back",
+          "Stig Petersen",
+          "David Reiman",
+          "Ellen Clancy",
+          "Michal Zielinski",
+          "Martin Steinegger",
+          "Michalina Pacholska",
+          "Tamas Berghammer",
+          "Sebastian Bodenstein",
+          "David Silver",
+          "Oriol Vinyals",
+          "Andrew W. Senior",
+          "Koray Kavukcuoglu",
+          "Pushmeet Kohli",
+          "Demis Hassabis"
+        ],
+        "yil": 2021,
+        "doi": "10.1038/s41586-021-03819-2",
+        "link": "https://doi.org/10.1038/s41586-021-03819-2",
+        "pdfAdaylari": [
+          {
+            "url": "https://www.nature.com/articles/s41586-021-03819-2.pdf",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://doi.org/10.1038/s41586-021-03819-2",
+            "doi": "10.1038/s41586-021-03819-2",
+            "lisans": "cc-by",
+            "surum": "publishedVersion",
+            "hostTuru": "publisher",
+            "baglantiTuru": "pdf",
+            "durum": "aday"
+          },
+          {
+            "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/8371605",
+            "kaynak": "unpaywall",
+            "kayitUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/8371605",
+            "doi": "10.1038/s41586-021-03819-2",
+            "lisans": "cc-by",
+            "surum": "submittedVersion",
+            "hostTuru": "repository",
+            "baglantiTuru": "kayit",
+            "durum": "aday"
+          }
+        ],
+        "pdf": "https://www.nature.com/articles/s41586-021-03819-2.pdf",
+        "erisim": "acik"
+      }
+    }
+  ]
+}

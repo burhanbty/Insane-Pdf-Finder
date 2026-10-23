@@ -1,4 +1,6 @@
 import { onbellekli } from "./cache.js";
+import { createHash } from "node:crypto";
+import { tamMetniZenginlestir, type TamMetinDurumu } from "./fulltext.js";
 import { ayar } from "./config.js";
 import { sureSinirli } from "./deadline.js";
 import { kaynakHazirligi } from "./source-state.js";
@@ -20,6 +22,7 @@ export interface AramaCevabi {
   kaynakDurumlari: KaynakDurumu[];
   toplamSonuc: number;
   gruplamaNotu: string;
+  tamMetinDurumu?: TamMetinDurumu;
 }
 
 /**
@@ -32,9 +35,24 @@ export async function ara(sorgu: Sorgu): Promise<AramaCevabi> {
   // Ayni sorgu tekrar ederse diskteki onbellegi doneruz. arXiv ve Semantic
   // Scholar gibi anahtarsiz API'ler kotali; tekrar eden aramalar onlari yiyor.
   // Eski gruplama kuraliyla birlestirilmis disk kayitlarini yeniden kullanma.
-  const anahtar = `arama:v6:${JSON.stringify(sorgu)}`;
+  const kaynaklar = await kaynaklariYukle();
+  const ayarSurumu = createHash("sha256")
+    .update(JSON.stringify([ayar.unpaywallEmail, ayar.openalexKey]))
+    .digest("hex");
+  const kaynakSurumleri = kaynaklar.map((k) => {
+    let surum: string;
+    try {
+      surum = k.onbellekSurumu?.() ?? "v1";
+    } catch {
+      surum = "surum-hatasi";
+    }
+    return [k.id, surum, kaynakHazirligi(k).hazir];
+  });
+  const anahtar = `arama:v8:${ayarSurumu}:${JSON.stringify(kaynakSurumleri)}:${JSON.stringify(sorgu)}`;
   return onbellekli(anahtar, () => araCanlı(sorgu), {
-    sakla: (cevap) => !cevap.kaynakDurumlari.some((k) => k.hazir && k.hataMesaji),
+    sakla: (cevap) =>
+      !cevap.kaynakDurumlari.some((k) => k.hazir && k.hataMesaji) &&
+      !cevap.tamMetinDurumu?.hatalar.length,
   });
 }
 
@@ -72,7 +90,13 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
     uygun.map(async (k) => {
       const t0 = Date.now();
       try {
-        const kaynakSurumu = ["internet-archive", "open-library"].includes(k.id) ? "v3" : "v1";
+        const kaynakSurumu =
+          k.onbellekSurumu?.() ??
+          (["internet-archive", "open-library"].includes(k.id)
+            ? "v3"
+            : k.id === "openalex"
+              ? `v2:${createHash("sha256").update(ayar.openalexKey).digest("hex")}`
+              : "v1");
         const isler = await onbellekli(
           `kaynak:${kaynakSurumu}:${k.id}:${JSON.stringify(sorgu)}`,
           async () => {
@@ -102,7 +126,10 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
   );
 
   for (const r of sonuclar) {
-    hepsi.push(...r.isler);
+    // Kaynak önbelleğinin nesnelerine sorguya özgü tam metin sonuçlarını yazma.
+    hepsi.push(
+      ...r.isler.map((w) => ({ ...w, pdfAdaylari: w.pdfAdaylari?.map((a) => ({ ...a })) })),
+    );
     durumlar.push({
       id: r.k.id,
       ad: r.k.ad,
@@ -134,11 +161,14 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
 
   const gruplar = grupla(hepsi, sorgu);
   gruplar.sort((a, b) => b.puan - a.puan);
+  const secilen = gruplar.slice(0, sorgu.limit);
+  const tamMetinDurumu = await tamMetniZenginlestir(secilen.flatMap((g) => g.kaynaklar));
 
   return {
     sorgu,
     sureMs: Date.now() - baslangic,
-    gruplar: gruplar.slice(0, sorgu.limit),
+    gruplar: secilen,
+    tamMetinDurumu,
     kaynakDurumlari: durumlar.sort((a, b) => a.sureMs - b.sureMs),
     toplamSonuc: hepsi.length,
     gruplamaNotu:
@@ -175,6 +205,7 @@ function grupUyumlu(g: Gruplanmis, w: Work): boolean {
       .toLowerCase()
       .replace(/^(https?:\/\/(dx\.)?doi\.org\/|doi:\s*)/, "");
   return g.kaynaklar.every((k) => {
+    if (k.belgeTuru && w.belgeTuru && k.belgeTuru !== w.belgeTuru) return false;
     if (k.doi && w.doi) return doiAnahtari(k.doi) === doiAnahtari(w.doi);
     if (!baskilarUyumlu(k, w)) return false;
     return !k.yazarlar.length || !w.yazarlar.length || ortakSoyadVar(k.yazarlar, w.yazarlar);

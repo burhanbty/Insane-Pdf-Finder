@@ -4,6 +4,8 @@ import { createHash, randomUUID } from "node:crypto";
 import { eserAnahtari } from "./normalize.js";
 import type { Gruplanmis, Sorgu, Work } from "./types.js";
 import { isbnDogrula } from "./isbn.js";
+import { pdfAdaylariniBirlestir } from "./pdf-candidates.js";
+import type { PdfAdayi } from "./types.js";
 
 export class CalismaHatasi extends Error {
   constructor(
@@ -97,6 +99,12 @@ function eserOku(v: unknown): Gruplanmis {
       dil: metin(k.dil, 200) || undefined,
       yayinci: metin(k.yayinci, 500) || undefined,
       pdf: adres(k.pdf),
+      pdfAdaylari: pdfAdaylariOku(k.pdfAdaylari),
+      erisim: ["acik", "sinirli", "odunc", "yonlendir"].includes(String(k.erisim))
+        ? (k.erisim as Work["erisim"])
+        : undefined,
+      belgeTuru:
+        k.belgeTuru === "kitap" || k.belgeTuru === "kitap-bolumu" ? k.belgeTuru : undefined,
       epub: adres(k.epub),
       tamMetin: adres(k.tamMetin),
     };
@@ -113,6 +121,28 @@ function eserOku(v: unknown): Gruplanmis {
     puan: 0,
     kaynaklar,
   };
+}
+function pdfAdaylariOku(v: unknown): PdfAdayi[] | undefined {
+  if (v === undefined) return undefined;
+  if (!Array.isArray(v) || v.length > 30)
+    throw new CalismaHatasi("En fazla 30 PDF adayı kaydedilebilir");
+  return pdfAdaylariniBirlestir(
+    v.map((v) => {
+      const a = nesne(v);
+      return {
+        url: adres(a.url) ?? "",
+        kaynak: metin(a.kaynak, 100, true),
+        kayitUrl: adres(a.kayitUrl),
+        doi: metin(a.doi, 300) || undefined,
+        lisans: metin(a.lisans, 500) || undefined,
+        surum: metin(a.surum, 100) || undefined,
+        hostTuru:
+          a.hostTuru === "publisher" || a.hostTuru === "repository" ? a.hostTuru : undefined,
+        baglantiTuru: a.baglantiTuru === "kayit" ? "kayit" : "pdf",
+        durum: "aday" as const,
+      };
+    }),
+  );
 }
 function kimlik(eser: Gruplanmis): string {
   const doi = eser.kaynaklar

@@ -1,13 +1,13 @@
 import { ayar } from "../config.js";
 import { getJson } from "../http.js";
 import { yazarParcalari } from "../normalize.js";
-import type { SourceModule, Sorgu, Work } from "../types.js";
+import { doiAnahtari } from "../doi.js";
+import { pdfAdaylariniBirlestir } from "../pdf-candidates.js";
+import type { PdfAdayi, SourceModule, Sorgu, Work } from "../types.js";
 
 /*
- * OpenAlex + Unpaywall zinciri.
- *  OpenAlex: genis makale/bilimsel kayit indeksi, konu etiketleri verir.
- *  Unpaywall: DOI verildiginde yasal acik erisim PDF kopyasini bulur
- *             (Green OA: arXiv/preprint, kurumsal depo, vs.).
+ * OpenAlex kayıtları ve bütün açık erişim konumları.
+ * Unpaywall bütün kaynaklara ortak fulltext.ts katmanında çalışır.
  */
 
 /** Sorgudaki yazar, eser yazarlarindan biriyle soyad uyumlu mu. */
@@ -19,6 +19,14 @@ function yazarUstundenGecer(eserYazarlari: string[], sorguYazar: string): boolea
   });
 }
 
+interface OAKonum {
+  landing_page_url?: string | null;
+  pdf_url?: string | null;
+  is_oa?: boolean;
+  license?: string | null;
+  version?: string | null;
+  source?: { display_name?: string; type?: string } | null;
+}
 interface OAWork {
   id?: string;
   doi?: string;
@@ -26,16 +34,9 @@ interface OAWork {
   publication_year?: number;
   authorships?: { author?: { display_name?: string } }[];
   abstract_inverted_index?: Record<string, number[]>;
-  primary_location?: {
-    landing_page_url?: string | null;
-    pdf_url?: string | null;
-    source?: { display_name?: string } | null;
-  };
-  best_oa_location?: {
-    landing_page_url?: string | null;
-    pdf_url?: string | null;
-    license?: string | null;
-  } | null;
+  primary_location?: OAKonum;
+  best_oa_location?: OAKonum | null;
+  locations?: OAKonum[];
   open_access?: { is_oa?: boolean; oa_status?: string };
   topics?: { display_name?: string }[];
   cited_by_count?: number;
@@ -54,38 +55,11 @@ function tersIndekstenOzet(harita?: Record<string, number[]>): string | undefine
   return konumlar.map(([, k]) => k).join(" ");
 }
 
-interface UPWall {
-  best_oa_location?: {
-    url_for_pdf?: string | null;
-    url_for_landing_page?: string | null;
-    license?: string | null;
-    host_type?: string | null;
-  } | null;
-  oa_locations?: {
-    url_for_pdf?: string | null;
-    url_for_landing_page?: string | null;
-    host_type?: string | null;
-    license?: string | null;
-  }[];
-}
-
-async function unpaywall(doi: string): Promise<UPWall | null> {
-  if (!ayar.unpaywallEmail) return null;
-  try {
-    return await getJson<UPWall>(
-      `https://api.unpaywall.org/v2/${encodeURIComponent(doi)}?email=${encodeURIComponent(ayar.unpaywallEmail)}`,
-      { boslukMs: 350, timeoutMs: 12_000 },
-    );
-  } catch {
-    return null;
-  }
-}
-
 async function ara(sorgu: Sorgu): Promise<Work[]> {
   const u = new URL("https://api.openalex.org/works");
   u.searchParams.set("search", sorgu.baslik);
   u.searchParams.set("per-page", String(Math.min(50, sorgu.limit * 2)));
-  if (ayar.unpaywallEmail) u.searchParams.set("mailto", ayar.unpaywallEmail);
+  if (ayar.contactEmail) u.searchParams.set("mailto", ayar.contactEmail);
   u.searchParams.set(
     "select",
     [
@@ -97,6 +71,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
       "abstract_inverted_index",
       "primary_location",
       "best_oa_location",
+      "locations",
       "open_access",
       "topics",
       "cited_by_count",
@@ -104,12 +79,12 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     ].join(","),
   );
 
-  // Not: OpenAlex `filter` parametresini 400 ile reddediyor; yazar ve yil
-  // filtresi sonuc listesinde uygulanir (asagida).
+  // Bu adaptörde yazar ve yıl uyumu dönen kayıtlar üzerinde uygulanır.
 
   const veri = await getJson<{ results?: OAWork[] }>(u.toString(), {
     boslukMs: 350,
     timeoutMs: 20_000,
+    header: ayar.openalexKey ? { authorization: `Bearer ${ayar.openalexKey}` } : undefined,
   });
 
   const sonuc: Work[] = [];
@@ -121,21 +96,31 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
     if (sorgu.yazar && !yazarUstundenGecer(yazarlar, sorgu.yazar)) continue;
     if (sorgu.yil && w.publication_year && Math.abs(sorgu.yil - w.publication_year) > 1) continue;
 
-    const doi = w.doi?.replace(/^https?:\/\/doi\.org\//, "");
-    let pdf = w.best_oa_location?.pdf_url ?? w.primary_location?.pdf_url ?? undefined;
-    let erisim: Work["erisim"] = pdf ? "acik" : w.open_access?.is_oa ? "sinirli" : "yonlendir";
-
-    // DOI varsa yasal OA kopyasini arayin.
-    if (!pdf && doi) {
-      const up = await unpaywall(doi);
-      const enIyi = up?.best_oa_location ?? up?.oa_locations?.[0];
-      if (enIyi?.url_for_pdf) {
-        pdf = enIyi.url_for_pdf;
-        erisim = "acik";
-      } else if (enIyi?.url_for_landing_page && erisim === "yonlendir") {
-        erisim = "sinirli";
-      }
-    }
+    const doi = doiAnahtari(w.doi);
+    const pdfAdaylari = pdfAdaylariniBirlestir(
+      [w.best_oa_location, w.primary_location, ...(w.locations ?? [])].flatMap((k): PdfAdayi[] => {
+        if (
+          !k?.pdf_url ||
+          k.is_oa === false ||
+          (k !== w.best_oa_location && !k.is_oa && !w.open_access?.is_oa)
+        )
+          return [];
+        return [
+          {
+            url: k.pdf_url,
+            kaynak: "openalex",
+            kayitUrl: k.landing_page_url ?? undefined,
+            doi,
+            lisans: k.license ?? undefined,
+            surum: k.version ?? undefined,
+            hostTuru: k.source?.type === "repository" ? "repository" : undefined,
+            durum: "aday",
+          },
+        ];
+      }),
+    );
+    const pdf = pdfAdaylari[0]?.url;
+    const erisim: Work["erisim"] = pdf ? "acik" : w.open_access?.is_oa ? "sinirli" : "yonlendir";
 
     const ozet = tersIndekstenOzet(w.abstract_inverted_index);
 
@@ -160,6 +145,7 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
         w.id ??
         "https://openalex.org",
       pdf,
+      pdfAdaylari,
       erisim,
       ham: w,
     });
@@ -170,9 +156,9 @@ async function ara(sorgu: Sorgu): Promise<Work[]> {
 
 const kaynak: SourceModule = {
   id: "openalex",
-  ad: "OpenAlex + Unpaywall",
+  ad: "OpenAlex",
   tur: ["makale"],
-  aciklama: "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+  aciklama: "Bilimsel makale kayıtları ve alternatif açık erişim kopyaları",
   ara,
 };
 

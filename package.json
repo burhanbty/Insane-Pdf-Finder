@@ -20,7 +20,10 @@
     "check": "npm run lint && npm run typecheck && npm run test",
     "smoke": "tsx scripts/smoke-server.ts",
     "smoke:search": "tsx scripts/smoke.ts",
-    "smoke:download": "tsx scripts/smoke-download.ts"
+    "smoke:download": "tsx scripts/smoke-download.ts",
+    "benchmark:pdf": "tsx scripts/pdf-benchmark.ts",
+    "benchmark:build": "tsx scripts/pdf-benchmark-build.ts",
+    "sources:sync": "tsx scripts/sync-book-catalogs.ts"
   },
   "dependencies": {
     "dotenv": "^18.0.5",

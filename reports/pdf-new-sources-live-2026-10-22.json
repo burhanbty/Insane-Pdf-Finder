@@ -1,0 +1,56 @@
+{
+  "tarih": "2026-10-22T19:59:23.723Z",
+  "yapilandirma": {
+    "unpaywallEpostaVar": false,
+    "openalexAnahtarVar": false
+  },
+  "durumlar": [
+    {
+      "kaynak": "oapen",
+      "baslik": "Multilevel Social Citizenship",
+      "durum": "EXTERNAL_LIMIT",
+      "hata": "Kaynak otomatik indirmeye izin vermedi (HTTP 403). Kaynak sayfasını açarak erişim seçeneklerini kontrol edebilirsiniz.",
+      "sureMs": 3343
+    },
+    {
+      "kaynak": "doab",
+      "baslik": "A World of Nourishment",
+      "eser": {
+        "kaynak": "doab",
+        "kaynakAd": "DOAB",
+        "tur": "kitap",
+        "baslik": "A World of Nourishment",
+        "yazarlar": ["Cinzia Pieruccini", "Paola M. Rossi"],
+        "yil": 2016,
+        "ozet": "Today as in the past, perhaps no other great culture of humankind is so markedly characterised by traditions in the field of nutrition as that of South Asia. In India food has served to express religious values, philosophical positions or material power, and between norms and narration Indian literature has dedicated ample space to the subject, presenting a broad range of diverse or variously aligned positions, and evidence of their evolution over time. This book provides a collection of essays on the subject, taking a broad and varied approach ranging chronologically from Vedic antiquity to the evidence of our own day, thus exposing, as in a sort of comprehensive outline, many of the tendencies, tensions and developments that have occurred within the framework of constant self-analysis and reflection.",
+        "konular": [],
+        "dil": "eng",
+        "yayinci": "Ledizioni",
+        "isbn": "9788867055432",
+        "link": "https://directory.doabooks.org/handle/20.500.12854/62823",
+        "pdf": "http://www.ledizioni.it/stag/wp-content/uploads/2018/06/World_Nour_web1.pdf",
+        "pdfAdaylari": [
+          {
+            "url": "http://www.ledizioni.it/stag/wp-content/uploads/2018/06/World_Nour_web1.pdf",
+            "kaynak": "doab",
+            "kayitUrl": "https://directory.doabooks.org/handle/20.500.12854/62823",
+            "baglantiTuru": "pdf",
+            "durum": "aday"
+          }
+        ],
+        "erisim": "acik",
+        "belgeTuru": "kitap",
+        "kunyeTuru": "eser",
+        "sayfaSayisi": 352,
+        "kapak": "https://directory.doabooks.org/bitstream/20.500.12854/62823/1/Pieruccini_cover_rotomail.jpg"
+      },
+      "durum": "COMPLETED",
+      "bayt": 9433209,
+      "sha256": "87f5842befaf178bffad9dca895c78abe88f1f7eda2c2e4182439d9dd687e481",
+      "sayfa": 352,
+      "ilkSayfalardaBaslikGoruldu": true,
+      "sureMs": 38010,
+      "sinir": "Bu örnekte dosya açıldı ve ilk sayfalarda başlık arandı. Genel otomatik dosya-kimlik doğrulaması henüz ürün özelliği değildir."
+    }
+  ]
+}

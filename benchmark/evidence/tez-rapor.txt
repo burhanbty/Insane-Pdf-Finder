@@ -1,0 +1,179 @@
+{
+  "response":{
+    "numFound":190604,
+    "start":0,
+    "maxScore":1.4840587,
+    "numFoundExact":true,
+    "docs":[{
+      "title_s":["Modélisation de l'émission Lyman-alpha dans les galaxies à grand décalage spectral et simulations cosmologiques","Modelling of the Lyman-alpha emission in high redshift galaxies and cosmological simulations"],
+      "authFullName_s":["Thibault Garel"],
+      "uri_s":"https://theses.hal.science/tel-00819264v1",
+      "doiId_s":"10.70675/6b970d6fz1abaz40baz8dfczfa59ef081a09",
+      "producedDateY_i":2011
+    },{
+      "title_s":["Modélisation du comportement dynamique d'un deux-roues motorisé pour la reconstruction d'accidents et la détection d'incidents","Modeling the dynamic behavior of a motorized two-wheeler for accident reconstruction and incident detection"],
+      "authFullName_s":["Laura Costa"],
+      "uri_s":"https://hal.science/tel-02499042v1",
+      "producedDateY_i":2017
+    },{
+      "title_s":["Analyse de la nature stochastique et modélisation interne des systèmes générant des comportements de type puissance","Analysis of the stochastic nature and internal modelling of systems generating power-law type behaviours"],
+      "authFullName_s":["Vincent Tartaglione"],
+      "uri_s":"https://theses.hal.science/tel-03937503v1",
+      "doiId_s":"10.70675/ec27d2fcz98e2z459cza7faz77fa1d1a8429",
+      "producedDateY_i":2022
+    },{
+      "title_s":["Contribution de la gestion des risques logistiques à l’évolution des systèmes d’information intégrés de type ERP (Enterprise Resource Planning) en phase de post-implémentation : une approche longitudinale appliquée au secteur aéronautique","Contribution of risk management to ERP (Enterprise Resource Planning) systems evolution on post implementation phase : a longitudinal approach applied to the aeronautics sector"],
+      "authFullName_s":["Sonia Froufe"],
+      "uri_s":"https://theses.hal.science/tel-01298027v1",
+      "doiId_s":"10.70675/50a4a3f2z2570z48a2za87dz9ff26485b475",
+      "producedDateY_i":2015
+    },{
+      "title_s":["Arithmetic of families of hyperelliptic curves","Arithmétique des familles de courbes hyperelliptiques"],
+      "authFullName_s":["Martin Azon"],
+      "uri_s":"https://theses.hal.science/tel-05536534v1",
+      "doiId_s":"10.70675/34fb480aza8fez450aza0f5z39f3325b7e82",
+      "producedDateY_i":2025
+    },{
+      "title_s":["La végétation dans les villes sénégalaises au regard des changements socio-environnementaux : le cas de l'agglomération dakaroise et des villes de Touba, Ziguinchor et Tambacounda","Vegetation in Senegalese cities with regard to socio-environmental changes : the case of the Dakar agglomeration and the cities of Touba, Ziguinchor and Tambacounda"],
+      "authFullName_s":["Moctar Diouf"],
+      "uri_s":"https://theses.hal.science/tel-03937531v1",
+      "doiId_s":"10.70675/bc553ff4z68c6z4f2az8424z9972c84ad2bf",
+      "producedDateY_i":2022
+    },{
+      "title_s":["A correct by construction approach for the modeling and the verification of cyber-physical systems in Event-B","Approche basée sur les preuves formelles pour la modélisation et la vérification de systèmes cyber-physiques dans Event-B"],
+      "authFullName_s":["Meryem Afendi"],
+      "uri_s":"https://theses.hal.science/tel-04337049v1",
+      "doiId_s":"10.70675/e76f96dfze476z4ed2za9b6z254be02eacaa",
+      "producedDateY_i":2022
+    },{
+      "title_s":["Development of the urgonian limestones in the delphino helvetic realm (Northern Subalpine Chains, Haute-Savoie, France) : sedimentology, sequence stratigraphy and biostratigraphy","Les calcaires urgoniens du domaine delphino-helvétique (Chaînes subalpines septentrionales de Haute-Savoie, France) : sédimentologie, stratigraphie séquentielle et biostratigraphie"],
+      "authFullName_s":["Günter Trabold"],
+      "uri_s":"https://theses.hal.science/tel-00819757v1",
+      "producedDateY_i":1995
+    },{
+      "title_s":["Mécanismes de pyrolyse des hydrocarbures et dépôt de pyrocarbone par CVD/CVI","Mechanisms of hydrocarbon pyrolysis and pyrocarbon deposition by CVD/CVI"],
+      "authFullName_s":["Arnaud Mouchon"],
+      "uri_s":"https://hal.science/tel-03618682v1",
+      "producedDateY_i":2004
+    },{
+      "title_s":["Synthèse, caractérisation et étude du comportement sous irradiation électronique de matrices de type hollandite destinées au confinement du césium radioactif"],
+      "authFullName_s":["Virginie Aubin"],
+      "uri_s":"https://pastel.hal.science/pastel-00001091v1",
+      "producedDateY_i":2004
+    },{
+      "title_s":["Intelligent Mobile Robot Learning in Autonomous Navigation","Apprentissage Intelligent des Robots Mobiles dans la Navigation Autonome"],
+      "authFullName_s":["Chen Xia"],
+      "uri_s":"https://theses.hal.science/tel-01298608v1",
+      "doiId_s":"10.70675/7e46a0dezd60fz4d56z9cf3z8ff9b4c5ff2d",
+      "producedDateY_i":2015
+    },{
+      "title_s":["Méthodologie d'exploitation quantitative des photographies aériennes d'inondation de plaine","(trad auto)Methodology for quantitative exploitation of aerial photographs of flooded plains"],
+      "authFullName_s":["Damien Raclot"],
+      "uri_s":"https://hal.inrae.fr/tel-02581783v1",
+      "producedDateY_i":2003
+    },{
+      "title_s":["Variabilité saisonnière et interannuelle de la croissance du chêne vert méditerranéen et vulnérabilité au changement climatique","Seasonal and inter-annual growth variations and vulnerability to climate change in Mediterranean Quercus ilex"],
+      "authFullName_s":["Morine Lempereur"],
+      "uri_s":"https://theses.hal.science/tel-01622364v1",
+      "doiId_s":"10.70675/a34b9386z5e45z4500za8bdzc90bda6c2c79",
+      "producedDateY_i":2015
+    },{
+      "title_s":["Impact de la signalétique d’information nutritionnelle simplifiée « Nutri-Score » en face avant des emballages des aliments sur les consommateurs","Impact for the front-of-pack nutrition label \"Nutri-Score\" on consumers"],
+      "authFullName_s":["Manon Egnell"],
+      "uri_s":"https://theses.hal.science/tel-03697497v1",
+      "doiId_s":"10.70675/94440436zc7c8z4ccez8b07z73c598edebb5",
+      "producedDateY_i":2020
+    },{
+      "title_s":["Structure profonde de la marge Nord-Ouest Africaine","Deep crustal structure of the North-West African margin"],
+      "authFullName_s":["Youssef Biari"],
+      "uri_s":"https://theses.hal.science/tel-01319623v2",
+      "doiId_s":"10.70675/cc559e37z88afz4008z9dcczbbba1f57aabf",
+      "producedDateY_i":2015
+    },{
+      "title_s":["Non-coherent wireless communications : fundamental limits and system design","Communications sans fil non-cohérentes : limites fondamentales et conception du système"],
+      "authFullName_s":["Khac Hoang Ngo"],
+      "uri_s":"https://theses.hal.science/tel-02900446v1",
+      "doiId_s":"10.70675/9754f099z3be3z448ez902bzc0a81bbde236",
+      "producedDateY_i":2020
+    },{
+      "title_s":["Thermally Deformable Mirrors : a new Adaptive Optics scheme for Advanced Gravitational Wave Interferometers","Miroirs Thermiquement Déformables : un nouveau schéma d’Optique Adaptative pour les Interféromètres Gravitationnels Avancés"],
+      "authFullName_s":["Marie Kasprzack"],
+      "uri_s":"https://theses.hal.science/tel-01136331v1",
+      "doiId_s":"10.70675/3625bf89z0aa1z4b3dz99c5z528c36184ddc",
+      "producedDateY_i":2014
+    },{
+      "title_s":["Etude des transferts d’énergie plasma/surface dans différents régimes de pulvérisation magnétron","Study of the energy flux during different regimes of magnetron sputtering"],
+      "authFullName_s":["Mariem El Mokh Halloumi"],
+      "uri_s":"https://theses.hal.science/tel-01622630v1",
+      "doiId_s":"10.70675/552f62e1z8a5cz4304z95e0z5ebfe2fcc5d4",
+      "producedDateY_i":2016
+    },{
+      "title_s":["Utilisation d'un modèle de culture pour évaluer le comportement des génotypes: Pertinence de l'utilisation d'Azodyn pour analyser la variabilité du rendement et de la teneur en protéines du blé tendre"],
+      "authFullName_s":["Aude Barbottin"],
+      "uri_s":"https://pastel.hal.science/pastel-00001262v1",
+      "producedDateY_i":2004
+    },{
+      "title_s":["Phospholipides bio-sourcés riches en acides gras oméga 3 pour la formulation de liposomes","Naturally occurring phospholipids rich in omega 3 fatty acids for liposome formulation"],
+      "authFullName_s":["Tiphaine Bardeau"],
+      "uri_s":"https://theses.hal.science/tel-01298731v1",
+      "doiId_s":"10.70675/2a2c8279z8d3fz4c2ez8abcz6f30f334e8cc",
+      "producedDateY_i":2015
+    },{
+      "title_s":["Droit et institutions publics en France face au terrorisme","Public law and public institutions in France in the face of terrorism"],
+      "authFullName_s":["Maxime Sauton"],
+      "uri_s":"https://theses.hal.science/tel-05219310v1",
+      "doiId_s":"10.70675/e43e62fbz7a89z4243z9d94zcb06690124b6",
+      "producedDateY_i":2024
+    },{
+      "title_s":["Résolution exacte de problèmes de couverture par arborescences sous contraintes de capacité","Exact methods for solving covering problems with trees subject to capacity constraints"],
+      "authFullName_s":["Jérémy Guillot"],
+      "uri_s":"https://theses.hal.science/tel-02020787v1",
+      "doiId_s":"10.70675/bdca3b7bzd3abz40e3z9fd2z61fef22c18b1",
+      "producedDateY_i":2018
+    },{
+      "title_s":["Information extraction from heterogeneous multilingual documents for the exploitation of a global tender database","Extraction d’information dans des documents hétérogènes multilingues pour l’exploitation d’une base de données mondiale d’appels d’offres"],
+      "authFullName_s":["Danrun Cao"],
+      "uri_s":"https://theses.hal.science/tel-05456704v1",
+      "doiId_s":"10.70675/a3cf21efzb2f7z4f65zbfcazcc671c1e06be",
+      "producedDateY_i":2025
+    },{
+      "title_s":["Intertwining Symbolic Execution and Abstract Interpretation for the Analysis of Security Properties","Combiner l’exécution symbolique et l’interprétation abstraite pour l’analyse des propriétés de sécurité"],
+      "authFullName_s":["Ignacio Tiraboschi"],
+      "uri_s":"https://hal.science/tel-04896474v1",
+      "producedDateY_i":2024
+    },{
+      "title_s":["Les essais inter-laboratoires en microbiologie des aliments Inter-laboratory studies in food microbiology"],
+      "authFullName_s":["Bertrand Lombard"],
+      "uri_s":"https://pastel.hal.science/pastel-00001258v1",
+      "producedDateY_i":2004
+    },{
+      "title_s":["La relation États-Unis – Europe, du délitement du lien transatlantique à la relégation du Vieux Continent. Fondements géopolitiques et culturels.","The relationship between the United States and Europe, from the weakening of the transatlantic link to the relegation of the OId Continent. Political ans cultural foundations."],
+      "authFullName_s":["Cécile De Glas"],
+      "uri_s":"https://theses.hal.science/tel-01939825v1",
+      "doiId_s":"10.70675/f597d3f9za8d8z42d9z8114z01355768b93d",
+      "producedDateY_i":2018
+    },{
+      "title_s":["La lutte contre les paradis fiscaux à l'aune des exemples français et américain","The fight against tax havens in French and American laws"],
+      "authFullName_s":["Anne de Ravel d'Esclapon"],
+      "uri_s":"https://theses.hal.science/tel-01537239v1",
+      "doiId_s":"10.70675/f7517cd4ze2a9z41f8za642z794f4cd91696",
+      "producedDateY_i":2016
+    },{
+      "title_s":["Searching for novel peptide hormones in the human genome","Recherche de nouvelles hormones peptidiques codées par le génome humain"],
+      "authFullName_s":["Olivier Mirabeau"],
+      "uri_s":"https://theses.hal.science/tel-00340710v1",
+      "producedDateY_i":2008
+    },{
+      "title_s":["Distribution de la variété: incertitude sur la demande et relations verticales dans l'industrie automobile"],
+      "authFullName_s":["Noémie Behr"],
+      "uri_s":"https://pastel.hal.science/pastel-00001250v1",
+      "producedDateY_i":2004
+    },{
+      "title_s":["Economie de l'énergie et accès à l'électricité : trois essais sur le Bénin","Energy economics and access to electricity : three essays from Benin"],
+      "authFullName_s":["Léonide Michael Sinsin"],
+      "uri_s":"https://theses.hal.science/tel-04577293v1",
+      "doiId_s":"10.70675/49a28701z2180z4a03za14dz440dcf2f6691",
+      "producedDateY_i":2017
+    }]
+  }
+}

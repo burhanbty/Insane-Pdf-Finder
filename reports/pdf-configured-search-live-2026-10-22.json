@@ -1,0 +1,1945 @@
+{
+  "sorgu": {
+    "baslik": "CORE: A Global Aggregation Service for Open Access Papers",
+    "yazar": "Knoth",
+    "yil": 2023,
+    "tur": "makale",
+    "limit": 3
+  },
+  "sureMs": 21107,
+  "gruplar": [
+    {
+      "anahtar": "makale::access aggregation core global open papers service::2023",
+      "tur": "makale",
+      "baslik": "CORE: A Global Aggregation Service for Open Access Papers",
+      "yazarlar": [
+        "Petr Knoth",
+        "Drahomira Herrmannova",
+        "Matteo Cancellieri",
+        "Lucas Anastasiou",
+        "Nancy Pontika",
+        "Samuel Pearce",
+        "Bikash Gyawali",
+        "David Pride"
+      ],
+      "yil": 2023,
+      "ozet": "Abstract This paper introduces CORE, a widely used scholarly service, which provides access to the world’s largest collection of open access research publications, acquired from a global network of repositories and journals. CORE was created with the goal of enabling text and data mining of scientific literature and thus supporting scientific discovery, but it is now used in a wide range of use cases within higher education, industry, not-for-profit organisations, as well as by the general public. Through the provided services, CORE powers innovative use cases, such as plagiarism detection, in market-leading third-party organisations. CORE has played a pivotal role in the global move towards universal open access by making scientific knowledge more easily and freely discoverable. In this paper, we describe CORE’s continuously growing dataset and the motivation behind its creation, present the challenges associated with systematically gathering research papers from thousands of data providers worldwide at scale, and introduce the novel solutions that were developed to overcome these challenges. The paper then provides an in-depth discussion of the services and tools built on top of the aggregated data and finally examines several use cases that have leveraged the CORE dataset and services.",
+      "konular": [
+        "Library Science and Information",
+        "Academic Publishing and Open Access",
+        "scientometrics and bibliometrics research"
+      ],
+      "puan": 0.9304347826086958,
+      "kaynaklar": [
+        {
+          "kaynak": "crossref",
+          "kaynakAd": "Crossref",
+          "tur": "makale",
+          "baslik": "CORE: A Global Aggregation Service for Open Access Papers",
+          "yazarlar": [
+            "Petr Knoth",
+            "Drahomira Herrmannova",
+            "Matteo Cancellieri",
+            "Lucas Anastasiou",
+            "Nancy Pontika",
+            "Samuel Pearce",
+            "Bikash Gyawali",
+            "David Pride"
+          ],
+          "yil": 2023,
+          "ozet": "Abstract This paper introduces CORE, a widely used scholarly service, which provides access to the world’s largest collection of open access research publications, acquired from a global network of repositories and journals. CORE was created with the goal of enabling text and data mining of scientific literature and thus supporting scientific discovery, but it is now used in a wide range of use cases within higher education, industry, not-for-profit organisations, as well as by the general public. Through the provided services, CORE powers innovative use cases, such as plagiarism detection, in market-leading third-party organisations. CORE has played a pivotal role in the global move towards universal open access by making scientific knowledge more easily and freely discoverable. In this paper, we describe CORE’s continuously growing dataset and the motivation behind its creation, present the challenges associated with systematically gathering research papers from thousands of data providers worldwide at scale, and introduce the novel solutions that were developed to overcome these challenges. The paper then provides an in-depth discussion of the services and tools built on top of the aggregated data and finally examines several use cases that have leveraged the CORE dataset and services.",
+          "yayinci": "Scientific Data",
+          "doi": "10.1038/s41597-023-02208-w",
+          "link": "https://doi.org/10.1038/s41597-023-02208-w",
+          "erisim": "acik",
+          "ham": {
+            "publisher": "Springer Science and Business Media LLC",
+            "issue": "1",
+            "abstract": "<jats:title>Abstract</jats:title><jats:p>This paper introduces CORE, a widely used scholarly service, which provides access to the world’s largest collection of open access research publications, acquired from a global network of repositories and journals. CORE was created with the goal of enabling text and data mining of scientific literature and thus supporting scientific discovery, but it is now used in a wide range of use cases within higher education, industry, not-for-profit organisations, as well as by the general public. Through the provided services, CORE powers innovative use cases, such as plagiarism detection, in market-leading third-party organisations. CORE has played a pivotal role in the global move towards universal open access by making scientific knowledge more easily and freely discoverable. In this paper, we describe CORE’s continuously growing dataset and the motivation behind its creation, present the challenges associated with systematically gathering research papers from thousands of data providers worldwide at scale, and introduce the novel solutions that were developed to overcome these challenges. The paper then provides an in-depth discussion of the services and tools built on top of the aggregated data and finally examines several use cases that have leveraged the CORE dataset and services.</jats:p>",
+            "DOI": "10.1038/s41597-023-02208-w",
+            "type": "journal-article",
+            "title": ["CORE: A Global Aggregation Service for Open Access Papers"],
+            "volume": "10",
+            "author": [
+              {
+                "ORCID": "https://orcid.org/0000-0003-1161-7359",
+                "authenticated-orcid": false,
+                "given": "Petr",
+                "family": "Knoth",
+                "sequence": "first",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "ORCID": "https://orcid.org/0000-0002-2730-1546",
+                "authenticated-orcid": false,
+                "given": "Drahomira",
+                "family": "Herrmannova",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Matteo",
+                "family": "Cancellieri",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Lucas",
+                "family": "Anastasiou",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Nancy",
+                "family": "Pontika",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Samuel",
+                "family": "Pearce",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Bikash",
+                "family": "Gyawali",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "David",
+                "family": "Pride",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              }
+            ],
+            "container-title": ["Scientific Data"],
+            "issued": {
+              "date-parts": [[2023, 6, 7]]
+            },
+            "URL": "https://doi.org/10.1038/s41597-023-02208-w"
+          },
+          "pdfAdaylari": [
+            {
+              "url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doi.org/10.1038/s41597-023-02208-w",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "publishedVersion",
+              "hostTuru": "publisher",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://oro.open.ac.uk/89835/1/article.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://oro.open.ac.uk/view/person/pk3295.html%3E;",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "other-oa",
+              "surum": "acceptedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10247729/pdf/41597_2023_Article_2208.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/10247729",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by-sa",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "kayit",
+              "durum": "aday"
+            }
+          ],
+          "pdf": "https://www.nature.com/articles/s41597-023-02208-w.pdf"
+        },
+        {
+          "kaynak": "openalex",
+          "kaynakAd": "OpenAlex",
+          "tur": "makale",
+          "baslik": "CORE: A Global Aggregation Service for Open Access Papers",
+          "yazarlar": [
+            "Petr Knoth",
+            "Drahomíra Herrmannová",
+            "Matteo Cancellieri",
+            "Lucas Anastasiou",
+            "Nancy Pontika",
+            "Samuel Pearce",
+            "Bikash Gyawali",
+            "David Pride"
+          ],
+          "yil": 2023,
+          "ozet": "This paper introduces CORE, a widely used scholarly service, which provides access to the world's largest collection of open access research publications, acquired from a global network of repositories and journals. CORE was created with the goal of enabling text and data mining of scientific literature and thus supporting scientific discovery, but it is now used in a wide range of use cases within higher education, industry, not-for-profit organisations, as well as by the general public. Through the provided services, CORE powers innovative use cases, such as plagiarism detection, in market-leading third-party organisations. CORE has played a pivotal role in the global move towards universal open access by making scientific knowledge more easily and freely discoverable. In this paper, we describe CORE's continuously growing dataset and the motivation behind its creation, present the challenges associated with systematically gathering research papers from thousands of data providers worldwide at scale, and introduce the novel solutions that were developed to overcome these challenges. The paper then provides an in-depth discussion of the services and tools built on top of the aggregated data and finally examines several use cases that have leveraged the CORE dataset and services.",
+          "konular": [
+            "Library Science and Information",
+            "Academic Publishing and Open Access",
+            "scientometrics and bibliometrics research"
+          ],
+          "yayinci": "Scientific Data",
+          "doi": "10.1038/s41597-023-02208-w",
+          "atif": 32,
+          "link": "https://doi.org/10.1038/s41597-023-02208-w",
+          "pdf": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+          "pdfAdaylari": [
+            {
+              "url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+              "kaynak": "openalex",
+              "kayitUrl": "https://doi.org/10.1038/s41597-023-02208-w",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "publishedVersion",
+              "hostTuru": "publisher",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://oro.open.ac.uk/89835/1/article.pdf",
+              "kaynak": "openalex",
+              "kayitUrl": "https://oro.open.ac.uk/view/person/pk3295.html%3E;",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "other-oa",
+              "surum": "acceptedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10247729/pdf/41597_2023_Article_2208.pdf",
+              "kaynak": "openalex",
+              "kayitUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/10247729",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by-sa",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "kayit",
+              "durum": "aday"
+            }
+          ],
+          "erisim": "acik",
+          "ham": {
+            "id": "https://openalex.org/W4379768223",
+            "doi": "https://doi.org/10.1038/s41597-023-02208-w",
+            "display_name": "CORE: A Global Aggregation Service for Open Access Papers",
+            "publication_year": 2023,
+            "authorships": [
+              {
+                "author_position": "first",
+                "author": {
+                  "id": "https://openalex.org/A5056018651",
+                  "display_name": "Petr Knoth",
+                  "orcid": "https://orcid.org/0000-0003-1161-7359",
+                  "observed_orcids": ["https://orcid.org/0000-0003-1161-7359"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": true,
+                "raw_author_name": "Petr Knoth",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK. petr.knoth@open.ac.uk",
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK"
+                ],
+                "raw_orcid": "https://orcid.org/0000-0003-1161-7359",
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK. petr.knoth@open.ac.uk",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  },
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "middle",
+                "author": {
+                  "id": "https://openalex.org/A5022174119",
+                  "display_name": "Drahomíra Herrmannová",
+                  "orcid": "https://orcid.org/0000-0002-2730-1546",
+                  "observed_orcids": ["https://orcid.org/0000-0002-2730-1546"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I1289243028",
+                    "display_name": "Oak Ridge National Laboratory",
+                    "ror": "https://ror.org/01qz5mb56",
+                    "country_code": "US",
+                    "type": "facility",
+                    "lineage": [
+                      "https://openalex.org/I1289243028",
+                      "https://openalex.org/I1330989302",
+                      "https://openalex.org/I39565521",
+                      "https://openalex.org/I4210159294"
+                    ]
+                  },
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB", "US"],
+                "is_corresponding": false,
+                "raw_author_name": "Drahomira Herrmannova",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                  "Oak Ridge National Laboratory Oak Ridge, Oak Ridge, TN, USA"
+                ],
+                "raw_orcid": "https://orcid.org/0000-0002-2730-1546",
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  },
+                  {
+                    "raw_affiliation_string": "Oak Ridge National Laboratory Oak Ridge, Oak Ridge, TN, USA",
+                    "institution_ids": ["https://openalex.org/I1289243028"]
+                  }
+                ]
+              },
+              {
+                "author_position": "middle",
+                "author": {
+                  "id": "https://openalex.org/A5087061304",
+                  "display_name": "Matteo Cancellieri",
+                  "orcid": "https://orcid.org/0000-0002-9558-9772",
+                  "observed_orcids": ["https://orcid.org/0000-0002-9558-9772"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "Matteo Cancellieri",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "middle",
+                "author": {
+                  "id": "https://openalex.org/A5057043716",
+                  "display_name": "Lucas Anastasiou",
+                  "orcid": "https://orcid.org/0000-0002-1587-5104",
+                  "observed_orcids": ["https://orcid.org/0000-0002-1587-5104"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "Lucas Anastasiou",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "middle",
+                "author": {
+                  "id": "https://openalex.org/A5003764201",
+                  "display_name": "Nancy Pontika",
+                  "orcid": "https://orcid.org/0000-0002-2091-0402",
+                  "observed_orcids": ["https://orcid.org/0000-0002-2091-0402"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "Nancy Pontika",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "middle",
+                "author": {
+                  "id": "https://openalex.org/A5027201240",
+                  "display_name": "Samuel Pearce",
+                  "orcid": "https://orcid.org/0000-0001-5616-7000",
+                  "observed_orcids": ["https://orcid.org/0000-0001-5616-7000"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "Samuel Pearce",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "middle",
+                "author": {
+                  "id": "https://openalex.org/A5015975716",
+                  "display_name": "Bikash Gyawali",
+                  "orcid": "https://orcid.org/0000-0002-4804-0963",
+                  "observed_orcids": ["https://orcid.org/0000-0002-4804-0963"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "Bikash Gyawali",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "last",
+                "author": {
+                  "id": "https://openalex.org/A5030795576",
+                  "display_name": "David Pride",
+                  "orcid": "https://orcid.org/0000-0002-7162-7252",
+                  "observed_orcids": ["https://orcid.org/0000-0002-7162-7252"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "David Pride",
+                "raw_affiliation_strings": [
+                  "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "Knowledge Media Institute, The Open University Walton Hall, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              }
+            ],
+            "abstract_inverted_index": {
+              "This": [0],
+              "paper": [1, 161],
+              "introduces": [2],
+              "CORE,": [3],
+              "a": [4, 24, 57, 96],
+              "widely": [5],
+              "used": [6, 55],
+              "scholarly": [7],
+              "service,": [8],
+              "which": [9],
+              "provides": [10, 163],
+              "access": [11, 19, 106],
+              "to": [12, 156],
+              "the": [13, 35, 73, 77, 100, 126, 132, 150, 168, 176, 188],
+              "world's": [14],
+              "largest": [15],
+              "collection": [16],
+              "of": [17, 27, 37, 43, 60, 142, 167, 175],
+              "open": [18, 105],
+              "research": [20, 138],
+              "publications,": [21],
+              "acquired": [22],
+              "from": [23, 140],
+              "global": [25, 101],
+              "network": [26],
+              "repositories": [28],
+              "and": [29, 40, 46, 113, 125, 148, 170, 179, 191],
+              "journals.": [30],
+              "CORE": [31, 80, 93, 189],
+              "was": [32],
+              "created": [33],
+              "with": [34, 135],
+              "goal": [36],
+              "enabling": [38],
+              "text": [39],
+              "data": [41, 143, 178],
+              "mining": [42],
+              "scientific": [44, 49, 109],
+              "literature": [45],
+              "thus": [47],
+              "supporting": [48],
+              "discovery,": [50],
+              "but": [51],
+              "it": [52],
+              "is": [53],
+              "now": [54],
+              "in": [56, 89, 99],
+              "wide": [58],
+              "range": [59],
+              "use": [61, 83, 183],
+              "cases": [62, 184],
+              "within": [63],
+              "higher": [64],
+              "education,": [65],
+              "industry,": [66],
+              "not-for-profit": [67],
+              "organisations,": [68],
+              "as": [69, 71, 86],
+              "well": [70],
+              "by": [72, 107],
+              "general": [74],
+              "public.": [75],
+              "Through": [76],
+              "provided": [78],
+              "services,": [79],
+              "powers": [81],
+              "innovative": [82],
+              "cases,": [84],
+              "such": [85],
+              "plagiarism": [87],
+              "detection,": [88],
+              "market-leading": [90],
+              "third-party": [91],
+              "organisations.": [92],
+              "has": [94],
+              "played": [95],
+              "pivotal": [97],
+              "role": [98],
+              "move": [102],
+              "towards": [103],
+              "universal": [104],
+              "making": [108],
+              "knowledge": [110],
+              "more": [111],
+              "easily": [112],
+              "freely": [114],
+              "discoverable.": [115],
+              "In": [116],
+              "this": [117],
+              "paper,": [118],
+              "we": [119],
+              "describe": [120],
+              "CORE's": [121],
+              "continuously": [122],
+              "growing": [123],
+              "dataset": [124, 190],
+              "motivation": [127],
+              "behind": [128],
+              "its": [129],
+              "creation,": [130],
+              "present": [131],
+              "challenges": [133],
+              "associated": [134],
+              "systematically": [136],
+              "gathering": [137],
+              "papers": [139],
+              "thousands": [141],
+              "providers": [144],
+              "worldwide": [145],
+              "at": [146],
+              "scale,": [147],
+              "introduce": [149],
+              "novel": [151],
+              "solutions": [152],
+              "that": [153, 185],
+              "were": [154],
+              "developed": [155],
+              "overcome": [157],
+              "these": [158],
+              "challenges.": [159],
+              "The": [160],
+              "then": [162],
+              "an": [164],
+              "in-depth": [165],
+              "discussion": [166],
+              "services": [169],
+              "tools": [171],
+              "built": [172],
+              "on": [173],
+              "top": [174],
+              "aggregated": [177],
+              "finally": [180],
+              "examines": [181],
+              "several": [182],
+              "have": [186],
+              "leveraged": [187],
+              "services.": [192]
+            },
+            "primary_location": {
+              "id": "doi:10.1038/s41597-023-02208-w",
+              "doi": "https://doi.org/10.1038/s41597-023-02208-w",
+              "is_oa": true,
+              "landing_page_url": "https://doi.org/10.1038/s41597-023-02208-w",
+              "pdf_url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+              "source": {
+                "id": "https://openalex.org/S2607323502",
+                "display_name": "Scientific Data",
+                "issn_l": "2052-4463",
+                "issn": ["2052-4463"],
+                "is_oa": true,
+                "is_in_doaj": true,
+                "is_core": true,
+                "listed_in": [
+                  "anvur-class-a",
+                  "anvur-scientific",
+                  "cwts-core",
+                  "doaj",
+                  "dongbi-b",
+                  "jufo-1",
+                  "ki-jl-1",
+                  "medline",
+                  "norway-2",
+                  "poland-140",
+                  "russia-white-list-1",
+                  "vabb-shw"
+                ],
+                "host_organization": "https://openalex.org/P4310319908",
+                "host_organization_name": "Nature Portfolio",
+                "host_organization_lineage": [
+                  "https://openalex.org/P4310319908",
+                  "https://openalex.org/P4310319965"
+                ],
+                "host_organization_lineage_names": ["Nature Portfolio", "Springer Nature"],
+                "type": "journal"
+              },
+              "license": "cc-by",
+              "license_id": "https://openalex.org/licenses/cc-by",
+              "version": "publishedVersion",
+              "is_accepted": true,
+              "is_published": true,
+              "raw_source_name": "Scientific Data",
+              "raw_type": "journal-article"
+            },
+            "best_oa_location": {
+              "id": "doi:10.1038/s41597-023-02208-w",
+              "doi": "https://doi.org/10.1038/s41597-023-02208-w",
+              "is_oa": true,
+              "landing_page_url": "https://doi.org/10.1038/s41597-023-02208-w",
+              "pdf_url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+              "source": {
+                "id": "https://openalex.org/S2607323502",
+                "display_name": "Scientific Data",
+                "issn_l": "2052-4463",
+                "issn": ["2052-4463"],
+                "is_oa": true,
+                "is_in_doaj": true,
+                "is_core": true,
+                "listed_in": [
+                  "anvur-class-a",
+                  "anvur-scientific",
+                  "cwts-core",
+                  "doaj",
+                  "dongbi-b",
+                  "jufo-1",
+                  "ki-jl-1",
+                  "medline",
+                  "norway-2",
+                  "poland-140",
+                  "russia-white-list-1",
+                  "vabb-shw"
+                ],
+                "host_organization": "https://openalex.org/P4310319908",
+                "host_organization_name": "Nature Portfolio",
+                "host_organization_lineage": [
+                  "https://openalex.org/P4310319908",
+                  "https://openalex.org/P4310319965"
+                ],
+                "host_organization_lineage_names": ["Nature Portfolio", "Springer Nature"],
+                "type": "journal"
+              },
+              "license": "cc-by",
+              "license_id": "https://openalex.org/licenses/cc-by",
+              "version": "publishedVersion",
+              "is_accepted": true,
+              "is_published": true,
+              "raw_source_name": "Scientific Data",
+              "raw_type": "journal-article"
+            },
+            "locations": [
+              {
+                "id": "doi:10.1038/s41597-023-02208-w",
+                "doi": "https://doi.org/10.1038/s41597-023-02208-w",
+                "is_oa": true,
+                "landing_page_url": "https://doi.org/10.1038/s41597-023-02208-w",
+                "pdf_url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+                "source": {
+                  "id": "https://openalex.org/S2607323502",
+                  "display_name": "Scientific Data",
+                  "issn_l": "2052-4463",
+                  "issn": ["2052-4463"],
+                  "is_oa": true,
+                  "is_in_doaj": true,
+                  "is_core": true,
+                  "listed_in": [
+                    "anvur-class-a",
+                    "anvur-scientific",
+                    "cwts-core",
+                    "doaj",
+                    "dongbi-b",
+                    "jufo-1",
+                    "ki-jl-1",
+                    "medline",
+                    "norway-2",
+                    "poland-140",
+                    "russia-white-list-1",
+                    "vabb-shw"
+                  ],
+                  "host_organization": "https://openalex.org/P4310319908",
+                  "host_organization_name": "Nature Portfolio",
+                  "host_organization_lineage": [
+                    "https://openalex.org/P4310319908",
+                    "https://openalex.org/P4310319965"
+                  ],
+                  "host_organization_lineage_names": ["Nature Portfolio", "Springer Nature"],
+                  "type": "journal"
+                },
+                "license": "cc-by",
+                "license_id": "https://openalex.org/licenses/cc-by",
+                "version": "publishedVersion",
+                "is_accepted": true,
+                "is_published": true,
+                "raw_source_name": "Scientific Data",
+                "raw_type": "journal-article"
+              },
+              {
+                "id": "pmid:37286585",
+                "doi": null,
+                "is_oa": false,
+                "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/37286585",
+                "pdf_url": null,
+                "source": {
+                  "id": "https://openalex.org/S4306525036",
+                  "display_name": "PubMed",
+                  "issn_l": null,
+                  "issn": null,
+                  "is_oa": false,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I1299303238",
+                  "host_organization_name": "National Institutes of Health",
+                  "host_organization_lineage": ["https://openalex.org/I1299303238"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": null,
+                "license_id": null,
+                "version": "publishedVersion",
+                "is_accepted": true,
+                "is_published": true,
+                "raw_source_name": "Scientific data",
+                "raw_type": "Journal Article"
+              },
+              {
+                "id": "pmh:oai:oro.open.ac.uk:89835",
+                "doi": null,
+                "is_oa": true,
+                "landing_page_url": "https://oro.open.ac.uk/view/person/pk3295.html>;",
+                "pdf_url": "https://oro.open.ac.uk/89835/1/article.pdf",
+                "source": {
+                  "id": "https://openalex.org/S4306401187",
+                  "display_name": "Open Research Online (The Open University)",
+                  "issn_l": null,
+                  "issn": null,
+                  "is_oa": false,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I204136569",
+                  "host_organization_name": "The Open University",
+                  "host_organization_lineage": ["https://openalex.org/I204136569"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": "other-oa",
+                "license_id": "https://openalex.org/licenses/other-oa",
+                "version": "acceptedVersion",
+                "is_accepted": true,
+                "is_published": false,
+                "raw_source_name": null,
+                "raw_type": "PeerReviewed"
+              },
+              {
+                "id": "pmh:oai:oro.open.ac.uk:89501",
+                "doi": null,
+                "is_oa": false,
+                "landing_page_url": "https://oro.open.ac.uk/89501/1/89501.pdf",
+                "pdf_url": "https://oro.open.ac.uk/89501/1/89501.pdf",
+                "source": {
+                  "id": "https://openalex.org/S4306401187",
+                  "display_name": "Open Research Online (The Open University)",
+                  "issn_l": null,
+                  "issn": null,
+                  "is_oa": false,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I204136569",
+                  "host_organization_name": "The Open University",
+                  "host_organization_lineage": ["https://openalex.org/I204136569"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": null,
+                "license_id": null,
+                "version": "submittedVersion",
+                "is_accepted": false,
+                "is_published": false,
+                "raw_source_name": "",
+                "raw_type": "PeerReviewed"
+              },
+              {
+                "id": "pmh:oai:pubmedcentral.nih.gov:10247729",
+                "doi": null,
+                "is_oa": true,
+                "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/10247729",
+                "pdf_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10247729/pdf/41597_2023_Article_2208.pdf",
+                "source": {
+                  "id": "https://openalex.org/S2764455111",
+                  "display_name": "PubMed Central",
+                  "issn_l": null,
+                  "issn": null,
+                  "is_oa": true,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I1299303238",
+                  "host_organization_name": "National Institutes of Health",
+                  "host_organization_lineage": ["https://openalex.org/I1299303238"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": "cc-by",
+                "license_id": "https://openalex.org/licenses/cc-by",
+                "version": "submittedVersion",
+                "is_accepted": false,
+                "is_published": false,
+                "raw_source_name": "Sci Data",
+                "raw_type": "Text"
+              },
+              {
+                "id": "pmh:oai:doaj.org/article:4f2aa02f22834dfba56eb52d9c778e30",
+                "doi": null,
+                "is_oa": true,
+                "landing_page_url": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+                "pdf_url": null,
+                "source": {
+                  "id": "https://openalex.org/S4306401280",
+                  "display_name": "DOAJ (DOAJ: Directory of Open Access Journals)",
+                  "issn_l": null,
+                  "issn": null,
+                  "is_oa": false,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": null,
+                  "host_organization_name": null,
+                  "host_organization_lineage": [],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": "cc-by-sa",
+                "license_id": "https://openalex.org/licenses/cc-by-sa",
+                "version": "submittedVersion",
+                "is_accepted": false,
+                "is_published": false,
+                "raw_source_name": "Scientific Data, Vol 10, Iss 1, Pp 1-19 (2023)",
+                "raw_type": "article"
+              },
+              {
+                "id": "pmh:oai:osti.gov:2471483",
+                "doi": null,
+                "is_oa": false,
+                "landing_page_url": "https://www.osti.gov/biblio/2471483",
+                "pdf_url": null,
+                "source": {
+                  "id": "https://openalex.org/S4306402487",
+                  "display_name": "OSTI OAI (U.S. Department of Energy Office of Scientific and Technical Information)",
+                  "issn_l": null,
+                  "issn": null,
+                  "is_oa": false,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I139351228",
+                  "host_organization_name": "Office of Scientific and Technical Information",
+                  "host_organization_lineage": ["https://openalex.org/I139351228"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": null,
+                "license_id": null,
+                "version": "submittedVersion",
+                "is_accepted": false,
+                "is_published": false,
+                "raw_source_name": null,
+                "raw_type": null
+              }
+            ],
+            "open_access": {
+              "is_oa": true,
+              "oa_status": "gold",
+              "oa_url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+              "any_repository_has_fulltext": true
+            },
+            "topics": [
+              {
+                "id": "https://openalex.org/T13673",
+                "display_name": "Library Science and Information",
+                "score": 0.38769999146461487,
+                "subfield": {
+                  "id": "https://openalex.org/subfields/1710",
+                  "display_name": "Information Systems"
+                },
+                "field": {
+                  "id": "https://openalex.org/fields/17",
+                  "display_name": "Computer Science"
+                },
+                "domain": {
+                  "id": "https://openalex.org/domains/3",
+                  "display_name": "Physical Sciences"
+                }
+              },
+              {
+                "id": "https://openalex.org/T13607",
+                "display_name": "Academic Publishing and Open Access",
+                "score": 0.2761000096797943,
+                "subfield": {
+                  "id": "https://openalex.org/subfields/1802",
+                  "display_name": "Information Systems and Management"
+                },
+                "field": {
+                  "id": "https://openalex.org/fields/18",
+                  "display_name": "Decision Sciences"
+                },
+                "domain": {
+                  "id": "https://openalex.org/domains/2",
+                  "display_name": "Social Sciences"
+                }
+              },
+              {
+                "id": "https://openalex.org/T10102",
+                "display_name": "scientometrics and bibliometrics research",
+                "score": 0.10809999704360962,
+                "subfield": {
+                  "id": "https://openalex.org/subfields/1804",
+                  "display_name": "Statistics, Probability and Uncertainty"
+                },
+                "field": {
+                  "id": "https://openalex.org/fields/18",
+                  "display_name": "Decision Sciences"
+                },
+                "domain": {
+                  "id": "https://openalex.org/domains/2",
+                  "display_name": "Social Sciences"
+                }
+              }
+            ],
+            "cited_by_count": 32,
+            "type": "data-paper"
+          }
+        },
+        {
+          "kaynak": "sci-hub",
+          "kaynakAd": "Sci-Hub",
+          "tur": "makale",
+          "baslik": "CORE: A Global Aggregation Service for Open Access Papers",
+          "yazarlar": [
+            "Petr Knoth",
+            "Drahomira Herrmannova",
+            "Matteo Cancellieri",
+            "Lucas Anastasiou",
+            "Nancy Pontika",
+            "Samuel Pearce",
+            "Bikash Gyawali",
+            "David Pride"
+          ],
+          "yil": 2023,
+          "yayinci": "Scientific Data",
+          "doi": "10.1038/s41597-023-02208-w",
+          "link": "https://sci-hub.se/10.1038%2Fs41597-023-02208-w",
+          "ozet": "Sci-Hub açık arşivi üzerinden tam metin (DOI: 10.1038/s41597-023-02208-w).",
+          "erisim": "acik",
+          "pdfAdaylari": [
+            {
+              "url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doi.org/10.1038/s41597-023-02208-w",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "publishedVersion",
+              "hostTuru": "publisher",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://oro.open.ac.uk/89835/1/article.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://oro.open.ac.uk/view/person/pk3295.html%3E;",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "other-oa",
+              "surum": "acceptedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10247729/pdf/41597_2023_Article_2208.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/10247729",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by-sa",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "kayit",
+              "durum": "aday"
+            }
+          ],
+          "pdf": "https://www.nature.com/articles/s41597-023-02208-w.pdf"
+        },
+        {
+          "kaynak": "europe-pmc",
+          "kaynakAd": "Europe PMC",
+          "tur": "makale",
+          "baslik": "CORE: A Global Aggregation Service for Open Access Papers.",
+          "yazarlar": [
+            "Knoth P",
+            "Herrmannova D",
+            "Cancellieri M",
+            "Anastasiou L",
+            "Pontika N",
+            "Pearce S",
+            "Gyawali B",
+            "Pride D"
+          ],
+          "yil": 2023,
+          "doi": "10.1038/s41597-023-02208-w",
+          "ozet": "This paper introduces CORE, a widely used scholarly service, which provides access to the world's largest collection of open access research publications, acquired from a global network of repositories and journals. CORE was created with the goal of enabling text and data mining of scientific literature and thus supporting scientific discovery, but it is now used in a wide range of use cases within higher education, industry, not-for-profit organisations, as well as by the general public. Through the provided services, CORE powers innovative use cases, such as plagiarism detection, in market-leading third-party organisations. CORE has played a pivotal role in the global move towards universal open access by making scientific knowledge more easily and freely discoverable. In this paper, we describe CORE's continuously growing dataset and the motivation behind its creation, present the challenges associated with systematically gathering research papers from thousands of data providers worldwide at scale, and introduce the novel solutions that were developed to overcome these challenges. The paper then provides an in-depth discussion of the services and tools built on top of the aggregated data and finally examines several use cases that have leveraged the CORE dataset and services.",
+          "sayfa": "366",
+          "link": "https://europepmc.org/article/MED/37286585",
+          "pdf": "https://europepmc.org/articles/PMC10247729?pdf=render",
+          "erisim": "acik",
+          "pdfAdaylari": [
+            {
+              "url": "https://europepmc.org/articles/PMC10247729?pdf=render",
+              "kaynak": "europe-pmc",
+              "kayitUrl": "https://europepmc.org/article/MED/37286585",
+              "doi": "10.1038/s41597-023-02208-w",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://www.nature.com/articles/s41597-023-02208-w.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doi.org/10.1038/s41597-023-02208-w",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "publishedVersion",
+              "hostTuru": "publisher",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://oro.open.ac.uk/89835/1/article.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://oro.open.ac.uk/view/person/pk3295.html%3E;",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "other-oa",
+              "surum": "acceptedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10247729/pdf/41597_2023_Article_2208.pdf",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/10247729",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doaj.org/article/4f2aa02f22834dfba56eb52d9c778e30",
+              "doi": "10.1038/s41597-023-02208-w",
+              "lisans": "cc-by-sa",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "kayit",
+              "durum": "aday"
+            }
+          ]
+        }
+      ],
+      "sayfa": "366",
+      "eslesme": {
+        "tur": "tam",
+        "oneri": false,
+        "aciklama": "Başlık ve girilen bilgiler eşleşiyor. Dosyanın içeriğini kaynakta kontrol et."
+      }
+    },
+    {
+      "anahtar": "makale::access aggregation api client core open papers service::2024",
+      "tur": "makale",
+      "baslik": "core_api_client: An API for the CORE aggregation service for open access papers",
+      "yazarlar": ["Domen Vake", "Niki Hrovatin", "Aleksandar Tošić", "Jernej Vičič"],
+      "yil": 2024,
+      "ozet": "Sci-Hub açık arşivi üzerinden tam metin (DOI: 10.1016/j.softx.2024.101907).",
+      "konular": [],
+      "puan": 0.18391304347826087,
+      "kaynaklar": [
+        {
+          "kaynak": "crossref",
+          "kaynakAd": "Crossref",
+          "tur": "makale",
+          "baslik": "core_api_client: An API for the CORE aggregation service for open access papers",
+          "yazarlar": ["Domen Vake", "Niki Hrovatin", "Aleksandar Tošić", "Jernej Vičič"],
+          "yil": 2024,
+          "yayinci": "SoftwareX",
+          "doi": "10.1016/j.softx.2024.101907",
+          "sayfa": "28: 101907",
+          "link": "https://doi.org/10.1016/j.softx.2024.101907",
+          "erisim": "acik",
+          "ham": {
+            "publisher": "Elsevier BV",
+            "DOI": "10.1016/j.softx.2024.101907",
+            "type": "journal-article",
+            "page": "101907",
+            "title": [
+              "core_api_client: An API for the CORE aggregation service for open access papers"
+            ],
+            "volume": "28",
+            "author": [
+              {
+                "ORCID": "https://orcid.org/0000-0002-5520-6802",
+                "authenticated-orcid": false,
+                "given": "Domen",
+                "family": "Vake",
+                "sequence": "first",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Niki",
+                "family": "Hrovatin",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Aleksandar",
+                "family": "Tošić",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              },
+              {
+                "given": "Jernej",
+                "family": "Vičič",
+                "sequence": "additional",
+                "affiliation": [],
+                "role": [
+                  {
+                    "vocabulary": "crossref",
+                    "role": "author"
+                  }
+                ]
+              }
+            ],
+            "container-title": ["SoftwareX"],
+            "issued": {
+              "date-parts": [[2024, 12]]
+            },
+            "URL": "https://doi.org/10.1016/j.softx.2024.101907"
+          },
+          "pdfAdaylari": [
+            {
+              "url": "https://doi.org/10.1016/j.softx.2024.101907",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doi.org/10.1016/j.softx.2024.101907",
+              "doi": "10.1016/j.softx.2024.101907",
+              "lisans": "cc-by",
+              "surum": "publishedVersion",
+              "hostTuru": "publisher",
+              "baglantiTuru": "kayit",
+              "durum": "aday"
+            }
+          ]
+        },
+        {
+          "kaynak": "sci-hub",
+          "kaynakAd": "Sci-Hub",
+          "tur": "makale",
+          "baslik": "core_api_client: An API for the CORE aggregation service for open access papers",
+          "yazarlar": ["Domen Vake", "Niki Hrovatin", "Aleksandar Tošić", "Jernej Vičič"],
+          "yil": 2024,
+          "yayinci": "SoftwareX",
+          "doi": "10.1016/j.softx.2024.101907",
+          "link": "https://sci-hub.se/10.1016%2Fj.softx.2024.101907",
+          "ozet": "Sci-Hub açık arşivi üzerinden tam metin (DOI: 10.1016/j.softx.2024.101907).",
+          "erisim": "acik",
+          "pdfAdaylari": [
+            {
+              "url": "https://doi.org/10.1016/j.softx.2024.101907",
+              "kaynak": "unpaywall",
+              "kayitUrl": "https://doi.org/10.1016/j.softx.2024.101907",
+              "doi": "10.1016/j.softx.2024.101907",
+              "lisans": "cc-by",
+              "surum": "publishedVersion",
+              "hostTuru": "publisher",
+              "baglantiTuru": "kayit",
+              "durum": "aday"
+            }
+          ]
+        }
+      ],
+      "sayfa": "28: 101907",
+      "eslesme": {
+        "tur": "ilgili",
+        "oneri": false,
+        "aciklama": "Aradığın eser olduğu doğrulanamadı; başlık ve yazarı kontrol et."
+      }
+    },
+    {
+      "anahtar": "makale::access answering combining core credible gpt language large models open question research trustworthy::2023",
+      "tur": "makale",
+      "baslik": "CORE-GPT: Combining Open Access Research and Large Language Models for Credible, Trustworthy Question Answering",
+      "yazarlar": ["David Pride", "Matteo Cancellieri", "Petr Knoth"],
+      "yil": 2023,
+      "konular": [
+        "Topic Modeling",
+        "Information Retrieval and Search Behavior",
+        "Multimodal Machine Learning Applications"
+      ],
+      "puan": 0.16829037969702937,
+      "kaynaklar": [
+        {
+          "kaynak": "openalex",
+          "kaynakAd": "OpenAlex",
+          "tur": "makale",
+          "baslik": "CORE-GPT: Combining Open Access Research and Large Language Models for Credible, Trustworthy Question Answering",
+          "yazarlar": ["David Pride", "Matteo Cancellieri", "Petr Knoth"],
+          "yil": 2023,
+          "konular": [
+            "Topic Modeling",
+            "Information Retrieval and Search Behavior",
+            "Multimodal Machine Learning Applications"
+          ],
+          "yayinci": "Lecture notes in computer science",
+          "doi": "10.1007/978-3-031-43849-3_13",
+          "atif": 28,
+          "link": "http://arxiv.org/abs/2307.04683",
+          "pdf": "https://arxiv.org/pdf/2307.04683",
+          "pdfAdaylari": [
+            {
+              "url": "https://arxiv.org/pdf/2307.04683",
+              "kaynak": "openalex",
+              "kayitUrl": "http://arxiv.org/abs/2307.04683",
+              "doi": "10.1007/978-3-031-43849-3_13",
+              "lisans": "cc-by",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            },
+            {
+              "url": "https://oro.open.ac.uk/94412/1/2307.04683.pdf",
+              "kaynak": "openalex",
+              "kayitUrl": "https://oro.open.ac.uk/view/person/dmp426.html;",
+              "doi": "10.1007/978-3-031-43849-3_13",
+              "lisans": "other-oa",
+              "surum": "submittedVersion",
+              "hostTuru": "repository",
+              "baglantiTuru": "pdf",
+              "durum": "aday"
+            }
+          ],
+          "erisim": "acik",
+          "ham": {
+            "id": "https://openalex.org/W4386915056",
+            "doi": "https://doi.org/10.1007/978-3-031-43849-3_13",
+            "display_name": "CORE-GPT: Combining Open Access Research and Large Language Models for Credible, Trustworthy Question Answering",
+            "publication_year": 2023,
+            "authorships": [
+              {
+                "author_position": "first",
+                "author": {
+                  "id": "https://openalex.org/A5030795576",
+                  "display_name": "David Pride",
+                  "orcid": "https://orcid.org/0000-0002-7162-7252",
+                  "observed_orcids": ["https://orcid.org/0000-0002-7162-7252"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": true,
+                "raw_author_name": "David Pride",
+                "raw_affiliation_strings": [
+                  "The Knowledge Media Institute, The Open University, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "The Knowledge Media Institute, The Open University, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "middle",
+                "author": {
+                  "id": "https://openalex.org/A5087061304",
+                  "display_name": "Matteo Cancellieri",
+                  "orcid": "https://orcid.org/0000-0002-9558-9772",
+                  "observed_orcids": ["https://orcid.org/0000-0002-9558-9772"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "Matteo Cancellieri",
+                "raw_affiliation_strings": [
+                  "The Knowledge Media Institute, The Open University, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "The Knowledge Media Institute, The Open University, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              },
+              {
+                "author_position": "last",
+                "author": {
+                  "id": "https://openalex.org/A5056018651",
+                  "display_name": "Petr Knoth",
+                  "orcid": "https://orcid.org/0000-0003-1161-7359",
+                  "observed_orcids": ["https://orcid.org/0000-0003-1161-7359"]
+                },
+                "institutions": [
+                  {
+                    "id": "https://openalex.org/I204136569",
+                    "display_name": "The Open University",
+                    "ror": "https://ror.org/05mzfcs16",
+                    "country_code": "GB",
+                    "type": "education",
+                    "lineage": ["https://openalex.org/I204136569"]
+                  }
+                ],
+                "countries": ["GB"],
+                "is_corresponding": false,
+                "raw_author_name": "Petr Knoth",
+                "raw_affiliation_strings": [
+                  "The Knowledge Media Institute, The Open University, Milton Keynes, UK"
+                ],
+                "raw_orcid": null,
+                "affiliations": [
+                  {
+                    "raw_affiliation_string": "The Knowledge Media Institute, The Open University, Milton Keynes, UK",
+                    "institution_ids": ["https://openalex.org/I204136569"]
+                  }
+                ]
+              }
+            ],
+            "abstract_inverted_index": null,
+            "primary_location": {
+              "id": "doi:10.1007/978-3-031-43849-3_13",
+              "doi": "https://doi.org/10.1007/978-3-031-43849-3_13",
+              "is_oa": false,
+              "landing_page_url": "https://doi.org/10.1007/978-3-031-43849-3_13",
+              "pdf_url": null,
+              "source": {
+                "id": "https://openalex.org/S106296714",
+                "display_name": "Lecture notes in computer science",
+                "issn_l": "0302-9743",
+                "issn": ["0302-9743", "1611-3349"],
+                "is_oa": false,
+                "is_in_doaj": false,
+                "is_core": true,
+                "listed_in": ["cwts-core", "jufo-1", "ki-jl-1", "norway-1", "vabb-shw"],
+                "host_organization": "https://openalex.org/P4310319900",
+                "host_organization_name": "Springer Science+Business Media",
+                "host_organization_lineage": [
+                  "https://openalex.org/P4310319900",
+                  "https://openalex.org/P4310319965"
+                ],
+                "host_organization_lineage_names": [
+                  "Springer Science+Business Media",
+                  "Springer Nature"
+                ],
+                "type": "book series"
+              },
+              "license": null,
+              "license_id": null,
+              "version": "publishedVersion",
+              "is_accepted": true,
+              "is_published": true,
+              "raw_source_name": "Lecture Notes in Computer Science",
+              "raw_type": "book-chapter"
+            },
+            "best_oa_location": {
+              "id": "pmh:oai:arXiv.org:2307.04683",
+              "doi": null,
+              "is_oa": true,
+              "landing_page_url": "http://arxiv.org/abs/2307.04683",
+              "pdf_url": "https://arxiv.org/pdf/2307.04683",
+              "source": {
+                "id": "https://openalex.org/S4306400194",
+                "display_name": "arXiv (Cornell University)",
+                "issn_l": "2331-8422",
+                "issn": ["2331-8422"],
+                "is_oa": true,
+                "is_in_doaj": false,
+                "is_core": false,
+                "listed_in": [],
+                "host_organization": "https://openalex.org/I205783295",
+                "host_organization_name": "Cornell University",
+                "host_organization_lineage": ["https://openalex.org/I205783295"],
+                "host_organization_lineage_names": [],
+                "type": "repository"
+              },
+              "license": "cc-by",
+              "license_id": "https://openalex.org/licenses/cc-by",
+              "version": "submittedVersion",
+              "is_accepted": false,
+              "is_published": false,
+              "raw_source_name": null,
+              "raw_type": "text"
+            },
+            "locations": [
+              {
+                "id": "doi:10.1007/978-3-031-43849-3_13",
+                "doi": "https://doi.org/10.1007/978-3-031-43849-3_13",
+                "is_oa": false,
+                "landing_page_url": "https://doi.org/10.1007/978-3-031-43849-3_13",
+                "pdf_url": null,
+                "source": {
+                  "id": "https://openalex.org/S106296714",
+                  "display_name": "Lecture notes in computer science",
+                  "issn_l": "0302-9743",
+                  "issn": ["0302-9743", "1611-3349"],
+                  "is_oa": false,
+                  "is_in_doaj": false,
+                  "is_core": true,
+                  "listed_in": ["cwts-core", "jufo-1", "ki-jl-1", "norway-1", "vabb-shw"],
+                  "host_organization": "https://openalex.org/P4310319900",
+                  "host_organization_name": "Springer Science+Business Media",
+                  "host_organization_lineage": [
+                    "https://openalex.org/P4310319900",
+                    "https://openalex.org/P4310319965"
+                  ],
+                  "host_organization_lineage_names": [
+                    "Springer Science+Business Media",
+                    "Springer Nature"
+                  ],
+                  "type": "book series"
+                },
+                "license": null,
+                "license_id": null,
+                "version": "publishedVersion",
+                "is_accepted": true,
+                "is_published": true,
+                "raw_source_name": "Lecture Notes in Computer Science",
+                "raw_type": "book-chapter"
+              },
+              {
+                "id": "pmh:oai:arXiv.org:2307.04683",
+                "doi": null,
+                "is_oa": true,
+                "landing_page_url": "http://arxiv.org/abs/2307.04683",
+                "pdf_url": "https://arxiv.org/pdf/2307.04683",
+                "source": {
+                  "id": "https://openalex.org/S4306400194",
+                  "display_name": "arXiv (Cornell University)",
+                  "issn_l": "2331-8422",
+                  "issn": ["2331-8422"],
+                  "is_oa": true,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I205783295",
+                  "host_organization_name": "Cornell University",
+                  "host_organization_lineage": ["https://openalex.org/I205783295"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": "cc-by",
+                "license_id": "https://openalex.org/licenses/cc-by",
+                "version": "submittedVersion",
+                "is_accepted": false,
+                "is_published": false,
+                "raw_source_name": null,
+                "raw_type": "text"
+              },
+              {
+                "id": "pmh:oai:oro.open.ac.uk:94412",
+                "doi": null,
+                "is_oa": true,
+                "landing_page_url": "https://oro.open.ac.uk/view/person/dmp426.html;",
+                "pdf_url": "https://oro.open.ac.uk/94412/1/2307.04683.pdf",
+                "source": {
+                  "id": "https://openalex.org/S4306401187",
+                  "display_name": "Open Research Online (The Open University)",
+                  "issn_l": null,
+                  "issn": null,
+                  "is_oa": false,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I204136569",
+                  "host_organization_name": "The Open University",
+                  "host_organization_lineage": ["https://openalex.org/I204136569"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": "other-oa",
+                "license_id": "https://openalex.org/licenses/other-oa",
+                "version": "submittedVersion",
+                "is_accepted": false,
+                "is_published": false,
+                "raw_source_name": null,
+                "raw_type": "Conference or Workshop Item"
+              },
+              {
+                "id": "doi:10.48550/arxiv.2307.04683",
+                "doi": "https://doi.org/10.48550/arxiv.2307.04683",
+                "is_oa": true,
+                "landing_page_url": "https://doi.org/10.48550/arxiv.2307.04683",
+                "pdf_url": null,
+                "source": {
+                  "id": "https://openalex.org/S4306400194",
+                  "display_name": "arXiv (Cornell University)",
+                  "issn_l": "2331-8422",
+                  "issn": ["2331-8422"],
+                  "is_oa": true,
+                  "is_in_doaj": false,
+                  "is_core": false,
+                  "listed_in": [],
+                  "host_organization": "https://openalex.org/I205783295",
+                  "host_organization_name": "Cornell University",
+                  "host_organization_lineage": ["https://openalex.org/I205783295"],
+                  "host_organization_lineage_names": [],
+                  "type": "repository"
+                },
+                "license": "cc-by",
+                "license_id": "https://openalex.org/licenses/cc-by",
+                "version": null,
+                "is_accepted": false,
+                "is_published": null,
+                "raw_source_name": null,
+                "raw_type": "Preprint"
+              }
+            ],
+            "open_access": {
+              "is_oa": true,
+              "oa_status": "green",
+              "oa_url": "https://arxiv.org/pdf/2307.04683",
+              "any_repository_has_fulltext": true
+            },
+            "topics": [
+              {
+                "id": "https://openalex.org/T10028",
+                "display_name": "Topic Modeling",
+                "score": 0.9452999830245972,
+                "subfield": {
+                  "id": "https://openalex.org/subfields/1702",
+                  "display_name": "Artificial Intelligence"
+                },
+                "field": {
+                  "id": "https://openalex.org/fields/17",
+                  "display_name": "Computer Science"
+                },
+                "domain": {
+                  "id": "https://openalex.org/domains/3",
+                  "display_name": "Physical Sciences"
+                }
+              },
+              {
+                "id": "https://openalex.org/T10286",
+                "display_name": "Information Retrieval and Search Behavior",
+                "score": 0.017899999395012856,
+                "subfield": {
+                  "id": "https://openalex.org/subfields/1710",
+                  "display_name": "Information Systems"
+                },
+                "field": {
+                  "id": "https://openalex.org/fields/17",
+                  "display_name": "Computer Science"
+                },
+                "domain": {
+                  "id": "https://openalex.org/domains/3",
+                  "display_name": "Physical Sciences"
+                }
+              },
+              {
+                "id": "https://openalex.org/T11714",
+                "display_name": "Multimodal Machine Learning Applications",
+                "score": 0.010300000198185444,
+                "subfield": {
+                  "id": "https://openalex.org/subfields/1707",
+                  "display_name": "Computer Vision and Pattern Recognition"
+                },
+                "field": {
+                  "id": "https://openalex.org/fields/17",
+                  "display_name": "Computer Science"
+                },
+                "domain": {
+                  "id": "https://openalex.org/domains/3",
+                  "display_name": "Physical Sciences"
+                }
+              }
+            ],
+            "cited_by_count": 28,
+            "type": "conference-paper"
+          }
+        }
+      ],
+      "eslesme": {
+        "tur": "ilgili",
+        "oneri": false,
+        "aciklama": "Aradığın eser olduğu doğrulanamadı; başlık ve yazarı kontrol et."
+      }
+    }
+  ],
+  "tamMetinDurumu": {
+    "hazir": true,
+    "planlanan": 3,
+    "tamamlanan": 3,
+    "eklenenAday": 15,
+    "sureMs": 966,
+    "hatalar": []
+  },
+  "kaynakDurumlari": [
+    {
+      "id": "benim-sitem",
+      "ad": "Benim Sitem (örnek)",
+      "tur": ["kitap", "makale"],
+      "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+      "hazir": false,
+      "sonucSayisi": 0,
+      "sureMs": 0,
+      "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+    },
+    {
+      "id": "crossref",
+      "ad": "Crossref",
+      "tur": ["makale", "kitap"],
+      "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+      "hazir": true,
+      "sonucSayisi": 6,
+      "sureMs": 248
+    },
+    {
+      "id": "arxiv",
+      "ad": "arXiv",
+      "tur": ["makale"],
+      "aciklama": "Acik erisimli on baskilar, tam PDF",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 577
+    },
+    {
+      "id": "hal",
+      "ad": "HAL Science",
+      "tur": ["makale", "kitap"],
+      "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 585
+    },
+    {
+      "id": "sci-hub",
+      "ad": "Sci-Hub",
+      "tur": ["makale", "kitap"],
+      "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+      "hazir": true,
+      "sonucSayisi": 3,
+      "sureMs": 604
+    },
+    {
+      "id": "europe-pmc",
+      "ad": "Europe PMC",
+      "tur": ["makale"],
+      "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+      "hazir": true,
+      "sonucSayisi": 1,
+      "sureMs": 882
+    },
+    {
+      "id": "wikipedia-tr",
+      "ad": "Türkçe Wikipedia",
+      "tur": ["kitap", "makale", "slayt"],
+      "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 927
+    },
+    {
+      "id": "zenodo",
+      "ad": "Zenodo",
+      "tur": ["makale", "slayt"],
+      "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 1137
+    },
+    {
+      "id": "openalex",
+      "ad": "OpenAlex",
+      "tur": ["makale"],
+      "aciklama": "Bilimsel makale kayıtları ve alternatif açık erişim kopyaları",
+      "hazir": true,
+      "sonucSayisi": 2,
+      "sureMs": 1354
+    },
+    {
+      "id": "semantic-scholar",
+      "ad": "Semantic Scholar",
+      "tur": ["makale"],
+      "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 1881,
+      "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+    },
+    {
+      "id": "core",
+      "ad": "CORE",
+      "tur": ["makale"],
+      "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 5148,
+      "hataMesaji": "api.core.ac.uk 500"
+    },
+    {
+      "id": "annas-archive",
+      "ad": "Anna's Archive",
+      "tur": ["kitap", "makale"],
+      "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 16399,
+      "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+    },
+    {
+      "id": "libgen",
+      "ad": "Library Genesis",
+      "tur": ["kitap", "makale"],
+      "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 20035,
+      "hataMesaji": "Kaynak 20 saniyede yanıt vermedi"
+    },
+    {
+      "id": "openaire",
+      "ad": "OpenAIRE (Açık Erişim)",
+      "tur": ["kitap", "makale"],
+      "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+      "hazir": true,
+      "sonucSayisi": 0,
+      "sureMs": 20036,
+      "hataMesaji": "Kaynak 20 saniyede yanıt vermedi"
+    }
+  ],
+  "toplamSonuc": 12,
+  "gruplamaNotu": "Kayıtlar başlık, yazar ve bilinen baskı bilgilerine göre birleştirildi. Eksik künye bilgisi doğrulanmış eşleşme sayılmaz."
+}

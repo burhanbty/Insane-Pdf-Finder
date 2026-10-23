@@ -55,6 +55,15 @@ it("bozuk hazırlık ve yanıt vermeyen kaynak sağlam sonucu engellemez; eksik 
     { id: "bozuk", ad: "Bozuk", tur: ["kitap"], hazirMi, ara: vi.fn() },
     { id: "yavas", ad: "Yavaş", tur: ["kitap"], ara: yavas },
     {
+      id: "bozuk-surum",
+      ad: "Bozuk sürüm",
+      tur: ["kitap"],
+      ara: vi.fn(),
+      onbellekSurumu: () => {
+        throw Error("bad index version");
+      },
+    },
+    {
       id: "gecersiz",
       ad: "Geçersiz",
       tur: ["kitap"],
@@ -67,6 +76,9 @@ it("bozuk hazırlık ve yanıt vermeyen kaynak sağlam sonucu engellemez; eksik 
     expect(r.gruplar).toHaveLength(1);
     expect(r.kaynakDurumlari.find((k) => k.id === "bozuk")?.hataMesaji).toContain("bad key");
     expect(r.kaynakDurumlari.find((k) => k.id === "yavas")?.hataMesaji).toContain("yanıt vermedi");
+    expect(r.kaynakDurumlari.find((k) => k.id === "bozuk-surum")?.hataMesaji).toContain(
+      "bad index version",
+    );
     expect(r.kaynakDurumlari.find((k) => k.id === "gecersiz")?.hataMesaji).toContain(
       "geçerli eser",
     );

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/zollu/bundles/ojsoai/oai2.xsl" ?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+         http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-10-22T22:50:43Z</responseDate>
+    <request verb="GetRecord" metadataPrefix="oai_dc"
+             identifier="oai:dergipark.org.tr:record/1124443">https://dergipark.org.tr/api/public/oai/?verb=GetRecord&amp;metadataPrefix=oai_dc&amp;identifier=oai%3Adergipark.org.tr%3Aarticle%2F1124443</request>
+    <GetRecord>
+        <record>
+            <header>
+    <identifier>oai:dergipark.org.tr:record/1124443</identifier>
+    <datestamp>2026-10-11</datestamp>
+                        <setSpec>ap</setSpec>
+            </header>
+            <metadata>
+                <oai_dc:dc
+        xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
+        xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <dc:title xml:lang="tr-TR">
+                <![CDATA[Zorunlu Göç Bağlamında Suriyeli Kadınların Ücretli İşgücüne Katılımında Toplumsal Cinsiyet Müzakeresi]]>
+            </dc:title>
+                                <dc:title xml:lang="en-US">
+                <![CDATA[Gender Negotiation in Syrian Women’s Paid Workforce Participation in the Context of Forced Migration]]>
+            </dc:title>
+                            <dc:creator>
+            <![CDATA[Körükmez, Lülüfer]]>
+        </dc:creator>
+            <dc:creator>
+            <![CDATA[Danış, Didem]]>
+        </dc:creator>
+            <dc:creator>
+            <![CDATA[Karakılıç, İlhan Zeynep]]>
+        </dc:creator>
+                                                                            <dc:subject><![CDATA[Zorunlu Göç,Göçmen Emeği,Toplumsal Cinsiyet,Patriyarkal Pazarlık,Suriyeli Mülteci Kadınlar]]></dc:subject>
+                                                                        <dc:subject><![CDATA[Forced Migration,Migrant Labor,Gender,Patriarchal Bargaining,Syrian Refugee Women]]></dc:subject>
+                                                                    <dc:description
+                        xml:lang="tr-TR">
+                    <![CDATA[Bu makalede, ücretli çalışan Suriyeli mülteci kadınların zorunlu göç sonrasında emek piyasasına katılımının toplumsal cinsiyet rolleri ile ilişkisi incelenmektedir. Mersin, İzmir ve Gaziantep’te 2019 yılında gerçekleştirilen çalışma, Suriye’den Türkiye’ye göç etmek zorunda kalan farklı sosyal ve etnik arka plandan 48 kadınla yapılan görüşmelere dayanmaktadır. Nitel araştırma yöntemleri kullanılan saha araştırması, Suriyeli mülteci kadınların ücretli işe girişlerinin hanenin geçimini sağlamak için mecburiyetten kaynaklandığını göstermiştir. Kadınların geleneksel rollerinin dışına çıkarak emek piyasasına girişleri, ev içinde ve dışında geleneksel toplumsal cinsiyet ilişkilerinin müzakere edilmesine de alan açmaktadır. Suriyeli kadınların ev dışı ücretli işe girişlerinde sosyal çevre baskısı, “aile onuru” ve toplumsal değerlerin sarsılacağı korkusu önemli bir gerilim hattı oluşturmaktadır. Bu çalışmanın bulgularına göre, iş yoluyla gelir elde etme, kadınlar için ev dışında tanınma, statülerinin iyileşmesi ve güçlenme beklentisi yaratsa da ücretli iş kadınların gündelik hayatlarında ek yükler getirmekte ve toplumsal cinsiyete dayalı yeni gerilim ve şiddet alanları ortaya çıkarmaktadır.]]>
+                </dc:description>
+                                                <dc:description
+                        xml:lang="en-US">
+                    <![CDATA[This article examines the relationship between wage-working Syrian refugee women&#039;s participation in the labor market after forced migration and gender roles. The study, carried out in Mersin, İzmir, and Gaziantep in 2019, is based on interviews with 48 women from different social and ethnic backgrounds who had to migrate from Syria to Turkey. Field research using qualitative research methods has shown that Syrian refugee women&#039;s entry into paid work is due to the necessity to earn a living for the household. The entry of women into the labor market by stepping out of their traditional roles also opens up space for negotiating traditional gender relations inside and outside the home. Pressure from the social environment, and fear of undermining the “family honor” and social values when Syrian women enter paid employment outside the home constitute an important line of tension. The findings of this study demonstrate that although earning income through work creates the expectation of recognition outside the home, improvement of social status, and empowerment for women, paid work brings additional burdens in women&#039;s daily lives and creates new areas of tension and violence based on gender.]]>
+                </dc:description>
+                                        <dc:publisher><![CDATA[Rasim Özgür DÖNMEZ]]></dc:publisher>
+                                        <dc:date>2022-06-01</dc:date>
+            <dc:type>info:eu-repo/semantics/article</dc:type>
+                <dc:format>application/pdf</dc:format>
+            <dc:identifier>https://dergipark.org.tr/en/pub/ap/article/1124443</dc:identifier>
+            <dc:identifier>https://doi.org/10.53376/ap.2022.07</dc:identifier>
+                <dc:identifier>https://izlik.org/JA88NN63HC</dc:identifier>
+                    <dc:source>
+            <![CDATA[Alternatif Politika, Vol. 14 No. 2            ]]>
+        </dc:source>
+                    <dc:language>tr</dc:language>
+                    <dc:relation>https://dergipark.org.tr/en/pub/ap</dc:relation>
+        <dc:relation>https://dergipark.org.tr/en/pub/ap/archive</dc:relation>
+                    <dc:relation>https://dergipark.org.tr/en/pub/ap/issue/70134</dc:relation>
+                        <dc:relation>https://doi.org/10.53376/ap.2022.07</dc:relation>
+                <dc:relation>https://izlik.org/JA88NN63HC</dc:relation>
+            </oai_dc:dc>
+            </metadata>
+        </record>
+    </GetRecord>
+</OAI-PMH>

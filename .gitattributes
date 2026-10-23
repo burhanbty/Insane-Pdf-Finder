@@ -23,3 +23,7 @@
 # Sifreler ve anahtarlar ASLA degistirilmemeli
 .env      text
 .env.*    text
+
+# Ham kaynak kanıtlarının baytlarını ve SHA-256 değerlerini koru.
+/benchmark/evidence/*.txt -text -whitespace
+/reports/dergipark-evidence/* -text -whitespace

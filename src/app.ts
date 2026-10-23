@@ -239,6 +239,8 @@ const IZINLI_KAPAK_ALANLARI = [
   "images-na.ssl-images-amazon.com",
   "upload.wikimedia.org",
   "gutenberg.org",
+  "library.oapen.org",
+  "directory.doabooks.org",
 ];
 
 uygulama.get("/api/kapak", async (req: Request, res: Response) => {

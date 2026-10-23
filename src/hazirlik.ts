@@ -42,6 +42,13 @@ function envKontrol(yol: string): { yaratildi: boolean; uyari: string | null } {
         "# Semantic Scholar API anahtari (https://www.semanticscholar.org/product/api)",
         "SEMANTIC_SCHOLAR_API_KEY=",
         "",
+        "# Ortak DOI/Unpaywall taraması için gerçek iletişim e-postası.",
+        "# Boşsa CONTACT_EMAIL kullanılır; ikisi de boşsa bu ek tarama kapalıdır.",
+        "CONTACT_EMAIL_UNPAYWALL=",
+        "",
+        "# İsteğe bağlı OpenAlex API anahtarı.",
+        "OPENALEX_API_KEY=",
+        "",
         "# Opsiyonel: ozet icin LLM. Bos ise anahtar kelime yontemi kullanilir.",
         "LLM_BASE_URL=",
         "LLM_API_KEY=",
@@ -100,8 +107,13 @@ function eksikAnahtarUyarisi(): string[] {
 
   if (!ayar.contactEmail) {
     uyarilar.push(
-      "CONTACT_EMAIL boş: Open Library ve Unpaywall yavaş çalışır " +
+      "CONTACT_EMAIL boş: Open Library yavaş çalışır " +
         "(1 istek/sn, ücretsiz e-posta ile 3 istek/sn olur)",
+    );
+  }
+  if (!ayar.unpaywallEmail) {
+    uyarilar.push(
+      "CONTACT_EMAIL_UNPAYWALL boş: DOI üzerinden ek açık erişim kopyası araması kapalı",
     );
   }
   if (!ayar.googleBooksKey) {

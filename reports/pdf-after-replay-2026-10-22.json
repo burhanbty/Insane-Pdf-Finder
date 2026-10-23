@@ -1,0 +1,4078 @@
+{
+  "tarih": "2026-10-22T19:59:07.172Z",
+  "mod": "replay",
+  "sinir": "Gerçek üstveriden sabit aday havuzu üzerinde sıralama/gruplama; internetten bulma veya indirme başarısı değildir.",
+  "veriSha256": "5dad39555161db622a4fb57e6edf999f8f08ee321e0266200aa3a828d2bc1f0e",
+  "planlanan": 500,
+  "tamamlanan": 500,
+  "metrikler": {
+    "sorgu": 500,
+    "ilkSirada": 1,
+    "ilkBeste": 1,
+    "hata": 0,
+    "p50Ms": 51,
+    "p95Ms": 87
+  },
+  "kategoriler": {
+    "turkce-kitap": {
+      "sorgu": 200,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 46,
+      "p95Ms": 73
+    },
+    "makale": {
+      "sorgu": 100,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 54,
+      "p95Ms": 88
+    },
+    "yabanci-kitap": {
+      "sorgu": 100,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 48,
+      "p95Ms": 80
+    },
+    "sunum-ders": {
+      "sorgu": 50,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 61,
+      "p95Ms": 97
+    },
+    "tez-rapor": {
+      "sorgu": 50,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 70,
+      "p95Ms": 96
+    }
+  },
+  "bolumler": {
+    "gelistirme": {
+      "sorgu": 400,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 51,
+      "p95Ms": 87
+    },
+    "test": {
+      "sorgu": 100,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 51,
+      "p95Ms": 82
+    }
+  },
+  "satirlar": [
+    {
+      "id": "00703b81ac664268:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 26,
+      "pdfAdayi": false
+    },
+    {
+      "id": "00703b81ac664268:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 25,
+      "pdfAdayi": false
+    },
+    {
+      "id": "00703b81ac664268:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "00703b81ac664268:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 27,
+      "pdfAdayi": false
+    },
+    {
+      "id": "00703b81ac664268:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 23,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0599c1fc7a678563:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 21,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0599c1fc7a678563:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 33,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0599c1fc7a678563:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 33,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0599c1fc7a678563:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 25,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0599c1fc7a678563:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 34,
+      "pdfAdayi": false
+    },
+    {
+      "id": "064628389a241040:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 22,
+      "pdfAdayi": false
+    },
+    {
+      "id": "064628389a241040:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 34,
+      "pdfAdayi": false
+    },
+    {
+      "id": "064628389a241040:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "064628389a241040:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 25,
+      "pdfAdayi": false
+    },
+    {
+      "id": "064628389a241040:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0a2a3edb8ac8608f:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 28,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0a2a3edb8ac8608f:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0a2a3edb8ac8608f:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0a2a3edb8ac8608f:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 33,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0a2a3edb8ac8608f:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 34,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0c8ef036bc9f5a8d:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 22,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0c8ef036bc9f5a8d:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 45,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0c8ef036bc9f5a8d:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0c8ef036bc9f5a8d:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 28,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0c8ef036bc9f5a8d:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 29,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0d37750b5f5fd6e9:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 20,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0d37750b5f5fd6e9:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 32,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0d37750b5f5fd6e9:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 32,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0d37750b5f5fd6e9:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 22,
+      "pdfAdayi": false
+    },
+    {
+      "id": "0d37750b5f5fd6e9:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 33,
+      "pdfAdayi": false
+    },
+    {
+      "id": "11bf4b1e4d23fd6b:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 26,
+      "pdfAdayi": false
+    },
+    {
+      "id": "11bf4b1e4d23fd6b:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "11bf4b1e4d23fd6b:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "11bf4b1e4d23fd6b:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 27,
+      "pdfAdayi": false
+    },
+    {
+      "id": "11bf4b1e4d23fd6b:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "121ca8989c40d784:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 20,
+      "pdfAdayi": false
+    },
+    {
+      "id": "121ca8989c40d784:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 31,
+      "pdfAdayi": false
+    },
+    {
+      "id": "121ca8989c40d784:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 34,
+      "pdfAdayi": false
+    },
+    {
+      "id": "121ca8989c40d784:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 26,
+      "pdfAdayi": false
+    },
+    {
+      "id": "121ca8989c40d784:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 34,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1226012103bbc682:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 23,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1226012103bbc682:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 32,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1226012103bbc682:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1226012103bbc682:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 27,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1226012103bbc682:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "12c27ae1fd903b0b:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 30,
+      "pdfAdayi": false
+    },
+    {
+      "id": "12c27ae1fd903b0b:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 32,
+      "pdfAdayi": false
+    },
+    {
+      "id": "12c27ae1fd903b0b:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "12c27ae1fd903b0b:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 30,
+      "pdfAdayi": false
+    },
+    {
+      "id": "12c27ae1fd903b0b:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 32,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1831940b5cb979ff:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 21,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1831940b5cb979ff:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 30,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1831940b5cb979ff:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1831940b5cb979ff:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 25,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1831940b5cb979ff:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 28,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1915cc7f80228aa9:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 20,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1915cc7f80228aa9:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 28,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1915cc7f80228aa9:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1915cc7f80228aa9:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 24,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1915cc7f80228aa9:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 34,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1947f552d224805e:baslik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 31,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1947f552d224805e:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 31,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1947f552d224805e:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1947f552d224805e:ascii-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 28,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1947f552d224805e:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 32,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1e9ee2cc04cd2506:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 23,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1e9ee2cc04cd2506:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1e9ee2cc04cd2506:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1e9ee2cc04cd2506:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 25,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1e9ee2cc04cd2506:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1fd8e3928254d815:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 24,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1fd8e3928254d815:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 31,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1fd8e3928254d815:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1fd8e3928254d815:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 28,
+      "pdfAdayi": false
+    },
+    {
+      "id": "1fd8e3928254d815:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 31,
+      "pdfAdayi": false
+    },
+    {
+      "id": "266d57c7b9431727:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 24,
+      "pdfAdayi": false
+    },
+    {
+      "id": "266d57c7b9431727:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 40,
+      "pdfAdayi": false
+    },
+    {
+      "id": "266d57c7b9431727:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "266d57c7b9431727:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 27,
+      "pdfAdayi": false
+    },
+    {
+      "id": "266d57c7b9431727:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 32,
+      "pdfAdayi": false
+    },
+    {
+      "id": "29f5c1d5cb0ca7d3:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 21,
+      "pdfAdayi": false
+    },
+    {
+      "id": "29f5c1d5cb0ca7d3:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 27,
+      "pdfAdayi": false
+    },
+    {
+      "id": "29f5c1d5cb0ca7d3:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 27,
+      "pdfAdayi": false
+    },
+    {
+      "id": "29f5c1d5cb0ca7d3:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 23,
+      "pdfAdayi": false
+    },
+    {
+      "id": "29f5c1d5cb0ca7d3:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2db349379ffaef0d:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2db349379ffaef0d:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 86,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2db349379ffaef0d:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 87,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2db349379ffaef0d:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 64,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2db349379ffaef0d:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 92,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2e27d5a8245f6a7f:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2e27d5a8245f6a7f:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 90,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2e27d5a8245f6a7f:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 88,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2e27d5a8245f6a7f:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2e27d5a8245f6a7f:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 115,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2eb478f44c181715:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 41,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2eb478f44c181715:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 65,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2eb478f44c181715:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 77,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2eb478f44c181715:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "2eb478f44c181715:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "30334096f33e3d56:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "30334096f33e3d56:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "30334096f33e3d56:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 75,
+      "pdfAdayi": false
+    },
+    {
+      "id": "30334096f33e3d56:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "30334096f33e3d56:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b029e865949e913:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b029e865949e913:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b029e865949e913:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 80,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b029e865949e913:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b029e865949e913:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 76,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b5f6ea47e26e4a4:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 41,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b5f6ea47e26e4a4:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b5f6ea47e26e4a4:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b5f6ea47e26e4a4:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3b5f6ea47e26e4a4:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3cb0f51f02d54c14:baslik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3cb0f51f02d54c14:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 62,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3cb0f51f02d54c14:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3cb0f51f02d54c14:ascii-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "3cb0f51f02d54c14:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40eae2398b3b31ae:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 40,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40eae2398b3b31ae:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40eae2398b3b31ae:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40eae2398b3b31ae:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40eae2398b3b31ae:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40edb4d13df9f4de:baslik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40edb4d13df9f4de:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40edb4d13df9f4de:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 60,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40edb4d13df9f4de:ascii-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "40edb4d13df9f4de:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 58,
+      "pdfAdayi": false
+    },
+    {
+      "id": "422ec636d30ce2d0:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "422ec636d30ce2d0:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "422ec636d30ce2d0:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 81,
+      "pdfAdayi": false
+    },
+    {
+      "id": "422ec636d30ce2d0:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "422ec636d30ce2d0:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 80,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43df6c040cb4b2f0:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 73,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43df6c040cb4b2f0:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 98,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43df6c040cb4b2f0:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 97,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43df6c040cb4b2f0:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43df6c040cb4b2f0:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 100,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43e14966367a5ee6:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43e14966367a5ee6:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 76,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43e14966367a5ee6:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 73,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43e14966367a5ee6:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "43e14966367a5ee6:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "469e5edfc13b8542:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "469e5edfc13b8542:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "469e5edfc13b8542:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 58,
+      "pdfAdayi": false
+    },
+    {
+      "id": "469e5edfc13b8542:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 43,
+      "pdfAdayi": false
+    },
+    {
+      "id": "469e5edfc13b8542:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4804307ea6ddf0a0:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 40,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4804307ea6ddf0a0:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4804307ea6ddf0a0:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 57,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4804307ea6ddf0a0:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4804307ea6ddf0a0:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4918f15734ba6b1e:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4918f15734ba6b1e:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4918f15734ba6b1e:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 70,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4918f15734ba6b1e:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 57,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4918f15734ba6b1e:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4aab33f088bc9cf0:baslik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 40,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4aab33f088bc9cf0:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4aab33f088bc9cf0:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4aab33f088bc9cf0:ascii-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4aab33f088bc9cf0:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4c90bc5f354a927b:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4c90bc5f354a927b:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4c90bc5f354a927b:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4c90bc5f354a927b:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "4c90bc5f354a927b:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "50e106d9369541b6:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "50e106d9369541b6:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 70,
+      "pdfAdayi": false
+    },
+    {
+      "id": "50e106d9369541b6:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 77,
+      "pdfAdayi": false
+    },
+    {
+      "id": "50e106d9369541b6:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 55,
+      "pdfAdayi": false
+    },
+    {
+      "id": "50e106d9369541b6:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "52d00ceaffc23adf:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "52d00ceaffc23adf:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 64,
+      "pdfAdayi": false
+    },
+    {
+      "id": "52d00ceaffc23adf:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 89,
+      "pdfAdayi": false
+    },
+    {
+      "id": "52d00ceaffc23adf:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 62,
+      "pdfAdayi": false
+    },
+    {
+      "id": "52d00ceaffc23adf:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5460762c25f97304:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5460762c25f97304:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 58,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5460762c25f97304:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5460762c25f97304:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 43,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5460762c25f97304:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "57a345e01911a52b:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "57a345e01911a52b:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 78,
+      "pdfAdayi": false
+    },
+    {
+      "id": "57a345e01911a52b:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 87,
+      "pdfAdayi": false
+    },
+    {
+      "id": "57a345e01911a52b:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "57a345e01911a52b:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 78,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5edad3dd2e202a1f:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5edad3dd2e202a1f:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5edad3dd2e202a1f:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 75,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5edad3dd2e202a1f:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "5edad3dd2e202a1f:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 73,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6245327e8e8b5b69:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6245327e8e8b5b69:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 75,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6245327e8e8b5b69:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 85,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6245327e8e8b5b69:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6245327e8e8b5b69:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 76,
+      "pdfAdayi": false
+    },
+    {
+      "id": "66ee5f5af1582434:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "66ee5f5af1582434:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "66ee5f5af1582434:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 76,
+      "pdfAdayi": false
+    },
+    {
+      "id": "66ee5f5af1582434:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "66ee5f5af1582434:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "670e7502d4afffa9:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "670e7502d4afffa9:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "670e7502d4afffa9:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "670e7502d4afffa9:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "670e7502d4afffa9:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6af196f09dbda601:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6af196f09dbda601:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 62,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6af196f09dbda601:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6af196f09dbda601:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 43,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6af196f09dbda601:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6ea4df5359eb6f0a:baslik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6ea4df5359eb6f0a:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6ea4df5359eb6f0a:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 55,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6ea4df5359eb6f0a:ascii-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "6ea4df5359eb6f0a:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "751f81453a543d55:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "751f81453a543d55:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "751f81453a543d55:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "751f81453a543d55:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "751f81453a543d55:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7ab15343b9c6ddac:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 40,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7ab15343b9c6ddac:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7ab15343b9c6ddac:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7ab15343b9c6ddac:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7ab15343b9c6ddac:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d0a1ff47454abf5:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d0a1ff47454abf5:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d0a1ff47454abf5:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d0a1ff47454abf5:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d0a1ff47454abf5:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d24add1686bcb30:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d24add1686bcb30:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 45,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d24add1686bcb30:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d24add1686bcb30:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7d24add1686bcb30:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 45,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e40fd34353dc76b:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e40fd34353dc76b:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e40fd34353dc76b:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 73,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e40fd34353dc76b:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e40fd34353dc76b:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e61cd01de3a9cec:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 55,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e61cd01de3a9cec:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e61cd01de3a9cec:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 43,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e61cd01de3a9cec:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "7e61cd01de3a9cec:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "826093c0b60e9af7:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "826093c0b60e9af7:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "826093c0b60e9af7:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 77,
+      "pdfAdayi": false
+    },
+    {
+      "id": "826093c0b60e9af7:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "826093c0b60e9af7:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 60,
+      "pdfAdayi": false
+    },
+    {
+      "id": "86c11b5dfcdd0bc8:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "86c11b5dfcdd0bc8:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 58,
+      "pdfAdayi": false
+    },
+    {
+      "id": "86c11b5dfcdd0bc8:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 78,
+      "pdfAdayi": false
+    },
+    {
+      "id": "86c11b5dfcdd0bc8:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 57,
+      "pdfAdayi": false
+    },
+    {
+      "id": "86c11b5dfcdd0bc8:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8a51b9e4a5651c11:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 40,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8a51b9e4a5651c11:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8a51b9e4a5651c11:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8a51b9e4a5651c11:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8a51b9e4a5651c11:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8b785329a989dc0a:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8b785329a989dc0a:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8b785329a989dc0a:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8b785329a989dc0a:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8b785329a989dc0a:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8d70489ab1a5ca04:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 64,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8d70489ab1a5ca04:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 86,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8d70489ab1a5ca04:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 84,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8d70489ab1a5ca04:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "8d70489ab1a5ca04:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 87,
+      "pdfAdayi": false
+    },
+    {
+      "id": "90cd220bd688467c:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "90cd220bd688467c:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 98,
+      "pdfAdayi": false
+    },
+    {
+      "id": "90cd220bd688467c:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 104,
+      "pdfAdayi": false
+    },
+    {
+      "id": "90cd220bd688467c:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 75,
+      "pdfAdayi": false
+    },
+    {
+      "id": "90cd220bd688467c:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 95,
+      "pdfAdayi": false
+    },
+    {
+      "id": "914285d285331435:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "914285d285331435:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 77,
+      "pdfAdayi": false
+    },
+    {
+      "id": "914285d285331435:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 76,
+      "pdfAdayi": false
+    },
+    {
+      "id": "914285d285331435:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "914285d285331435:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 73,
+      "pdfAdayi": false
+    },
+    {
+      "id": "967e0a5603e2cfc5:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "967e0a5603e2cfc5:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 77,
+      "pdfAdayi": false
+    },
+    {
+      "id": "967e0a5603e2cfc5:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 82,
+      "pdfAdayi": false
+    },
+    {
+      "id": "967e0a5603e2cfc5:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 58,
+      "pdfAdayi": false
+    },
+    {
+      "id": "967e0a5603e2cfc5:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 80,
+      "pdfAdayi": false
+    },
+    {
+      "id": "97f64c193bd9288d:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 41,
+      "pdfAdayi": false
+    },
+    {
+      "id": "97f64c193bd9288d:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "97f64c193bd9288d:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "97f64c193bd9288d:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "97f64c193bd9288d:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9833f56b694fc9c1:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9833f56b694fc9c1:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 43,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9833f56b694fc9c1:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9833f56b694fc9c1:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9833f56b694fc9c1:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 41,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9ab1d7504e524f3b:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9ab1d7504e524f3b:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 64,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9ab1d7504e524f3b:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9ab1d7504e524f3b:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "9ab1d7504e524f3b:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 77,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a2112acab76243fa:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a2112acab76243fa:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a2112acab76243fa:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a2112acab76243fa:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a2112acab76243fa:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a4be7a173e49b6e6:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a4be7a173e49b6e6:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 62,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a4be7a173e49b6e6:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a4be7a173e49b6e6:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "a4be7a173e49b6e6:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 63,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aba2e6d218f8cce7:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 60,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aba2e6d218f8cce7:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 84,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aba2e6d218f8cce7:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 85,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aba2e6d218f8cce7:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aba2e6d218f8cce7:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 79,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aeb75086ad93ead9:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aeb75086ad93ead9:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aeb75086ad93ead9:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 78,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aeb75086ad93ead9:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "aeb75086ad93ead9:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b24059474cf8e589:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 61,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b24059474cf8e589:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 75,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b24059474cf8e589:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 75,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b24059474cf8e589:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b24059474cf8e589:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 76,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b62b82bcc7e2d68d:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b62b82bcc7e2d68d:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b62b82bcc7e2d68d:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b62b82bcc7e2d68d:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b62b82bcc7e2d68d:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 43,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b653f4b632e00b16:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 55,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b653f4b632e00b16:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 78,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b653f4b632e00b16:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 83,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b653f4b632e00b16:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 55,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b653f4b632e00b16:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 78,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b6db236530ae1c1e:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b6db236530ae1c1e:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b6db236530ae1c1e:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b6db236530ae1c1e:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "b6db236530ae1c1e:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 65,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bc108fb63e1e02d1:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bc108fb63e1e02d1:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bc108fb63e1e02d1:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bc108fb63e1e02d1:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bc108fb63e1e02d1:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "be766499b41148fe:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "be766499b41148fe:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "be766499b41148fe:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 77,
+      "pdfAdayi": false
+    },
+    {
+      "id": "be766499b41148fe:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "be766499b41148fe:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bf064f4240638c3b:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 80,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bf064f4240638c3b:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 96,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bf064f4240638c3b:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 114,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bf064f4240638c3b:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 86,
+      "pdfAdayi": false
+    },
+    {
+      "id": "bf064f4240638c3b:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 108,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c3ce6f4484b1b193:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c3ce6f4484b1b193:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c3ce6f4484b1b193:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c3ce6f4484b1b193:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c3ce6f4484b1b193:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c535ec00c8155fca:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c535ec00c8155fca:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c535ec00c8155fca:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c535ec00c8155fca:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c535ec00c8155fca:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 70,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c8cd06edb3be511f:baslik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c8cd06edb3be511f:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c8cd06edb3be511f:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 73,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c8cd06edb3be511f:ascii-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c8cd06edb3be511f:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 55,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c9e08539bae3b150:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 34,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c9e08539bae3b150:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c9e08539bae3b150:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c9e08539bae3b150:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 33,
+      "pdfAdayi": false
+    },
+    {
+      "id": "c9e08539bae3b150:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ca99153d977e08fe:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ca99153d977e08fe:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ca99153d977e08fe:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 65,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ca99153d977e08fe:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ca99153d977e08fe:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cea6db62d41ef7b4:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cea6db62d41ef7b4:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cea6db62d41ef7b4:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cea6db62d41ef7b4:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 41,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cea6db62d41ef7b4:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 41,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cfb0a101d8736389:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cfb0a101d8736389:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cfb0a101d8736389:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cfb0a101d8736389:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "cfb0a101d8736389:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 88,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d02464e83c2522f9:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d02464e83c2522f9:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d02464e83c2522f9:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 64,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d02464e83c2522f9:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d02464e83c2522f9:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 63,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d3862ea12d275873:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d3862ea12d275873:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 33,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d3862ea12d275873:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d3862ea12d275873:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d3862ea12d275873:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d449d6ae4b71458a:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d449d6ae4b71458a:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d449d6ae4b71458a:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d449d6ae4b71458a:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d449d6ae4b71458a:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 53,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d647e5cd383667f5:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d647e5cd383667f5:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 68,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d647e5cd383667f5:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d647e5cd383667f5:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d647e5cd383667f5:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 65,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6c1f9e6cec294f9:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 70,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6c1f9e6cec294f9:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 87,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6c1f9e6cec294f9:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 91,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6c1f9e6cec294f9:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 57,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6c1f9e6cec294f9:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 80,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6ef0e52bd19423c:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 38,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6ef0e52bd19423c:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6ef0e52bd19423c:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6ef0e52bd19423c:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d6ef0e52bd19423c:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d717fb314968acc8:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d717fb314968acc8:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 87,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d717fb314968acc8:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 90,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d717fb314968acc8:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 65,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d717fb314968acc8:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 87,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d74b06de11a5ed4e:baslik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d74b06de11a5ed4e:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 73,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d74b06de11a5ed4e:baslik-yazar-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 76,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d74b06de11a5ed4e:ascii-yil",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 25,
+      "pdfAdayi": false
+    },
+    {
+      "id": "d74b06de11a5ed4e:tek-harf-eksik",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 48,
+      "pdfAdayi": false
+    },
+    {
+      "id": "daf064df89bc78c9:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "daf064df89bc78c9:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 74,
+      "pdfAdayi": false
+    },
+    {
+      "id": "daf064df89bc78c9:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "daf064df89bc78c9:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "daf064df89bc78c9:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 82,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e39ebe0257303edb:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e39ebe0257303edb:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 67,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e39ebe0257303edb:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 72,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e39ebe0257303edb:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e39ebe0257303edb:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e669b63196de36cd:baslik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e669b63196de36cd:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e669b63196de36cd:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 84,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e669b63196de36cd:ascii-yil",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "e669b63196de36cd:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 51,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ec9f88f9bc0a472d:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ec9f88f9bc0a472d:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ec9f88f9bc0a472d:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ec9f88f9bc0a472d:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 50,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ec9f88f9bc0a472d:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 42,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eec98a7b46d7fee3:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 28,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eec98a7b46d7fee3:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 45,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eec98a7b46d7fee3:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 43,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eec98a7b46d7fee3:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eec98a7b46d7fee3:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eecc67f026c1bfcd:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eecc67f026c1bfcd:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eecc67f026c1bfcd:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eecc67f026c1bfcd:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 58,
+      "pdfAdayi": false
+    },
+    {
+      "id": "eecc67f026c1bfcd:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 45,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ef0d2e47ce24741e:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 35,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ef0d2e47ce24741e:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ef0d2e47ce24741e:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ef0d2e47ce24741e:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "ef0d2e47ce24741e:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 44,
+      "pdfAdayi": false
+    },
+    {
+      "id": "efcddebe69b242ab:baslik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 54,
+      "pdfAdayi": false
+    },
+    {
+      "id": "efcddebe69b242ab:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 85,
+      "pdfAdayi": false
+    },
+    {
+      "id": "efcddebe69b242ab:baslik-yazar-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 82,
+      "pdfAdayi": false
+    },
+    {
+      "id": "efcddebe69b242ab:ascii-yil",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 52,
+      "pdfAdayi": false
+    },
+    {
+      "id": "efcddebe69b242ab:tek-harf-eksik",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 87,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f164af5f1bf8f2be:baslik",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f164af5f1bf8f2be:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 84,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f164af5f1bf8f2be:baslik-yazar-yil",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 80,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f164af5f1bf8f2be:ascii-yil",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 58,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f164af5f1bf8f2be:tek-harf-eksik",
+      "kategori": "tez-rapor",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 82,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f1e132ad855a9e6a:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 37,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f1e132ad855a9e6a:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 65,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f1e132ad855a9e6a:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 66,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f1e132ad855a9e6a:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 36,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f1e132ad855a9e6a:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 63,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5b8572d6e0f9912:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 39,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5b8572d6e0f9912:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5b8572d6e0f9912:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 65,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5b8572d6e0f9912:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 49,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5b8572d6e0f9912:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 45,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5d0268763f5c6c3:baslik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 60,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5d0268763f5c6c3:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 84,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5d0268763f5c6c3:baslik-yazar-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 90,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5d0268763f5c6c3:ascii-yil",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 59,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f5d0268763f5c6c3:tek-harf-eksik",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 88,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f8f0a11c42ea8c84:baslik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 46,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f8f0a11c42ea8c84:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 62,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f8f0a11c42ea8c84:baslik-yazar-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 71,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f8f0a11c42ea8c84:ascii-yil",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 47,
+      "pdfAdayi": false
+    },
+    {
+      "id": "f8f0a11c42ea8c84:tek-harf-eksik",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 69,
+      "pdfAdayi": false
+    }
+  ]
+}

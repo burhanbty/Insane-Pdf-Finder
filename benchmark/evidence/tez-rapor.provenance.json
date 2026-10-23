@@ -1,0 +1,5 @@
+{
+  "url": "https://api.archives-ouvertes.fr/search/?q=docType_s%3ATHESE&rows=30&wt=json&fl=title_s,authFullName_s,producedDateY_i,uri_s,doiId_s",
+  "alindi": "2026-10-22T19:42:38.199Z",
+  "sha256": "1089ef3bd9469520269c5a53f15d7d74bdb7105711683dbf2922576196100ea8"
+}

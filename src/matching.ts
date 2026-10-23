@@ -44,6 +44,7 @@ function baskiAnahtari(s: string): string {
 
 /** Bilinen çelişkiler, eksik bir kayıt üzerinden de birleşemez. */
 export function baskilarUyumlu(a: Work, b: Work): boolean {
+  if (a.belgeTuru && b.belgeTuru && a.belgeTuru !== b.belgeTuru) return false;
   const simgeler = (s: string) => s.match(/[+#]/g)?.join("") ?? "";
   if (simgeler(a.baslik) !== simgeler(b.baslik)) return false;
   const sayilar = (s: string) => {

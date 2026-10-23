@@ -1,0 +1,5 @@
+{
+  "url": "https://api.archives-ouvertes.fr/search/?q=docType_s%3ALECTURE&rows=30&wt=json&fl=title_s,authFullName_s,producedDateY_i,uri_s,doiId_s",
+  "alindi": "2026-10-22T19:43:16.518Z",
+  "sha256": "f61a4cbfc4cd2b5e42bc0ca9699ba56317916d81ba4acf04b4a1ef14976e71de"
+}

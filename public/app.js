@@ -629,6 +629,7 @@ function kartYap(g) {
         : `<span>${kacis(k.kaynakAd)}</span>`;
       return `<span class="kaynak-rozet" data-kaynak="${kacis(k.kaynak)}">
       <span class="badge ${sinif}">${etiket}</span>
+      ${k.belgeTuru === "kitap-bolumu" ? '<span class="badge">Kitap bölümü</span>' : ""}
       ${ad}
     </span>`;
     })
@@ -852,7 +853,10 @@ el.kartlar.addEventListener("click", async (olay) => {
           ? [
               ...new Set(
                 [
-                  ...g.kaynaklar.map((k) => guvenliAdres(k.pdf)),
+                  ...g.kaynaklar.flatMap((k) => [
+                    guvenliAdres(k.pdf),
+                    ...(k.pdfAdaylari ?? []).map((a) => guvenliAdres(a.url)),
+                  ]),
                   ...g.kaynaklar
                     .filter((k) => k.erisim !== "odunc")
                     .map((k) => guvenliAdres(k.link)),

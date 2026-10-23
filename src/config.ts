@@ -27,6 +27,9 @@ export const ayar = {
   googleBooksKey: yolla("GOOGLE_BOOKS_API_KEY", ""),
   semanticScholarKey: yolla("SEMANTIC_SCHOLAR_API_KEY", ""),
   unpaywallEmail: yolla("CONTACT_EMAIL_UNPAYWALL", "") || yolla("CONTACT_EMAIL", ""),
+  openalexKey: yolla("OPENALEX_API_KEY", ""),
+  tamMetinTimeoutMs: 6000,
+  tamMetinDoiLimiti: 8,
 
   llm: {
     baseUrl: yolla("LLM_BASE_URL", ""),
@@ -47,7 +50,8 @@ export const ayar = {
 
   /** Kullanici tanitici. Open Library kendini arayabilsin diye sart. */
   userAgent(): string {
-    const e = ayar.contactEmail || ayar.unpaywallEmail;
+    // Unpaywall'a özel verilen adresi başka PDF sitelerinin User-Agent'ına taşıma.
+    const e = ayar.contactEmail;
     return `kaynak-bul/1.0 (akademik kaynak arama;${e ? ` iletisim: ${e}` : ""})`;
   },
 };

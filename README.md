@@ -68,6 +68,41 @@ Sonra tarayıcıda `http://127.0.0.1:3000`.
 
 Geliştirirken izleme modu: `npm run dev`.
 
+### OAPEN, DOAB ve ortak DOI taraması
+
+OAPEN ve DOAB kitap aramasına dahildir. Bu iki kaynak, resmî tam üstveri akışlarının
+yerel indeksini kullanır. İlk kurulumda ve verileri yenilemek istediğinizde:
+
+```bash
+npm run sources:sync
+# Yalnızca bir kaynak:
+npm run sources:sync -- doab
+```
+
+İndeksler `.data/catalogs/` içinde tutulur ve Git'e dahil değildir. Bu işlem kitap
+PDF'lerini topluca indirmez. Tam akış ve bildirilen kayıt sayısı doğrulanmadan yeni
+indeks yayımlanmaz; başarısız güncellemede önceki indeks korunur. İndeksin değişmesi
+arama önbelleğini geçersiz kılar. İndeks yoksa Kaynaklar bölümünde hazırlık komutu
+gösterilir. Kitap bölümleri ayrıca etiketlenir; yayınevi/DOI sayfası doğrudan PDF
+olarak sunulmaz. Katalogdaki açık erişim bilgisi dosyanın şu an indirilebildiğinin kanıtı değildir.
+
+`.env` içindeki `CONTACT_EMAIL_UNPAYWALL` veya `CONTACT_EMAIL` gerçek iletişim
+e-postanızla yapılandırıldığında, aramada bulunan DOI'ler kaynaklardan bağımsız olarak
+Unpaywall üzerinden zenginleştirilir. Aynı DOI tek sorgulanır; ilk görünen sonuçlardaki
+en fazla 8 DOI, toplam 6 saniyelik ayrı bütçeyle taranır. Hata veya süre aşımında bulunan
+künyeler korunur; eksik zenginleştirme tam başarı diye önbelleğe alınmaz.
+
+OpenAlex'in bütün açık konumları ve Unpaywall'ın alternatifleri `pdfAdaylari` alanında,
+lisans/sürüm bilgileriyle tutulur. Bunlar henüz dosya içeriği doğrulanmamış adaylardır.
+Eski istemciler için `pdf` alanı korunur; arama ve kitaplık indirmeleri alternatifleri
+ortak indirme kuyruğuna taşır. `OPENALEX_API_KEY` isteğe bağlıdır; anahtar yalnızca
+API isteğinin başlığında gönderilir, sonuçlara ve PDF adreslerine yazılmaz.
+
+500 sorguluk sabit değerlendirme ve canlı örneklem komutları için
+[`benchmark/README.md`](benchmark/README.md) dosyasına bakın. DergiPark OAI-PMH ve
+PDF keşif fizibilitesi `npx tsx scripts/probe-dergipark.ts` ile tekrar çalıştırılabilir;
+rapor `reports/dergipark-feasibility-2026-10-22.json` dosyasına yazılır.
+
 Sonuçlar eşleşme puanı, yayın yılı veya başlığa göre sıralanabilir. Filtrede görünen
 kayıtlar **Kaynakçayı indir (.ris)** düğmesiyle Zotero ve benzeri kaynakça araçlarına
 aktarılır. Kartlardaki **Künyeyi kopyala** düğmesi yazar, yıl, başlık ve bağlantıyı
@@ -123,12 +158,14 @@ Canlı arama denemesi için `npm run smoke -- --live` kullanılabilir.
 `.env.example` dosyasını `.env` olarak kopyalayıp doldur. Anahtarsız da çalışır,
 sadece bazı kaynaklar devre dışı kalır.
 
-| Değişken                                   | Nereye alınır                                        | Etkisi                                                        |
-| ------------------------------------------ | ---------------------------------------------------- | ------------------------------------------------------------- |
-| `CONTACT_EMAIL`                            | kendi e-postan                                       | Open Library ve Unpaywall ister; kota 3 katına çıkar          |
-| `GOOGLE_BOOKS_API_KEY`                     | Google Cloud Console → APIs & Services → Credentials | Google Books kaynağı açılır                                   |
-| `SEMANTIC_SCHOLAR_API_KEY`                 | semanticscholar.org/product/api                      | Semantic Scholar hızlanır                                     |
-| `LLM_BASE_URL`, `LLM_API_KEY`, `LLM_MODEL` | OpenAI uyumlu herhangi bir servis                    | Özet modelle yazılır; yoksa anahtar kelime yöntemi kullanılır |
+| Değişken                                   | Nereye alınır                                        | Etkisi                                                            |
+| ------------------------------------------ | ---------------------------------------------------- | ----------------------------------------------------------------- |
+| `CONTACT_EMAIL`                            | kendi e-postan                                       | Open Library kimliği ve Unpaywall için varsayılan iletişim adresi |
+| `CONTACT_EMAIL_UNPAYWALL`                  | kendi e-postan                                       | Ortak DOI/Unpaywall taraması; boşsa CONTACT_EMAIL kullanılır      |
+| `OPENALEX_API_KEY`                         | openalex.org ayarları                                | OpenAlex API kimliği; isteğe bağlı                                |
+| `GOOGLE_BOOKS_API_KEY`                     | Google Cloud Console → APIs & Services → Credentials | Google Books kaynağı açılır                                       |
+| `SEMANTIC_SCHOLAR_API_KEY`                 | semanticscholar.org/product/api                      | Semantic Scholar hızlanır                                         |
+| `LLM_BASE_URL`, `LLM_API_KEY`, `LLM_MODEL` | OpenAI uyumlu herhangi bir servis                    | Özet modelle yazılır; yoksa anahtar kelime yöntemi kullanılır     |
 
 ## Kaynaklar
 
@@ -136,39 +173,41 @@ sadece bazı kaynaklar devre dışı kalır.
 paralel sorgulanır; **biri hata verse bile diğerlerinin sonucu döner** ve
 arayüzde o kaynağın durumu ayrı satırda görünür.
 
-| Kaynak               | Tür           | Ne verir                                                              |
-| -------------------- | ------------- | --------------------------------------------------------------------- |
-| Open Library         | kitap         | Katalog kaydı, kapak, ödünç/arşiv bağlantıları                        |
-| Internet Archive     | kitap         | Açık metin ve PDF; tam metin okunabilen kayıtlar                      |
-| Google Books         | kitap         | Künye, kapak, bazı durumlarda önizleme bağlantısı _(anahtar gerekir)_ |
-| OpenAIRE             | kitap, makale | DOAB/OAPEN ve kurumsal arşivler dahil açık erişim kopyalar            |
-| arXiv                | makale        | Ön baskılar, tam PDF                                                  |
-| Semantic Scholar     | makale        | Özet, atıf sayısı, açık erişim PDF bağlantısı                         |
-| OpenAlex + Unpaywall | makale        | Künye ve DOI üzerinden yasal açık erişim PDF'si                       |
-| Crossref             | makale, kitap | Kesin künye (DOI, sayfa, cilt)                                        |
-| CORE                 | makale        | Açık erişim makale indeksi, çoğunda tam metin PDF                     |
-| Zenodo               | makale, slayt | Veri setleri, çalışma kâğıtları, sunum dosyaları                      |
-| Sci-Hub              | makale, kitap | 88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi   |
-| Europe PMC           | makale        | 44+ milyon biyomedikal/fen makalesi ve PubMed Central açık PDF'leri   |
-| Project Gutenberg    | kitap         | 70.000+ klasik ve kamu malı kitap (EPUB, TXT, HTML)                   |
-| HAL Science          | makale, kitap | 4+ milyon açık erişimli araştırma yayını, tez ve kitap (tam PDF)      |
-| Library Genesis      | kitap, makale | Ayna siteler üzerinden kitap ve makale künyesi / detay yönlendirmesi  |
-| Anna's Archive       | kitap, makale | Geniş gölge kütüphane meta-indeksi / detay yönlendirmesi              |
-| Türkçe Wikipedia     | hepsi         | Anahtarsız açık API; **senin eklediğin kaynak için örnek**            |
-| Web araması          | slayt         | SlideShare, Speaker Deck, Google Slides vb. — yalnızca bağlantı       |
+| Kaynak            | Tür           | Ne verir                                                                |
+| ----------------- | ------------- | ----------------------------------------------------------------------- |
+| Open Library      | kitap         | Katalog kaydı, kapak, ödünç/arşiv bağlantıları                          |
+| Internet Archive  | kitap         | Açık metin ve PDF; tam metin okunabilen kayıtlar                        |
+| Google Books      | kitap         | Künye, kapak, bazı durumlarda önizleme bağlantısı _(anahtar gerekir)_   |
+| OpenAIRE          | kitap, makale | DOAB/OAPEN ve kurumsal arşivler dahil açık erişim kopyalar              |
+| OAPEN             | kitap         | Resmî tam üstverinin yerel indeksi; kitaplar, bölümler ve PDF adayları  |
+| DOAB              | kitap         | Resmî tam üstverinin yerel indeksi; kitap ve yayınevi/depo bağlantıları |
+| arXiv             | makale        | Ön baskılar, tam PDF                                                    |
+| Semantic Scholar  | makale        | Özet, atıf sayısı, açık erişim PDF bağlantısı                           |
+| OpenAlex          | makale        | Künye ve bütün açık erişim konumları                                    |
+| Crossref          | makale, kitap | Kesin künye (DOI, sayfa, cilt)                                          |
+| CORE              | makale        | Açık erişim makale indeksi, çoğunda tam metin PDF                       |
+| Zenodo            | makale, slayt | Veri setleri, çalışma kâğıtları, sunum dosyaları                        |
+| Sci-Hub           | makale, kitap | 88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi     |
+| Europe PMC        | makale        | 44+ milyon biyomedikal/fen makalesi ve PubMed Central açık PDF'leri     |
+| Project Gutenberg | kitap         | 70.000+ klasik ve kamu malı kitap (EPUB, TXT, HTML)                     |
+| HAL Science       | makale, kitap | 4+ milyon açık erişimli araştırma yayını, tez ve kitap (tam PDF)        |
+| Library Genesis   | kitap, makale | Ayna siteler üzerinden kitap ve makale künyesi / detay yönlendirmesi    |
+| Anna's Archive    | kitap, makale | Geniş gölge kütüphane meta-indeksi / detay yönlendirmesi                |
+| Türkçe Wikipedia  | hepsi         | Anahtarsız açık API; **senin eklediğin kaynak için örnek**              |
+| Web araması       | slayt         | SlideShare, Speaker Deck, Google Slides vb. — yalnızca bağlantı         |
 
 ### Kaynak hakkında bilinmesi gerekenler
 
-- **DOAB'in kendi REST API'si 403 döndürüyor** (Cloudflare koruması). Aynı
-  kayıtları OpenAIRE indekslediği için o yol kullanılıyor.
+- **OAPEN/DOAB REST aramaları** bu bağlantıdan 403 döndürüyor. Bağımsız kaynaklar
+  resmî JSON üstveri akışlarından oluşturulan yerel indeksleri kullanır; OpenAIRE
+  araması da devam eder. İndeks güncelliği `npm run sources:sync` ile yönetilir.
 - **Crossref** `select` listesinde `language` ve `ISBN` geçerli alan değil;
   gönderilirse 400 döner.
 - **arXiv** JSON döndürmüyor, Atom (XML) döndürüyor. `<link>` etiketleri
   kendini kapattığı için ayrıca ele alınıyor.
 - **Open Library** `title=` parametresi tam başlık eşleşmesi istiyor; uzun
   başlıklarda sıfır sonuç veriyor. Solr sorgusu (`q=`) kullanılıyor.
-- **OpenAlex** `filter` parametresini 400 ile reddediyor; yazar ve yıl
-  filtresi sonuç listesinde uygulanıyor.
+- **OpenAlex** adaptöründe yazar ve yıl uyumu dönen kayıtlar üzerinde uygulanır.
 - **CORE** ve **Semantic Scholar** anahtarsız erişimde kotayı hızlı tüketir.
   Tekrarlanan aramalar diskte önbelleğe alınır, ama arka arkaya farklı
   aramalarda 429 alabilirsin.

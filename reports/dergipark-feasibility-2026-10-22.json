@@ -1,0 +1,54 @@
+{
+  "tarih": "2026-10-22T19:50:30.420Z",
+  "kontroller": [
+    {
+      "ad": "identify",
+      "url": "https://dergipark.org.tr/api/public/oai/?verb=Identify",
+      "http": 200,
+      "sha256": "b9a3acc09f52a7e26c6cb1afaa85bb9570f4a59e0392b377fbbf59f88f6f3b77",
+      "hatalar": []
+    },
+    {
+      "ad": "formats",
+      "url": "https://dergipark.org.tr/api/public/oai/?verb=ListMetadataFormats",
+      "http": 200,
+      "sha256": "040c22e27766fafebd6d371d813afe087be3f5bad8c3376add2595cff06e2c54",
+      "hatalar": []
+    },
+    {
+      "ad": "sample",
+      "url": "https://dergipark.org.tr/api/public/oai/?verb=ListRecords&metadataPrefix=oai_dc&set=ap",
+      "http": 200,
+      "sha256": "82ad40c1e1e511893e40a472adb0a24b59583f5975b127b083804b2c3f19d00a",
+      "hatalar": []
+    },
+    {
+      "ad": "get-record",
+      "url": "https://dergipark.org.tr/api/public/oai/?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai%3Adergipark.org.tr%3Aarticle%2F1124443",
+      "http": 200,
+      "sha256": "de90b57aebdd6885152a0d7115d914ea96652dc53c5118bdf9cf588765e1f1df",
+      "hatalar": []
+    }
+  ],
+  "durum": "COMPLETED",
+  "protokol": "2.0",
+  "bicimler": ["oai_dc", "oai_etdms", "oai_marc", "oai_mods"],
+  "ornek": {
+    "identifier": "oai:dergipark.org.tr:article/1124443",
+    "basliklar": [
+      "Zorunlu Göç Bağlamında Suriyeli Kadınların Ücretli İşgücüne Katılımında Toplumsal Cinsiyet Müzakeresi",
+      "Gender Negotiation in Syrian Women’s Paid Workforce Participation in the Context of Forced Migration"
+    ],
+    "yazarlar": ["Körükmez, Lülüfer", "Danış, Didem", "Karakılıç, İlhan Zeynep"],
+    "sayfa": "https://dergipark.org.tr/en/pub/ap/article/1124443",
+    "devamTokeniVar": true
+  },
+  "pdfAdaylari": ["https://dergipark.org.tr/en/download/article-file/2460141"],
+  "pdf": {
+    "bayt": 438480,
+    "sha256": "40fef0cd2cdfefe59afa198740eacd6577eca919259f4f004cc761ef49a9f439",
+    "imza": "%PDF-",
+    "sinir": "PDF biçimi ve kayıt sayfasının bağlantısı doğrulandı; bağımsız içerik-kimlik doğrulaması değildir."
+  },
+  "karar": "OAI-PMH harmanlama ve kayıt sayfasından PDF çözümleme uygulanabilir. OAI-PMH başlık araması sunmaz; sonraki entegrasyon yerel indeks ve artımlı toplama gerektirir."
+}

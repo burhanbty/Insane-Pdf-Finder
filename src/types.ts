@@ -14,6 +14,19 @@ export interface Sorgu {
   yayinci?: string;
 }
 
+/** Kaynak üstverisinin bildirdiği aday; dosya veya eser kimliği henüz doğrulanmış değildir. */
+export interface PdfAdayi {
+  url: string;
+  kaynak: string;
+  kayitUrl?: string;
+  doi?: string;
+  lisans?: string;
+  surum?: string;
+  hostTuru?: "publisher" | "repository";
+  baglantiTuru?: "pdf" | "kayit";
+  durum: "aday";
+}
+
 /** Tek bir kaynaktan gelen ham sonuc. */
 export interface Work {
   kaynak: string;
@@ -45,6 +58,9 @@ export interface Work {
   link: string;
   /** Dogrudan indirilebilir yasal PDF/metin. */
   pdf?: string;
+  /** Aynı eserin alternatif PDF konumları; eski istemciler için pdf alanı da korunur. */
+  pdfAdaylari?: PdfAdayi[];
+  belgeTuru?: "kitap" | "kitap-bolumu";
   /** EPUB, PDF'ten ayrı bir indirme biçimidir. */
   epub?: string;
   /** Dogrudan okunabilir tam metin. */
@@ -105,5 +121,8 @@ export interface SourceModule {
   aciklama?: string;
   /** Anahtar yoksa kaynak sessizce atlanir. */
   hazirMi?(): boolean;
+  hazirDegilAciklamasi?: string;
+  /** Yerel indeks yenilenince hem kaynak hem arama önbelleğini geçersiz kılar. */
+  onbellekSurumu?(): string;
   ara(sorgu: Sorgu): Promise<Work[]>;
 }

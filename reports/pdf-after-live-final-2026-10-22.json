@@ -1,0 +1,2460 @@
+{
+  "tarih": "2026-10-22T20:02:33.854Z",
+  "mod": "live",
+  "sinir": "Canlı kaynak araması; PDF aday URL'si dosya/kimlik doğrulaması veya başarılı indirme değildir. Kaynak hataları eksik kapsam demektir.",
+  "veriSha256": "5dad39555161db622a4fb57e6edf999f8f08ee321e0266200aa3a828d2bc1f0e",
+  "planlanan": 20,
+  "tamamlanan": 20,
+  "metrikler": {
+    "sorgu": 20,
+    "ilkSirada": 0.6,
+    "ilkBeste": 0.8,
+    "hata": 0,
+    "p50Ms": 10521,
+    "p95Ms": 20022
+  },
+  "kategoriler": {
+    "turkce-kitap": {
+      "sorgu": 4,
+      "ilkSirada": 0.25,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 6516,
+      "p95Ms": 14622
+    },
+    "makale": {
+      "sorgu": 4,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 16063,
+      "p95Ms": 20020
+    },
+    "yabanci-kitap": {
+      "sorgu": 4,
+      "ilkSirada": 1,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 12378,
+      "p95Ms": 18872
+    },
+    "sunum-ders": {
+      "sorgu": 4,
+      "ilkSirada": 0,
+      "ilkBeste": 0,
+      "hata": 0,
+      "p50Ms": 5626,
+      "p95Ms": 5661
+    },
+    "tez-rapor": {
+      "sorgu": 4,
+      "ilkSirada": 0.75,
+      "ilkBeste": 1,
+      "hata": 0,
+      "p50Ms": 15407,
+      "p95Ms": 20025
+    }
+  },
+  "bolumler": {
+    "gelistirme": {
+      "sorgu": 16,
+      "ilkSirada": 0.625,
+      "ilkBeste": 0.875,
+      "hata": 0,
+      "p50Ms": 10521,
+      "p95Ms": 20025
+    },
+    "test": {
+      "sorgu": 4,
+      "ilkSirada": 0.5,
+      "ilkBeste": 0.5,
+      "hata": 0,
+      "p50Ms": 5626,
+      "p95Ms": 18872
+    }
+  },
+  "satirlar": [
+    {
+      "id": "00703b81ac664268:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 10521,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 543
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 605
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 709
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 728
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 733
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 969
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 7,
+          "sureMs": 1035
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1252
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 2,
+          "sureMs": 4482
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5061,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 6110
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 10440
+        }
+      ]
+    },
+    {
+      "id": "0a2a3edb8ac8608f:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 16063,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 361
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 536
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 543
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 640
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 689
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 712
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1203
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1301
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 1483
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1712,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 2431
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5415,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 16038,
+          "hataMesaji": "Library Genesis aynaları başarısız: fetch failed"
+        }
+      ]
+    },
+    {
+      "id": "0c8ef036bc9f5a8d:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 12378,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 186
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 187
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 426
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 552
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 678
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 931
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 978
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1474
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1946
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 2736
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5482,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 3,
+          "sureMs": 12359
+        }
+      ]
+    },
+    {
+      "id": "11bf4b1e4d23fd6b:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 0,
+      "sureMs": 5661,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 267
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 431
+        },
+        {
+          "id": "web-slayt",
+          "ad": "Web Araması (Slayt)",
+          "tur": ["slayt"],
+          "aciklama": "SlideShare, Speaker Deck, Google Slides vb. sitelerde başlık araması — yalnızca bağlantı listeler. Bing'in site: filtresi güvenilir çalışmadığı için sonuçlar sınırlıdır.",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5660
+        }
+      ]
+    },
+    {
+      "id": "12c27ae1fd903b0b:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 2,
+      "sureMs": 20022,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 206
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 415
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 488
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 488
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 548
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 585
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 709
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1414,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 2,
+          "sureMs": 1516
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 2070
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 2200
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 4943,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 20012,
+          "hataMesaji": "Kaynak 20 saniyede yanıt vermedi"
+        }
+      ]
+    },
+    {
+      "id": "0599c1fc7a678563:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 4,
+      "sureMs": 6516,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 24
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 7,
+          "sureMs": 24
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 264
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 344
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 472
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 665
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 678
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 847
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1293
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1341
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 4351,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 4,
+          "sureMs": 6482
+        }
+      ]
+    },
+    {
+      "id": "1226012103bbc682:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 4668,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 293
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 358
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 387
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 480
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 609
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 727
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 856
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 860
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 1324
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1489,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1952
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 3927
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 4655,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        }
+      ]
+    },
+    {
+      "id": "1831940b5cb979ff:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 6082,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 108
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 109
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 347
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 469
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 539
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 572
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 2,
+          "sureMs": 731
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 841
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 991
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1521
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5249,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 6061
+        }
+      ]
+    },
+    {
+      "id": "2eb478f44c181715:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 0,
+      "sureMs": 5609,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 435
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 612
+        },
+        {
+          "id": "web-slayt",
+          "ad": "Web Araması (Slayt)",
+          "tur": ["slayt"],
+          "aciklama": "SlideShare, Speaker Deck, Google Slides vb. sitelerde başlık araması — yalnızca bağlantı listeler. Bing'in site: filtresi güvenilir çalışmadığı için sonuçlar sınırlıdır.",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5605
+        }
+      ]
+    },
+    {
+      "id": "2db349379ffaef0d:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 7595,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 214
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 295
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 382
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 438
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 471
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 533
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 819
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 1139
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1688
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1698,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 3290,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 7030
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 7569
+        }
+      ]
+    },
+    {
+      "id": "064628389a241040:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 2,
+      "sureMs": 5967,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 6,
+          "sureMs": 18
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 4,
+          "sureMs": 18
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 259
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 359
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 439
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 628
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 720
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1168
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1385
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 1744
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 9,
+          "sureMs": 1960
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5956,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        }
+      ]
+    },
+    {
+      "id": "1947f552d224805e:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 16301,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 210
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 397
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 423
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 424
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 588
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1036
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 1162
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 1455
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1567,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 2010
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 5016
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 6419,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 16291,
+          "hataMesaji": "Library Genesis aynaları başarısız: fetch failed"
+        }
+      ]
+    },
+    {
+      "id": "1915cc7f80228aa9:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "test",
+      "sira": 1,
+      "sureMs": 18872,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 26
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 26
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 268
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 386
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 518
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 8,
+          "sureMs": 592
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 2,
+          "sureMs": 743
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1128
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1576
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 3372
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5387,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 18856,
+          "hataMesaji": "Library Genesis aynaları başarısız: fetch failed"
+        }
+      ]
+    },
+    {
+      "id": "3b029e865949e913:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "gelistirme",
+      "sira": 0,
+      "sureMs": 5631,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 429
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1341
+        },
+        {
+          "id": "web-slayt",
+          "ad": "Web Araması (Slayt)",
+          "tur": ["slayt"],
+          "aciklama": "SlideShare, Speaker Deck, Google Slides vb. sitelerde başlık araması — yalnızca bağlantı listeler. Bing'in site: filtresi güvenilir çalışmadığı için sonuçlar sınırlıdır.",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5629
+        }
+      ]
+    },
+    {
+      "id": "4918f15734ba6b1e:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 15407,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 282
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 444
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 643
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 743
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 743
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 2,
+          "sureMs": 1035
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1161
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1333
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 2280,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 2776
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 4186
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 13671,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 15382,
+          "hataMesaji": "Library Genesis aynaları başarısız: fetch failed"
+        }
+      ]
+    },
+    {
+      "id": "0d37750b5f5fd6e9:baslik-yazar",
+      "kategori": "turkce-kitap",
+      "bolum": "gelistirme",
+      "sira": 2,
+      "sureMs": 14622,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 28
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 29
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 2,
+          "sureMs": 286
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 359
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 692
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 939
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1453
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 1569
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1611
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 2388
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 8141
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 14597,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        }
+      ]
+    },
+    {
+      "id": "2e27d5a8245f6a7f:baslik-yazar",
+      "kategori": "makale",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 20020,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 206
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 386
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 436
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 470
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 547
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 704
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 807
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 861
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 1251
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1704,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1967,
+          "hataMesaji": "api.core.ac.uk 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 15865,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 20012,
+          "hataMesaji": "Kaynak 20 saniyede yanıt vermedi"
+        }
+      ]
+    },
+    {
+      "id": "1fd8e3928254d815:baslik-yazar",
+      "kategori": "yabanci-kitap",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 15529,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "google-books",
+          "ad": "Google Books",
+          "tur": ["kitap"],
+          "aciklama": "Katalog kaydi, kapak, bazi durumlarda tam gorunumlu PDF",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "oapen",
+          "ad": "OAPEN",
+          "tur": ["kitap"],
+          "aciklama": "Açık akademik kitaplar ve kitap bölümleri; resmî üstverinin yerel indeksi. Güncelleme: npm run sources:sync -- oapen",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 482
+        },
+        {
+          "id": "doab",
+          "ad": "DOAB",
+          "tur": ["kitap"],
+          "aciklama": "Açık erişimli kitap keşfi; resmî üstverinin yerel indeksi. PDF ve yayınevi kayıt bağlantıları ayrı tutulur. Güncelleme: npm run sources:sync -- doab",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 483
+        },
+        {
+          "id": "gutenberg",
+          "ad": "Project Gutenberg",
+          "tur": ["kitap"],
+          "aciklama": "70.000+ klasik ve kamu malı tam metin kitap arşivi (EPUB, TXT, HTML)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 716
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 819
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 855
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1007
+        },
+        {
+          "id": "internet-archive",
+          "ad": "Internet Archive",
+          "tur": ["kitap"],
+          "aciklama": "Acik metin ve PDF; tam metin okunabilen kayitlar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1223
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 1267
+        },
+        {
+          "id": "open-library",
+          "ad": "Open Library",
+          "tur": ["kitap"],
+          "aciklama": "Acik katalog; eser kaydi ve Internet Archive baglantilari",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 2010
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 2479
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 12888,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 15519,
+          "hataMesaji": "Library Genesis aynaları başarısız: fetch failed"
+        }
+      ]
+    },
+    {
+      "id": "3b5f6ea47e26e4a4:baslik-yazar",
+      "kategori": "sunum-ders",
+      "bolum": "test",
+      "sira": 0,
+      "sureMs": 5626,
+      "pdfAdayi": false,
+      "kaynaklar": [
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 350
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 561
+        },
+        {
+          "id": "web-slayt",
+          "ad": "Web Araması (Slayt)",
+          "tur": ["slayt"],
+          "aciklama": "SlideShare, Speaker Deck, Google Slides vb. sitelerde başlık araması — yalnızca bağlantı listeler. Bing'in site: filtresi güvenilir çalışmadığı için sonuçlar sınırlıdır.",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 5620
+        }
+      ]
+    },
+    {
+      "id": "52d00ceaffc23adf:baslik-yazar",
+      "kategori": "tez-rapor",
+      "bolum": "gelistirme",
+      "sira": 1,
+      "sureMs": 20025,
+      "pdfAdayi": true,
+      "kaynaklar": [
+        {
+          "id": "benim-sitem",
+          "ad": "Benim Sitem (örnek)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Kendi kaynağını buradan eklersin — bu bir şablondur",
+          "hazir": false,
+          "sonucSayisi": 0,
+          "sureMs": 0,
+          "hataMesaji": "API anahtarı yok (.env dosyasına ekleyin)"
+        },
+        {
+          "id": "arxiv",
+          "ad": "arXiv",
+          "tur": ["makale"],
+          "aciklama": "Acik erisimli on baskilar, tam PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 223
+        },
+        {
+          "id": "crossref",
+          "ad": "Crossref",
+          "tur": ["makale", "kitap"],
+          "aciklama": "Kesin kunye bilgisi (DOI, yazar, yil, sayfa)",
+          "hazir": true,
+          "sonucSayisi": 10,
+          "sureMs": 593
+        },
+        {
+          "id": "hal",
+          "ad": "HAL Science",
+          "tur": ["makale", "kitap"],
+          "aciklama": "4+ milyon açık erişimli araştırma yayını, tez ve kitap arşivi (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 637
+        },
+        {
+          "id": "europe-pmc",
+          "ad": "Europe PMC",
+          "tur": ["makale"],
+          "aciklama": "44+ milyon biyomedikal ve fen bilimleri makalesi, doğrudan açık PDF bağlantısı",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 721
+        },
+        {
+          "id": "wikipedia-tr",
+          "ad": "Türkçe Wikipedia",
+          "tur": ["kitap", "makale", "slayt"],
+          "aciklama": "Anahtarsız açık API — kendi kaynağınızı eklemek için örnek",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 777
+        },
+        {
+          "id": "openalex",
+          "ad": "OpenAlex + Unpaywall",
+          "tur": ["makale"],
+          "aciklama": "Makale kaydi ve DOI uzerinden yasal acik erisim PDF kopyasi",
+          "hazir": true,
+          "sonucSayisi": 1,
+          "sureMs": 976
+        },
+        {
+          "id": "zenodo",
+          "ad": "Zenodo",
+          "tur": ["makale", "slayt"],
+          "aciklama": "Arastirma verisi, calisma kagitlari ve acik sunum dosyalari (tam PDF)",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1133
+        },
+        {
+          "id": "core",
+          "ad": "CORE",
+          "tur": ["makale"],
+          "aciklama": "Dünya geneli açık erişim makale indeksi, çoğunda tam metin PDF",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1214,
+          "hataMesaji": "api.core.ac.uk 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "semantic-scholar",
+          "ad": "Semantic Scholar",
+          "tur": ["makale"],
+          "aciklama": "Makale ozeti, atif sayisi ve acik erisim PDF linki",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 1887,
+          "hataMesaji": "api.semanticscholar.org 429 — kota dolu, biraz sonra tekrar deneyin"
+        },
+        {
+          "id": "sci-hub",
+          "ad": "Sci-Hub",
+          "tur": ["makale", "kitap"],
+          "aciklama": "88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi",
+          "hazir": true,
+          "sonucSayisi": 5,
+          "sureMs": 2299
+        },
+        {
+          "id": "openaire",
+          "ad": "OpenAIRE (Açık Erişim)",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Avrupa açık erişim indeksi — DOAB, OAPEN, kurumsal arşivler dahil, açık kopyaları verir",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 9250
+        },
+        {
+          "id": "annas-archive",
+          "ad": "Anna's Archive",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Anna's Archive üzerinde kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 13010,
+          "hataMesaji": "Anna's Archive aynaları başarısız: annas-archive.gd HTTP 403"
+        },
+        {
+          "id": "libgen",
+          "ad": "Library Genesis",
+          "tur": ["kitap", "makale"],
+          "aciklama": "Library Genesis aynalarında kitap ve makale kayıtları arar",
+          "hazir": true,
+          "sonucSayisi": 0,
+          "sureMs": 20015,
+          "hataMesaji": "Kaynak 20 saniyede yanıt vermedi"
+        }
+      ]
+    }
+  ]
+}
