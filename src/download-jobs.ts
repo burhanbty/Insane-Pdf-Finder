@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { Router } from "express";
 import { indir, type Indirilebilir, type IndirmeSonucu } from "./download.js";
+import { kimlikGirdisi, type DosyaDogrulamasi } from "./file-identity.js";
 
 export type IndirmeDurumu =
   | "sirada"
@@ -23,6 +24,8 @@ export interface IndirmeIsi {
   dosya?: string;
   boyut?: number;
   mevcut?: boolean;
+  dogrulama?: DosyaDogrulamasi;
+  kopyaDenemesi?: number;
 }
 interface IcIs {
   bilgi: IndirmeIsi;
@@ -48,6 +51,8 @@ export class IndirmeYoneticisi {
     const ayni = [...this.isler.values()].find(
       (i) =>
         i.hedef.url === hedef.url &&
+        JSON.stringify(i.hedef.kimlik) === JSON.stringify(hedef.kimlik) &&
+        JSON.stringify(i.hedef.alternatifler) === JSON.stringify(hedef.alternatifler) &&
         i.bilgi.tur === tur &&
         !bitti(i.bilgi.durum) &&
         i.bilgi.durum !== "iptal-ediliyor",
@@ -122,6 +127,12 @@ export class IndirmeYoneticisi {
       const r: IndirmeSonucu = await this.indirici(i.hedef, i.bilgi.tur, {
         signal: i.kontrol.signal,
         tekillestir: true,
+        kopyaDenemesi: (n) => {
+          i.bilgi.kopyaDenemesi = n;
+          i.bilgi.alinan = 0;
+          i.bilgi.toplam = undefined;
+          i.bilgi.durum = "baglaniyor";
+        },
         ilerleme: (p) => {
           if (i.kontrol.signal.aborted) return;
           i.bilgi.durum = p.asama;
@@ -136,6 +147,8 @@ export class IndirmeYoneticisi {
         boyut: r.boyut,
         alinan: r.boyut,
         mevcut: r.mevcut,
+        dogrulama: r.dogrulama,
+        kopyaDenemesi: r.kopyaDenemesi,
       });
     } catch (hata) {
       i.bilgi.durum = i.kontrol.signal.aborted ? "iptal" : "basarisiz";
@@ -169,6 +182,7 @@ function girdiOku(v: unknown): { hedef: Indirilebilir; tur: IndirmeIsi["tur"] } 
       varsayilanAd:
         typeof g.baslik === "string" && g.baslik.trim() ? g.baslik.trim().slice(0, 150) : "icerik",
       alternatifler: (g.alternatifler as unknown[] | undefined)?.map(adres),
+      kimlik: kimlikGirdisi(g.kimlik),
     },
     tur: (g.tur as IndirmeIsi["tur"]) ?? "pdf",
   };

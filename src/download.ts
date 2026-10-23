@@ -9,6 +9,7 @@ import { normalizeMetin } from "./normalize.js";
 import { pdfImzasi } from "./body.js";
 import { pdfYanitiniBul } from "./pdf-resolver.js";
 import { istekSinyali, sureSinirli } from "./deadline.js";
+import { pdfKimliginiDogrula, type EserKimligi, type DosyaDogrulamasi } from "./file-identity.js";
 
 /*
  * Indirme: uzak PDF/tam metni downloads/ klasorune akis halinde yazar.
@@ -36,17 +37,21 @@ export interface IndirmeSonucu {
   boyut: number;
   tur: "pdf" | "epub" | "metin" | "bilinmiyor";
   mevcut?: boolean;
+  dogrulama?: DosyaDogrulamasi;
+  kopyaDenemesi?: number;
 }
 
 export interface Indirilebilir {
   url: string;
   varsayilanAd: string;
   alternatifler?: string[];
+  kimlik?: EserKimligi;
 }
 
 export interface IndirmeSecenekleri {
   signal?: AbortSignal;
   tekillestir?: boolean;
+  kopyaDenemesi?: (sira: number) => void;
   ilerleme?: (durum: {
     alinan: number;
     toplam?: number;
@@ -156,13 +161,17 @@ export async function indir(
   ipucuTur?: "pdf" | "epub" | "metin",
   secenek: IndirmeSecenekleri = {},
 ): Promise<IndirmeSonucu> {
-  return sureSinirli(() => {
-    const signal = AbortSignal.any([
-      istekSinyali.getStore()!,
-      ...(secenek.signal ? [secenek.signal] : []),
-    ]);
-    return istekSinyali.run(signal, () => indirDosya(hedef, ipucuTur, { ...secenek, signal }));
-  }, 120_000);
+  return sureSinirli(
+    () => {
+      const signal = AbortSignal.any([
+        istekSinyali.getStore()!,
+        ...(secenek.signal ? [secenek.signal] : []),
+      ]);
+      return istekSinyali.run(signal, () => indirDosya(hedef, ipucuTur, { ...secenek, signal }));
+    },
+    120_000,
+    true,
+  );
 }
 
 async function indirDosya(
@@ -179,16 +188,38 @@ async function indirDosya(
   await fs.promises.mkdir(ayar.downloadsDir, { recursive: true });
 
   // Once HEAD/GET ile gercek dosya tipini ve boyutu ogren.
-  const cevap =
-    ipucuTur === "pdf"
-      ? await pdfYanitiniBul([u.toString(), ...(hedef.alternatifler ?? []).slice(0, 5)])
-      : await get(u.toString(), {
-          disAg: true,
-          tekrar: 0,
-          yonlendir: true,
-          timeoutMs: 90_000,
-          boslukMs: 400,
-        });
+  if (ipucuTur === "pdf") {
+    let sonuc: IndirmeSonucu | undefined;
+    let sira = 0;
+    await pdfYanitiniBul([u.toString(), ...(hedef.alternatifler ?? []).slice(0, 5)], {
+      deneme: (n) => {
+        sira = n;
+        secenek.kopyaDenemesi?.(n);
+      },
+      kabul: async (r) => {
+        const altSignal = istekSinyali.getStore()!;
+        sonuc = await yanitiKaydet(r, hedef, ipucuTur, { ...secenek, signal: altSignal });
+      },
+    });
+    return { ...sonuc!, kopyaDenemesi: sira };
+  }
+  const cevap = await get(u.toString(), {
+    disAg: true,
+    tekrar: 0,
+    yonlendir: true,
+    timeoutMs: 90_000,
+    boslukMs: 400,
+  });
+  return yanitiKaydet(cevap, hedef, ipucuTur, secenek);
+}
+
+async function yanitiKaydet(
+  cevap: Response,
+  hedef: Indirilebilir,
+  ipucuTur: "pdf" | "epub" | "metin" | undefined,
+  secenek: IndirmeSecenekleri,
+): Promise<IndirmeSonucu> {
+  const signal = secenek.signal!;
 
   const icerikTipi = String(cevap.headers.get("content-type") ?? "").toLowerCase();
   const uzunluk = Number(cevap.headers.get("content-length"));
@@ -223,6 +254,7 @@ async function indirDosya(
   let ilk = Buffer.alloc(0);
   const hash = createHash("sha256");
   let mevcut = false;
+  let dogrulama: DosyaDogrulamasi | undefined;
 
   try {
     const govde = cevap.body;
@@ -265,6 +297,10 @@ async function indirDosya(
       throw new Error("Kaynak düz metin yerine farklı içerik döndürdü");
     }
     secenek.ilerleme?.({ alinan: yazilan, toplam, asama: "dogrulaniyor" });
+    if (tur === "pdf" && hedef.kimlik) {
+      dogrulama = await pdfKimliginiDogrula(gecici, hedef.kimlik);
+      if (dogrulama.durum === "uyusmuyor") throw new Error(dogrulama.aciklama);
+    }
     const bitir = async () => {
       signal.throwIfAborted();
       const bulunan = secenek.tekillestir
@@ -293,6 +329,7 @@ async function indirDosya(
     yol,
     boyut: yazilan,
     tur,
+    ...(dogrulama ? { dogrulama } : {}),
     ...(mevcut ? { mevcut } : {}),
   };
 }

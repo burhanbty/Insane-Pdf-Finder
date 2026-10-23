@@ -1,11 +1,11 @@
 import { get, KaynakHatasi } from "./http.js";
 import { disAdres } from "./network.js";
 import { pdfImzasi, sinirliGovde } from "./body.js";
-import { istekSinyali } from "./deadline.js";
+import { istekSinyali, sureSinirli } from "./deadline.js";
 
 const SAYFA_SINIRI = 2 * 1024 * 1024;
 
-function htmlCoz(s: string): string {
+export function htmlCoz(s: string): string {
   return s.replace(/&(?:amp|quot|apos|lt|gt|#\d+|#x[0-9a-f]+);/gi, (m) => {
     const named: Record<string, string> = {
       "&amp;": "&",
@@ -21,10 +21,21 @@ function htmlCoz(s: string): string {
     return n > 0 && n <= 0x10ffff && !(n >= 0xd800 && n <= 0xdfff) ? String.fromCodePoint(n) : "";
   });
 }
-function alanlar(tag: string) {
+export function alanlar(tag: string) {
   const out: Record<string, string> = {};
   for (const m of tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g))
     out[m[1]!.toLowerCase()] = htmlCoz(m[2] ?? m[3] ?? m[4] ?? "");
+  return out;
+}
+
+export function sayfaUstverisi(html: string): Map<string, string[]> {
+  const out = new Map<string, string[]>();
+  const temiz = html.replace(/<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, "");
+  for (const m of temiz.matchAll(/<meta\b[^>]*>/gi)) {
+    const a = alanlar(m[0]);
+    const ad = (a.name ?? a.property ?? "").toLowerCase();
+    if (ad && a.content?.trim()) out.set(ad, [...(out.get(ad) ?? []), a.content.trim()]);
+  }
   return out;
 }
 
@@ -121,7 +132,13 @@ async function basiniOku(r: Response): Promise<{ ilk: Uint8Array; cevap: Respons
   return { ilk, cevap: new Response(body, { headers: r.headers, status: r.status }) };
 }
 
-export async function pdfYanitiniBul(adresler: string[]): Promise<Response> {
+export async function pdfYanitiniBul(
+  adresler: string[],
+  secenek: {
+    kabul?: (cevap: Response, adres: string) => Promise<void>;
+    deneme?: (sira: number) => void;
+  } = {},
+): Promise<Response> {
   const kuyruk = [...new Set(adresler)];
   const gorulen = new Set<string>();
   let hata =
@@ -131,26 +148,43 @@ export async function pdfYanitiniBul(adresler: string[]): Promise<Response> {
     const adres = kuyruk.shift()!;
     if (gorulen.has(adres)) continue;
     gorulen.add(adres);
+    secenek.deneme?.(gorulen.size);
     try {
-      disAdres(adres);
-      const r = await get(adres, {
-        disAg: true,
-        ham: true,
-        tekrar: 0,
-        timeoutMs: 90_000,
-        boslukMs: 200,
-      });
-      const { ilk, cevap } = await basiniOku(r);
-      if (pdfImzasi(ilk)) return cevap;
-      const tip = r.headers.get("content-type") ?? "";
-      if (/html/i.test(tip) || /^\s*</.test(new TextDecoder().decode(ilk.subarray(0, 200)))) {
-        const html = new TextDecoder().decode(await sinirliGovde(cevap, SAYFA_SINIRI));
-        const pdfler = sayfadakiPdfler(html, r.url || adres).filter((u) => !gorulen.has(u));
-        kuyruk.unshift(...pdfler);
-      } else {
-        await cevap.body?.cancel();
-        hata = "Kaynak PDF yerine farklı bir dosya döndürdü.";
-      }
+      const bulunan = await sureSinirli(
+        async () => {
+          disAdres(adres);
+          const r = await get(adres, {
+            disAg: true,
+            ham: true,
+            tekrar: 0,
+            timeoutMs: 25_000,
+            boslukMs: 200,
+          });
+          const { ilk, cevap } = await basiniOku(r);
+          if (pdfImzasi(ilk)) {
+            try {
+              await secenek.kabul?.(cevap, r.url || adres);
+            } catch (e) {
+              await cevap.body?.cancel().catch(() => undefined);
+              throw e;
+            }
+            return cevap;
+          }
+          const tip = r.headers.get("content-type") ?? "";
+          if (/html/i.test(tip) || /^\s*</.test(new TextDecoder().decode(ilk.subarray(0, 200)))) {
+            const html = new TextDecoder().decode(await sinirliGovde(cevap, SAYFA_SINIRI));
+            const pdfler = sayfadakiPdfler(html, r.url || adres).filter((u) => !gorulen.has(u));
+            kuyruk.unshift(...pdfler);
+          } else {
+            await cevap.body?.cancel();
+            hata = "Kaynak PDF yerine farklı bir dosya döndürdü.";
+          }
+          return undefined;
+        },
+        30_000,
+        true,
+      );
+      if (bulunan) return bulunan;
     } catch (e) {
       istekSinyali.getStore()?.throwIfAborted();
       if (e instanceof KaynakHatasi && [401, 403, 429].includes(e.durum ?? 0))

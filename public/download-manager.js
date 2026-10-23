@@ -48,7 +48,10 @@
     return a;
   }
   function durumMetni(i) {
-    return `${etiket[i.durum] ?? i.durum}${i.durum === "indiriliyor" || i.durum === "dogrulaniyor" ? ` · ${boyut(i.alinan)}${i.toplam ? ` / ${boyut(i.toplam)}` : " · toplam boyut bilinmiyor"}` : ""}${i.mevcut ? " · Aynı dosya zaten vardı, mevcut dosya kullanıldı" : ""}${i.hata ? ` · ${i.hata}` : ""}`;
+    const dogrulama = i.dogrulama
+      ? ` · ${i.dogrulama.durum === "dogrulandi" ? "Dosya–eser eşleşti" : "Eser kimliği belirsiz"}: ${i.dogrulama.aciklama}${i.dogrulama.kanitlar?.length ? ` (${i.dogrulama.kanitlar.join("; ")})` : ""} · ${i.dogrulama.kontrolZamani}`
+      : "";
+    return `${etiket[i.durum] ?? i.durum}${i.kopyaDenemesi > 1 ? ` · ${i.kopyaDenemesi}. bağlantı deneniyor/denendi` : ""}${i.durum === "indiriliyor" || i.durum === "dogrulaniyor" ? ` · ${boyut(i.alinan)}${i.toplam ? ` / ${boyut(i.toplam)}` : " · toplam boyut bilinmiyor"}` : ""}${i.mevcut ? " · Aynı dosya zaten vardı, mevcut dosya kullanıldı" : ""}${i.hata ? ` · ${i.hata}` : ""}${dogrulama}`;
   }
   function izleyiciCiz(kutu, i) {
     kutu.replaceChildren(document.createTextNode(durumMetni(i) + " "));

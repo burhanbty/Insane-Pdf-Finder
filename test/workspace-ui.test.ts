@@ -133,6 +133,7 @@ it("kaydedilmiş kitap doğrudan indirilebilir; kişisel notlar indirme isteğin
     tur: "pdf",
     baslik: g.baslik,
     alternatifler: ["https://example.com/book"],
+    kimlik: { baslik: g.baslik, yazarlar: ["Jane Doe"], doi: "10.1000/test" },
   });
   expect(downloads).toEqual(["/api/downloads/book.pdf"]);
 });

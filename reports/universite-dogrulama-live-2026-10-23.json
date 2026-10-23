@@ -1,0 +1,474 @@
+{
+  "tarih": "2026-10-23T11:15:39.846Z",
+  "kapsam": "Üç resmî arşiv, tek ortak konu sorgusu; kapsam/recall ölçümü değildir.",
+  "kaynaklar": [
+    {
+      "kaynak": "openmetu",
+      "sureMs": 7018,
+      "hata": "open.metu.edu.tr zaman aşımı (7000ms)",
+      "eserler": []
+    },
+    {
+      "kaynak": "bilkent",
+      "sureMs": 235,
+      "sayi": 5,
+      "eserler": [
+        {
+          "kaynak": "bilkent",
+          "kaynakAd": "Bilkent Üniversitesi",
+          "tur": "makale",
+          "baslik": "Classification of regional ionospheric disturbance based on machine learning techniques",
+          "link": "https://repository.bilkent.edu.tr/items/1d9e98a7-c82c-426b-9149-a3ea274da54d",
+          "yazarlar": [
+            "Terzi, Merve Begüm",
+            "Arıkan, Orhan",
+            "Karatay, S.",
+            "Arıkan, F.",
+            "Gulyaeva, T."
+          ],
+          "yil": 2016,
+          "ozet": "In this study, Total Electron Content (TEC) estimated from GPS receivers is used to model the regional and local variability that differs from global activity along with solar and geomagnetic indices. For the automated classification of regional disturbances, a classification technique based on a robust machine learning technique that have found wide spread use, Support Vector Machine (SVM) is proposed. Performance of developed classification technique is demonstrated for midlatitude ionosphere over Anatolia using TEC estimates generated from GPS data provided by Turkish National Permanent GPS Network (TNPGN-Active) for solar maximum year of 2011. As a result of implementing developed classification technique to Global Ionospheric Map (GIM) TEC data, which is provided by the NASA Jet Propulsion Laboratory (JPL), it is shown that SVM can be a suitable learning method to detect anomalies in TEC variations.",
+          "dil": "English",
+          "yayinci": "European Space Agency",
+          "konular": [
+            "Ionosphere",
+            "Kernel functions",
+            "Space weather",
+            "Artificial intelligence",
+            "Fighter aircraft",
+            "Geomagnetism",
+            "Global positioning system",
+            "Ionospheric measurement",
+            "Learning algorithms",
+            "NASA",
+            "Support vector machines",
+            "Vector spaces",
+            "Automated classification",
+            "Classification technique"
+          ],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://repository.bilkent.edu.tr/items/1d9e98a7-c82c-426b-9149-a3ea274da54d",
+              "kaynak": "bilkent",
+              "kayitUrl": "https://repository.bilkent.edu.tr/items/1d9e98a7-c82c-426b-9149-a3ea274da54d",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        },
+        {
+          "kaynak": "bilkent",
+          "kaynakAd": "Bilkent Üniversitesi",
+          "tur": "makale",
+          "baslik": "Machine learning-based high-precision and real-time focus detection for laser material processing systems",
+          "link": "https://repository.bilkent.edu.tr/items/ddf547ef-fbc8-4e82-9a86-9c7996814980",
+          "yazarlar": ["Polat, Can", "Yapıcı, Gizem Nuran", "Elahi, Sepehr", "Elahi, Parviz"],
+          "yil": 2022,
+          "doi": "10.1117/12.2624383",
+          "ozet": "This work explores a real-time and high precision focus finding for the ultrafast laser material \nprocessing for a\ndifferent types of materials. Focus detection is essential for laser machining because an unfocused \nbeam cannot affect the material and, at worst, a destructive effect. Here, we compare CNN and \nnon-CNN-based approaches to focus detection, ultimately proposing a robust CNN model that can \nachieve high performance when only trained on a portion of the dataset.   We  use an ordinary lens \n(11 mm focal length,  0.25 NA) and a CMOS camera.   Our robust CNN model achieved a focus \nprediction accuracy of 95% when identifying focus distances in   -150,\n-140,...,0,...,150  µm, each step is about 7% of the Rayleigh length, and a high processing speed \nof 1000+ Hz on a CPU.",
+          "dil": "English",
+          "yayinci": "S P I E - International Society for Optical Engineering",
+          "konular": [
+            "Laser machining",
+            "Machine learning",
+            "Auto focus",
+            "Neural networks",
+            "Machine vision"
+          ],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://repository.bilkent.edu.tr/items/ddf547ef-fbc8-4e82-9a86-9c7996814980",
+              "kaynak": "bilkent",
+              "kayitUrl": "https://repository.bilkent.edu.tr/items/ddf547ef-fbc8-4e82-9a86-9c7996814980",
+              "doi": "10.1117/12.2624383",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        },
+        {
+          "kaynak": "bilkent",
+          "kaynakAd": "Bilkent Üniversitesi",
+          "tur": "makale",
+          "baslik": "Editorial: machine learning methods for human brain imaging",
+          "link": "https://repository.bilkent.edu.tr/items/028c228f-2f21-4310-9c11-bb7608a440ea",
+          "yazarlar": [
+            "Vural, Y.",
+            "Tunay, F.",
+            "Newman, S.D.",
+            "Çukur, Tolga",
+            "Önal Ertuğrul, I."
+          ],
+          "yil": 2023,
+          "doi": "10.3389/fninf.2023.1154835",
+          "dil": "English",
+          "yayinci": "Frontiers Research Foundation",
+          "konular": [
+            "Machine learning",
+            "Deep learning",
+            "Artificial intelligence",
+            "Imaging",
+            "MRI"
+          ],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://repository.bilkent.edu.tr/items/028c228f-2f21-4310-9c11-bb7608a440ea",
+              "kaynak": "bilkent",
+              "kayitUrl": "https://repository.bilkent.edu.tr/items/028c228f-2f21-4310-9c11-bb7608a440ea",
+              "doi": "10.3389/fninf.2023.1154835",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        },
+        {
+          "kaynak": "bilkent",
+          "kaynakAd": "Bilkent Üniversitesi",
+          "tur": "makale",
+          "baslik": "Learning translation templates for closely related languages",
+          "link": "https://repository.bilkent.edu.tr/items/bae6ae53-3bdc-42fd-8bbe-7a2f6a599d2b",
+          "yazarlar": ["Altıntaş, Kemal", "Güvenir, H. Altay"],
+          "yil": 2003,
+          "doi": "10.1007/978-3-540-45224-9_102",
+          "ozet": "Many researchers have worked on example-based machine translation and different techniques have been investigated in the area. In literature, a method of using translation templates learned from bilingual example pairs was proposed. The paper investigates the possibility of applying the same idea for close languages where word order is preserved. In addition to applying the original algorithm for example pairs, we believe that the similarities between the translated sentences may always be learned as atomic translations. Since the word order is almost always preserved, there is no need to have any previous knowledge to identify the corresponding differences. The paper concludes that applying this method for close languages may improve the performance of the system.",
+          "dil": "English",
+          "yayinci": "Springer, Berlin, Heidelberg",
+          "konular": [
+            "Example-Based Machine Translation (EBMT)",
+            "Language Processing",
+            "Machine Translation",
+            "Operational Systems",
+            "Example Based Machine Translations",
+            "Original Algorithms",
+            "Translation Templates",
+            "Word Orders",
+            "Algorithms",
+            "Computer Science",
+            "Linguistics",
+            "Neural Networks",
+            "Semantics",
+            "Computational Linguistics"
+          ],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://repository.bilkent.edu.tr/items/bae6ae53-3bdc-42fd-8bbe-7a2f6a599d2b",
+              "kaynak": "bilkent",
+              "kayitUrl": "https://repository.bilkent.edu.tr/items/bae6ae53-3bdc-42fd-8bbe-7a2f6a599d2b",
+              "doi": "10.1007/978-3-540-45224-9_102",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        },
+        {
+          "kaynak": "bilkent",
+          "kaynakAd": "Bilkent Üniversitesi",
+          "tur": "makale",
+          "baslik": "A machine learning approach for result caching in web search engines",
+          "link": "https://repository.bilkent.edu.tr/items/e0160368-00df-49d8-94b9-661072c2c6e5",
+          "yazarlar": ["Kucukyilmaz T.", "Cambazoglu, B. B.", "Aykanat, Cevdet", "Baeza-Yates R."],
+          "yil": 2017,
+          "doi": "10.1016/j.ipm.2017.02.006",
+          "ozet": "A commonly used technique for improving search engine performance is result caching. In result caching, precomputed results (e.g., URLs and snippets of best matching pages) of certain queries are stored in a fast-access storage. The future occurrences of a query whose results are already stored in the cache can be directly served by the result cache, eliminating the need to process the query using costly computing resources. Although other performance metrics are possible, the main performance metric for evaluating the success of a result cache is hit rate. In this work, we present a machine learning approach to improve the hit rate of a result cache by facilitating a large number of features extracted from search engine query logs. We then apply the proposed machine learning approach to static, dynamic, and static-dynamic caching. Compared to the previous methods in the literature, the proposed approach improves the hit rate of the result cache up to 0.66%, which corresponds to 9.60% of the potential room for improvement. © 2017 Elsevier Ltd",
+          "dil": "English",
+          "yayinci": "Elsevier",
+          "konular": [
+            "Feature-based caching",
+            "Machine learning",
+            "Query result caching",
+            "Static caching",
+            "Static-dynamic caching",
+            "Artificial intelligence",
+            "Information retrieval",
+            "Search engines",
+            "Feature-based",
+            "Machine learning approaches",
+            "Performance metrics",
+            "Query results",
+            "Search engine performance",
+            "Static dynamics"
+          ],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://repository.bilkent.edu.tr/items/e0160368-00df-49d8-94b9-661072c2c6e5",
+              "kaynak": "bilkent",
+              "kayitUrl": "https://repository.bilkent.edu.tr/items/e0160368-00df-49d8-94b9-661072c2c6e5",
+              "doi": "10.1016/j.ipm.2017.02.006",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kaynak": "sabanci",
+      "sureMs": 1776,
+      "sayi": 4,
+      "eserler": [
+        {
+          "kaynak": "sabanci",
+          "kaynakAd": "Sabancı Üniversitesi",
+          "tur": "makale",
+          "baslik": "An exploratory machine learning analysis of 10-year mortality after isolated CABG",
+          "link": "https://research.sabanciuniv.edu/id/eprint/54433/",
+          "yazarlar": [
+            "Aksoy, Rezan",
+            "Yener, Alp Önder",
+            "Çalışkan, Recep",
+            "Boz, Hasan Alp",
+            "Aydoğdu, Naci Cem",
+            "Balcısoy, Selim",
+            "Kocogullari, Cevdet Ugur"
+          ],
+          "yil": 2026,
+          "doi": "10.1155/jocs/3088313",
+          "ozet": "Background: Conventional risk scoring systems often lack optimization for long-term prognosis, necessitating the exploration of machine learning (ML) methods in predicting mortality after coronary artery bypass grafting (CABG). This study aimed to identify risk factors for long-term mortality in isolated CABG patients and compare the performance of ML models with EuroSCORE II. Methods: This single-center, retrospective study analyzed the 10-year follow-up data of 350 patients who underwent isolated CABG between January 2011 and January 2012. The dataset comprised 52 variables, including clinical and procedural data. After preprocessing and SMOTE resampling, ensemble ML models were trained using Lasso-based feature selection; performance was compared with the full EuroSCORE II model. Result: The best-performing model utilized the top 8 features selected by Lasso regression, achieving a higher recall (0.768) and F1 score (0.462) compared to the model using the full feature set. The eight most predictive features were X-clamp time, cardiopulmonary bypass (CPB) time, first-year blood glucose levels, MACCE, elevated pulmonary artery pressure (PAH), 10th-year blood glucose levels, intervention for peripheral arterial disease (PAD), and first-year LDL levels. The ML pipeline (AUC: 0.559) achieved discrimination comparable to EuroSCORE II (AUC: 0.604) (p = 0.403). Conclusion: ML-based analysis identified procedural duration, long-term metabolic control, and PAD-related variables as key determinants of long-term mortality after CABG. Notably, MACCE history and elevated PAH further contributed to risk stratification. ML models achieved discrimination comparable to traditional risk scores while offering improved interpretability for long-term outcomes, suggesting that integration with established clinical scoring systems may enhance patient-specific mortality prediction.",
+          "dil": "english",
+          "yayinci": "John Wiley and Sons",
+          "konular": [],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://research.sabanciuniv.edu/id/eprint/54433/",
+              "kaynak": "sabanci",
+              "kayitUrl": "https://research.sabanciuniv.edu/id/eprint/54433/",
+              "doi": "10.1155/jocs/3088313",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        },
+        {
+          "kaynak": "sabanci",
+          "kaynakAd": "Sabancı Üniversitesi",
+          "tur": "makale",
+          "baslik": "Bowtie-patterned MIM SERS platform assisted by machine learning for detection of pesticide residues in food matrices",
+          "link": "https://research.sabanciuniv.edu/id/eprint/53847/",
+          "yazarlar": [
+            "Öncer, Nazlı",
+            "Vural Kaymaz, Sümeyra",
+            "Olgun, Elmas",
+            "Canli, Oltan",
+            "Guzel, Baris",
+            "Çelik, Süleyman",
+            "Tanrıseven, Selim",
+            "Kurt, Hasan",
+            "Yüce, Meral"
+          ],
+          "yil": 2026,
+          "doi": "10.1016/j.talanta.2026.129607",
+          "ozet": "The increasing use of pesticides and their mixtures poses a serious risk to human health and the environment. This increases the demand for simple, cost-effective, and reliable methods for detecting these residues. In this study, a highly sensitive in-house SERS platform based on a metal–insulator–metal (MIM) nanoarray structure was employed to acquire Raman fingerprint spectra of Pyrimethanil (PYM), Imidacloprid (IMI), and Chlormequat chloride (CCC) in pepper juice, yielding spectra with high signal-to-noise ratios. The detection limit for PYM in pepper juice (0.16 mg/kg) was well below both the EFSA (2 mg/kg) and EPA (2 mg/kg) limits. Among the tested pesticides, PYM shows the lowest detection limit, indicating a more efficient signal enhancement for the π-metal interaction. This strong affinity results in significantly enhanced Raman scattering activity. Furthermore, the unsupervised machine learning analysis techniques (e.g., PCA and HCA) used showed a concentration-dependent separation in spiked samples. The same approach also enabled detection and discrimination in real food samples obtained from different regions. These results demonstrate the potential of the developed platform for rapid, on-site monitoring of pesticide residues in complex food matrices.",
+          "dil": "en",
+          "yayinci": "Elsevier",
+          "konular": [],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://research.sabanciuniv.edu/id/eprint/53847/",
+              "kaynak": "sabanci",
+              "kayitUrl": "https://research.sabanciuniv.edu/id/eprint/53847/",
+              "doi": "10.1016/j.talanta.2026.129607",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        },
+        {
+          "kaynak": "sabanci",
+          "kaynakAd": "Sabancı Üniversitesi",
+          "tur": "makale",
+          "baslik": "Machine learning-aided channel estimation and hybrid combining for ultra-massive MIMO THz UAV communications",
+          "link": "https://research.sabanciuniv.edu/id/eprint/54374/",
+          "yazarlar": [
+            "Shapoval, Iana",
+            "Gerstacker, Wolfgang H.",
+            "Gürbüz, Özgür",
+            "Saeed, Akhtar"
+          ],
+          "yil": 2026,
+          "doi": "10.1109/balkancom71095.2026.11605049",
+          "ozet": "Terahertz (THz) communication is considered a key enabling technology for future sixth-generation (6G) wireless networks due to its potential to support extremely high data rates. In this paper, we investigate an uplink THz communication scenario with unmanned aerial vehicles (UAVs) as user equipment and a master UAV equipped with an ultra-massive multiple-input multiple-output (MIMO) array employing an antenna-ofsubarrays (AoSA) architecture. While this architecture reduces hardware complexity, it introduces challenges related to compressed channel observations and high spatial correlation, which complicate channel estimation and signal detection. To address these challenges, machine learning-based channel estimation using the Fixed-Point Network Orthogonal Approximate Message Passing (FPN-OAMP) algorithm is applied, and hybrid analog-digital combining schemes are investigated. In addition, a combining method based on Simultaneous Perturbation Stochastic Approximation (SPSA) is proposed to optimize the analog combiner with respect to the detector performance. Simulation results show that the proposed approach improves channel estimation accuracy and achieves significant BER improvements under realistic conditions. The proposed framework is particularly relevant for emerging 6G non-terrestrial networks, where UAV-assisted THz communications are expected to play a key role.",
+          "dil": "english",
+          "yayinci": "Institute of Electrical and Electronics Engineers",
+          "konular": [],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://research.sabanciuniv.edu/id/eprint/54374/",
+              "kaynak": "sabanci",
+              "kayitUrl": "https://research.sabanciuniv.edu/id/eprint/54374/",
+              "doi": "10.1109/balkancom71095.2026.11605049",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        },
+        {
+          "kaynak": "sabanci",
+          "kaynakAd": "Sabancı Üniversitesi",
+          "tur": "makale",
+          "baslik": "On-machine tool wear monitoring system using strain-gauge signals and edge force coefficients with physics-informed machine learning",
+          "link": "https://research.sabanciuniv.edu/id/eprint/54061/",
+          "yazarlar": [
+            "Mohamadyari Heydarlou, Mahdi",
+            "Efe, Aras",
+            "Yamada, Yuki",
+            "Boujnah, Haythem",
+            "Irino, Naruhiro",
+            "Budak, Erhan"
+          ],
+          "yil": 2026,
+          "doi": "10.1016/j.cirp.2026.04.030",
+          "ozet": "This paper presents a hybrid framework for tool wear monitoring in milling integrating strain sensor-based force measurement signals (SSFM), mechanistic force-coefficient identification, and machine learning (ML). Strain sensors and dynamometer signals train ML models that estimate cutting forces across various cutting conditions. Reconstructed forces feed an inverse mechanistic model to estimate cutting and edge coefficients over tool life. These coefficients are then used by an XGBoost model to predict in-process flank wear. Experiments across multiple cutting conditions demonstrate real-time estimation, accurate force prediction, and reliable wear estimation, showing that physics-informed features improve robustness and production compatibility.",
+          "dil": "english",
+          "yayinci": "Elsevier",
+          "konular": [],
+          "erisim": "yonlendir",
+          "pdfAdaylari": [
+            {
+              "url": "https://research.sabanciuniv.edu/id/eprint/54061/",
+              "kaynak": "sabanci",
+              "kayitUrl": "https://research.sabanciuniv.edu/id/eprint/54061/",
+              "doi": "10.1016/j.cirp.2026.04.030",
+              "durum": "aday",
+              "baglantiTuru": "kayit"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "yerelIndeks": [
+    {
+      "baslik": "Editorial: machine learning methods for human brain imaging",
+      "kaynakAd": "Yerel indeks · Bilkent Üniversitesi",
+      "link": "https://repository.bilkent.edu.tr/items/028c228f-2f21-4310-9c11-bb7608a440ea",
+      "goruldu": "2026-10-23T11:15:40.086Z"
+    },
+    {
+      "baslik": "On-machine tool wear monitoring system using strain-gauge signals and edge force coefficients with physics-informed machine learning",
+      "kaynakAd": "Yerel indeks · Sabancı Üniversitesi",
+      "link": "https://research.sabanciuniv.edu/id/eprint/54061/",
+      "goruldu": "2026-10-23T11:15:41.629Z"
+    },
+    {
+      "baslik": "Learning translation templates for closely related languages",
+      "kaynakAd": "Yerel indeks · Bilkent Üniversitesi",
+      "link": "https://repository.bilkent.edu.tr/items/bae6ae53-3bdc-42fd-8bbe-7a2f6a599d2b",
+      "goruldu": "2026-10-23T11:15:40.086Z"
+    },
+    {
+      "baslik": "Machine learning-based high-precision and real-time focus detection for laser material processing systems",
+      "kaynakAd": "Yerel indeks · Bilkent Üniversitesi",
+      "link": "https://repository.bilkent.edu.tr/items/ddf547ef-fbc8-4e82-9a86-9c7996814980",
+      "goruldu": "2026-10-23T11:15:40.086Z"
+    },
+    {
+      "baslik": "Classification of regional ionospheric disturbance based on machine learning techniques",
+      "kaynakAd": "Yerel indeks · Bilkent Üniversitesi",
+      "link": "https://repository.bilkent.edu.tr/items/1d9e98a7-c82c-426b-9149-a3ea274da54d",
+      "goruldu": "2026-10-23T11:15:40.086Z"
+    }
+  ],
+  "pdf": {
+    "kaynak": "https://repository.bilkent.edu.tr/items/1d9e98a7-c82c-426b-9149-a3ea274da54d",
+    "pdf": "https://repository.bilkent.edu.tr/bitstreams/e8ec3af3-fd76-43ab-950e-6e85abd67cee/download",
+    "boyut": 769800,
+    "sha256": "0670da42cb4a2e588b9fccce855f63e47967bb7b87b0cc9af24f5b6805bb1bbb",
+    "dogrulama": {
+      "durum": "dogrulandi",
+      "aciklama": "PDF başlığı ve kimlik kanıtları eserle eşleşti; kontrol ön sayfalarla sınırlıdır.",
+      "kanitlar": ["Ön sayfalarda başlık kelimeleri bulundu", "Ön sayfalarda yazar soyadı bulundu"],
+      "kontrolZamani": "2026-10-23T11:15:50.444Z",
+      "sayfaSayisi": 1,
+      "incelenenSayfa": 1
+    }
+  },
+  "akis": {
+    "ilkSonucMs": 19,
+    "toplamMs": 7028,
+    "olaylar": [
+      {
+        "sureMs": 1,
+        "grup": 0,
+        "bekleyen": 4,
+        "tamamlandi": false
+      },
+      {
+        "sureMs": 19,
+        "grup": 4,
+        "bekleyen": 3,
+        "tamamlandi": false
+      },
+      {
+        "sureMs": 220,
+        "grup": 5,
+        "bekleyen": 2,
+        "tamamlandi": false
+      },
+      {
+        "sureMs": 1824,
+        "grup": 5,
+        "bekleyen": 1,
+        "tamamlandi": false
+      },
+      {
+        "sureMs": 7017,
+        "grup": 5,
+        "bekleyen": 0,
+        "tamamlandi": false
+      },
+      {
+        "sureMs": 7028,
+        "grup": 5,
+        "bekleyen": 0,
+        "tamamlandi": true
+      }
+    ],
+    "kaynaklar": [
+      {
+        "id": "yerel-arsiv",
+        "ad": "Yerel üniversite indeksi",
+        "tur": ["kitap", "makale", "slayt"],
+        "aciklama": "Önceki üniversite aramalarında gözlenen künyelerde başlık, konu ve özet araması (BM25). Eski bağlantıların erişimi yeniden kontrol edilir.",
+        "hazir": true,
+        "sonucSayisi": 4,
+        "sureMs": 12
+      },
+      {
+        "id": "bilkent",
+        "ad": "Bilkent Üniversitesi",
+        "tur": ["kitap", "makale", "slayt"],
+        "aciklama": "Üniversitenin açık arşivinde makale, tez, kitap ve ders materyali; dosyasız/ambargolu kayıtlar ayrıca belirtilir.",
+        "hazir": true,
+        "sonucSayisi": 5,
+        "sureMs": 211
+      },
+      {
+        "id": "sabanci",
+        "ad": "Sabancı Üniversitesi",
+        "tur": ["kitap", "makale", "slayt"],
+        "aciklama": "Üniversitenin açık arşivinde makale, tez, kitap ve ders materyali; dosyasız/ambargolu kayıtlar ayrıca belirtilir.",
+        "hazir": true,
+        "sonucSayisi": 5,
+        "sureMs": 1813
+      },
+      {
+        "id": "openmetu",
+        "ad": "ODTÜ OpenMETU",
+        "tur": ["kitap", "makale", "slayt"],
+        "aciklama": "Üniversitenin açık arşivinde makale, tez, kitap ve ders materyali; dosyasız/ambargolu kayıtlar ayrıca belirtilir.",
+        "hazir": true,
+        "sonucSayisi": 0,
+        "sureMs": 7004,
+        "hataMesaji": "open.metu.edu.tr zaman aşımı (7000ms)"
+      }
+    ]
+  }
+}

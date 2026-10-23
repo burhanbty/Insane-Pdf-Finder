@@ -2,17 +2,18 @@ import { onbellekli } from "./cache.js";
 import { createHash } from "node:crypto";
 import { tamMetniZenginlestir, type TamMetinDurumu } from "./fulltext.js";
 import { ayar } from "./config.js";
-import { sureSinirli } from "./deadline.js";
+import { istekSinyali, sureSinirli } from "./deadline.js";
 import { kaynakHazirligi } from "./source-state.js";
 import { baskilarUyumlu, sonucuAcikla } from "./matching.js";
 import { eserAnahtari, eslestir, yazarParcalari, yilUyumlu } from "./normalize.js";
 import { kaynaklariYukle, yuklenmeHataListesi } from "./registry.js";
-import type { Gruplanmis, KaynakInfo, Sorgu, Work } from "./types.js";
+import type { Gruplanmis, KaynakInfo, KaynakSonuclari, Sorgu, Work } from "./types.js";
 
 export interface KaynakDurumu extends KaynakInfo {
   sonucSayisi: number;
   sureMs: number;
   hataMesaji?: string;
+  bekliyor?: boolean;
 }
 
 export interface AramaCevabi {
@@ -23,6 +24,12 @@ export interface AramaCevabi {
   toplamSonuc: number;
   gruplamaNotu: string;
   tamMetinDurumu?: TamMetinDurumu;
+  tamamlandi?: boolean;
+}
+
+export interface AramaSecenekleri {
+  signal?: AbortSignal;
+  guncelle?: (cevap: AramaCevabi) => void;
 }
 
 /**
@@ -31,7 +38,11 @@ export interface AramaCevabi {
  * Kritik davranis: bir kaynak coktugunde (api anahtari yok, kota, ag hatasi)
  * digerleri ETKILENMEZ. Hatalar durum listesinde gorunur, arama yine sonuc doner.
  */
-export async function ara(sorgu: Sorgu): Promise<AramaCevabi> {
+export async function ara(sorgu: Sorgu, secenek: AramaSecenekleri = {}): Promise<AramaCevabi> {
+  if (secenek.signal) {
+    secenek.signal.throwIfAborted();
+    return istekSinyali.run(secenek.signal, () => ara(sorgu, { guncelle: secenek.guncelle }));
+  }
   // Ayni sorgu tekrar ederse diskteki onbellegi doneruz. arXiv ve Semantic
   // Scholar gibi anahtarsiz API'ler kotali; tekrar eden aramalar onlari yiyor.
   // Eski gruplama kuraliyla birlestirilmis disk kayitlarini yeniden kullanma.
@@ -48,17 +59,25 @@ export async function ara(sorgu: Sorgu): Promise<AramaCevabi> {
     }
     return [k.id, surum, kaynakHazirligi(k).hazir];
   });
-  const anahtar = `arama:v8:${ayarSurumu}:${JSON.stringify(kaynakSurumleri)}:${JSON.stringify(sorgu)}`;
-  return onbellekli(anahtar, () => araCanlı(sorgu), {
+  const anahtar = `arama:v9:${ayarSurumu}:${JSON.stringify(kaynakSurumleri)}:${JSON.stringify(sorgu)}`;
+  const cevap = await onbellekli(anahtar, () => araCanlı(sorgu, secenek.guncelle), {
     sakla: (cevap) =>
       !cevap.kaynakDurumlari.some((k) => k.hazir && k.hataMesaji) &&
       !cevap.tamMetinDurumu?.hatalar.length,
   });
+  istekSinyali.getStore()?.throwIfAborted();
+  const son = { ...cevap, tamamlandi: true };
+  secenek.guncelle?.(son);
+  return son;
 }
 
-async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
+async function araCanlı(
+  sorgu: Sorgu,
+  guncelle?: AramaSecenekleri["guncelle"],
+): Promise<AramaCevabi> {
   const baslangic = Date.now();
   const kaynaklar = await kaynaklariYukle();
+  const hazirliklar = new Map(kaynaklar.map((k) => [k.id, kaynakHazirligi(k)]));
 
   // hic kaynak yuklenemediyse (klasor yanlsi, kurulum hatasi) kullaniciya
   // sessizce bos sonuc donmek yerine ne oldugunu soyle.
@@ -72,7 +91,7 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
 
   const uygun = kaynaklar.filter((k) => {
     if (!k.tur.includes(sorgu.tur)) return false;
-    return kaynakHazirligi(k).hazir;
+    return hazirliklar.get(k.id)!.hazir;
   });
 
   // Bu tur icin uygun kaynak yoksa da sessizce bos donme.
@@ -85,10 +104,48 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
 
   const durumlar: KaynakDurumu[] = [];
   const hepsi: Work[] = [];
+  const kaynakSonuclari = new Map<string, Work[]>();
 
-  const sonuclar = await Promise.all(
+  function anlik(): AramaCevabi {
+    const gruplar = grupla(hepsi, sorgu)
+      .sort((a, b) => b.puan - a.puan)
+      .slice(0, sorgu.limit);
+    return {
+      sorgu,
+      sureMs: Date.now() - baslangic,
+      gruplar,
+      kaynakDurumlari: kaynaklar
+        .filter((k) => k.tur.includes(sorgu.tur))
+        .map((k) => {
+          const bitti = durumlar.find((d) => d.id === k.id);
+          const h = hazirliklar.get(k.id)!;
+          return (
+            bitti ?? {
+              id: k.id,
+              ad: k.ad,
+              tur: k.tur,
+              aciklama: k.aciklama ?? "",
+              hazir: h.hazir,
+              hataMesaji: h.hata,
+              sonucSayisi: 0,
+              sureMs: 0,
+              bekliyor: h.hazir,
+            }
+          );
+        }),
+      toplamSonuc: hepsi.length,
+      tamamlandi: false,
+      gruplamaNotu:
+        "Kaynaklar geldikçe sonuçlar güncellenir; PDF adayları henüz dosya içeriğiyle doğrulanmamıştır.",
+    };
+  }
+  guncelle?.(anlik());
+
+  await Promise.all(
     uygun.map(async (k) => {
       const t0 = Date.now();
+      let isler: KaynakSonuclari = [];
+      let hataMesaji: string | undefined;
       try {
         const kaynakSurumu =
           k.onbellekSurumu?.() ??
@@ -97,7 +154,7 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
             : k.id === "openalex"
               ? `v2:${createHash("sha256").update(ayar.openalexKey).digest("hex")}`
               : "v1");
-        const isler = await onbellekli(
+        isler = await onbellekli(
           `kaynak:${kaynakSurumu}:${k.id}:${JSON.stringify(sorgu)}`,
           async () => {
             const sonuc = await sureSinirli(() => k.ara(sorgu), ayar.kaynakTimeoutMs);
@@ -117,35 +174,38 @@ async function araCanlı(sorgu: Sorgu): Promise<AramaCevabi> {
             }
             return sonuc;
           },
+          { sakla: (r) => !r.uyarilar?.length },
         );
-        return { k, isler, sure: Date.now() - t0, hata: undefined as string | undefined };
+        hataMesaji = isler.uyarilar?.join("; ");
       } catch (hata) {
-        return { k, isler: [] as Work[], sure: Date.now() - t0, hata: (hata as Error).message };
+        istekSinyali.getStore()?.throwIfAborted();
+        hataMesaji = (hata as Error).message;
       }
+      istekSinyali.getStore()?.throwIfAborted();
+      kaynakSonuclari.set(
+        k.id,
+        isler.map((w) => ({ ...w, pdfAdaylari: w.pdfAdaylari?.map((a) => ({ ...a })) })),
+      );
+      // Kaynakların geliş sırası son gruplama/sıralama kararını değiştirmesin.
+      hepsi.splice(0, hepsi.length, ...uygun.flatMap((k) => kaynakSonuclari.get(k.id) ?? []));
+      durumlar.push({
+        id: k.id,
+        ad: k.ad,
+        tur: k.tur,
+        aciklama: k.aciklama ?? "",
+        hazir: true,
+        sonucSayisi: isler.length,
+        sureMs: Date.now() - t0,
+        hataMesaji,
+      });
+      guncelle?.(anlik());
     }),
   );
-
-  for (const r of sonuclar) {
-    // Kaynak önbelleğinin nesnelerine sorguya özgü tam metin sonuçlarını yazma.
-    hepsi.push(
-      ...r.isler.map((w) => ({ ...w, pdfAdaylari: w.pdfAdaylari?.map((a) => ({ ...a })) })),
-    );
-    durumlar.push({
-      id: r.k.id,
-      ad: r.k.ad,
-      tur: r.k.tur,
-      aciklama: r.k.aciklama ?? "",
-      hazir: true,
-      sonucSayisi: r.isler.length,
-      sureMs: r.sure,
-      hataMesaji: r.hata,
-    });
-  }
 
   // Kullanilamayan kaynaklari da durum listesinde goster.
   for (const k of kaynaklar) {
     if (!k.tur.includes(sorgu.tur)) continue;
-    const { hazir, hata } = kaynakHazirligi(k);
+    const { hazir, hata } = hazirliklar.get(k.id)!;
     if (hazir) continue;
     durumlar.push({
       id: k.id,

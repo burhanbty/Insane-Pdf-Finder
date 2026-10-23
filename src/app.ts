@@ -13,6 +13,7 @@ import { sureSinirli } from "./deadline.js";
 import { calismaRotalari } from "./workspace-api.js";
 import { isbnDogrula, isbnKitabi } from "./isbn.js";
 import { indirmeRotalari } from "./download-jobs.js";
+import { kimlikGirdisi } from "./file-identity.js";
 import { KaynakHatasi } from "./http.js";
 import type { Sorgu, Tur } from "./types.js";
 import fs from "node:fs/promises";
@@ -148,10 +149,41 @@ uygulama.post("/api/search", async (req: Request, res: Response) => {
   const s = sorguAyikla(req.body);
   if (typeof s === "string") return hataCevap(res, 400, s);
 
+  const kontrol = new AbortController();
+  const akis = req.get("accept")?.includes("application/x-ndjson");
+  const kapandi = () => {
+    if (!res.writableEnded) kontrol.abort(new Error("Arama bağlantısı kapandı"));
+  };
+  res.on("close", kapandi);
   try {
-    res.json(await ara(s));
+    if (akis) {
+      res.type("application/x-ndjson");
+      res.setHeader("x-accel-buffering", "no");
+      res.flushHeaders();
+    }
+    const sonuc = await ara(s, {
+      signal: kontrol.signal,
+      guncelle: akis
+        ? (cevap) => {
+            kontrol.signal.throwIfAborted();
+            if (res.writableLength > 4 * 1024 * 1024) {
+              kontrol.abort(new Error("Arama bağlantısı sonuçları yeterince hızlı okuyamıyor"));
+              kontrol.signal.throwIfAborted();
+            }
+            res.write(JSON.stringify({ cevap }) + "\n");
+          }
+        : undefined,
+    });
+    if (akis) res.end();
+    else res.json(sonuc);
   } catch (hata) {
-    hataCevap(res, 500, `Arama başarısız: ${(hata as Error).message}`);
+    if (kontrol.signal.aborted) {
+      if (!res.destroyed) res.end();
+    } else if (akis)
+      res.end(JSON.stringify({ hata: `Arama başarısız: ${(hata as Error).message}` }) + "\n");
+    else hataCevap(res, 500, `Arama başarısız: ${(hata as Error).message}`);
+  } finally {
+    res.off("close", kapandi);
   }
 });
 
@@ -323,9 +355,15 @@ uygulama.post("/api/download", async (req: Request, res: Response) => {
   )
     return hataCevap(res, 400, "En fazla 5 geçerli alternatif adres gönderilebilir");
   const alternatifler = (g.alternatifler ?? []) as string[];
+  let kimlik;
+  try {
+    kimlik = kimlikGirdisi(g.kimlik);
+  } catch (e) {
+    return hataCevap(res, 400, (e as Error).message);
+  }
 
   try {
-    const sonuc = await indir({ url, varsayilanAd: baslik, alternatifler }, tur);
+    const sonuc = await indir({ url, varsayilanAd: baslik, alternatifler, kimlik }, tur);
     res.json({ ...sonuc, tamAd: path.resolve(sonuc.yol) });
   } catch (hata) {
     hataCevap(res, 502, `İndirme başarısız: ${(hata as Error).message}`);

@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { ayar } from "./config.js";
+import { istekSinyali } from "./deadline.js";
 
 /*
  * Basit iki katmanli onbellek: bellek (LRU) + disk.
@@ -62,6 +63,7 @@ export async function onbellekli<T>(
   }
 
   const deger = await uretici();
+  istekSinyali.getStore()?.throwIfAborted();
   if (secenek.sakla && !secenek.sakla(deger)) return deger;
   bellekEkle(anahtar, deger);
 

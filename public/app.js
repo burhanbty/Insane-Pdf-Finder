@@ -47,8 +47,10 @@ let suzgec = "hepsi";
 const ozetYuklenen = new Map();
 let kaynakAdlari = new Map();
 let aramaSurumu = 0;
+let aramaKontrol = null;
 const kartDugumleri = new WeakMap();
 const kartVerileri = new WeakMap();
+const akisKartlari = new Map();
 
 function baskiAlanlariniGuncelle() {
   $(".baski-tercihleri").disabled =
@@ -129,6 +131,11 @@ el.form.addEventListener("submit", async (olay) => {
   const baslik = el.baslik.value.trim();
   if (!baslik) return;
   const aramaId = ++aramaSurumu;
+  aramaKontrol?.abort();
+  const kontrol = new AbortController();
+  aramaKontrol = kontrol;
+  $("#aramaIptal").hidden = false;
+  sonCevap = null;
   const webDahil = el.webDahil.checked;
 
   const govde = {
@@ -150,9 +157,10 @@ el.form.addEventListener("submit", async (olay) => {
     }
   }
 
-  el.araBtn.disabled = true;
-  el.araBtn.textContent = "Aranıyor…";
+  el.araBtn.disabled = false;
+  el.araBtn.textContent = "Yeniden ara";
   el.kartlar.innerHTML = "";
+  akisKartlari.clear();
   el.sonucBolum.classList.add("gizli");
   el.ozetPanel.classList.remove("gizli");
   el.ozetPanel.innerHTML =
@@ -183,15 +191,17 @@ el.form.addEventListener("submit", async (olay) => {
         elleAramaAdresi = web.value.elleAramaAdresi ?? null;
       } else if (web) hatalar.push(`Web araması: ${web.reason.message}`);
 
-      sonCevap = { gruplar, kaynakDurumlari: durumlar, hatalar, anahtar };
+      sonCevap = { gruplar, kaynakDurumlari: durumlar, hatalar, anahtar, sorgu: govde };
       cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi);
       cizKartlar(gruplar);
       el.sonucBolum.classList.remove("gizli");
       const bekleyen = !ana
         ? "Ana kaynak araması sürüyor…"
-        : webDahil && !web
-          ? "Web araması sürüyor…"
-          : null;
+        : ana.status === "fulfilled" && ana.value.tamamlandi === false
+          ? "Diğer kaynaklar ve tam metin konumları taranıyor; sonuçlar güncelleniyor…"
+          : webDahil && !web
+            ? "Web araması sürüyor…"
+            : null;
       if (bekleyen) {
         el.ozetPanel.insertAdjacentHTML(
           "beforeend",
@@ -200,15 +210,70 @@ el.form.addEventListener("submit", async (olay) => {
         if (!gruplar.length) el.bos.innerHTML = `<p>${kacis(bekleyen)}</p>`;
       }
       // Ana arama bittiginde yeni sorguya izin ver; web arka planda surer.
-      el.araBtn.disabled = !ana;
-      el.araBtn.textContent = ana ? "Ara" : "Aranıyor…";
+      el.araBtn.disabled = false;
+      el.araBtn.textContent = !ana || ana.value?.tamamlandi === false ? "Yeniden ara" : "Ara";
     }
 
     async function sorgula(yol, indeks) {
       try {
-        cevaplar[indeks] = { status: "fulfilled", value: await istek(yol, govde) };
+        const r = await fetch(yol, {
+          method: "POST",
+          headers: { "content-type": "application/json", accept: "application/x-ndjson" },
+          body: JSON.stringify(govde),
+          signal: kontrol.signal,
+        });
+        if (r.ok && r.headers?.get("content-type")?.includes("application/x-ndjson") && r.body) {
+          const reader = r.body.getReader();
+          const decoder = new TextDecoder();
+          let kalan = "",
+            tamamlandi = false;
+          const satirOku = (satir) => {
+            if (!satir.trim()) return;
+            const v = JSON.parse(satir);
+            if (v.hata) throw new Error(v.hata);
+            if (!v.cevap || !Array.isArray(v.cevap.gruplar))
+              throw new Error("Arama yanıtı geçersiz");
+            tamamlandi = v.cevap.tamamlandi === true;
+            cevaplar[indeks] = { status: "fulfilled", value: v.cevap };
+            guncelle();
+          };
+          try {
+            for (;;) {
+              const p = await reader.read();
+              kalan += decoder.decode(p.value, { stream: !p.done });
+              if (kalan.length > 4 * 1024 * 1024) throw new Error("Arama yanıtı çok büyük");
+              let n;
+              while ((n = kalan.indexOf("\n")) >= 0) {
+                satirOku(kalan.slice(0, n));
+                kalan = kalan.slice(n + 1);
+              }
+              if (p.done) break;
+            }
+            satirOku(kalan);
+            if (!tamamlandi)
+              throw new Error("Arama akışı kesildi; görünen sonuçlar eksik olabilir");
+          } finally {
+            await reader.cancel().catch(() => {});
+            reader.releaseLock();
+          }
+        } else {
+          const veri = await r.json();
+          if (!r.ok) throw new Error(veri.hata ?? `İstek başarısız (${r.status})`);
+          cevaplar[indeks] = { status: "fulfilled", value: veri };
+        }
       } catch (hata) {
-        cevaplar[indeks] = { status: "rejected", reason: hata };
+        if (kontrol.signal.aborted) return;
+        // Kesilen akışta daha önce bulunan kayıtlar korunur.
+        if (cevaplar[indeks]?.status === "fulfilled") {
+          cevaplar[indeks].value.tamamlandi = true;
+          cevaplar[indeks].value.kaynakDurumlari.push({
+            ad: "Arama akışı",
+            hazir: true,
+            sonucSayisi: 0,
+            sureMs: 0,
+            hataMesaji: hata.message,
+          });
+        } else cevaplar[indeks] = { status: "rejected", reason: hata };
       }
       guncelle();
     }
@@ -222,18 +287,38 @@ el.form.addEventListener("submit", async (olay) => {
     if (aramaId === aramaSurumu) {
       el.araBtn.disabled = false;
       el.araBtn.textContent = "Ara";
+      $("#aramaIptal").hidden = true;
     }
   }
+});
+
+$("#aramaIptal").addEventListener("click", () => {
+  aramaSurumu++;
+  aramaKontrol?.abort();
+  $("#aramaIptal").hidden = true;
+  el.araBtn.disabled = false;
+  el.araBtn.textContent = "Ara";
+  if (sonCevap) {
+    sonCevap.kaynakDurumlari = sonCevap.kaynakDurumlari.map((d) =>
+      d.bekliyor
+        ? { ...d, bekliyor: false, hataMesaji: "Arama durduruldu; bu kaynak tamamlanmadı" }
+        : d,
+    );
+    sonCevap.hatalar.push("Arama durduruldu; bulunan sonuçlar korundu, tarama eksik olabilir.");
+    cizDurumlar(sonCevap.kaynakDurumlari, sonCevap.hatalar);
+  } else mesajGoster("Arama durduruldu.", "uyari");
 });
 
 /* ------------------------------ durum paneli ---------------------------- */
 
 function cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi) {
   const satirlar = durumlar.map((d) => {
-    const sinif = d.hataMesaji ? (d.hazir ? "uyari" : "hata") : "iyi";
-    const bilgi = d.hataMesaji
-      ? d.hataMesaji
-      : `${d.sonucSayisi} sonuç · ${(d.sureMs / 1000).toFixed(1)} sn`;
+    const sinif = d.bekliyor ? "uyari" : d.hataMesaji ? (d.hazir ? "uyari" : "hata") : "iyi";
+    const bilgi = d.bekliyor
+      ? "Aranıyor…"
+      : d.hataMesaji
+        ? d.hataMesaji
+        : `${d.sonucSayisi} sonuç · ${(d.sureMs / 1000).toFixed(1)} sn`;
     return `<div class="durum-satir">
       <span class="nokta ${sinif}"></span>
       <span class="ad">${kacis(d.ad)}</span>
@@ -264,7 +349,7 @@ function cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi) {
   const toplam = durumlar.reduce((a, d) => a + d.sonucSayisi, 0);
   el.ozetPanel.innerHTML = `<div class="durum-satir" style="border:none">
        <span class="ad">${sonCevap.gruplar.length} sonuç bulundu</span>
-       <span class="bilgi">${durumlar.length} katalog tarandı · ${toplam} kayıt incelendi</span>
+       <span class="bilgi">${durumlar.filter((d) => d.hazir && !d.bekliyor).length} katalog tarandı · ${durumlar.filter((d) => d.bekliyor).length} bekleniyor · ${toplam} kayıt incelendi</span>
      </div><details class="kaynak-ayrinti"><summary>Arama ayrıntılarını göster${hatalar.length || durumlar.some((d) => d.hataMesaji) ? " · Bazı kaynaklara ulaşılamadı" : ""}</summary>${satirlar.join("")}</details>`;
 }
 
@@ -316,9 +401,23 @@ function cizKartlar(gruplar) {
   gruplar.forEach((g, i) => {
     let kart = kartDugumleri.get(g);
     if (!kart) {
-      kart = kartYap(g);
+      const onceki = akisKartlari.get(g.anahtar);
+      const surum = JSON.stringify(g);
+      if (onceki?.surum === surum) kart = onceki.kart;
+      else {
+        kart = kartYap(g);
+        // İndirme izleyicisini ve açılmış özeti akış güncellemesi sırasında koru.
+        if (onceki)
+          for (const secici of [".indirme-icerik", ".ozet-icerik"]) {
+            const eski = onceki.kart.querySelector(secici),
+              yeni = kart.querySelector(secici);
+            if (eski && yeni) yeni.replaceWith(eski);
+          }
+        akisKartlari.set(g.anahtar, { kart, surum });
+      }
       kartDugumleri.set(g, kart);
     }
+    kartVerileri.set(kart, g);
     kart.dataset.sira = String(i);
     el.kartlar.appendChild(kart);
   });
@@ -327,7 +426,7 @@ function cizKartlar(gruplar) {
   filtreUygula();
 
   // Sayfa sayilari kaynakta yoksa arka planda tek istekte getirilir.
-  sayfalariArkaPlanda(gruplar);
+  if (!sonCevap.kaynakDurumlari.some((d) => d.bekliyor)) sayfalariArkaPlanda(gruplar);
 }
 
 /* ------------------------- kaynak bazli ozellikler ------------------------ */
@@ -629,7 +728,8 @@ function kartYap(g) {
         : `<span>${kacis(k.kaynakAd)}</span>`;
       return `<span class="kaynak-rozet" data-kaynak="${kacis(k.kaynak)}">
       <span class="badge ${sinif}">${etiket}</span>
-      ${k.belgeTuru === "kitap-bolumu" ? '<span class="badge">Kitap bölümü</span>' : ""}
+      ${k.belgeTuru ? `<span class="badge">${kacis({ "kitap-bolumu": "Kitap bölümü", tez: "Tez", rapor: "Rapor", "ders-notu": "Ders notu", sunum: "Sunum", kitap: "Kitap" }[k.belgeTuru] ?? k.belgeTuru)}</span>` : ""}
+      ${k.arsivGorulmeZamani ? `<span class="pdf-bilgi">Yerel künye · ${kacis(k.arsivGorulmeZamani.slice(0, 10))} tarihinde görüldü; erişim yeniden kontrol edilir</span>` : ""}
       ${ad}
     </span>`;
     })
@@ -848,6 +948,17 @@ el.kartlar.addEventListener("click", async (olay) => {
     buton.textContent = "İndiriliyor…";
     try {
       const g = kartVerileri.get(buton.closest(".kart"));
+      const k = g.kaynaklar.find((k) => k.pdf === url || k.link === url) ?? g.kaynaklar[0];
+      const kimlik =
+        tur === "pdf"
+          ? {
+              baslik: g.baslik,
+              yazarlar: g.yazarlar.slice(0, 20),
+              doi: k?.doi,
+              isbn: sonCevap.sorgu?.isbn || k?.isbn,
+              baski: sonCevap.sorgu?.baski || k?.baski,
+            }
+          : undefined;
       const alternatifler =
         tur === "pdf"
           ? [
@@ -869,6 +980,7 @@ el.kartlar.addEventListener("click", async (olay) => {
           url,
           tur,
           baslik,
+          ...(kimlik ? { kimlik } : {}),
           ...(alternatifler.length ? { alternatifler } : {}),
         },
         buton.closest(".kart").querySelector(".indirme-icerik"),

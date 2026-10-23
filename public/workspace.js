@@ -169,6 +169,17 @@ q("#kitaplikListe").addEventListener("click", async (e) => {
           url: b.dataset.url,
           tur: b.dataset.tur,
           baslik: k.eser.baslik,
+          ...(b.dataset.tur === "pdf"
+            ? {
+                kimlik: {
+                  baslik: k.eser.baslik,
+                  yazarlar: k.eser.yazarlar.slice(0, 20),
+                  doi: k.eser.kaynaklar.find((s) => s.doi)?.doi,
+                  isbn: k.eser.kaynaklar.find((s) => s.isbn)?.isbn,
+                  baski: k.eser.kaynaklar.find((s) => s.baski)?.baski,
+                },
+              }
+            : {}),
           ...(alternatifler.length ? { alternatifler } : {}),
         },
         b.closest(".kitaplik-karti").querySelector(".indirme-icerik"),

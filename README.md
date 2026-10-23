@@ -55,6 +55,58 @@ Sayfanın üstündeki **Açık / Koyu / Sistem** seçeneklerinden görünümü d
 **Sistem** seçeneği cihazın tema değişikliklerini otomatik takip eder. Tema seçimi
 kitaplığınızı veya notlarınızı değiştirmez.
 
+## Dosya–eser doğrulaması ve erken sonuçlar
+
+Arama artık kaynaklar yanıt verdikçe kartları gösterir. Kalan kaynakların durumu
+**Aranıyor…** olarak görünür; DOI/tam metin konumları tamamlanınca sonuçlar yenilenir.
+**Aramayı durdur** bağlantılı istekleri iptal eder ve bulunan kartları korur.
+Yeni arama önceki isteği iptal eder. Akış kesilirse görünen kayıtlar korunur ve
+taramanın eksik olduğu belirtilir. JSON API kullanan istemciler çalışmaya devam eder;
+`POST /api/search` için `Accept: application/x-ndjson` aşamalı yanıt seçer.
+
+Arama ve kitaplık PDF indirmeleri beklenen eser künyesini de gönderir. Dosya
+açılır; en fazla ilk dört sayfada başlık/yazar, varsa DOI, ISBN ve baskı kanıtları
+aranır. Sonuç indirme kuyruğunda kontrol zamanı ve kanıtlarıyla gösterilir:
+
+- **Dosya–eser eşleşti:** başlıkla birlikte ek kimlik kanıtı bulundu.
+- **Eser kimliği belirsiz:** dosya alındı ama yeterli metin/baskı kanıtı yok;
+  kullanıcı dosyayı kontrol etmelidir. Önizleme/eleştiri işaretleri de belirsiz tutulur.
+- Yanlış başlık, açık DOI/ISBN/baskı çelişkisi veya açılamayan PDF reddedilir;
+  sıradaki bağlantı denenir. Reddedilen/yarım dosya yayımlanmaz.
+
+En fazla sekiz bağlantı kontrol edilir; bağlantı başına 30 saniye, bütün işlem için
+120 saniye sınırı vardır. Dosya sınırı 300 MB'dir. İçerik kimlik kontrolü 40 MB ile
+sınırlıdır; daha büyük dosyalar belirsiz gösterilir. OCR ve bütün kitabın eksiksizliği
+kontrol edilmez. API'ye `kimlik` gönderilmeyen eski indirmeler biçim kontrolü yapar;
+eser kimliği doğrulanmış diye etiketlenmez. Belirsiz dosya ilk uygun kopya olarak
+sunulur; bütün alternatiflerde daha güçlü kimlik kanıtı araması yapılmaz.
+
+## Üniversite arşivleri ve yerel arama
+
+**Bilkent Üniversitesi**, **ODTÜ OpenMETU** ve **Sabancı Üniversitesi** bağımsız
+kaynaklar olarak aramaya katılır. Bilkent resmî DSpace API'sini, diğer ikisi kurumun
+arama ve künye sayfalarını kullanır. Tez/raporlar **Makale**, ders notları/sunumlar
+**Slayt / Sunum** aramasında kendi belge etiketiyle görünür. Kitap bölümü tam kitap
+diye sunulmaz; dosyasız/ambargolu kayıtta PDF bulunduğu iddia edilmez.
+ODTÜ/Sabancı için arama başına en fazla beş kayıt sayfası incelenir; bu bütün
+kurum arşivinin tarandığı anlamına gelmez. Kısmi künye kaybı kaynak uyarısıdır ve
+tam başarı olarak önbelleğe alınmaz. ODTÜ'nün 23 Ekim 2026 canlı denemesi zaman
+aşımıyla sınırlı kaldı; erişilemeyen kaynak diğer sonuçları engellemez.
+
+Bu aramalarda gerçekten gözlenen künyeler `.data/archives/observed.json` içinde
+saklanır. **Yerel üniversite indeksi**, başlık, konu ve özet üzerinde ters kelime
+indeksi ve BM25 sıralaması kullanır. Önceden görülen eserleri başka sözcüklerle
+bulabilir; kartta son canlı gözlem tarihi gösterilir. Bağlantı ve PDF içeriği indirme
+sırasında yeniden kontrol edilir. İndeks, bütün üniversite arşivlerini veya PDF tam
+metinlerini kapsamaz. En fazla 20.000 kayıt/20 MB tutulur; sınır aşılırsa en eski
+gözlemler çıkarılır. Güncelleme atomiktir; bozuk dosya sessizce sıfırlanmaz.
+Bu indeks de tek sunucu süreci için tasarlanmıştır. Anlamsal model eklenmedi;
+kelime aramasının yetersiz kaldığı bağımsız sorgularda faydası ölçüldükten sonra
+eklenebilir. Yeni API anahtarı, model indirmesi veya ücretli servis gerekmez.
+
+Sınırlı canlı doğrulama: `npx tsx scripts/probe-institutional.ts`.
+Sonuçlar `reports/universite-dogrulama-live-2026-10-23.json` içinde tutulur.
+
 ## Kurulum
 
 Node.js **22.22.2+ (22.x), 24.15.0+ (24.x) veya 26+** gerekir.
@@ -173,28 +225,32 @@ sadece bazı kaynaklar devre dışı kalır.
 paralel sorgulanır; **biri hata verse bile diğerlerinin sonucu döner** ve
 arayüzde o kaynağın durumu ayrı satırda görünür.
 
-| Kaynak            | Tür           | Ne verir                                                                |
-| ----------------- | ------------- | ----------------------------------------------------------------------- |
-| Open Library      | kitap         | Katalog kaydı, kapak, ödünç/arşiv bağlantıları                          |
-| Internet Archive  | kitap         | Açık metin ve PDF; tam metin okunabilen kayıtlar                        |
-| Google Books      | kitap         | Künye, kapak, bazı durumlarda önizleme bağlantısı _(anahtar gerekir)_   |
-| OpenAIRE          | kitap, makale | DOAB/OAPEN ve kurumsal arşivler dahil açık erişim kopyalar              |
-| OAPEN             | kitap         | Resmî tam üstverinin yerel indeksi; kitaplar, bölümler ve PDF adayları  |
-| DOAB              | kitap         | Resmî tam üstverinin yerel indeksi; kitap ve yayınevi/depo bağlantıları |
-| arXiv             | makale        | Ön baskılar, tam PDF                                                    |
-| Semantic Scholar  | makale        | Özet, atıf sayısı, açık erişim PDF bağlantısı                           |
-| OpenAlex          | makale        | Künye ve bütün açık erişim konumları                                    |
-| Crossref          | makale, kitap | Kesin künye (DOI, sayfa, cilt)                                          |
-| CORE              | makale        | Açık erişim makale indeksi, çoğunda tam metin PDF                       |
-| Zenodo            | makale, slayt | Veri setleri, çalışma kâğıtları, sunum dosyaları                        |
-| Sci-Hub           | makale, kitap | 88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi     |
-| Europe PMC        | makale        | 44+ milyon biyomedikal/fen makalesi ve PubMed Central açık PDF'leri     |
-| Project Gutenberg | kitap         | 70.000+ klasik ve kamu malı kitap (EPUB, TXT, HTML)                     |
-| HAL Science       | makale, kitap | 4+ milyon açık erişimli araştırma yayını, tez ve kitap (tam PDF)        |
-| Library Genesis   | kitap, makale | Ayna siteler üzerinden kitap ve makale künyesi / detay yönlendirmesi    |
-| Anna's Archive    | kitap, makale | Geniş gölge kütüphane meta-indeksi / detay yönlendirmesi                |
-| Türkçe Wikipedia  | hepsi         | Anahtarsız açık API; **senin eklediğin kaynak için örnek**              |
-| Web araması       | slayt         | SlideShare, Speaker Deck, Google Slides vb. — yalnızca bağlantı         |
+| Kaynak                   | Tür           | Ne verir                                                                |
+| ------------------------ | ------------- | ----------------------------------------------------------------------- |
+| Open Library             | kitap         | Katalog kaydı, kapak, ödünç/arşiv bağlantıları                          |
+| Internet Archive         | kitap         | Açık metin ve PDF; tam metin okunabilen kayıtlar                        |
+| Google Books             | kitap         | Künye, kapak, bazı durumlarda önizleme bağlantısı _(anahtar gerekir)_   |
+| OpenAIRE                 | kitap, makale | DOAB/OAPEN ve kurumsal arşivler dahil açık erişim kopyalar              |
+| Bilkent Üniversitesi     | hepsi         | Resmî DSpace API'sinden üniversite yayınları, tezler ve kayıt sayfaları |
+| ODTÜ OpenMETU            | hepsi         | Kurum arama/künye sayfaları; canlı erişim dış kaynak koşullarına bağlı  |
+| Sabancı Üniversitesi     | hepsi         | EPrints arama ve künye sayfalarından akademik yayınlar                  |
+| Yerel üniversite indeksi | hepsi         | Önceki aramalarda gözlenen üniversite künyelerinde BM25 araması         |
+| OAPEN                    | kitap         | Resmî tam üstverinin yerel indeksi; kitaplar, bölümler ve PDF adayları  |
+| DOAB                     | kitap         | Resmî tam üstverinin yerel indeksi; kitap ve yayınevi/depo bağlantıları |
+| arXiv                    | makale        | Ön baskılar, tam PDF                                                    |
+| Semantic Scholar         | makale        | Özet, atıf sayısı, açık erişim PDF bağlantısı                           |
+| OpenAlex                 | makale        | Künye ve bütün açık erişim konumları                                    |
+| Crossref                 | makale, kitap | Kesin künye (DOI, sayfa, cilt)                                          |
+| CORE                     | makale        | Açık erişim makale indeksi, çoğunda tam metin PDF                       |
+| Zenodo                   | makale, slayt | Veri setleri, çalışma kâğıtları, sunum dosyaları                        |
+| Sci-Hub                  | makale, kitap | 88+ milyon akademik makale ve kitap bölümünün açık tam metin arşivi     |
+| Europe PMC               | makale        | 44+ milyon biyomedikal/fen makalesi ve PubMed Central açık PDF'leri     |
+| Project Gutenberg        | kitap         | 70.000+ klasik ve kamu malı kitap (EPUB, TXT, HTML)                     |
+| HAL Science              | makale, kitap | 4+ milyon açık erişimli araştırma yayını, tez ve kitap (tam PDF)        |
+| Library Genesis          | kitap, makale | Ayna siteler üzerinden kitap ve makale künyesi / detay yönlendirmesi    |
+| Anna's Archive           | kitap, makale | Geniş gölge kütüphane meta-indeksi / detay yönlendirmesi                |
+| Türkçe Wikipedia         | hepsi         | Anahtarsız açık API; **senin eklediğin kaynak için örnek**              |
+| Web araması              | slayt         | SlideShare, Speaker Deck, Google Slides vb. — yalnızca bağlantı         |
 
 ### Kaynak hakkında bilinmesi gerekenler
 

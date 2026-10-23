@@ -457,7 +457,8 @@ describe("bağımsız arama cevapları", () => {
     gonder();
     try {
       await vi.waitFor(() => expect(ids()).toEqual(["web"]));
-      expect(d.querySelector<HTMLButtonElement>("#araBtn")!.disabled).toBe(true);
+      expect(d.querySelector<HTMLButtonElement>("#araBtn")!.disabled).toBe(false);
+      expect(d.querySelector<HTMLButtonElement>("#aramaIptal")!.hidden).toBe(false);
     } finally {
       main.resolve(cevap([kart("main")]));
     }

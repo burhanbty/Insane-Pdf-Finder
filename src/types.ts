@@ -60,7 +60,9 @@ export interface Work {
   pdf?: string;
   /** Aynı eserin alternatif PDF konumları; eski istemciler için pdf alanı da korunur. */
   pdfAdaylari?: PdfAdayi[];
-  belgeTuru?: "kitap" | "kitap-bolumu";
+  belgeTuru?: "kitap" | "kitap-bolumu" | "tez" | "rapor" | "ders-notu" | "sunum";
+  /** Yerel indeksten gelen üstverinin en son canlı gözlem zamanı. */
+  arsivGorulmeZamani?: string;
   /** EPUB, PDF'ten ayrı bir indirme biçimidir. */
   epub?: string;
   /** Dogrudan okunabilir tam metin. */
@@ -124,5 +126,8 @@ export interface SourceModule {
   hazirDegilAciklamasi?: string;
   /** Yerel indeks yenilenince hem kaynak hem arama önbelleğini geçersiz kılar. */
   onbellekSurumu?(): string;
-  ara(sorgu: Sorgu): Promise<Work[]>;
+  ara(sorgu: Sorgu): Promise<KaynakSonuclari>;
 }
+
+/** Kısmi künye kaybı varsa sonuçlar korunur; eksik tarama başarı diye önbelleğe alınmaz. */
+export type KaynakSonuclari = Work[] & { uyarilar?: string[] };

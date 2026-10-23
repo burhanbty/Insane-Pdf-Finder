@@ -95,6 +95,10 @@ function eserOku(v: unknown): Gruplanmis {
       doi: metin(k.doi, 300) || undefined,
       isbn: metin(k.isbn, 40) || undefined,
       baski: metin(k.baski, 200) || undefined,
+      arsivGorulmeZamani:
+        typeof k.arsivGorulmeZamani === "string" && /^\d{4}-\d{2}-\d{2}T/.test(k.arsivGorulmeZamani)
+          ? k.arsivGorulmeZamani.slice(0, 30)
+          : undefined,
       kunyeTuru: k.kunyeTuru === "eser" || k.kunyeTuru === "baski" ? k.kunyeTuru : undefined,
       dil: metin(k.dil, 200) || undefined,
       yayinci: metin(k.yayinci, 500) || undefined,
@@ -103,8 +107,11 @@ function eserOku(v: unknown): Gruplanmis {
       erisim: ["acik", "sinirli", "odunc", "yonlendir"].includes(String(k.erisim))
         ? (k.erisim as Work["erisim"])
         : undefined,
-      belgeTuru:
-        k.belgeTuru === "kitap" || k.belgeTuru === "kitap-bolumu" ? k.belgeTuru : undefined,
+      belgeTuru: ["kitap", "kitap-bolumu", "tez", "rapor", "ders-notu", "sunum"].includes(
+        String(k.belgeTuru),
+      )
+        ? (k.belgeTuru as Work["belgeTuru"])
+        : undefined,
       epub: adres(k.epub),
       tamMetin: adres(k.tamMetin),
     };
