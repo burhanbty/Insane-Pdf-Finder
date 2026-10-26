@@ -55,6 +55,20 @@ Sayfanın üstündeki **Açık / Koyu / Sistem** seçeneklerinden görünümü d
 **Sistem** seçeneği cihazın tema değişikliklerini otomatik takip eder. Tema seçimi
 kitaplığınızı veya notlarınızı değiştirmez.
 
+## Kitap aramasında PDF görünümü
+
+Kitap aramalarında **Kitaplarda yalnız PDF bağlantısı olanlar** varsayılan olarak açıktır.
+Yalnız katalog/önizleme/ödünç veya EPUB/metin sunan kayıtlar bu görünümde gizlenir;
+**Katalog kayıtlarını da göster** ile tekrar açılabilir. Kaynaklar tamamen devre dışı
+bırakılmaz; aynı kaynak başka bir kitapta PDF bağlantısı sağlayabilir. Makale ve slayt
+aramaları bu ek filtreden etkilenmez.
+
+PDF bağlantısı yoksa kitabın bulunamadığı söylenmez; mevcut sonuçlarda PDF bağlantısı
+bulunamadığı açıklanır. Yalnız ilgili çalışmaların PDF’leri varsa bunların aranan
+kitabın kendisi olmadığı belirtilir. **İndirilebilir** sekmesi ayrıca EPUB ve metni de
+kapsar. Bağlantı, dosya erişimi/kitap kimliği garantisi değildir; mevcut indirme ve
+dosya–eser kontrolleri indirme sırasında çalışır.
+
 ## Dosya–eser doğrulaması ve erken sonuçlar
 
 Arama artık kaynaklar yanıt verdikçe kartları gösterir. Kalan kaynakların durumu

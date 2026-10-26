@@ -37,6 +37,8 @@ const el = {
   kaynakSecim: $("#kaynakSecim"),
   grupla: $("#grupla"),
   sadeceTekKaynak: $("#sadeceTekKaynak"),
+  sadecePdf: $("#sadecePdf"),
+  pdfFiltreOzeti: $("#pdfFiltreOzeti"),
   kaynakSayaci: $("#kaynakSayaci"),
   siralama: $("#siralama"),
 };
@@ -53,6 +55,7 @@ const kartVerileri = new WeakMap();
 const akisKartlari = new Map();
 
 function baskiAlanlariniGuncelle() {
+  el.sadecePdf.disabled = el.form.querySelector("input[name=tur]:checked")?.value !== "kitap";
   $(".baski-tercihleri").disabled =
     el.form.querySelector("input[name=tur]:checked")?.value !== "kitap";
 }
@@ -356,6 +359,8 @@ function cizDurumlar(durumlar, hatalar, webNotu, elleAramaAdresi) {
 /* -------------------------------- kartlar ------------------------------- */
 
 function cizKartlar(gruplar) {
+  el.pdfFiltreOzeti.replaceChildren();
+  el.pdfFiltreOzeti.classList.add("gizli");
   el.kartlar.innerHTML = "";
   const oneriler = $("#aramaOnerileri");
   oneriler.replaceChildren();
@@ -494,6 +499,8 @@ function filtreUygula() {
 
   // Gorunur kartlari hesapla.
   const gorunur = [];
+  const pdfOdakli = el.sadecePdf.checked && sonCevap?.sorgu?.tur === "kitap";
+  let gizlenenPdf = 0;
   for (const kart of $$(".kart")) {
     const kaynaklar = (kart.dataset.kaynaklar ?? "").split(",").filter(Boolean);
 
@@ -501,7 +508,10 @@ function filtreUygula() {
     const kaynakGec = !secilenKaynak || kaynaklar.includes(secilenKaynak);
     const tekKaynakGec = !tekKaynakFiltre || kaynaklar.length === 1;
 
-    const goster = turGec && kaynakGec && tekKaynakGec;
+    const digerleriGec = turGec && kaynakGec && tekKaynakGec;
+    const pdfGec = !pdfOdakli || kart.dataset.pdf === "1";
+    if (digerleriGec && !pdfGec) gizlenenPdf++;
+    const goster = digerleriGec && pdfGec;
     kart.classList.toggle("gizli", !goster);
     if (goster) gorunur.push(kart);
   }
@@ -511,11 +521,29 @@ function filtreUygula() {
 
   if (!sonCevap) return;
 
+  el.pdfFiltreOzeti.replaceChildren();
+  if (gizlenenPdf) {
+    el.pdfFiltreOzeti.append(`PDF bağlantısı olmayan ${gizlenenPdf} kayıt gizlendi. `);
+    const goster = document.createElement("button");
+    goster.type = "button";
+    goster.className = "mini";
+    goster.dataset.pdfKatalog = "1";
+    goster.textContent = "Katalog kayıtlarını da göster";
+    el.pdfFiltreOzeti.append(goster);
+  }
+  if (pdfOdakli && gorunur.length && gorunur.every((k) => k.dataset.eslesme === "ilgili")) {
+    el.pdfFiltreOzeti.append(
+      " Bu sonuçlarda kitabın kendisiyle eşleşen PDF bağlantısı saptanmadı; görünen PDF’ler ilgili çalışmalar olabilir.",
+    );
+  }
+  el.pdfFiltreOzeti.classList.toggle("gizli", !el.pdfFiltreOzeti.textContent);
+
   if (!gorunur.length) {
     el.sonucBaslik.textContent = "0 sonuç";
     el.bos.classList.remove("gizli");
-    el.bos.innerHTML =
-      "<p>Bu filtreye uyan sonuç yok.</p><p>Farklı bir kaynak seçmeyi deneyin.</p>";
+    el.bos.innerHTML = gizlenenPdf
+      ? "<p>Bu sonuçlarda PDF bağlantısı bulunamadı.</p><p>Katalog ve ödünç kayıtlarını da gösterebilirsin. Kaynaklar yanıt verdikçe liste güncellenir.</p>"
+      : "<p>Bu filtreye uyan sonuç yok.</p><p>Farklı bir kaynak seçmeyi deneyin.</p>";
   } else {
     el.sonucBaslik.textContent = `${gorunur.length} sonuç`;
     el.bos.classList.add("gizli");
@@ -671,6 +699,9 @@ function kartYap(g) {
   ]
     .filter(Boolean)
     .join(". ");
+
+  // Bağlantı bulunması dosyanın veya eser kimliğinin doğrulandığı anlamına gelmez.
+  kart.dataset.pdf = g.kaynaklar.some((k) => guvenliAdres(k.pdf)) ? "1" : "0";
 
   // Filtre bayraklari
   kart.dataset.indirilebilir = g.kaynaklar.some((k) =>
@@ -1046,6 +1077,12 @@ $$(".sekme").forEach((sekme) => {
 el.kaynakSecim.addEventListener("change", () => filtreUygula());
 el.grupla.addEventListener("change", () => filtreUygula());
 el.sadeceTekKaynak.addEventListener("change", () => filtreUygula());
+el.sadecePdf.addEventListener("change", () => filtreUygula());
+el.pdfFiltreOzeti.addEventListener("click", (olay) => {
+  if (!olay.target.closest("[data-pdf-katalog]")) return;
+  el.sadecePdf.checked = false;
+  filtreUygula();
+});
 el.siralama.addEventListener("change", () => filtreUygula());
 
 $("#risAktar").addEventListener("click", () => {

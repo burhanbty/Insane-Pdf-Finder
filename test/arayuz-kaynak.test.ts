@@ -119,6 +119,8 @@ async function araVeBekle(): Promise<Document> {
   };
 
   const d = dom.window.document;
+  d.querySelector<HTMLInputElement>("input[name=tur][value=makale]")!.checked = true;
+  d.querySelector("#aramaForm")!.dispatchEvent(new dom.window.Event("change"));
   d.querySelector<HTMLInputElement>("#baslik")!.value = "Attention";
   d.querySelector<HTMLFormElement>("#aramaForm")!.dispatchEvent(
     new dom.window.Event("submit", { bubbles: true, cancelable: true }),

@@ -1,0 +1,564 @@
+{
+  "query": {
+    "baslik": "Silmarillion",
+    "tur": "kitap",
+    "limit": 20
+  },
+  "durationMs": 20172,
+  "totalRecords": 180,
+  "returnedGroups": 20,
+  "pdfGroups": 1,
+  "matchingPdfGroups": 0,
+  "groups": [
+    {
+      "key": "kitap::silmarillion::2004",
+      "title": "The Silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "wikipedia-tr",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "acik"
+        },
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::silmarillion::1996",
+      "title": "Silmarillion",
+      "kind": "kitap",
+      "match": "tam",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::silmarillion::2010",
+      "title": "Silmarillion",
+      "kind": "kitap",
+      "match": "tam",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::silmarillion::1977",
+      "title": "The Silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "odunc"
+        },
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::o silmarillion::2006",
+      "title": "O Silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::das silmarillion::2005",
+      "title": "Das Silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::1 silmarillion::1998",
+      "title": "The Silmarillion. 1/?",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::silmarillion tolkien::1976",
+      "title": "Tolkien & the Silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "odunc"
+        }
+      ]
+    },
+    {
+      "key": "kitap::3 silmarillion::1998",
+      "title": "The Silmarillion. 3/3",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::o silmarillion::1989",
+      "title": "O silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::enlarged silmarillion version::?",
+      "title": "The Silmarillion (Enlarged Version)",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "libgen",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::2 3 silmarillion::1983",
+      "title": "The Silmarillion. 2/3",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::jrr silmarillion tolkiens::1999",
+      "title": "JRR Tolkien's The Silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::guide readers silmarillion::1980",
+      "title": "A reader's guide to The Silmarillion",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "odunc"
+        }
+      ]
+    },
+    {
+      "key": "kitap::silmarillion thirty years::2007",
+      "title": "The Silmarillion - Thirty Years On",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::collection poster silmarillion::1998",
+      "title": "Silmarillion Poster Collection",
+      "kind": "kitap",
+      "match": "yakin",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "open-library",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "makale::i silmarillion::2022",
+      "title": "<i>The Silmarillion</i>",
+      "kind": "makale",
+      "match": "ilgili",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "crossref",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "makale::le silmarillion::2021",
+      "title": "Le Silmarillion",
+      "kind": "makale",
+      "match": "ilgili",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "crossref",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "openaire",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "sci-hub",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "kitap::fate free providence silmarillion::2015",
+      "title": "ON FATE, PROVIDENCE, AND FREE WILL IN THE SILMARILLION",
+      "kind": "kitap",
+      "match": "ilgili",
+      "pdf": false,
+      "sources": [
+        {
+          "source": "crossref",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        },
+        {
+          "source": "openaire",
+          "pdf": false,
+          "epub": false,
+          "text": false,
+          "access": "yonlendir"
+        }
+      ]
+    },
+    {
+      "key": "makale::archetype evil morgoth silmarillion::2019",
+      "title": "Morgoth : The Archetype of Evil in The Silmarillion",
+      "kind": "makale",
+      "match": "ilgili",
+      "pdf": true,
+      "sources": [
+        {
+          "source": "hal",
+          "pdf": true,
+          "epub": false,
+          "text": false,
+          "access": "acik"
+        }
+      ]
+    }
+  ],
+  "providers": [
+    {
+      "id": "benim-sitem",
+      "ready": false,
+      "count": 0,
+      "error": true
+    },
+    {
+      "id": "google-books",
+      "ready": false,
+      "count": 0,
+      "error": true
+    },
+    {
+      "id": "bilkent",
+      "ready": true,
+      "count": 0,
+      "error": false
+    },
+    {
+      "id": "doab",
+      "ready": true,
+      "count": 0,
+      "error": false
+    },
+    {
+      "id": "crossref",
+      "ready": true,
+      "count": 39,
+      "error": false
+    },
+    {
+      "id": "hal",
+      "ready": true,
+      "count": 16,
+      "error": false
+    },
+    {
+      "id": "oapen",
+      "ready": true,
+      "count": 0,
+      "error": false
+    },
+    {
+      "id": "openmetu",
+      "ready": true,
+      "count": 0,
+      "error": false
+    },
+    {
+      "id": "sabanci",
+      "ready": true,
+      "count": 0,
+      "error": false
+    },
+    {
+      "id": "wikipedia-tr",
+      "ready": true,
+      "count": 20,
+      "error": false
+    },
+    {
+      "id": "libgen",
+      "ready": true,
+      "count": 20,
+      "error": false
+    },
+    {
+      "id": "sci-hub",
+      "ready": true,
+      "count": 5,
+      "error": false
+    },
+    {
+      "id": "yerel-arsiv",
+      "ready": true,
+      "count": 0,
+      "error": false
+    },
+    {
+      "id": "openaire",
+      "ready": true,
+      "count": 40,
+      "error": false
+    },
+    {
+      "id": "open-library",
+      "ready": true,
+      "count": 40,
+      "error": false
+    },
+    {
+      "id": "annas-archive",
+      "ready": true,
+      "count": 0,
+      "error": true
+    },
+    {
+      "id": "gutenberg",
+      "ready": true,
+      "count": 0,
+      "error": true
+    },
+    {
+      "id": "internet-archive",
+      "ready": true,
+      "count": 0,
+      "error": true
+    }
+  ],
+  "downloadInitiated": false
+}

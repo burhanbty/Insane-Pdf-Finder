@@ -57,6 +57,9 @@ async function kur(handler: (url: string, body: unknown) => unknown) {
   const js = await fs.readFile(new URL("../public/app.js", import.meta.url), "utf8");
   dom.window.eval(`globalThis.__regresyon = (async () => {\n${js}\n})();`);
   await (dom.window as unknown as { __regresyon: Promise<void> }).__regresyon;
+  // Bu dosya katalog, baskı ve kaynak araçlarını tüm kayıtlar görünürken sınar.
+  // Varsayılan PDF görünümü pdf-availability-ui.test.ts içinde ayrıca sınanır.
+  d.querySelector<HTMLInputElement>("#sadecePdf")!.checked = false;
 }
 function gonder(baslik = "Test") {
   d.querySelector<HTMLInputElement>("#baslik")!.value = baslik;

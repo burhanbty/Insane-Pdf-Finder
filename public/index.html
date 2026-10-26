@@ -247,7 +247,13 @@
           <h2 id="sonucBaslik"></h2>
           <div class="sekiller" role="group" aria-label="Sonuçları filtrele">
             <button class="sekme etkin" data-suzgec="hepsi">Hepsi</button>
-            <button class="sekme" data-suzgec="acik">İndirilebilir</button>
+            <button
+              class="sekme"
+              data-suzgec="acik"
+              title="PDF, EPUB veya metin bağlantısı bildirilen kayıtlar"
+            >
+              İndirilebilir
+            </button>
             <button class="sekme" data-suzgec="ozet">Özet olanlar</button>
             <button class="sekme" data-suzgec="uyum">Tam eşleşme</button>
           </div>
@@ -277,10 +283,18 @@
             <input type="checkbox" id="sadeceTekKaynak" />
             <span>Yalnızca tek kaynakta bulunanlar</span>
           </label>
+          <label
+            class="onay"
+            title="PDF bağlantısı bildirilmeyen katalog, önizleme, ödünç, EPUB ve metin kayıtlarını kitap aramasında gizler. Dosya erişimi ve kimliği indirme sırasında denetlenir."
+          >
+            <input type="checkbox" id="sadecePdf" checked />
+            <span>Kitaplarda yalnız PDF bağlantısı olanlar</span>
+          </label>
           <span id="kaynakSayaci" class="kaynak-sayac"></span>
           <button type="button" class="mini" id="risAktar">Kaynakçayı indir (.ris)</button>
         </div>
 
+        <p id="pdfFiltreOzeti" class="ipucu gizli" role="status" aria-live="polite"></p>
         <div id="kartlar" class="kartlar"></div>
         <div id="bos" class="bos gizli"></div>
       </section>
