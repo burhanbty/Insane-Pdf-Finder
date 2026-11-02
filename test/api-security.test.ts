@@ -97,18 +97,25 @@ it("kuyruk rotaları da yabancı Origin ve bozuk girdileri reddeder", async () =
   ]) {
     expect((await post("/api/download-jobs", g)).status).toBe(400);
   }
+  // Aynı hostun 400 ms istek aralığına takılan işi de gerçekten sınayalım.
+  const onceki = await post("/api/download", { url: "http://127.0.0.1/internal", tur: "metin" });
+  expect(onceki.status).toBe(502);
+  expect((await onceki.json()).hata).toContain("engellendi");
   const r = await post("/api/download-jobs", { url: "http://127.0.0.1/internal", tur: "metin" });
   expect(r.status).toBe(202);
   const { is } = await r.json();
-  let sonuc;
-  for (let n = 0; n < 20; n++) {
-    const { isler } = await (await fetch(url + "/api/download-jobs")).json();
-    sonuc = isler.find((i: { id: string }) => i.id === is.id);
-    if (sonuc.durum === "basarisiz") break;
-    await new Promise((r) => setTimeout(r, 10));
-  }
-  expect(sonuc.durum).toBe("basarisiz");
-  expect(sonuc.hata).toContain("engellendi");
+  // İş, host aralığı dolana kadar "baglaniyor" kalabilir; tamamlanmasını bekle.
+  await expect
+    .poll(
+      async () => {
+        const r = await fetch(url + "/api/download-jobs");
+        expect(r.status).toBe(200);
+        const { isler } = await r.json();
+        return isler.find((i: { id: string }) => i.id === is.id);
+      },
+      { timeout: 3000, interval: 25 },
+    )
+    .toMatchObject({ durum: "basarisiz", hata: expect.stringContaining("engellendi") });
   expect(await fs.readdir(ayar.downloadsDir)).toEqual(["book.txt"]);
 });
 it("baskı tercihlerini doğrulamadan kaynak sorgusu başlatmaz", async () => {
